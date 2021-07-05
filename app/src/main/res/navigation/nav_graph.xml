@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/aboutFarm">
+
+    <fragment
+        android:id="@+id/aboutFarm"
+        android:name="com.kudashov.rabbits_farm.screens.AboutFarm"
+        android:label="AboutFarm" >
+        <action
+            android:id="@+id/action_aboutFarm_to_aboutFarmMenu"
+            app:destination="@id/aboutFarmMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFarmMenu"
+        android:name="com.kudashov.rabbits_farm.screens.AboutFarmMenu"
+        android:label="AboutFarmMenu" >
+        <action
+            android:id="@+id/action_aboutFarmMenu_to_aboutFarm"
+            app:destination="@id/aboutFarm" />
+    </fragment>
+</navigation>

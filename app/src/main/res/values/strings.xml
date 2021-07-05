@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">Rabbits_Farm</string>
+    <string name="app_name">Rabbits</string>
+
+    <!--IN CODE-->
+    <string name="error_receiving_data">Ошибка получения данных с сервера</string>
+    <!--IN CODE-->
+
+    <string name="str_for">из</string>
+    <string name="about_farm">Данные о ферме</string>
+    <string name="btn_rabbits">Кролики</string>
+    <string name="btn_cages">Клетки</string>
+    <string name="sort">Сортировать</string>
+    <string name="number_of_cage">№ клетки</string>
+    <string name="age">Возраст</string>
+    <string name="gender">Пол</string>
+    <string name="type">Тип</string>
+    <string name="btn_find_pair">Подобрать оптимальную пару</string>
+    <string name="btn_kill">Отправить на убой</string>
+    <string name="btn_to_menu_description">btn_to_menu</string>
+    <string name="img_gender">Пол кролика</string>
+    <string name="str_plan">Ведение плана</string>
+    <string name="srt_data">Дата</string>
+    <string name="str_number_of_firm">Номер фирмы</string>
+    <string name="srt_choose_gender">Выбрать пол</string>
+    <string name="str_type_of_rabbit">Тип кролика</string>
+    <string name="srt_breed_of_rabbit">Порода кролика</string>
+    <string name="str_age">Возраст (в днях)</string>
+    <string name="srt_number_of_cage">Номер клетки</string>
+    <string name="str_status_of_cage">Статус клетки</string>
+    <string name="btn_male">Самец</string>
+    <string name="btn_female">Самка</string>
+    <string name="str_type_feedlots">Откормочный</string>
+    <string name="btn_type_reproduction">Размножение</string>
+    <string name="btn_type_baby">Малыш</string>
+    <string name="srt_from">от:</string>
+    <string name="srt_to">до:</string>
+    <string name="btn_show">Отобразить</string>
+
 </resources>

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Rabbits" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Rabbits_Farm" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#B4B4B4</item>
         <item name="colorPrimaryVariant">#80000000</item>

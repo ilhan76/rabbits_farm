@@ -9,7 +9,9 @@
         android:label="AboutFarm" >
         <action
             android:id="@+id/action_aboutFarm_to_aboutFarmMenu"
-            app:destination="@id/aboutFarmMenu" />
+            app:destination="@id/aboutFarmMenu"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/aboutFarmMenu"
@@ -17,6 +19,8 @@
         android:label="AboutFarmMenu" >
         <action
             android:id="@+id/action_aboutFarmMenu_to_aboutFarm"
-            app:destination="@id/aboutFarm" />
+            app:destination="@id/aboutFarm"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 </navigation>

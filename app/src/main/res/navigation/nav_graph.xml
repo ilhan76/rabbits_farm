@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/aboutFarm"
-        android:name="com.kudashov.rabbits_farm.screens.AboutFarm"
+        android:name="com.kudashov.rabbits_farm.screens.aboutFarm.AboutFarm"
         android:label="AboutFarm" >
         <action
             android:id="@+id/action_aboutFarm_to_aboutFarmMenu"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFarmMenu"
-        android:name="com.kudashov.rabbits_farm.screens.AboutFarmMenu"
+        android:name="com.kudashov.rabbits_farm.screens.aboutFarmMenu.AboutFarmMenu"
         android:label="AboutFarmMenu" >
         <action
             android:id="@+id/action_aboutFarmMenu_to_aboutFarm"

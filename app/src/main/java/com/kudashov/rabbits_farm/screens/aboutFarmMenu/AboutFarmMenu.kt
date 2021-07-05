@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens
+package com.kudashov.rabbits_farm.screens.aboutFarmMenu
 
 import android.os.Bundle
 import android.view.LayoutInflater

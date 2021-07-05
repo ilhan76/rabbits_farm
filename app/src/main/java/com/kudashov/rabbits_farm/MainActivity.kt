@@ -9,6 +9,7 @@ import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class MainActivity : AppCompatActivity() {
 
+    private var TAG: String = this::class.java.simpleName
     lateinit var mNavController: NavController
     private var _binding: ActivityMainBinding? = null
     private val mBinding get() = _binding!!

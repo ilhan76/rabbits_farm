@@ -7,4 +7,26 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--fragment_veterinarian_about_farm_menu-->
+    <color name="btn_rabbits_active">#B4B4B4</color>
+    <color name="btn_rabbits_passive">#DBDBDB</color>
+
+    <color name="btn_cages_active">#B4B4B4</color>
+    <color name="btn_cages_passive">#DBDBDB</color>
+
+    <color name="item_background">#DBDBDB</color>
+    <color name="task_background">#C4C4C4</color>
+    
+    <color name="btn_select_pair">#3BB89A</color>
+    <color name="btn_kill">#DD4D4D</color>
+
+    <!--fragment_veterinarian_about_farm_menu-->
+    <color name="task_area_background">#DBDBDB</color>
+    <color name="task_item_background">#C4C4C4</color>
+
+    <color name="sort_area_background">#DBDBDB</color>
+
+    <color name="btn_standard">#6D6D6D</color>
+
 </resources>

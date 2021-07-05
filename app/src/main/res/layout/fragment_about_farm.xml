@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/about_farm"
+
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_to_menu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            android:layout_margin="30dp"
+            android:background="@drawable/ic_to_menu"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:contentDescription="@string/btn_to_menu_description" />
+
+        <Button
+            android:id="@+id/btn_rabbits"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/btn_rabbits_passive"
+
+            android:text="@string/btn_rabbits"
+
+            android:textAllCaps="false"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+        <Button
+            android:id="@+id/btn_cages"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:backgroundTint="@color/btn_cages_passive"
+            android:text="@string/btn_cages"
+            android:textAllCaps="false"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+        <TextView
+            android:id="@+id/str_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="20dp"
+            android:text="@string/sort"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_rabbits" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
+
+        <LinearLayout
+            android:id="@+id/list_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:layout_marginTop="20dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/str_sort">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/number_of_cage"
+                android:textColor="@color/black"
+
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/age"
+                android:textColor="@color/black"
+
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/gender"
+                android:textColor="@color/black"
+
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/type"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="2"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_area" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/task_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/standard_margin"
+
+            android:layout_marginTop="10dp"
+            android:background="@color/task_background"
+
+            android:backgroundTint="@color/task_background"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <CheckBox
+                android:id="@+id/ch_is_current_task_done"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/str_date_of_current_task"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:textColor="@color/black"
+
+                android:textSize="12sp"
+                tools:text="11.11.2021" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_select_pair"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+
+            android:backgroundTint="@color/btn_select_pair"
+            android:text="@string/btn_find_pair"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+
+            android:textSize="12sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_area" />
+
+        <Button
+            android:id="@+id/btn_kill"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="@dimen/standard_margin"
+
+            android:backgroundTint="@color/btn_kill"
+            android:text="@string/btn_kill"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+
+            android:textSize="12sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_area" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

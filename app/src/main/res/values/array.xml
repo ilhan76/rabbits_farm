@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorting_method">
+        <item>По клеткам</item>
+        <item>По клеткам</item>
+        <item>По клеткам</item>
+        <item>По клеткам</item>
+        <item>По клеткам</item>
+    </string-array>
+</resources>

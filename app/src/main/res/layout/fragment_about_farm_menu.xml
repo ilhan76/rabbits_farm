@@ -191,7 +191,7 @@
                     app:layout_constraintTop_toBottomOf="@id/btn_choose_type" />
 
                 <TextView
-                    android:id="@+id/str_task"
+                    android:id="@+id/str_age"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/text_height"
 
@@ -206,7 +206,7 @@
                     app:layout_constraintTop_toBottomOf="@id/srt_breed" />
 
                 <TextView
-                    android:id="@+id/str_data_of_task"
+                    android:id="@+id/str_number_of_farm"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/text_height"
 
@@ -218,7 +218,7 @@
                     android:textSize="@dimen/standard_text_size"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/str_task" />
+                    app:layout_constraintTop_toBottomOf="@id/str_age" />
 
                 <TextView
                     android:id="@+id/str_status"
@@ -234,7 +234,7 @@
                     android:textSize="@dimen/standard_text_size"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/str_data_of_task" />
+                    app:layout_constraintTop_toBottomOf="@id/str_number_of_farm" />
 
                 <Spinner
                     android:id="@+id/spinner"

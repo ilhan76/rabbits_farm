@@ -179,39 +179,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/task_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginHorizontal="@dimen/standard_margin"
-
-            android:layout_marginTop="10dp"
-            android:background="@color/task_background"
-
-            android:backgroundTint="@color/task_background"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <CheckBox
-                android:id="@+id/ch_is_current_task_done"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-
-            <TextView
-                android:id="@+id/str_date_of_current_task"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:textColor="@color/black"
-
-                android:textSize="12sp"
-                tools:text="11.11.2021" />
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/btn_select_pair"
             android:layout_width="@dimen/btn_width"

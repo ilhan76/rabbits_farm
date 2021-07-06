@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp"
+
+        android:background="@drawable/shape_item_corner"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginTop="25dp"
+            android:text="@string/srt_deposition"
+
+            android:textColor="@color/black"
+            android:textSize="21sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:textColor="@color/black"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+
+            tools:text="01.01.2021" />
+
+        <TextView
+            android:id="@+id/srt_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginTop="50dp"
+            android:text="@string/str_number_of_cage_from"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/txt_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/item_start_margin"
+
+            android:background="@drawable/shape_item_text"
+
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="10dp"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_text_size"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/srt_from"
+
+            tools:text="125А"/>
+
+        <TextView
+            android:id="@+id/srt_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_number_of_cage_to"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_from" />
+
+        <TextView
+            android:id="@+id/txt_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/item_start_margin"
+            android:background="@drawable/shape_item_text"
+
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="10dp"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_text_size"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/srt_to"
+
+            tools:text="113Б" />
+
+        <TextView
+            android:id="@+id/str_count_of_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_count_of_male"
+
+            android:textColor="@color/black"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_to" />
+
+        <LinearLayout
+            android:id="@+id/leaner_layout_count_of_male"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/item_start_margin"
+
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/str_count_of_male">
+
+            <SeekBar
+                android:id="@+id/sb_count_of_male"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+
+                android:layout_weight="9"
+
+                app:layout_constraintEnd_toStartOf="@+id/txt_sb_com"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/str_count_of_male" />
+
+            <TextView
+                android:id="@+id/txt_sb_com"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+
+                android:gravity="end"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/standard_text_size"
+
+                app:layout_constraintStart_toEndOf="@+id/sb_count_of_male"
+                app:layout_constraintTop_toBottomOf="@+id/str_count_of_male"
+
+                tools:text="20" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/str_count_of_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_count_of_female"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_text_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leaner_layout_count_of_male" />
+
+        <LinearLayout
+            android:id="@+id/leaner_layout_count_of_female"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/item_start_margin"
+
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/str_count_of_female">
+
+            <SeekBar
+                android:id="@+id/sb_count_of_female"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+
+                android:layout_weight="9" />
+
+            <TextView
+                android:id="@+id/txt_sb_count_of_female"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+
+                android:gravity="end"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/standard_text_size"
+
+                tools:text="20" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginTop="@dimen/item_start_margin"
+            android:layout_marginBottom="@dimen/item_start_margin"
+
+            android:background="@drawable/shape_btn_red"
+
+            android:text="@string/btn_not_yet_done"
+
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leaner_layout_count_of_female" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

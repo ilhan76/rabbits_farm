@@ -35,5 +35,15 @@
     <string name="srt_from">от:</string>
     <string name="srt_to">до:</string>
     <string name="btn_show">Отобразить</string>
+    <string name="srt_deposition">Отсадка от мат.</string>
+    <string name="str_number_of_cage_from">№ клетки ИЗ</string>
+    <string name="str_count_of_male">Количество самцов</string>
+    <string name="str_count_of_female">Количество самок</string>
+    <string name="btn_not_yet_done">Не выполнено</string>
+    <string name="str_number_of_cage_to">№ клетки В</string>
+    <string name="str_number_of_cage">№ клетки</string>
+    <string name="str_item_title_vaccination">Вакцинация</string>
+    <string name="str_item_title_reproduction">Размножение</string>
+    <string name="srt_item_title_inspection">Осмотр (Убой)</string>
 
 </resources>

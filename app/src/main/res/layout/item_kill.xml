@@ -129,7 +129,7 @@
 
             android:background="@drawable/shape_btn_red"
 
-            android:text="@string/btn_not_yet_done"
+            android:text="@string/task_item_btn_not_yet_done"
 
             android:textAllCaps="false"
             android:textColor="@color/white"

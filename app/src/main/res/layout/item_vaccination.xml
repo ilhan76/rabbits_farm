@@ -25,7 +25,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="25dp"
-            android:text="@string/str_item_title_vaccination"
+            android:text="@string/task_item_vaccination_txt_item_title"
 
             android:textColor="@color/black"
             android:textSize="21sp"
@@ -54,7 +54,7 @@
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="50dp"
 
-            android:text="@string/str_number_of_cage"
+            android:text="@string/task_item_vaccination_txt_number_of_cage"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -94,7 +94,7 @@
 
             android:background="@drawable/shape_btn_red"
 
-            android:text="@string/btn_not_yet_done"
+            android:text="@string/task_item_btn_not_yet_done"
 
             android:textAllCaps="false"
             android:textColor="@color/white"

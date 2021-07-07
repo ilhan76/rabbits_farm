@@ -25,7 +25,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="25dp"
-            android:text="@string/srt_deposition"
+            android:text="@string/task_item_deposition_txt_title"
 
             android:textColor="@color/black"
             android:textSize="21sp"
@@ -53,7 +53,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="50dp"
-            android:text="@string/str_number_of_cage_from"
+            android:text="@string/task_item_deposition_txt_number_of_cage_from"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -89,7 +89,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="10dp"
-            android:text="@string/str_number_of_cage_to"
+            android:text="@string/task_item_deposition_txt_number_of_cage_to"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -124,7 +124,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="10dp"
-            android:text="@string/str_count_of_male"
+            android:text="@string/task_item_deposition_txt_count_of_male"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -185,7 +185,7 @@
 
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="10dp"
-            android:text="@string/str_count_of_female"
+            android:text="@string/task_item_deposition_txt_count_of_female"
 
             android:textColor="@color/black"
             android:textSize="@dimen/standard_text_size"
@@ -242,7 +242,7 @@
 
             android:background="@drawable/shape_btn_red"
 
-            android:text="@string/btn_not_yet_done"
+            android:text="@string/task_item_btn_not_yet_done"
 
             android:textAllCaps="false"
             android:textColor="@color/white"

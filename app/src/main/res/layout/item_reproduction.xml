@@ -26,7 +26,7 @@
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="25dp"
 
-            android:text="Размножение"
+            android:text="@string/task_item_reproduction_title"
 
             android:textColor="@color/black"
             android:textSize="21sp"
@@ -55,7 +55,7 @@
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="50dp"
 
-            android:text="Взять самку ИЗ (№ клетки)"
+            android:text="@string/task_item_reproduction_txt_take_female_from"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -91,7 +91,7 @@
             android:layout_marginStart="@dimen/item_start_margin"
             android:layout_marginTop="10dp"
 
-            android:text="Отнести к самцу В (№ клетки)"
+            android:text="@string/task_item_reproduction_txt_refer_female_to_male"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -129,7 +129,7 @@
 
             android:background="@drawable/shape_btn_red"
 
-            android:text="@string/btn_not_yet_done"
+            android:text="@string/task_item_btn_not_yet_done"
 
             android:textAllCaps="false"
             android:textColor="@color/white"

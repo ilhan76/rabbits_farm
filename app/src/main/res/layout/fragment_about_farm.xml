@@ -23,7 +23,7 @@
 
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-            android:text="@string/about_farm"
+            android:text="@string/farm_rabbits_title"
 
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -52,7 +52,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/btn_rabbits_passive"
 
-            android:text="@string/btn_rabbits"
+            android:text="@string/farm_rabbits_btn_rabbits"
 
             android:textAllCaps="false"
 
@@ -70,7 +70,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/standard_margin"
             android:backgroundTint="@color/btn_cages_passive"
-            android:text="@string/btn_cages"
+            android:text="@string/farm_rabbits_btn_cages"
             android:textAllCaps="false"
 
             android:textColor="@color/black"
@@ -86,7 +86,7 @@
 
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="20dp"
-            android:text="@string/sort"
+            android:text="@string/farm_rabbits_txt_sort"
 
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
-                android:text="@string/number_of_cage"
+                android:text="@string/farm_rabbits_txt_number_of_cage"
                 android:textColor="@color/black"
 
                 android:textSize="12sp" />
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
-                android:text="@string/age"
+                android:text="@string/farm_rabbits_txt_age"
                 android:textColor="@color/black"
 
                 android:textSize="12sp" />
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
-                android:text="@string/gender"
+                android:text="@string/farm_rabbits_txt_gender"
                 android:textColor="@color/black"
 
                 android:textSize="12sp" />
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="1"
-                android:text="@string/type"
+                android:text="@string/farm_rabbits_txt_type"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -178,41 +178,6 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btn_select_pair"
-            android:layout_width="@dimen/btn_width"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/standard_margin"
-
-            android:backgroundTint="@color/btn_select_pair"
-            android:text="@string/btn_find_pair"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-
-            android:textSize="12sp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_area" />
-
-        <Button
-            android:id="@+id/btn_kill"
-            android:layout_width="@dimen/btn_width"
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="@dimen/standard_margin"
-
-            android:backgroundTint="@color/btn_kill"
-            android:text="@string/btn_kill"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-
-            android:textSize="12sp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_area" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </LinearLayout>

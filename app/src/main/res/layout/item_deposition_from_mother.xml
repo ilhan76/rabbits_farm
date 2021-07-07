@@ -80,10 +80,11 @@
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/srt_from"
 
-            tools:text="125А"/>
+            app:layout_constraintTop_toBottomOf="@+id/srt_from"
+            tools:text="125А" />
 
         <TextView
             android:id="@+id/srt_to"

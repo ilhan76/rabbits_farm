@@ -5,6 +5,7 @@
     <string name="error_receiving_data">Ошибка получения данных с сервера</string>
     <!--IN CODE-->
 
+    <!-- About Farm -->
     <!-- About Farm Rabbits -->
     <string name="farm_rabbits_title">Данные о ферме</string>
     <string name="farm_rabbits_btn_rabbits">Кролики</string>
@@ -53,8 +54,26 @@
     <string name="farm_cage_settings_btn_show">Отобразить</string>
     <!-- About Farm Cage Settings -->
 
+    <!-- Floating Action Fragment Weigh Rabbit -->
+    <string name="farm_floating_action_title">Взвесить кролика</string>
+    <string name="farm_floating_txt_current_weight_of_rabbit">Текущий вес кролика: %s кг</string>
+    <string name="farm_floating_new_weight_of_rabbit">Новый вес кролика</string>
+    <string name="farm_floating_action_btn_save">Сохранить вес кролики</string>
+    <!-- Floating Action Fragment Weigh Rabbit -->
+
+    <!-- Floating Action Fragment Rabbit -->
+
+    <!-- Floating Action Fragment Rabbit -->
+    <!-- About Farm -->
+
     <!-- Tasks-->
 
+    <string name="tasks_title">Задачи</string>
+    <string name="tasks_btn_death">Смерть</string>
+    <string name="tasks_btn_not_yet_done">Не выполнено</string>
+    <string name="tasks_btn_done">Выполнено</string>
+    <string name="tasks_txt_sort">Сортировать</string>
+    
     <string name="task_item_btn_not_yet_done">Не выполнено</string>
     <string name="task_item_btn_done">Выполнено</string>
 
@@ -89,6 +108,24 @@
     <string name="task_item_kill_txt_weight_of_rabbit">Вес кролика</string>
     <!-- Item kill -->
 
+    <!-- Floating Action Fragment Death -->
+    <string name="tasks_floating_action_death_title">Смерть</string>
+    <string name="tasks_floating_action_death_number_of_cage">№ клетки</string>
+    <string name="tasks_floating_action_death_cause_of_death">Причина смерти</string>
+    <string name="tasks_floating_action_death_btn_save">Сохранить</string>
+    <!-- Floating Action Fragment Death -->
     <!-- Tasks-->
 
+    <!-- Birth -->
+    <string name="birth_title">Рождение</string>
+    <string name="birth_btn_not_yet_confirmed">Не подтверждено</string>
+    <string name="birth_btn_confirmed">Подтверждено</string>
+    <string name="birth_txt_sort">Сортировать (дн)</string>
+
+    <!-- Floating Action Fragment -->
+    <string name="birth_floating_action_title">Принять роды</string>
+    <string name="birth_floating_action_count_of_rabbit">Количество рожденных кроликов</string>
+    <string name="birth_floating_action_btn_save">Сохранить</string>
+    <!-- Floating Action Fragment -->
+    <!-- Birth -->
 </resources>

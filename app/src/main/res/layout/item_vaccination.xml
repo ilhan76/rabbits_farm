@@ -9,11 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="@dimen/tasks_item_margin_horizontal"
+        android:layout_marginVertical="@dimen/tasks_item_margin_vertical"
 
         android:background="@drawable/shape_item_corner"
-        android:elevation="10dp"
+        android:elevation="@dimen/tasks_item_elevation"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,12 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/item_start_margin"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_vaccination_title_margin_top"
             android:text="@string/task_item_vaccination_txt_item_title"
 
             android:textColor="@color/black"
-            android:textSize="21sp"
+            android:textSize="@dimen/title_item_txt_size"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/item_start_margin"
+            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
             android:textColor="@color/black"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +52,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/item_start_margin"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_vaccination_margin_from_title"
 
             android:text="@string/task_item_vaccination_txt_number_of_cage"
 
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -67,15 +68,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginHorizontal="@dimen/item_start_margin"
+            android:layout_marginHorizontal="@dimen/tasks_item_vaccination_margin_horizontal"
 
             android:background="@drawable/shape_item_text"
 
             android:gravity="center_vertical|start"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
 
             android:textColor="@color/white"
-            android:textSize="@dimen/standard_text_size"
+            android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,11 +87,11 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/tasks_item_btn_show_height"
 
-            android:layout_marginHorizontal="70dp"
-            android:layout_marginTop="@dimen/item_start_margin"
-            android:layout_marginBottom="@dimen/item_start_margin"
+            android:layout_marginHorizontal="@dimen/tasks_item_btn_show_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_btn_show_margin_top"
+            android:layout_marginBottom="@dimen/tasks_item_btn_show_margin_bottom"
 
             android:background="@drawable/shape_btn_red"
 

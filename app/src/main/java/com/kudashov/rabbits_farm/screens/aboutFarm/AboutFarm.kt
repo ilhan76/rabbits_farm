@@ -41,7 +41,7 @@ class AboutFarm: Fragment() {
 
     private fun init() {
         adapter = AboutFarmAdapter()
-        recyclerView = mBinding.recyclerView
+        recyclerView = mBinding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
@@ -91,9 +91,7 @@ class AboutFarm: Fragment() {
     private fun setEnabled(enable: Boolean){
         mBinding.apply {
             btnCages.isEnabled = enable
-            btnKill.isEnabled = enable
             btnRabbits.isEnabled = enable
-            btnSelectPair.isEnabled = enable
             btnToMenu.isEnabled = enable
         }
     }

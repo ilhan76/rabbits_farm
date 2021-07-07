@@ -53,14 +53,11 @@
     <string name="farm_cage_settings_btn_show">Отобразить</string>
     <!-- About Farm Cage Settings -->
 
-    <string name="str_for">из</string>
-    <string name="btn_to_menu_description">btn_to_menu</string>
-    <string name="img_gender">Пол кролика</string>
-
     <!-- Tasks-->
 
     <string name="task_item_btn_not_yet_done">Не выполнено</string>
     <string name="task_item_btn_done">Выполнено</string>
+
     <!-- Item deposition-->
     <string name="task_item_deposition_txt_title">Отсадка от мат.</string>
     <string name="task_item_deposition_txt_number_of_cage_from">№ клетки ИЗ</string>
@@ -87,7 +84,7 @@
     <!-- Item reproduction-->
 
     <!-- Item kill -->
-    <string name="task_item_kill_title">Размножение</string>
+    <string name="task_item_kill_title">Убой</string>
     <string name="task_item_kill_txt_number_of_cage">№ клетки</string>
     <string name="task_item_kill_txt_weight_of_rabbit">Вес кролика</string>
     <!-- Item kill -->

@@ -21,6 +21,14 @@
     <color name="btn_select_pair">#3BB89A</color>
     <color name="btn_kill">#DD4D4D</color>
 
+    <!-- Standard -->
+    <color name="standard_txt_color">#FF000000</color>
+    <!-- Standard -->
+
+    <!-- About Farm-->
+    <color name="farm_rabbit_settings_btn_txt_color">#FFFFFFFF</color>
+    <!-- About Farm-->
+
     <!--fragment_veterinarian_about_farm_menu-->
     <color name="task_area_background">#DBDBDB</color>
     <color name="task_item_background">#C4C4C4</color>

@@ -5,7 +5,6 @@
     </style>
 
     <style name="FarmRabbitsSettingsText" parent="@style/Text">
-        <item name="android:height">@dimen/farm_rabbit_settings_btn_height</item>
 
         <item name="android:layout_marginTop">@dimen/farm_rabbit_settings_vertical_btn_margin</item>
         <item name="android:layout_marginStart">@dimen/farm_rabbit_settings_horizontal_margin</item>

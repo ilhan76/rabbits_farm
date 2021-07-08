@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.databinding.FragmentAboutFarmMenuBinding
+import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitMenuBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class AboutFarmMenu: Fragment() {
 
     private val TAG: String = this::class.java.simpleName
-    private var _binding: FragmentAboutFarmMenuBinding? = null
+    private var _binding: FragmentFarmRabbitMenuBinding? = null
     private val mBinding get() = _binding!!
     private lateinit var mViewModel: AboutFarmMenuViewModel
 
@@ -24,7 +24,7 @@ class AboutFarmMenu: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAboutFarmMenuBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFarmRabbitMenuBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 

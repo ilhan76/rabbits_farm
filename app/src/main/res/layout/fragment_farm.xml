@@ -182,4 +182,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_area" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+
+        android:background="@color/purple_200">
+
+        <Button
+            android:id="@+id/btn_cage_is_repaired"
+            android:layout_width="0sp"
+            android:layout_height="30dp"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка отремонтирована"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cage_need_repaired"
+            />
+
+        <Button
+            android:id="@+id/btn_cage_is_cleaned"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка убрана"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cage_need_cleaned"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cage_is_repaired" />
+
+        <Button
+            android:id="@+id/btn_cage_need_repaired"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка отремонтирована"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_cage_is_repaired"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <Button
+            android:id="@+id/btn_cage_need_cleaned"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка убрана"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_cage_is_cleaned"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cage_need_repaired" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

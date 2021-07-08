@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.AboutFarmAdapter
-import com.kudashov.rabbits_farm.databinding.FragmentAboutFarmBinding
+import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class AboutFarm: Fragment() {
 
     private val TAG: String = this::class.java.simpleName
-    private var _binding: FragmentAboutFarmBinding? = null
+    private var _binding: FragmentFarmBinding? = null
     private val mBinding get() = _binding!!
     private lateinit var mViewModel: AboutFarmViewModel
 
@@ -30,7 +30,7 @@ class AboutFarm: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAboutFarmBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 

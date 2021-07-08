@@ -124,19 +124,19 @@
 
     <!-- Item -->
     <string name="birth_item_title">Беременная самка</string>
+    <string name="birth_item_txt_number_of_cage">№ клетки</string>
+    <string name="birth_item_txt_status">Статус</string>
+    <string name="birth_item_txt_not_confirmed">Не подтверждено</string>
+    <string name="birth_item_txt_confirmed">Оплодотворена</string>
+    <string name="birth_item_btn_fertilized">Оплодотворена</string>
+    <string name="birth_item_txt_not_fertilised">Не оплодотворена</string>
+    <string name="birth_item_btn_take_births">Принять роды</string>
     <!-- Item -->
 
     <!-- Floating Action Fragment -->
     <string name="birth_floating_action_title">Принять роды</string>
     <string name="birth_floating_action_count_of_rabbit">Количество рожденных кроликов</string>
     <string name="birth_floating_action_btn_save">Сохранить</string>
-
-    <string name="birth_item_txt_number_of_cage">№ клетки</string>
-    <string name="birth_item_txt_status">Статус</string>
-    <string name="birth_item_txt_not_confirmed">Не подтверждено</string>
-    <string name="birth_item_txt_confirmed">Подтверждено</string>
-    <string name="birth_item_btn_fertilized">Оплодотворена</string>
-    <string name="birth_item_txt_not_fertilised">Не плодотворена</string>
     <!-- Floating Action Fragment -->
     <!-- Birth -->
 </resources>

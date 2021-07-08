@@ -40,7 +40,8 @@
 
         android:layout_marginHorizontal="@dimen/standard_margin"
 
-        android:background="@color/sort_area_background"
+        android:background="@drawable/shape_item_corner"
+        android:elevation="50dp"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

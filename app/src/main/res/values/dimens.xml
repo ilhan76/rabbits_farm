@@ -86,7 +86,8 @@
     <dimen name="tasks_item_btn_show_margin_bottom">20dp</dimen>
     <dimen name="tasks_item_btn_show_margin_horizontal">50dp</dimen>
 
-    <!-- Tasks deposition -->
+
+    >
     <dimen name="tasks_item_deposition_margin_horizontal">20dp</dimen>
     <dimen name="tasks_item_deposition_title_margin_top">20dp</dimen>
     <dimen name="tasks_item_deposition_margin_from_title">50dp</dimen>

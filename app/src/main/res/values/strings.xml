@@ -49,8 +49,8 @@
     <string name="farm_cage_settings_txt_type_of_cage">Тип клетки</string>
     <string name="farm_cage_settings_txt_count_of_rabbits">Кол-во кроликов</string>
     <string name="farm_cage_settings_txt_status_of_cage">Статус клетки</string>
-    <string name="farm_cage_settings_btn_status_of_cage_need_clean">Статус клетки</string>
-    <string name="farm_cage_settings_btn_status_of_cage_need_repair">Статус клетки</string>
+    <string name="farm_cage_settings_btn_status_of_cage_need_clean">Треб. уборка</string>
+    <string name="farm_cage_settings_btn_status_of_cage_need_repair">Треб. ремонт</string>
     <string name="farm_cage_settings_btn_show">Отобразить</string>
     <!-- About Farm Cage Settings -->
 

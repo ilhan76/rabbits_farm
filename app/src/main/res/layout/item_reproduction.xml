@@ -129,6 +129,8 @@
             android:layout_marginTop="@dimen/tasks_item_btn_show_margin_top"
             android:layout_marginBottom="@dimen/tasks_item_btn_show_margin_bottom"
 
+            android:padding="0dp"
+
             android:background="@drawable/shape_btn_red"
 
             android:text="@string/task_item_btn_not_yet_done"

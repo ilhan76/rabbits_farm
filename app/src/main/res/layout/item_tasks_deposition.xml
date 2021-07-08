@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         android:background="@drawable/shape_item_corner"
         android:elevation="@dimen/tasks_item_elevation"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -237,6 +238,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_done"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tasks_item_btn_show_height"
 
@@ -244,9 +246,9 @@
             android:layout_marginTop="@dimen/tasks_item_btn_show_margin_top"
             android:layout_marginBottom="@dimen/tasks_item_btn_show_margin_bottom"
 
-            android:padding="0dp"
-
             android:background="@drawable/shape_btn_red"
+
+            android:padding="0dp"
 
             android:text="@string/task_item_btn_not_yet_done"
             android:textAllCaps="false"

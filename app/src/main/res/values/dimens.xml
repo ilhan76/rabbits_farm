@@ -78,7 +78,7 @@
 
     <dimen name="tasks_item_margin_horizontal">15dp</dimen>
     <dimen name="tasks_item_margin_vertical">10dp</dimen>
-    <dimen name="tasks_item_elevation">5dp</dimen>
+    <dimen name="tasks_item_elevation">10dp</dimen>
     <dimen name="tasks_item_txt_area_padding_horizontal">10dp</dimen>
 
     <dimen name="tasks_item_btn_show_height">35dp</dimen>

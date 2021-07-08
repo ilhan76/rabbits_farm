@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         android:background="@drawable/shape_item_corner"
         android:elevation="@dimen/tasks_item_elevation"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,9 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
-            android:layout_marginTop="@dimen/tasks_item_vaccination_title_margin_top"
-            android:text="@string/task_item_vaccination_txt_item_title"
+            android:layout_marginStart="@dimen/tasks_item_reproduction_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_reproduction_title_margin_top"
+
+            android:text="@string/task_item_reproduction_title"
 
             android:textColor="@color/black"
             android:textSize="@dimen/title_item_txt_size"
@@ -39,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
+            android:layout_marginStart="@dimen/tasks_item_reproduction_margin_horizontal"
+
             android:textColor="@color/black"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -52,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/tasks_item_vaccination_margin_horizontal"
-            android:layout_marginTop="@dimen/tasks_item_vaccination_margin_from_title"
+            android:layout_marginStart="@dimen/tasks_item_reproduction_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_reproduction_margin_from_title"
 
-            android:text="@string/task_item_vaccination_txt_number_of_cage"
+            android:text="@string/task_item_reproduction_txt_take_female_from"
 
             android:textColor="@color/black"
             android:textSize="@dimen/standard_txt_size"
@@ -68,10 +71,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginHorizontal="@dimen/tasks_item_vaccination_margin_horizontal"
+            android:layout_marginHorizontal="@dimen/tasks_item_reproduction_margin_horizontal"
 
             android:background="@drawable/shape_item_text"
-
             android:gravity="center_vertical|start"
             android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
 
@@ -82,10 +84,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/srt_number"
 
-            tools:text="125А"/>
+            tools:text="125А" />
 
+        <TextView
+            android:id="@+id/srt_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/tasks_item_reproduction_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_reproduction_txt_margin_top"
+
+            android:text="@string/task_item_reproduction_txt_refer_female_to_male"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_from" />
+
+        <TextView
+            android:id="@+id/txt_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/tasks_item_reproduction_margin_horizontal"
+            android:background="@drawable/shape_item_text"
+
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/srt_to"
+
+            tools:text="113Б" />
 
         <Button
+            android:id="@+id/btn_done"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tasks_item_btn_show_height"
 
@@ -95,6 +133,8 @@
 
             android:background="@drawable/shape_btn_red"
 
+            android:padding="0dp"
+
             android:text="@string/task_item_btn_not_yet_done"
 
             android:textAllCaps="false"
@@ -103,7 +143,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_from" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_to" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

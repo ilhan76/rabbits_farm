@@ -36,16 +36,16 @@ class AboutFarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder){
-            is RabbitViewHolder -> holder.bind((listData[position] as Rabbit))
-            is CageViewHolder -> holder.bind((listData[position] as Cage))
+            is RabbitViewHolder -> holder.bind(listData[position] as Rabbit)
+            is CageViewHolder -> holder.bind(listData[position] as Cage)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            1 -> RabbitViewHolder(inflater.inflate(R.layout.item_rabbit_list, parent, false))
-            else -> CageViewHolder(inflater.inflate(R.layout.item_cage_list, parent, false))
+            1 -> RabbitViewHolder(inflater.inflate(R.layout.item_farm_rabbit, parent, false))
+            else -> CageViewHolder(inflater.inflate(R.layout.item_farm_cage, parent, false))
         }
     }
 

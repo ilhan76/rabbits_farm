@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/farm_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/farm_rabbits_title"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_txt_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_to_menu"
+            android:layout_width="@dimen/farm_btn_to_menu_size"
+            android:layout_height="@dimen/farm_btn_to_menu_size"
+
+            android:layout_margin="30dp"
+
+            android:background="@drawable/ic_to_menu"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_rabbits"
+            android:layout_width="@dimen/farm_btn_width"
+            android:layout_height="@dimen/standard_btn_height"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+
+            android:backgroundTint="@color/btn_rabbits_passive"
+
+            android:text="@string/farm_rabbits_btn_rabbits"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintTop_toBottomOf="@+id/farm_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_cages"
+            android:layout_width="@dimen/farm_btn_width"
+            android:layout_height="@dimen/standard_btn_height"
+
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+
+            android:backgroundTint="@color/btn_cages_passive"
+
+            android:text="@string/farm_rabbits_btn_cages"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintTop_toBottomOf="@+id/farm_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/str_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+
+            android:text="@string/farm_rabbits_txt_sort"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_rabbits" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="@dimen/farm_btn_width"
+            android:layout_height="@dimen/standard_spinner_height"
+
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+
+            android:backgroundTint="@color/black"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
+
+        <LinearLayout
+            android:id="@+id/farm_title_of_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/str_sort">
+
+            <TextView
+                android:id="@+id/farm_title_of_list_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/farm_rabbits_txt_number_of_cage"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/small_txt_size" />
+
+            <TextView
+                android:id="@+id/farm_title_of_list_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/farm_rabbits_txt_age"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/small_txt_size" />
+
+            <TextView
+                android:id="@+id/farm_title_of_list_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/farm_rabbits_txt_gender"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/small_txt_size" />
+
+            <TextView
+                android:id="@+id/farm_title_of_list_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/farm_rabbits_txt_type"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/farm_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="2"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_area" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+
+        android:background="@color/purple_200">
+
+        <Button
+            android:id="@+id/btn_cage_is_repaired"
+            android:layout_width="0sp"
+            android:layout_height="30dp"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка отремонтирована"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cage_need_repaired"
+            />
+
+        <Button
+            android:id="@+id/btn_cage_is_cleaned"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка убрана"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cage_need_cleaned"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cage_is_repaired" />
+
+        <Button
+            android:id="@+id/btn_cage_need_repaired"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка отремонтирована"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_cage_is_repaired"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <Button
+            android:id="@+id/btn_cage_need_cleaned"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="10dp"
+
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+
+            android:text="Клетка убрана"
+            android:textAllCaps="false"
+            android:textSize="@dimen/very_small_txt_size"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_cage_is_cleaned"
+            app:layout_constraintTop_toBottomOf="@+id/btn_cage_need_repaired" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

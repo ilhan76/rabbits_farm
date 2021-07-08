@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text">
+        <item name="android:textColor">@color/standard_txt_color</item>
+    </style>
+
+    <style name="FarmRabbitsSettingsText" parent="@style/Text">
+        <item name="android:height">@dimen/farm_rabbit_settings_btn_height</item>
+
+        <item name="android:layout_marginTop">@dimen/farm_rabbit_settings_vertical_btn_margin</item>
+        <item name="android:layout_marginStart">@dimen/farm_rabbit_settings_horizontal_margin</item>
+
+        <item name="android:textSize">@dimen/standard_txt_size</item>
+    </style>
+
+    <style name="FarmRabbitsButton">
+        <item name="android:layout_width">@dimen/farm_rabbit_settings_btn_width</item>
+        <item name="android:layout_height">@dimen/farm_rabbit_settings_btn_height</item>
+
+        <item name="android:layout_marginTop">@dimen/farm_rabbit_settings_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/farm_rabbit_settings_horizontal_margin</item>
+
+        <item name="android:textSize">@dimen/standard_txt_size</item>
+        <item name="android:textColor">@color/farm_rabbit_settings_btn_txt_color</item>
+    </style>
+</resources>

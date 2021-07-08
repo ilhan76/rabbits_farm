@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- todo - refactor dimens -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="@dimen/tasks_item_margin_horizontal"
+        android:layout_marginVertical="@dimen/tasks_item_margin_vertical"
+
+        android:background="@drawable/shape_item_corner"
+        android:elevation="@dimen/tasks_item_elevation"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+
+            android:text="@string/birth_item_title"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_item_txt_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_count_of_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/tasks_item_reproduction_margin_horizontal"
+
+            android:textColor="@color/black"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+
+            tools:text="21 дн." />
+
+        <TextView
+            android:id="@+id/srt_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="50dp"
+
+            android:text="@string/birth_item_txt_number_of_cage"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/txt_number_of_cage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/standard_margin"
+
+            android:background="@drawable/shape_item_text"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="10dp"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/srt_number"
+
+            tools:text="125А (Ферма №1)"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="5dp"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+            android:text="@string/birth_item_txt_status"
+
+            app:layout_constraintBottom_toTopOf="@id/ic_status"
+            app:layout_constraintEnd_toEndOf="@+id/ic_status"
+            app:layout_constraintStart_toStartOf="@+id/ic_status" />
+
+
+        <ImageView
+            android:id="@+id/ic_status"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+
+            android:layout_marginTop="46dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginBottom="44dp"
+
+            android:src="@drawable/ic_not_confirmed"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_number_of_cage"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:text="@string/birth_item_txt_not_confirmed"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_txt_size"
+
+            app:layout_constraintEnd_toEndOf="@+id/ic_status"
+            app:layout_constraintTop_toBottomOf="@+id/ic_status"
+            app:layout_constraintStart_toStartOf="@+id/ic_status"/>
+
+        <Button
+            android:id="@+id/btn_fertilized"
+            android:layout_width="140dp"
+            android:layout_height="@dimen/standard_btn_height"
+
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginTop="30dp"
+
+            android:padding="0dp"
+
+            android:background="@drawable/shape_btn_red"
+
+            android:text="@string/birth_item_btn_fertilized"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_txt_size"
+            android:textAllCaps="false"
+
+            app:layout_constraintTop_toBottomOf="@+id/txt_number_of_cage"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_not_fertilized"
+            android:layout_width="140dp"
+            android:layout_height="@dimen/standard_btn_height"
+
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="@dimen/standard_margin"
+
+            android:padding="0dp"
+
+            android:background="@drawable/shape_btn_red"
+
+            android:text="@string/birth_item_txt_not_fertilised"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_txt_size"
+            android:textAllCaps="false"
+
+            app:layout_constraintTop_toBottomOf="@+id/btn_fertilized"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,8 @@
 
         app:menu="@menu/menu_bnv"
 
+        android:background="@color/white"
+
         app:labelVisibilityMode="unlabeled"
 
         app:layout_constraintBottom_toBottomOf="parent"

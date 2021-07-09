@@ -51,6 +51,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_number_of_farm"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_number_of_farm"
@@ -62,6 +63,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_type_of_cage"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_type_of_cage"
@@ -73,6 +75,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_count_of_rabbit"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_count_of_rabbits"
@@ -84,6 +87,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_status_of_cage"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_status_of_cage"
@@ -92,8 +96,10 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_count_of_rabbit" />
 
         <Spinner
-            android:id="@+id/spinner_farm"
             style="@style/FarmRabbitsButton"
+            android:id="@+id/spinner_farm"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
             android:background="@drawable/shape_item_text"
@@ -106,8 +112,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/spinner_type_of_cage"
             style="@style/FarmRabbitsButton"
+            android:id="@+id/spinner_type_of_cage"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
             android:background="@drawable/shape_item_text"
@@ -120,9 +128,12 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_farm" />
 
         <EditText
-            android:id="@+id/edit_txt_count_of_rabbit"
-
             style="@style/FarmRabbitsButton"
+            android:id="@+id/edit_txt_count_of_rabbit"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+
+            android:paddingHorizontal="10dp"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
             android:background="@drawable/shape_item_text"
@@ -134,17 +145,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
 
-        <Button
-            android:id="@+id/btn_need_clear"
-
+        <CheckBox
             style="@style/FarmRabbitsButton"
+            android:id="@+id/btn_need_clear"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
-            android:background="@drawable/shape_btn_red"
+            android:button="@drawable/selector_check_box"
+            android:background="@drawable/shape_item_text"
 
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
 
-            android:drawableLeft="@drawable/ic_rabbit_label"
             android:gravity="end|center_vertical"
 
             android:insetTop="0dp"
@@ -158,17 +170,18 @@
             app:layout_constraintTop_toBottomOf="@id/edit_txt_count_of_rabbit"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
-            android:id="@+id/btn_need_repair"
-
+        <CheckBox
             style="@style/FarmRabbitsButton"
-
-            android:background="@drawable/shape_btn_red"
+            android:id="@+id/btn_need_repair"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
 
-            android:drawableLeft="@drawable/ic_rabbit_label"
+            android:button="@drawable/selector_check_box"
+            android:background="@drawable/shape_item_text"
+
             android:gravity="end|center_vertical"
 
             android:insetTop="0dp"

@@ -48,10 +48,6 @@ class Tasks : Fragment() {
         mViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
-        mBinding.btnToMenu.setOnClickListener {
-            APP_ACTIVITY.mNavController.navigate(R.id.action_aboutFarm_to_aboutFarmMenu)
-        }
-
         mViewModel.getTasks()
     }
 

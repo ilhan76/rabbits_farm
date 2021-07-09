@@ -13,8 +13,6 @@
     </style>
 
     <style name="FarmRabbitsButton">
-        <item name="android:layout_width">@dimen/farm_rabbit_settings_btn_width</item>
-        <item name="android:layout_height">@dimen/farm_rabbit_settings_btn_height</item>
 
         <item name="android:layout_marginTop">@dimen/farm_rabbit_settings_horizontal_margin</item>
         <item name="android:layout_marginEnd">@dimen/farm_rabbit_settings_horizontal_margin</item>

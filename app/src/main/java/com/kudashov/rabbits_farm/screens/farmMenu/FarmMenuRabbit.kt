@@ -12,17 +12,18 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitMenuBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
-class AboutFarmMenu: Fragment() {
+class FarmMenuRabbit : Fragment() {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentFarmRabbitMenuBinding? = null
     private val mBinding get() = _binding!!
+
     private lateinit var mViewModel: AboutFarmMenuViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFarmRabbitMenuBinding.inflate(layoutInflater, container, false)
         return mBinding.root
@@ -38,17 +39,17 @@ class AboutFarmMenu: Fragment() {
         mViewModel.getStates().observe(this, this::stateProcessing)
 
         mBinding.btnExit.setOnClickListener {
-            APP_ACTIVITY.mNavController.navigate(R.id.action_aboutFarmMenu_to_aboutFarm)
+            APP_ACTIVITY.mNavController.navigate(R.id.action_farmMenuRabbit_to_farm)
         }
     }
 
-    private fun stateProcessing(state: StateAboutFarmMenu){
-        when (state){
+    private fun stateProcessing(state: StateAboutFarmMenu) {
+        when (state) {
             is StateAboutFarmMenu.Default -> {
                 Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
                 //todo разблокировать кнопки
             }
-            is StateAboutFarmMenu.Sending ->{
+            is StateAboutFarmMenu.Sending -> {
                 Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
                 //todo заблокировать кнопки
             }

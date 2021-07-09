@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     fun hideBottomNavigation(){ mBinding.footerBar.visibility = View.GONE }
     fun showBottomNavigation(){ mBinding.footerBar.visibility = View.VISIBLE }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -12,10 +12,18 @@ import com.kudashov.rabbits_farm.data.Cage
 import com.kudashov.rabbits_farm.data.Rabbit
 import java.util.*
 
+interface FarmDelegate {
+    fun openMoreRabbitInfo()
+}
+
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listData: MutableList<AboutFarmListItemType> = LinkedList()
+    private var delegate: FarmDelegate? = null
 
+    fun attachDelegate(delegate: FarmDelegate){
+        this.delegate = delegate
+    }
     fun setList(list: List<AboutFarmListItemType>) {
         listData.clear()
         listData.addAll(list)
@@ -36,7 +44,9 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder){
-            is RabbitViewHolder -> holder.bind(listData[position] as Rabbit)
+            is RabbitViewHolder -> {
+                holder.bind(listData[position] as Rabbit)
+            }
             is CageViewHolder -> holder.bind(listData[position] as Cage)
         }
     }
@@ -44,12 +54,12 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            1 -> RabbitViewHolder(inflater.inflate(R.layout.item_farm_rabbit, parent, false))
+            1 -> RabbitViewHolder(inflater.inflate(R.layout.item_farm_rabbit, parent, false), delegate)
             else -> CageViewHolder(inflater.inflate(R.layout.item_farm_cage, parent, false))
         }
     }
 
-    class RabbitViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) : RecyclerView.ViewHolder(view) {
 
         private val label: ImageView = view.findViewById(R.id.image_rabbit_label)
         private val number: TextView = view.findViewById(R.id.str_number_of_cage)
@@ -61,6 +71,10 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             number.text = rabbit.numberOfCage
             age.text = rabbit.age
             type.text = rabbit.type
+
+            view.setOnClickListener {
+                delegate?.openMoreRabbitInfo()
+            }
         }
     }
 

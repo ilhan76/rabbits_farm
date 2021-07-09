@@ -25,13 +25,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-187" />
-                            <option name="y" value="19" />
+                            <option name="x" value="-191" />
+                            <option name="y" value="-3" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_aboutFarm_to_aboutFarmMenu">
+                            <entry key="action_farm_to_farmMenuCage">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_farm_to_farmMenuRabbit">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -41,7 +46,28 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="farm_menu_rabbit">
+                  <entry key="farmMenuCage">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-12" />
+                            <option name="y" value="400" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_farmMenuCage_to_farm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="farmMenuRabbit">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -52,7 +78,33 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_aboutFarmMenu_to_aboutFarm">
+                            <entry key="action_farmMenuRabbit_to_farm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="rabbit">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-567" />
+                            <option name="y" value="112" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="rabbitMoreInfo">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="rabbitWeigh">
                               <value>
                                 <LayoutPositions />
                               </value>

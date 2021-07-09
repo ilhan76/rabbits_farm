@@ -20,6 +20,10 @@ class FarmMenuRabbit : Fragment() {
 
     private lateinit var mViewModel: AboutFarmMenuViewModel
 
+    private var isMale: Boolean = false
+    private var isFemale: Boolean = false
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -40,6 +44,18 @@ class FarmMenuRabbit : Fragment() {
 
         mBinding.btnExit.setOnClickListener {
             APP_ACTIVITY.mNavController.navigate(R.id.action_farmMenuRabbit_to_farm)
+        }
+
+        mBinding.btnMale.setOnClickListener {
+       /*     if (isMale){
+                mBinding.btnFemale.setBackgroundResource(R.drawable.shape_menu)
+            }*/
+            mBinding.btnMale.setBackgroundResource(if (isMale) R.drawable.shape_menu else R.drawable.shape_btn_green)
+            isMale = !isMale
+        }
+        mBinding.btnFemale.setOnClickListener {
+            mBinding.btnFemale.setBackgroundResource(if (isFemale) R.drawable.shape_menu else R.drawable.shape_btn_green)
+            isFemale = !isFemale
         }
     }
 

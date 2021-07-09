@@ -8,9 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
@@ -18,7 +15,6 @@ import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.FarmDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
-import okhttp3.internal.notify
 
 class Farm: Fragment(), FarmDelegate {
 
@@ -66,10 +62,16 @@ class Farm: Fragment(), FarmDelegate {
         }
         mBinding.btnRabbits.setOnClickListener{
             isRabbit = true
+            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
+            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
+
             mViewModel.getRabbits()
         }
         mBinding.btnCages.setOnClickListener{
             isRabbit = false
+            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
+            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
+
             mViewModel.getCages()
         }
         mViewModel.getRabbits()
@@ -79,37 +81,24 @@ class Farm: Fragment(), FarmDelegate {
         when (state){
             is StateAboutFarm.Default -> {
                 Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
-                setEnabled(true)
             }
             is StateAboutFarm.Sending ->{
                 Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
-                setEnabled(false)
                 //todo - добавить лоадер
             }
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 adapter.setList(state.list)
                 mBinding.buttonsPanel.visibility = View.GONE
-                setEnabled(true)
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 mBinding.buttonsPanel.visibility = View.VISIBLE
                 adapter.setList(state.list)
-                setEnabled(true)
             }
             is StateAboutFarm.Error<*> -> {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
-                setEnabled(true)
             }
-        }
-    }
-
-    private fun setEnabled(enable: Boolean){
-        mBinding.apply {
-            btnCages.isEnabled = enable
-            btnRabbits.isEnabled = enable
-            btnToMenu.isEnabled = enable
         }
     }
 

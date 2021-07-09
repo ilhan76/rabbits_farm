@@ -11,11 +11,8 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.adapters.AboutFarmAdapter
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
-import com.kudashov.rabbits_farm.screens.aboutFarm.AboutFarmViewModel
-import com.kudashov.rabbits_farm.screens.aboutFarm.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Tasks : Fragment() {
@@ -75,6 +72,11 @@ class Tasks : Fragment() {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

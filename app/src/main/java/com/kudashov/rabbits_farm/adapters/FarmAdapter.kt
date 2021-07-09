@@ -12,7 +12,7 @@ import com.kudashov.rabbits_farm.data.Cage
 import com.kudashov.rabbits_farm.data.Rabbit
 import java.util.*
 
-class AboutFarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listData: MutableList<AboutFarmListItemType> = LinkedList()
 

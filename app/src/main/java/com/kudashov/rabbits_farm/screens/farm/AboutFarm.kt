@@ -1,19 +1,17 @@
-package com.kudashov.rabbits_farm.screens.aboutFarm
+package com.kudashov.rabbits_farm.screens.farm
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.adapters.AboutFarmAdapter
+import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
@@ -25,7 +23,7 @@ class AboutFarm: Fragment() {
     private lateinit var mViewModel: AboutFarmViewModel
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: AboutFarmAdapter
+    private lateinit var adapter: FarmAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +40,7 @@ class AboutFarm: Fragment() {
     }
 
     private fun init() {
-        adapter = AboutFarmAdapter()
+        adapter = FarmAdapter()
         recyclerView = mBinding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter

@@ -21,37 +21,20 @@
         app:layout_constraintBottom_toTopOf="@+id/footer_bar"/>
 
 
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/footer_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
 
-        android:orientation="horizontal"
+        app:menu="@menu/menu_bnv"
+
+        android:background="@color/white"
+
+        app:labelVisibilityMode="unlabeled"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/about_farm"
-            android:layout_width="wrap_content"
-
-            android:padding="0dp"
-
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/tasks"
-            android:layout_width="wrap_content"
-
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/birth"
-            android:layout_width="wrap_content"
-
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>

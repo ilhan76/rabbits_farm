@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.aboutFarm
+package com.kudashov.rabbits_farm.screens.farm
 
 import android.app.Application
 import android.util.Log

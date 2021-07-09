@@ -5,15 +5,77 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.BirthAdapter
+import com.kudashov.rabbits_farm.adapters.TasksAdapter
+import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
+import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
+import com.kudashov.rabbits_farm.screens.tasks.StateTasks
+import com.kudashov.rabbits_farm.screens.tasks.TasksViewModel
+import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Birth : Fragment() {
+
+    private val TAG: String = this::class.java.simpleName
+    private var _binding: FragmentBirthBinding? = null
+    private val mBinding get() = _binding!!
+
+    private lateinit var mViewModel: BirthViewModel
+
+    private lateinit var adapter: BirthAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_birth, container, false)
+        _binding = FragmentBirthBinding.inflate(layoutInflater, container, false)
+        return mBinding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        init()
+    }
+
+    private fun init() {
+        adapter = BirthAdapter()
+        recyclerView = mBinding.birthList
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
+
+        mViewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
+        mViewModel.getStates().observe(this, this::stateProcessing)
+
+        mViewModel.getTasks()
+    }
+
+    private fun stateProcessing(state: StateBirth){
+        when (state){
+            is StateBirth.Default -> {
+                Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
+            }
+            is StateBirth.Sending ->{
+                Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
+                //todo - добавить лоадер
+            }
+            is StateBirth.ListOfBirthReceived -> {
+                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                adapter.setList(state.list)
+            }
+            is StateBirth.Error<*> -> {
+                Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.aboutFarm
+package com.kudashov.rabbits_farm.screens.farm
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,22 +8,30 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.adapters.AboutFarmAdapter
+import com.kudashov.rabbits_farm.adapters.FarmAdapter
+import com.kudashov.rabbits_farm.adapters.FarmDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import okhttp3.internal.notify
 
-class AboutFarm: Fragment() {
+class Farm: Fragment(), FarmDelegate {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentFarmBinding? = null
     private val mBinding get() = _binding!!
+
     private lateinit var mViewModel: AboutFarmViewModel
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: AboutFarmAdapter
+    private lateinit var adapter: FarmAdapter
+
+    private var isRabbit: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,21 +48,28 @@ class AboutFarm: Fragment() {
     }
 
     private fun init() {
-        adapter = AboutFarmAdapter()
+        adapter = FarmAdapter()
         recyclerView = mBinding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+
+        adapter.attachDelegate(this)
 
         mViewModel = ViewModelProvider(this).get(AboutFarmViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
         mBinding.btnToMenu.setOnClickListener {
-            APP_ACTIVITY.mNavController.navigate(R.id.action_aboutFarm_to_aboutFarmMenu)
+            if (isRabbit)
+                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuRabbit)
+            else
+                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuCage)
         }
         mBinding.btnRabbits.setOnClickListener{
+            isRabbit = true
             mViewModel.getRabbits()
         }
         mBinding.btnCages.setOnClickListener{
+            isRabbit = false
             mViewModel.getCages()
         }
         mViewModel.getRabbits()
@@ -74,10 +89,12 @@ class AboutFarm: Fragment() {
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 adapter.setList(state.list)
+                mBinding.buttonsPanel.visibility = View.GONE
                 setEnabled(true)
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                mBinding.buttonsPanel.visibility = View.VISIBLE
                 adapter.setList(state.list)
                 setEnabled(true)
             }
@@ -99,5 +116,9 @@ class AboutFarm: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun openMoreRabbitInfo() {
+        Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
     }
 }

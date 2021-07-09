@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/aboutFarm">
+    app:startDestination="@id/farm">
 
     <fragment
-        android:id="@+id/aboutFarm"
-        android:name="com.kudashov.rabbits_farm.screens.aboutFarm.AboutFarm"
+        android:id="@+id/farm"
+        android:name="com.kudashov.rabbits_farm.screens.farm.Farm"
         android:label="AboutFarm" >
         <action
-            android:id="@+id/action_aboutFarm_to_aboutFarmMenu"
-            app:destination="@id/aboutFarmMenu"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_farm_to_farmMenuCage"
+            app:destination="@id/farmMenuCage" />
+        <action
+            android:id="@+id/action_farm_to_farmMenuRabbit"
+            app:destination="@id/farmMenuRabbit" />
     </fragment>
     <fragment
-        android:id="@+id/aboutFarmMenu"
-        android:name="com.kudashov.rabbits_farm.screens.aboutFarmMenu.AboutFarmMenu"
+        android:id="@+id/farmMenuRabbit"
+        android:name="com.kudashov.rabbits_farm.screens.farmMenu.FarmMenuRabbit"
         android:label="AboutFarmMenu" >
         <action
-            android:id="@+id/action_aboutFarmMenu_to_aboutFarm"
-            app:destination="@id/aboutFarm"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_farmMenuRabbit_to_farm"
+            app:destination="@id/farm" />
+    </fragment>
+    <fragment
+        android:id="@+id/birth"
+        android:name="com.kudashov.rabbits_farm.screens.birth.Birth"
+        android:label="Birth" />
+    <fragment
+        android:id="@+id/tasks"
+        android:name="com.kudashov.rabbits_farm.screens.tasks.Tasks"
+        android:label="Tasks" />
+    <fragment
+        android:id="@+id/farmMenuCage"
+        android:name="com.kudashov.rabbits_farm.screens.farmMenu.FarmMenuCage"
+        android:label="FarmMenuCage" >
+        <action
+            android:id="@+id/action_farmMenuCage_to_farm"
+            app:destination="@id/farm" />
     </fragment>
 </navigation>

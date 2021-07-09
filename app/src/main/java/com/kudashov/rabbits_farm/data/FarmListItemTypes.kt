@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.data
 
-sealed class AboutFarmListItemType()
+sealed class AboutFarmListItemType
 
 data class Rabbit(
         var numberOfCage: String? = null,

@@ -129,7 +129,7 @@
     <string name="birth_item_txt_not_confirmed">Не подтверждено</string>
     <string name="birth_item_txt_confirmed">Оплодотворена</string>
     <string name="birth_item_btn_fertilized">Оплодотворена</string>
-    <string name="birth_item_txt_not_fertilised">Не оплодотворена</string>
+    <string name="birth_item_btn_not_fertilised">Не оплодотворена</string>
     <string name="birth_item_btn_take_births">Принять роды</string>
     <!-- Item -->
 

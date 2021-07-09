@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.aboutFarmMenu
+package com.kudashov.rabbits_farm.screens.farmMenu
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

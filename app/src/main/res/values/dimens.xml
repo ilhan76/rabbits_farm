@@ -29,7 +29,7 @@
     <dimen name="farm_rabbit_settings_vertical_btn_margin">10dp</dimen>
     <dimen name="farm_rabbit_settings_btn_width">160dp</dimen>
     <dimen name="farm_rabbit_settings_btn_height">25dp</dimen>
-    <dimen name="farm_rabbit_settings_small_btn_width">75</dimen>
+    <dimen name="farm_rabbit_settings_small_btn_width">75dp</dimen>
 
     <dimen name="farm_rabbit_settings_btn_show_height">40dp</dimen>
     <dimen name="farm_rabbit_settings_btn_show_width">190dp</dimen>
@@ -78,7 +78,7 @@
 
     <dimen name="tasks_item_margin_horizontal">15dp</dimen>
     <dimen name="tasks_item_margin_vertical">10dp</dimen>
-    <dimen name="tasks_item_elevation">5dp</dimen>
+    <dimen name="tasks_item_elevation">10dp</dimen>
     <dimen name="tasks_item_txt_area_padding_horizontal">10dp</dimen>
 
     <dimen name="tasks_item_btn_show_height">35dp</dimen>

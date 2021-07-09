@@ -125,6 +125,8 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
 
+                android:background="@drawable/shape_btn_green"
+
                 android:text="@string/farm_floating_action_btn_save"
                 android:textColor="@color/white"
                 android:textSize="@dimen/farm_floating_action_weigh_txt_size"

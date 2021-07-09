@@ -139,7 +139,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:background="@drawable/shape_btn_red"
+            android:background="@drawable/shape_btn_green"
 
             android:padding="0dp"
 
@@ -178,7 +178,7 @@
 
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:background="@drawable/shape_btn_red"
+            android:background="@drawable/shape_btn_green"
 
             android:padding="0dp"
 

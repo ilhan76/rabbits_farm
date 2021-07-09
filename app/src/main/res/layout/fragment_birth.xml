@@ -45,11 +45,11 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:backgroundTint="@color/btn_rabbits_passive"
+            android:background="@drawable/shape_btn_orange"
 
             android:text="@string/birth_btn_not_yet_confirmed"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -66,11 +66,11 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:backgroundTint="@color/btn_cages_passive"
+            android:background="@drawable/shape_btn_grey"
 
             android:text="@string/birth_btn_confirmed"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -100,7 +100,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:backgroundTint="@color/black"
+            android:background="@drawable/shape_spinner_dark"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_confirmed" />

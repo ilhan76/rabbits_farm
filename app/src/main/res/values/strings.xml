@@ -72,7 +72,7 @@
     <string name="tasks_btn_death">Смерть</string>
     <string name="tasks_btn_not_yet_done">Не выполнено</string>
     <string name="tasks_btn_done">Выполнено</string>
-    <string name="tasks_txt_sort">Сортировать</string>
+    <string name="tasks_txt_sort">Сортировать (дн)</string>
     
     <string name="task_item_btn_not_yet_done">Не выполнено</string>
     <string name="task_item_btn_done">Выполнено</string>
@@ -137,6 +137,10 @@
     <string name="birth_floating_action_title">Принять роды</string>
     <string name="birth_floating_action_count_of_rabbit">Количество рожденных кроликов</string>
     <string name="birth_floating_action_btn_save">Сохранить</string>
+    <string name="farm_button_area_cage_is_repaired">Клетка отремонтирована</string>
+    <string name="farm_button_area_cage_is_cleaned">Клетка убрана</string>
+    <string name="farm_button_area_need_repair">Требуется ремонт</string>
+    <string name="farm_button_area_need_clean">Требуется уборка</string>
     <!-- Floating Action Fragment -->
     <!-- Birth -->
 </resources>

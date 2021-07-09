@@ -108,7 +108,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:backgroundTint="@color/black"
+            android:background="@drawable/shape_spinner_dark"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
@@ -207,7 +207,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка отремонтирована"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_cage_is_repaired"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -230,7 +233,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка убрана"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_cage_is_cleaned"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -252,7 +258,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка отремонтирована"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_need_repair"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -274,7 +283,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка убрана"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_need_clean"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 

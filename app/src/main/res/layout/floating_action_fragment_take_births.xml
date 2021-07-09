@@ -92,7 +92,7 @@
             android:layout_marginTop="@dimen/birth_item_btn_save_margin_top"
             android:layout_marginBottom="@dimen/birth_item_btn_save_margin_bottom"
 
-            android:background="@drawable/shape_btn_red"
+            android:background="@drawable/shape_btn_green"
 
             android:text="@string/birth_floating_action_btn_save"
             android:textAllCaps="false"

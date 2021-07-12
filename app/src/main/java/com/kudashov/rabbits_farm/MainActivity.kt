@@ -1,15 +1,11 @@
 package com.kudashov.rabbits_farm
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.Transition
 import android.transition.TransitionManager
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -22,7 +18,7 @@ import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 class MainActivity : AppCompatActivity() {
 
     private var TAG: String = this::class.java.simpleName
-    lateinit var mNavController: NavController
+    lateinit var navController: NavController
     private var _binding: ActivityMainBinding? = null
     private val mBinding get() = _binding!!
 
@@ -33,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         APP_ACTIVITY = this
-        mNavController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         bottomNavigationView = mBinding.footerBar
         bottomNavigationView.itemIconTintList = null
-        bottomNavigationView.setupWithNavController(navController = mNavController)
+        bottomNavigationView.setupWithNavController(navController = navController)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             underlineSelectedItem(item)
@@ -53,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTransitionStart(transition: Transition?) {
             }
             override fun onTransitionEnd(transition: Transition?) {
-                NavigationUI.onNavDestinationSelected(item, mNavController)
+                NavigationUI.onNavDestinationSelected(item, navController)
             }
             override fun onTransitionCancel(transition: Transition?) {
             }

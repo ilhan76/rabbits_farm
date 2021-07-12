@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitMenuBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
@@ -22,7 +24,6 @@ class FarmMenuRabbit : Fragment() {
 
     private var isMale: Boolean = false
     private var isFemale: Boolean = false
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -43,13 +44,15 @@ class FarmMenuRabbit : Fragment() {
         mViewModel.getStates().observe(this, this::stateProcessing)
 
         mBinding.btnExit.setOnClickListener {
-            APP_ACTIVITY.mNavController.navigate(R.id.action_farmMenuRabbit_to_farm)
+            APP_ACTIVITY.navController.navigate(R.id.action_farmMenuRabbit_to_farm)
         }
 
+        val list: List<String> = listOf("Фирма №1", "Фирма №2", "Фирма №3")
+        val adapter = SpinnerAdapter(APP_ACTIVITY)
+        adapter.setList(list)
+        mBinding.spinnerNumberOfFarm.adapter = adapter
+
         mBinding.btnMale.setOnClickListener {
-       /*     if (isMale){
-                mBinding.btnFemale.setBackgroundResource(R.drawable.shape_menu)
-            }*/
             mBinding.btnMale.setBackgroundResource(if (isMale) R.drawable.shape_menu else R.drawable.shape_btn_green)
             isMale = !isMale
         }

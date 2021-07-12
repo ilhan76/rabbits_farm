@@ -100,7 +100,11 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:background="@drawable/shape_spinner_dark"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/standard_spinner_height"
+            android:popupBackground="@drawable/shape_spinner_dark"
+            android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_confirmed" />

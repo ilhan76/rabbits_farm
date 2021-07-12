@@ -1,143 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+
+    android:layout_marginHorizontal="@dimen/standard_margin"
+
+    android:background="@drawable/shape_dialog_fragment"
+    android:elevation="@dimen/farm_floating_action_weigh_elevation"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="@dimen/floating_action_fragment_btn_edit_size"
+        android:layout_height="@dimen/floating_action_fragment_btn_edit_size"
+
+        android:layout_marginTop="@dimen/floating_action_fragment_btn_exit_margin_top"
+        android:layout_marginEnd="@dimen/floating_action_fragment_btn_exit_margin_end"
+
+        android:background="@drawable/ic_close_menu"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/farm_floating_action_weigh_title_margin_top"
+
+        android:text="@string/farm_floating_action_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/farm_floating_action_weigh_title_txt_size"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_current_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/farm_floating_action_weigh_margin_from_title"
+
+        android:text="@string/farm_floating_txt_current_weight_of_rabbit"
+        android:textColor="@color/black"
+        android:textSize="@dimen/farm_floating_action_weigh_txt_current_weight_size"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/farm_floating_action_weigh_input_area_margin_top"
+        android:layout_marginBottom="@dimen/farm_floating_action_weigh_input_area_margin_bottom"
 
         android:background="@drawable/shape_item_corner"
-        android:elevation="@dimen/farm_floating_action_weigh_elevation"
+        android:elevation="@dimen/farm_floating_action_weigh_input_area_elevation"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btn_exit"
-            android:layout_width="@dimen/floating_action_fragment_btn_edit_size"
-            android:layout_height="@dimen/floating_action_fragment_btn_edit_size"
-
-            android:layout_marginTop="@dimen/floating_action_fragment_btn_exit_margin_top"
-            android:layout_marginEnd="@dimen/floating_action_fragment_btn_exit_margin_end"
-
-            android:background="@drawable/ic_close_menu"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_current_weight">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/txt_new_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="@dimen/farm_floating_action_weigh_title_margin_top"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
 
-            android:text="@string/farm_floating_action_title"
+            android:text="@string/farm_floating_new_weight_of_rabbit"
             android:textColor="@color/black"
-            android:textSize="@dimen/farm_floating_action_weigh_title_txt_size"
+            android:textSize="@dimen/farm_floating_action_weigh_txt_size"
 
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txt_current_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/farm_floating_action_weigh_margin_from_title"
-
-            android:text="@string/farm_floating_txt_current_weight_of_rabbit"
-            android:textColor="@color/black"
-            android:textSize="@dimen/farm_floating_action_weigh_txt_current_weight_size"
-
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <EditText
+            android:id="@+id/edit_txt_new_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="@dimen/farm_floating_action_weigh_input_area_margin_top"
             android:layout_marginHorizontal="@dimen/standard_margin"
-            android:layout_marginBottom="@dimen/farm_floating_action_weigh_input_area_margin_bottom"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:background="@drawable/shape_item_text"
 
-            android:background="@drawable/shape_item_corner"
-            android:elevation="@dimen/farm_floating_action_weigh_input_area_elevation"
+            android:gravity="center_vertical|start"
+
+            android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_txt_size"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_new_weight" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_btn_height"
+
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/farm_floating_action_weigh_btn_margin_top"
+            android:layout_marginBottom="@dimen/farm_floating_action_weigh__btn_margin_bottom"
+
+            android:background="@drawable/shape_btn_green"
+            android:insetTop="0dp"
+
+            android:insetBottom="0dp"
+
+            android:text="@string/farm_floating_action_btn_save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/farm_floating_action_weigh_txt_size"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_current_weight">
-
-            <TextView
-                android:id="@+id/txt_new_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="@dimen/standard_margin"
-                android:layout_marginStart="@dimen/standard_margin"
-
-                android:text="@string/farm_floating_new_weight_of_rabbit"
-                android:textSize="@dimen/farm_floating_action_weigh_txt_size"
-                android:textColor="@color/black"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <EditText
-                android:id="@+id/edit_txt_new_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginHorizontal="@dimen/standard_margin"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
-
-                android:background="@drawable/shape_item_text"
-
-                android:gravity="center_vertical|start"
-
-                android:textColor="@color/white"
-                android:textSize="@dimen/standard_txt_size"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_new_weight"/>
-
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_btn_height"
-
-                android:layout_marginHorizontal="@dimen/standard_margin"
-                android:layout_marginTop="@dimen/farm_floating_action_weigh_btn_margin_top"
-                android:layout_marginBottom="@dimen/farm_floating_action_weigh__btn_margin_bottom"
-
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-
-                android:background="@drawable/shape_btn_green"
-
-                android:text="@string/farm_floating_action_btn_save"
-                android:textColor="@color/white"
-                android:textSize="@dimen/farm_floating_action_weigh_txt_size"
-                android:textAllCaps="false"
-
-                app:layout_constraintTop_toBottomOf="@+id/edit_txt_new_weight"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/edit_txt_new_weight" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

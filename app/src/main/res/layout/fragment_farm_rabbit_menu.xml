@@ -132,15 +132,23 @@
 
         <Spinner
             style="@style/FarmRabbitsButton"
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_number_of_farm"
 
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-            android:background="@drawable/shape_menu"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
+            android:popupBackground="@drawable/shape_menu"
+            android:background="@drawable/selector_spinner_bg"
+
+            android:spinnerMode="dropdown"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:listitem="@layout/spinner_item"/>
 
         <ImageButton
             android:id="@+id/btn_male"
@@ -162,7 +170,7 @@
             android:textAllCaps="false"
 
             app:layout_constraintEnd_toStartOf="@id/btn_female"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_number_of_farm" />
 
         <ImageButton
             android:id="@+id/btn_female"
@@ -180,7 +188,7 @@
             android:padding="0dp"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_number_of_farm" />
 
             <CheckBox
                 style="@style/FarmRabbitsButton"
@@ -242,144 +250,89 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-            android:background="@drawable/shape_menu"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
+            android:popupBackground="@drawable/shape_menu"
+            android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_baby" />
 
-        <LinearLayout
+
+        <EditText
+            android:id="@+id/edit_txt_age_from"
             style="@style/FarmRabbitsButton"
-            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_width="75dp"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
-            android:id="@+id/edit_age_area"
 
-            android:orientation="horizontal"
+            android:inputType="number"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_breed">
+            android:gravity="center"
 
-            <TextView
-                android:id="@+id/str_age_from"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:background="@drawable/selector_menu"
 
-                android:paddingStart="5dp"
-                android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_edit_txt_from"
+            android:paddingStart="5dp"
 
-                android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@id/spinner_breed"
+            app:layout_constraintEnd_toStartOf="@id/edit_txt_age_to"/>
 
-                android:background="@color/btn_standard"
-
-                android:text="@string/farm_rabbits_settings_txt_from"
-
-                android:textColor="@color/white" />
-
-            <EditText
-                android:id="@+id/edit_age_from"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-
-                android:autofillHints=""
-                android:inputType="number"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/str_age_to"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:paddingStart="5dp"
-                android:gravity="center_vertical"
-
-                android:layout_weight="1"
-
-                android:background="@color/btn_standard"
-
-                android:text="@string/farm_rabbits_settings_txt__to"
-
-                android:textColor="@color/white" />
-
-            <EditText
-                android:id="@+id/edit_age_to"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-
-                android:autofillHints=""
-                android:inputType="number" />
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/edit_txt_age_to"
             style="@style/FarmRabbitsButton"
-            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_width="75dp"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
-            android:id="@+id/edit_number_area"
 
-            android:orientation="horizontal"
+            android:inputType="number"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_age_area">
+            android:gravity="center"
 
-            <TextView
-                android:id="@+id/str_number_from"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:background="@drawable/shape_menu"
 
+            android:drawableStart="@drawable/ic_edit_txt_to"
+            android:paddingStart="5dp"
 
-                android:paddingStart="5dp"
-                android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/spinner_breed"
 
-                android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-                android:background="@color/btn_standard"
+        <EditText
+            android:id="@+id/edit_txt_number_of_cage_from"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-                android:text="@string/farm_rabbits_settings_txt_from"
+            android:inputType="number"
 
-                android:textColor="@color/white" />
+            android:gravity="center"
 
-            <EditText
-                android:id="@+id/edit_number_from"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:background="@drawable/shape_menu"
 
-                android:layout_weight="1"
+            android:drawableStart="@drawable/ic_edit_txt_from"
+            android:paddingStart="5dp"
 
-                android:autofillHints=""
-                android:inputType="number"
-                android:textSize="12sp" />
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_age_from"
+            app:layout_constraintEnd_toStartOf="@id/edit_txt_age_to"/>
 
-            <TextView
-                android:id="@+id/str_number_to"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+        <EditText
+            android:id="@+id/edit_txt_number_of_cage_to"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-                android:paddingStart="5dp"
-                android:gravity="center_vertical"
+            android:inputType="number"
 
-                android:layout_weight="1"
-                android:background="@color/btn_standard"
+            android:gravity="center"
 
-                android:text="@string/farm_rabbits_settings_txt__to"
+            android:background="@drawable/shape_menu"
 
-                android:textColor="@color/white" />
+            android:drawableStart="@drawable/ic_edit_txt_to"
+            android:paddingStart="5dp"
 
-            <EditText
-                android:id="@+id/edit_number_to"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_age_to"
 
-                android:layout_weight="1"
-
-                android:autofillHints=""
-                android:inputType="number"
-
-                android:paddingVertical="0dp"
-                android:textSize="12sp"
-                tools:ignore="LabelFor" />
-        </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <Spinner
             style="@style/FarmRabbitsButton"
@@ -387,10 +340,14 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-            android:background="@drawable/shape_menu"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
+            android:popupBackground="@drawable/shape_menu"
+            android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_number_area" />
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_number_of_cage_from" />
 
         <Button
             android:layout_width="match_parent"

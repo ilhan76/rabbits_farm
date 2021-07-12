@@ -14,6 +14,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.FarmDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
+import com.kudashov.rabbits_farm.screens.Rabbit
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Farm: Fragment(), FarmDelegate {
@@ -56,9 +57,9 @@ class Farm: Fragment(), FarmDelegate {
 
         mBinding.btnToMenu.setOnClickListener {
             if (isRabbit)
-                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuRabbit)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
             else
-                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuCage)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
         }
         mBinding.btnRabbits.setOnClickListener{
             isRabbit = true
@@ -73,6 +74,11 @@ class Farm: Fragment(), FarmDelegate {
             mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
 
             mViewModel.getCages()
+
+            val rabbitDialog = Rabbit()
+            val transaction = parentFragmentManager.beginTransaction()
+            rabbitDialog.show(transaction,"time_picker")
+
         }
         mViewModel.getRabbits()
     }
@@ -109,5 +115,8 @@ class Farm: Fragment(), FarmDelegate {
 
     override fun openMoreRabbitInfo() {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
+        val rabbitDialog = Rabbit()
+        val transaction = parentFragmentManager.beginTransaction()
+        rabbitDialog.show(transaction,"Rabbit")
     }
 }

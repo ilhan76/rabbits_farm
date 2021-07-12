@@ -33,7 +33,7 @@ class FarmMenuCage : Fragment() {
 
     private fun init() {
         mBinding.btnExit.setOnClickListener {
-            APP_ACTIVITY.mNavController.navigate(R.id.action_farmMenuCage_to_farm)
+            APP_ACTIVITY.navController.navigate(R.id.action_farmMenuCage_to_farm)
         }
     }
 

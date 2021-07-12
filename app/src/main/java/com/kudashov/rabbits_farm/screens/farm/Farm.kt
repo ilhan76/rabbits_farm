@@ -14,7 +14,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.FarmDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
-import com.kudashov.rabbits_farm.screens.Rabbit
+import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Farm: Fragment(), FarmDelegate {
@@ -55,12 +55,19 @@ class Farm: Fragment(), FarmDelegate {
         mViewModel = ViewModelProvider(this).get(AboutFarmViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
+        initButtons()
+
+        mViewModel.getRabbits()
+    }
+
+    private fun initButtons() {
         mBinding.btnToMenu.setOnClickListener {
             if (isRabbit)
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
             else
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
         }
+
         mBinding.btnRabbits.setOnClickListener{
             isRabbit = true
             mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
@@ -74,13 +81,7 @@ class Farm: Fragment(), FarmDelegate {
             mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
 
             mViewModel.getCages()
-
-            val rabbitDialog = Rabbit()
-            val transaction = parentFragmentManager.beginTransaction()
-            rabbitDialog.show(transaction,"time_picker")
-
         }
-        mViewModel.getRabbits()
     }
 
     private fun stateProcessing(state: StateAboutFarm){
@@ -115,7 +116,8 @@ class Farm: Fragment(), FarmDelegate {
 
     override fun openMoreRabbitInfo() {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
-        val rabbitDialog = Rabbit()
+
+        val rabbitDialog = RabbitDialog()
         val transaction = parentFragmentManager.beginTransaction()
         rabbitDialog.show(transaction,"Rabbit")
     }

@@ -68,22 +68,25 @@
         android:layout_height="wrap_content"
 
         android:layout_marginHorizontal="@dimen/birth_item_floating_action_margin_horizontal"
+        android:paddingHorizontal="@dimen/birth_item_txt_area_padding_horizontal"
 
         android:background="@drawable/shape_item_text"
 
         android:gravity="center_vertical|start"
-        android:paddingHorizontal="@dimen/birth_item_txt_area_padding_horizontal"
 
         android:textColor="@color/white"
         android:textSize="@dimen/standard_txt_size"
+
+        android:inputType="number"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/srt_number"
 
-        tools:text="" />
+        tools:text="13" />
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="@dimen/birth_item_btn_save_height"
 

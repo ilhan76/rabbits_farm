@@ -24,6 +24,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun attachDelegate(delegate: FarmDelegate){
         this.delegate = delegate
     }
+
     fun setList(list: List<AboutFarmListItemType>) {
         listData.clear()
         listData.addAll(list)

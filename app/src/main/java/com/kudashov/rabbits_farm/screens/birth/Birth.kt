@@ -10,16 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.BirthAdapter
-import com.kudashov.rabbits_farm.adapters.TasksAdapter
+import com.kudashov.rabbits_farm.adapters.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
-import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
-import com.kudashov.rabbits_farm.screens.tasks.StateTasks
-import com.kudashov.rabbits_farm.screens.tasks.TasksViewModel
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.screens.dialogs.TakeBirthDialog
 
-class Birth : Fragment() {
+class Birth : Fragment(), BirthDelegate {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentBirthBinding? = null
@@ -67,6 +63,7 @@ class Birth : Fragment() {
             is StateBirth.ListOfBirthReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 adapter.setList(state.list)
+                adapter.attachDelegate(this)
             }
             is StateBirth.Error<*> -> {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
@@ -77,5 +74,11 @@ class Birth : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun openBirthDialog() {
+        val dialogBirth = TakeBirthDialog()
+        val transaction = parentFragmentManager.beginTransaction()
+        dialogBirth.show(transaction, "Dialog_TakeBirth")
     }
 }

@@ -15,9 +15,17 @@ import com.kudashov.rabbits_farm.data.BirthListItemTypes
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.RH
 
+interface BirthDelegate{
+    fun openBirthDialog()
+}
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val listOfData: MutableList<BirthListItemTypes> = ArrayList()
+    private var delegate: BirthDelegate? = null
+
+    fun attachDelegate(delegate: BirthDelegate){
+        this.delegate = delegate
+    }
 
     fun setList(list: List<BirthListItemTypes>) {
         listOfData.clear()
@@ -44,11 +52,11 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return BirthViewHolder(inflater.inflate(R.layout.item_birth, parent, false))
+        return BirthViewHolder(inflater.inflate(R.layout.item_birth, parent, false), delegate)
 
     }
 
-    class BirthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class BirthViewHolder(view: View, var delegate: BirthDelegate?) : RecyclerView.ViewHolder(view) {
         var countOfDay: TextView = view.findViewById(R.id.txt_count_of_day)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
         var isConfirmed: ImageView = view.findViewById(R.id.ic_status)
@@ -64,6 +72,9 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (birthListItem.status == RH.string(R.string.birth_item_txt_confirmed)) {
                 isConfirmed.setImageDrawable(RH.drawable(R.drawable.ic_confirmed))
                 btnTakeBirths.visibility = View.VISIBLE
+                btnTakeBirths.setOnClickListener {
+                    delegate?.openBirthDialog()
+                }
                 btnFertilizes.visibility = View.GONE
                 btnNotFertilized.visibility = View.GONE
             } else {

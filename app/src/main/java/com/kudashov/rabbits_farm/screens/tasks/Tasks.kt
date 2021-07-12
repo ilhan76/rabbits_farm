@@ -10,10 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.screens.dialogs.DeathDialog
 
 class Tasks : Fragment() {
 
@@ -48,7 +47,17 @@ class Tasks : Fragment() {
         mViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
+        initButtons()
+
         mViewModel.getTasks()
+    }
+
+    private fun initButtons() {
+        mBinding.btnDeath.setOnClickListener {
+            val dialogDeath = DeathDialog()
+            val transaction = parentFragmentManager.beginTransaction()
+            dialogDeath.show(transaction, "Dialog_Death")
+        }
     }
 
     private fun stateProcessing(state: StateTasks){

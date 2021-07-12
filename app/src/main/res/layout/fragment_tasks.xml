@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_to_menu"
+            android:id="@+id/btn_death"
             android:layout_width="@dimen/tasks_btn_death_width"
             android:layout_height="@dimen/standard_btn_height"
 

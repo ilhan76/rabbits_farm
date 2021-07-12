@@ -1,9 +1,6 @@
 package com.kudashov.rabbits_farm.repository
 
-import com.kudashov.rabbits_farm.net.BirthServerResponse
-import com.kudashov.rabbits_farm.net.CageServerResponse
-import com.kudashov.rabbits_farm.net.RabbitServerResponse
-import com.kudashov.rabbits_farm.net.TaskServerResponse
+import com.kudashov.rabbits_farm.net.*
 import io.reactivex.rxjava3.core.Observable
 
 interface DataRepository {
@@ -13,4 +10,6 @@ interface DataRepository {
     fun getTasks(): Observable<TaskServerResponse>
 
     fun getBirth(): Observable<BirthServerResponse>
+
+    fun getOperations(): Observable<OperationsResponse>
 }

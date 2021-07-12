@@ -108,6 +108,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
+            android:inputType="number"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_new_weight" />

@@ -1,10 +1,7 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
 import com.kudashov.rabbits_farm.data.*
-import com.kudashov.rabbits_farm.net.BirthServerResponse
-import com.kudashov.rabbits_farm.net.CageServerResponse
-import com.kudashov.rabbits_farm.net.RabbitServerResponse
-import com.kudashov.rabbits_farm.net.TaskServerResponse
+import com.kudashov.rabbits_farm.net.*
 import com.kudashov.rabbits_farm.repository.DataRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -78,6 +75,22 @@ class DataRepositoryTest: DataRepository {
         GlobalScope.launch() {
             delay(100)
             response.onNext(BirthServerResponse("", list))
+        }
+
+        return response
+    }
+
+    override fun getOperations(): Observable<OperationsResponse> {
+        val response: PublishSubject<OperationsResponse> = PublishSubject.create()
+
+        val list: MutableList<Operation> = ArrayList()
+        for (i in 1..20) {
+            list.add(Operation("01.01.2021", "Какой-то статус"))
+        }
+
+        GlobalScope.launch() {
+            delay(100)
+            response.onNext(OperationsResponse("", list))
         }
 
         return response

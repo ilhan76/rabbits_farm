@@ -34,27 +34,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_to_menu"
+            android:id="@+id/btn_death"
             android:layout_width="@dimen/tasks_btn_death_width"
             android:layout_height="@dimen/standard_btn_height"
 
             android:layout_margin="@dimen/standard_margin"
 
-            android:text="@string/tasks_btn_death"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="@dimen/standard_txt_size"
-
-            android:backgroundTint="@color/btn_rabbits_passive"
-
             android:insetTop="0dp"
             android:insetBottom="0dp"
+
+            android:background="@drawable/shape_btn_red"
+
+            android:text="@string/tasks_btn_death"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_txt_size"
+
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_rabbits"
+            android:id="@+id/btn_not_done"
             android:layout_width="@dimen/tasks_btn_width"
             android:layout_height="@dimen/standard_btn_height"
 
@@ -64,18 +65,18 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:backgroundTint="@color/btn_rabbits_passive"
+            android:background="@drawable/shape_btn_grey"
 
             android:text="@string/tasks_btn_not_yet_done"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btn_cages"
+            android:id="@+id/btn_done"
             android:layout_width="@dimen/tasks_btn_width"
             android:layout_height="@dimen/standard_btn_height"
 
@@ -85,11 +86,11 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:backgroundTint="@color/btn_cages_passive"
+            android:background="@drawable/shape_btn_grey"
 
             android:text="@string/tasks_btn_done"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -109,7 +110,7 @@
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_rabbits" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_done" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -119,10 +120,14 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:backgroundTint="@color/black"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/standard_spinner_height"
+            android:popupBackground="@drawable/shape_spinner_dark"
+            android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_done" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

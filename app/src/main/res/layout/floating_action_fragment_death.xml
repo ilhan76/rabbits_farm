@@ -1,144 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- todo - рефакторинг id и dimens-->
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
 
-    <!-- todo - рефакторинг id и dimens-->
+    android:layout_marginHorizontal="@dimen/standard_margin"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    android:background="@drawable/shape_dialog_fragment"
+    android:elevation="@dimen/birth_item_elevation"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="@dimen/floating_action_fragment_btn_edit_size"
+        android:layout_height="@dimen/floating_action_fragment_btn_edit_size"
+
+        android:layout_marginTop="@dimen/floating_action_fragment_btn_exit_margin_top"
+        android:layout_marginEnd="@dimen/floating_action_fragment_btn_exit_margin_end"
+
+        android:background="@drawable/ic_close_menu"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+
+        android:text="@string/tasks_floating_action_death_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_item_txt_size"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/srt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="30dp"
+
+        android:text="@string/task_item_inspection_txt_number_of_cage"
+
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_txt_size"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/txt_from"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+
+        android:layout_marginHorizontal="@dimen/tasks_item_inspection_margin_horizontal"
+
+        android:background="@drawable/shape_item_text"
+        android:gravity="center_vertical|start"
+
+        android:paddingHorizontal="10dp"
+
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/srt_number" />
+
+    <TextView
+        android:id="@+id/srt_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="10dp"
+
+        android:text="@string/tasks_floating_action_death_cause_of_death"
+
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_txt_size"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_from" />
+
+    <Spinner
+        android:id="@+id/txt_to"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
 
         android:layout_marginHorizontal="@dimen/standard_margin"
 
-        android:background="@drawable/shape_item_corner"
-        android:elevation="@dimen/birth_item_elevation"
+        android:background="@drawable/selector_spinner_bg"
+
+        android:dropDownVerticalOffset="30dp"
+        android:paddingHorizontal="30dp"
+        android:popupBackground="@drawable/shape_menu"
+
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/srt_to" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+
+        android:background="@drawable/shape_btn_green"
+
+        android:padding="0dp"
+
+        android:text="@string/tasks_floating_action_death_btn_save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btn_exit"
-            android:layout_width="@dimen/floating_action_fragment_btn_edit_size"
-            android:layout_height="@dimen/floating_action_fragment_btn_edit_size"
-
-            android:layout_marginTop="@dimen/floating_action_fragment_btn_exit_margin_top"
-            android:layout_marginEnd="@dimen/floating_action_fragment_btn_exit_margin_end"
-
-            android:background="@drawable/ic_close_menu"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="@dimen/standard_margin"
-
-            android:text="@string/tasks_floating_action_death_title"
-            android:textColor="@color/black"
-            android:textSize="@dimen/title_item_txt_size"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/srt_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="30dp"
-
-            android:text="@string/task_item_inspection_txt_number_of_cage"
-
-            android:textColor="@color/black"
-            android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
-
-        <EditText
-            android:id="@+id/txt_from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginHorizontal="@dimen/tasks_item_inspection_margin_horizontal"
-
-            android:background="@drawable/shape_item_text"
-            android:gravity="center_vertical|start"
-
-            android:paddingHorizontal="10dp"
-
-            android:textColor="@color/white"
-            android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/srt_number" />
-
-        <TextView
-            android:id="@+id/srt_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="10dp"
-
-            android:text="@string/tasks_floating_action_death_cause_of_death"
-
-            android:textColor="@color/black"
-            android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_from" />
-
-        <Spinner
-            android:id="@+id/txt_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginHorizontal="@dimen/standard_margin"
-            android:background="@drawable/shape_item_text"
-
-            android:gravity="center_vertical|start"
-
-            android:textColor="@color/white"
-            android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/srt_to" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-
-            android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginBottom="20dp"
-
-            android:padding="0dp"
-
-            android:background="@drawable/shape_btn_red"
-
-            android:text="@string/tasks_floating_action_death_btn_save"
-            android:textColor="@color/white"
-            android:textSize="@dimen/standard_txt_size"
-            android:textAllCaps="false"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_to"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_to" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

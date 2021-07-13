@@ -23,8 +23,9 @@
 
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-            android:text="@string/farm_rabbits_title"
+            android:fontFamily="@font/roboto"
 
+            android:text="@string/farm_rabbits_title"
             android:textColor="@color/black"
             android:textSize="@dimen/title_txt_size"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,11 +54,11 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:background="@drawable/shape_btn_red"
+            android:background="@drawable/shape_btn_green"
 
             android:text="@string/farm_rabbits_btn_rabbits"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/farm_title"
@@ -74,11 +75,11 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:background="@drawable/shape_btn_red"
+            android:background="@drawable/shape_btn_grey"
 
             android:text="@string/farm_rabbits_btn_cages"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintTop_toBottomOf="@+id/farm_title"
@@ -108,7 +109,11 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
 
-            android:backgroundTint="@color/black"
+            android:paddingHorizontal="30dp"
+
+            android:dropDownVerticalOffset="@dimen/standard_spinner_height"
+            android:popupBackground="@drawable/shape_spinner_dark"
+            android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
@@ -207,7 +212,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка отремонтирована"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_cage_is_repaired"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -230,7 +238,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка убрана"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_cage_is_cleaned"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -252,7 +263,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка отремонтирована"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_need_repair"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 
@@ -274,7 +288,10 @@
             android:insetBottom="0dp"
             android:padding="0dp"
 
-            android:text="Клетка убрана"
+            android:background="@drawable/shape_btn_grey"
+
+            android:textColor="@color/white"
+            android:text="@string/farm_button_area_need_clean"
             android:textAllCaps="false"
             android:textSize="@dimen/very_small_txt_size"
 

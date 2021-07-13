@@ -147,7 +147,7 @@
     <dimen name="birth_item_floating_action_margin_horizontal">20dp</dimen>
     <dimen name="birth_item_floating_action_title_margin_top">20dp</dimen>
 
-    <dimen name="birth_item_floating_action_margin_from_title">30</dimen>
+    <dimen name="birth_item_floating_action_margin_from_title">30dp</dimen>
 
     <dimen name="birth_item_btn_save_height">35dp</dimen>
     <dimen name="birth_item_btn_save_margin_top">40dp</dimen>

@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="underline">#6CC165</color>
+
+    <color name="transparent">#00000000</color>
+
     <!--fragment_veterinarian_about_farm_menu-->
     <color name="btn_rabbits_active">#B4B4B4</color>
     <color name="btn_rabbits_passive">#DBDBDB</color>

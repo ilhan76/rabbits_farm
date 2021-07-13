@@ -51,7 +51,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_number_of_farm"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_number_of_farm"
@@ -63,7 +63,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_type_of_cage"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_type_of_cage"
@@ -75,7 +75,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_count_of_rabbit"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_count_of_rabbits"
@@ -87,7 +87,7 @@
             style="@style/FarmRabbitsSettingsText"
 
             android:id="@+id/txt_status_of_cage"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:layout_width="wrap_content"
 
             android:text="@string/farm_cage_settings_txt_status_of_cage"
@@ -102,9 +102,10 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
-            android:background="@drawable/shape_item_text"
 
-            android:gravity="center_vertical|start"
+            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
+            android:popupBackground="@drawable/shape_menu"
+            android:background="@drawable/selector_spinner_bg"
 
             android:textSize="@dimen/standard_txt_size"
 
@@ -118,9 +119,10 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
-            android:background="@drawable/shape_item_text"
 
-            android:gravity="center_vertical|start"
+            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
+            android:popupBackground="@drawable/shape_menu"
+            android:background="@drawable/selector_spinner_bg"
 
             android:textSize="@dimen/standard_txt_size"
 
@@ -136,9 +138,8 @@
             android:paddingHorizontal="10dp"
 
             android:layout_marginHorizontal="@dimen/standard_margin"
-            android:background="@drawable/shape_item_text"
 
-            android:gravity="center_vertical|start"
+            android:background="@drawable/shape_menu"
 
             android:textSize="@dimen/standard_txt_size"
 
@@ -202,13 +203,13 @@
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="@dimen/standard_margin"
 
-            android:backgroundTint="@color/btn_standard"
-
             android:insetTop="0dp"
             android:insetBottom="0dp"
 
-            android:text="@string/farm_rabbits_settings_btn_show"
+            android:background="@drawable/shape_btn_show"
 
+            android:text="@string/farm_rabbits_settings_btn_show"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="@dimen/farm_rabbit_settings_btn_show_text_size"
 

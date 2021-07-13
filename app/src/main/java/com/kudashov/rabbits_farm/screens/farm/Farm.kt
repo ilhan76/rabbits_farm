@@ -8,17 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.FarmDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
+import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
-import okhttp3.internal.notify
 
 class Farm: Fragment(), FarmDelegate {
 
@@ -48,6 +45,8 @@ class Farm: Fragment(), FarmDelegate {
     }
 
     private fun init() {
+        APP_ACTIVITY.moveUnderline(R.id.farm)
+
         adapter = FarmAdapter()
         recyclerView = mBinding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -58,58 +57,57 @@ class Farm: Fragment(), FarmDelegate {
         mViewModel = ViewModelProvider(this).get(AboutFarmViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
+        initButtons()
+
+        mViewModel.getRabbits()
+    }
+
+    private fun initButtons() {
         mBinding.btnToMenu.setOnClickListener {
             if (isRabbit)
-                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuRabbit)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
             else
-                APP_ACTIVITY.mNavController.navigate(R.id.action_farm_to_farmMenuCage)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
         }
+
         mBinding.btnRabbits.setOnClickListener{
             isRabbit = true
+            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
+            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
+
             mViewModel.getRabbits()
         }
         mBinding.btnCages.setOnClickListener{
             isRabbit = false
+            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
+            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
+
             mViewModel.getCages()
         }
-        mViewModel.getRabbits()
     }
 
     private fun stateProcessing(state: StateAboutFarm){
         when (state){
             is StateAboutFarm.Default -> {
                 Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
-                setEnabled(true)
             }
             is StateAboutFarm.Sending ->{
                 Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
-                setEnabled(false)
                 //todo - добавить лоадер
             }
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 adapter.setList(state.list)
                 mBinding.buttonsPanel.visibility = View.GONE
-                setEnabled(true)
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 mBinding.buttonsPanel.visibility = View.VISIBLE
                 adapter.setList(state.list)
-                setEnabled(true)
             }
             is StateAboutFarm.Error<*> -> {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
-                setEnabled(true)
             }
-        }
-    }
-
-    private fun setEnabled(enable: Boolean){
-        mBinding.apply {
-            btnCages.isEnabled = enable
-            btnRabbits.isEnabled = enable
-            btnToMenu.isEnabled = enable
         }
     }
 
@@ -120,5 +118,9 @@ class Farm: Fragment(), FarmDelegate {
 
     override fun openMoreRabbitInfo() {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
+
+        val rabbitDialog = RabbitDialog()
+        val transaction = parentFragmentManager.beginTransaction()
+        rabbitDialog.show(transaction,"Rabbit")
     }
 }

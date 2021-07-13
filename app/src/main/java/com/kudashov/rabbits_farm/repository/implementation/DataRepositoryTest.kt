@@ -43,16 +43,16 @@ class DataRepositoryTest: DataRepository {
         return response
     }
 
-    override fun getTasks(): Observable<TaskServerResponse> {
+    override fun getTasks(isDone: Boolean): Observable<TaskServerResponse> {
         val response: PublishSubject<TaskServerResponse> = PublishSubject.create()
 
         val list: MutableList<TasksListItemTypes> = ArrayList()
         for (i in 1..20) {
-            list.add(Deposition("01.01.2021", "113", "110", false))
-            list.add(Vaccination("01.01.2021", "113",  false))
-            list.add(Inspection("01.01.2021", "113",  null, false))
-            list.add(Reproduction("01.01.2021", "113", "110", false))
-            list.add(Kill("01.01.2021", "113", 4.5, false))
+            list.add(Deposition("01.01.2021", "113", "110", isDone))
+            list.add(Vaccination("01.01.2021", "113",  isDone))
+            list.add(Inspection("01.01.2021", "113",  null, isDone))
+            list.add(Reproduction("01.01.2021", "113", "110", isDone))
+            list.add(Kill("01.01.2021", "113", 4.5, isDone))
         }
 
         GlobalScope.launch() {
@@ -63,13 +63,15 @@ class DataRepositoryTest: DataRepository {
         return response
     }
 
-    override fun getBirth(): Observable<BirthServerResponse> {
+    override fun getBirth(isConfirmed: Boolean): Observable<BirthServerResponse> {
         val response: PublishSubject<BirthServerResponse> = PublishSubject.create()
 
         val list: MutableList<BirthListItemTypes> = ArrayList()
         for (i in 1..20) {
-            list.add(BirthListItem("21 дн.", "113Б", "Оплодотворена"))
-            list.add(BirthListItem("21 дн.", "113Б", "Не оплодотворена"))
+            if (isConfirmed)
+                list.add(BirthListItem("21 дн.", "113Б", "Оплодотворена"))
+            else
+                list.add(BirthListItem("21 дн.", "113Б", "Не оплодотворена"))
         }
 
         GlobalScope.launch() {

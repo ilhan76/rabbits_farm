@@ -22,10 +22,10 @@ class BirthViewModel(application: Application): AndroidViewModel(application) {
     private val state: MutableLiveData<StateBirth> = MutableLiveData()
     private val repository: DataRepository = DataRepositoryTest()
 
-    fun getTasks(){
+    fun getTasks(isConfirmed: Boolean){
         state.postValue(StateBirth.Sending())
 
-        repository.getBirth()
+        repository.getBirth(isConfirmed)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { response ->

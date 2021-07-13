@@ -10,10 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.BirthAdapter
 import com.kudashov.rabbits_farm.adapters.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
 import com.kudashov.rabbits_farm.screens.dialogs.TakeBirthDialog
+import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Birth : Fragment(), BirthDelegate {
 
@@ -25,6 +27,8 @@ class Birth : Fragment(), BirthDelegate {
 
     private lateinit var adapter: BirthAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private var isConfirmed: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +44,8 @@ class Birth : Fragment(), BirthDelegate {
     }
 
     private fun init() {
+        //APP_ACTIVITY.moveUnderline(R.id.birth)
+
         adapter = BirthAdapter()
         recyclerView = mBinding.birthList
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -48,7 +54,28 @@ class Birth : Fragment(), BirthDelegate {
         mViewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
-        mViewModel.getTasks()
+        initButtons()
+
+        mViewModel.getTasks(isConfirmed)
+        mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+    }
+
+    private fun initButtons() {
+        mBinding.btnConfirmed.setOnClickListener {
+            isConfirmed = true
+            mBinding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+            mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            mViewModel.getTasks(isConfirmed)
+        }
+
+        mBinding.btnNotYetConfirmed.setOnClickListener {
+            isConfirmed = false
+            mBinding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
+            mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+
+            mViewModel.getTasks(isConfirmed)
+        }
     }
 
     private fun stateProcessing(state: StateBirth){

@@ -45,6 +45,8 @@ class Farm: Fragment(), FarmDelegate {
     }
 
     private fun init() {
+        APP_ACTIVITY.moveUnderline(R.id.farm)
+
         adapter = FarmAdapter()
         recyclerView = mBinding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)

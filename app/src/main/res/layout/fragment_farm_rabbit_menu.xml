@@ -137,8 +137,6 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-            android:paddingHorizontal="30dp"
-
             android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
             android:popupBackground="@drawable/shape_menu"
             android:background="@drawable/selector_spinner_bg"

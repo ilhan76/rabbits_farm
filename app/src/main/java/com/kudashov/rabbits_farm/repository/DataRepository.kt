@@ -7,9 +7,9 @@ interface DataRepository {
     fun getRabbits(): Observable<RabbitServerResponse>
     fun getCages(): Observable<CageServerResponse>
 
-    fun getTasks(): Observable<TaskServerResponse>
+    fun getTasks(isDone: Boolean): Observable<TaskServerResponse>
 
-    fun getBirth(): Observable<BirthServerResponse>
+    fun getBirth(isConfirmed: Boolean): Observable<BirthServerResponse>
 
     fun getOperations(): Observable<OperationsResponse>
 }

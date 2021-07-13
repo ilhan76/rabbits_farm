@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_rabbits"
+            android:id="@+id/btn_not_done"
             android:layout_width="@dimen/tasks_btn_width"
             android:layout_height="@dimen/standard_btn_height"
 
@@ -76,7 +76,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btn_cages"
+            android:id="@+id/btn_done"
             android:layout_width="@dimen/tasks_btn_width"
             android:layout_height="@dimen/standard_btn_height"
 
@@ -110,7 +110,7 @@
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_rabbits" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_done" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -127,7 +127,7 @@
             android:background="@drawable/selector_spinner_bg"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_cages" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_done" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

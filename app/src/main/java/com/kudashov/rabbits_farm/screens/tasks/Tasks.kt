@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
 import com.kudashov.rabbits_farm.screens.dialogs.DeathDialog
+import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class Tasks : Fragment() {
 
@@ -24,6 +26,8 @@ class Tasks : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TasksAdapter
+
+    private var isDone: Boolean = false
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +43,8 @@ class Tasks : Fragment() {
     }
 
     private fun init() {
+        //APP_ACTIVITY.moveUnderline(R.id.tasks)
+
         adapter = TasksAdapter()
         recyclerView = mBinding.tasksList
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -49,7 +55,8 @@ class Tasks : Fragment() {
 
         initButtons()
 
-        mViewModel.getTasks()
+        mViewModel.getTasks(isDone)
+        mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
     }
 
     private fun initButtons() {
@@ -57,6 +64,22 @@ class Tasks : Fragment() {
             val dialogDeath = DeathDialog()
             val transaction = parentFragmentManager.beginTransaction()
             dialogDeath.show(transaction, "Dialog_Death")
+        }
+
+        mBinding.btnDone.setOnClickListener {
+            isDone = true
+            mBinding.btnDone.setBackgroundResource(R.drawable.shape_btn_green)
+            mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            mViewModel.getTasks(isDone)
+        }
+
+        mBinding.btnNotDone.setOnClickListener {
+            isDone = false
+            mBinding.btnDone.setBackgroundResource(R.drawable.shape_btn_grey)
+            mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
+
+            mViewModel.getTasks(isDone)
         }
     }
 

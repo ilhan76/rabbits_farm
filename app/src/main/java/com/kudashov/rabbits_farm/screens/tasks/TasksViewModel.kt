@@ -22,10 +22,10 @@ class TasksViewModel(application: Application): AndroidViewModel(application) {
     private val state: MutableLiveData<StateTasks> = MutableLiveData()
     private val repository: DataRepository = DataRepositoryTest()
 
-    fun getTasks(){
+    fun getTasks(isDone: Boolean){
         state.postValue(StateTasks.Sending())
 
-        repository.getTasks()
+        repository.getTasks(isDone)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { response ->

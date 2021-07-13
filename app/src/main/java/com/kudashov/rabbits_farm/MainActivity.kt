@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
         APP_ACTIVITY = this
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun underlineSelectedItem(item: MenuItem?) {
         if (item == null) return
+
         val transition: Transition = ChangeBounds()
 
         transition.addListener(object : Transition.TransitionListener {
@@ -74,6 +76,17 @@ class MainActivity : AppCompatActivity() {
             R.id.birth -> 2
             else -> 0
         }
+    }
+
+    fun moveUnderline(itemId: Int){
+        val transition: Transition = ChangeBounds()
+
+        TransitionManager.beginDelayedTransition(mBinding.main, transition)
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(mBinding.main)
+        constraintSet.setHorizontalBias(R.id.underline, getItemPosition(itemId) * 0.5f)
+        constraintSet.applyTo(mBinding.main)
     }
 
     override fun onDestroy() {

@@ -23,8 +23,9 @@
 
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-            android:text="@string/farm_rabbits_title"
+            android:fontFamily="@font/roboto"
 
+            android:text="@string/farm_rabbits_title"
             android:textColor="@color/black"
             android:textSize="@dimen/title_txt_size"
             app:layout_constraintStart_toStartOf="parent"

@@ -63,6 +63,8 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var cageTo: TextView = view.findViewById(R.id.txt_to)
 
         var countOfMale: SeekBar = view.findViewById(R.id.sb_count_of_male)
+        var txtCountOfMale: TextView = view.findViewById(R.id.txt_sb_count_of_male)
+        var txtCountOfFemale: TextView = view.findViewById(R.id.txt_sb_count_of_female)
         var countOfFemale: SeekBar = view.findViewById(R.id.sb_count_of_female)
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
@@ -71,6 +73,27 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             cageFrom.text = deposition.numberOfCageFrom
             cageTo.text = deposition.numberOfCageTo
 
+            countOfMale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    txtCountOfMale.text = seekBar?.progress.toString()
+                }
+            })
+            txtCountOfMale.text = "0"
+
+            countOfFemale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    txtCountOfFemale.text = seekBar?.progress.toString()
+                }
+            })
+            txtCountOfFemale.text = "0"
             //todo - обработчики
         }
     }

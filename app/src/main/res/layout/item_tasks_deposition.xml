@@ -137,18 +137,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_to" />
 
-        <LinearLayout
-            android:id="@+id/leaner_layout_count_of_male"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
 
-            android:layout_marginHorizontal="@dimen/tasks_item_deposition_margin_horizontal"
-
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@+id/str_count_of_male">
 
             <SeekBar
                 android:id="@+id/sb_count_of_male"
@@ -156,32 +145,39 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="@dimen/tasks_item_deposition_seek_bar_margin_top"
+                android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
 
                 android:layout_weight="9"
 
-                app:layout_constraintEnd_toStartOf="@+id/txt_sb_com"
+                android:max="20"
+                android:splitTrack="false"
+
+                android:thumb="@drawable/shape_thumb"
+
+                app:layout_constraintEnd_toStartOf="@+id/txt_sb_count_of_male"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/str_count_of_male" />
 
             <TextView
-                android:id="@+id/txt_sb_com"
-                android:layout_width="0dp"
+                android:id="@+id/txt_sb_count_of_male"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
 
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/tasks_item_deposition_margin_horizontal"
 
                 android:gravity="end"
 
                 android:textColor="@color/black"
                 android:textSize="@dimen/standard_txt_size"
 
+                app:layout_constraintTop_toTopOf="@+id/sb_count_of_male"
                 app:layout_constraintStart_toEndOf="@+id/sb_count_of_male"
-                app:layout_constraintTop_toBottomOf="@+id/str_count_of_male"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/sb_count_of_male"
 
                 tools:text="20" />
 
-        </LinearLayout>
+
 
         <TextView
             android:id="@+id/str_count_of_female"
@@ -196,20 +192,8 @@
             android:textSize="@dimen/standard_txt_size"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leaner_layout_count_of_male" />
+            app:layout_constraintTop_toBottomOf="@+id/sb_count_of_male" />
 
-        <LinearLayout
-            android:id="@+id/leaner_layout_count_of_female"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginHorizontal="@dimen/tasks_item_deposition_margin_horizontal"
-
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@+id/str_count_of_female">
 
             <SeekBar
                 android:id="@+id/sb_count_of_female"
@@ -217,25 +201,36 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="@dimen/tasks_item_deposition_seek_bar_margin_top"
+                android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
 
-                android:layout_weight="9" />
+                android:max="20"
+                android:splitTrack="false"
+
+                android:thumb="@drawable/shape_thumb"
+
+                app:layout_constraintEnd_toStartOf="@+id/txt_sb_count_of_female"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/str_count_of_female" />
 
             <TextView
                 android:id="@+id/txt_sb_count_of_female"
-                android:layout_width="0dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
 
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/tasks_item_deposition_margin_horizontal"
 
                 android:gravity="end"
 
                 android:textColor="@color/black"
                 android:textSize="@dimen/standard_txt_size"
 
+                app:layout_constraintTop_toTopOf="@+id/sb_count_of_female"
+                app:layout_constraintStart_toEndOf="@+id/sb_count_of_female"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/sb_count_of_female"
+
                 tools:text="20" />
 
-        </LinearLayout>
 
         <Button
             android:id="@+id/btn_done"
@@ -257,7 +252,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leaner_layout_count_of_female" />
+            app:layout_constraintTop_toBottomOf="@+id/sb_count_of_female" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

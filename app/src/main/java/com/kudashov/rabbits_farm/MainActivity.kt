@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
     private fun underlineSelectedItem(item: MenuItem?) {
         if (item == null) return
 
@@ -60,15 +59,14 @@ class MainActivity : AppCompatActivity() {
             override fun onTransitionResume(transition: Transition?) {
             }
         })
-
         TransitionManager.beginDelayedTransition(mBinding.main, transition)
 
         val constraintSet = ConstraintSet()
+
         constraintSet.clone(mBinding.main)
         constraintSet.setHorizontalBias(R.id.underline, getItemPosition(item.itemId) * 0.5f)
         constraintSet.applyTo(mBinding.main)
     }
-
     private fun getItemPosition(itemId: Int): Int {
         return when (itemId) {
             R.id.farm -> 0

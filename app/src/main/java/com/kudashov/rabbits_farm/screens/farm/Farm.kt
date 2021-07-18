@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.FarmDelegate
+import com.kudashov.rabbits_farm.data.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
@@ -36,6 +37,7 @@ class Farm: Fragment(), FarmDelegate {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
+
         return mBinding.root
     }
 
@@ -116,7 +118,7 @@ class Farm: Fragment(), FarmDelegate {
         _binding = null
     }
 
-    override fun openMoreRabbitInfo() {
+    override fun openMoreRabbitInfo(rabbit: Rabbit) {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
 
         val rabbitDialog = RabbitDialog()

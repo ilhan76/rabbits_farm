@@ -1,5 +1,6 @@
 package com.kudashov.rabbits_farm.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import com.kudashov.rabbits_farm.data.Rabbit
 import java.util.*
 
 interface FarmDelegate {
-    fun openMoreRabbitInfo()
+    fun openMoreRabbitInfo(rabbit: Rabbit)
 }
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -21,7 +22,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listData: MutableList<AboutFarmListItemType> = LinkedList()
     private var delegate: FarmDelegate? = null
 
-    fun attachDelegate(delegate: FarmDelegate){
+    fun attachDelegate(delegate: FarmDelegate) {
         this.delegate = delegate
     }
 
@@ -44,7 +45,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder){
+        when (holder) {
             is RabbitViewHolder -> {
                 holder.bind(listData[position] as Rabbit)
             }
@@ -55,12 +56,16 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            1 -> RabbitViewHolder(inflater.inflate(R.layout.item_farm_rabbit, parent, false), delegate)
+            1 -> RabbitViewHolder(
+                inflater.inflate(R.layout.item_farm_rabbit, parent, false),
+                delegate
+            )
             else -> CageViewHolder(inflater.inflate(R.layout.item_farm_cage, parent, false))
         }
     }
 
-    class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) : RecyclerView.ViewHolder(view) {
+    class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) :
+        RecyclerView.ViewHolder(view) {
 
         private val label: ImageView = view.findViewById(R.id.image_rabbit_label)
         private val number: TextView = view.findViewById(R.id.str_number_of_cage)
@@ -68,13 +73,13 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val gender: ImageView = view.findViewById(R.id.gender)
         private val type: TextView = view.findViewById(R.id.str_type)
 
-        fun bind(rabbit: Rabbit){
+        fun bind(rabbit: Rabbit) {
             number.text = rabbit.numberOfCage
             age.text = rabbit.age
             type.text = rabbit.type
 
             view.setOnClickListener {
-                delegate?.openMoreRabbitInfo()
+                delegate?.openMoreRabbitInfo(rabbit)
             }
         }
     }
@@ -87,7 +92,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val typeOfCage: TextView = view.findViewById(R.id.str_type_of_cage)
         private val status: TextView = view.findViewById(R.id.str_status_of_cage)
 
-        fun bind(cage: Cage){
+        fun bind(cage: Cage) {
             numberOfFarm.text = cage.numberOfFarm
             number.text = cage.numberOfCage
             typeOfCage.text = cage.type

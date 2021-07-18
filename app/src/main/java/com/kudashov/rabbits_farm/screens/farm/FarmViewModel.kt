@@ -6,11 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.Cage
 import com.kudashov.rabbits_farm.data.Rabbit
+import com.kudashov.rabbits_farm.data.RabbitMapper
 import com.kudashov.rabbits_farm.repository.DataRepository
-import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryTest
+import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-
 
 sealed class StateAboutFarm {
     class Default: StateAboutFarm()
@@ -24,7 +24,7 @@ class AboutFarmViewModel(application: Application): AndroidViewModel(application
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()
-    private val repository: DataRepository = DataRepositoryTest()
+    private val repository: DataRepository = DataRepositoryHeroku()
 
     //todo добавить фильтры
     fun getRabbits(){
@@ -35,10 +35,10 @@ class AboutFarmViewModel(application: Application): AndroidViewModel(application
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { rabbitServerResponse ->
                     if (rabbitServerResponse.respError?.isEmpty()!!){
-                        Log.i(TAG, "getRabbits: SUCCESS")
-                        state.postValue(StateAboutFarm.ListOfRabbitsReceived(rabbitServerResponse.rabbits!!))
+                        Log.d(TAG, "getRabbits: SUCCESS")
+                        state.postValue(StateAboutFarm.ListOfRabbitsReceived(RabbitMapper.fromApiToListRabbitItem(rabbitServerResponse.rabbits!!)))
                     } else {
-                        Log.i(TAG, "getRabbits: ERROR")
+                        Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.respError}")
                         state.postValue(StateAboutFarm.Error("Error"))
                     }
                 }
@@ -60,7 +60,6 @@ class AboutFarmViewModel(application: Application): AndroidViewModel(application
                     }
                 }
     }
-
 
     fun getStates(): MutableLiveData<StateAboutFarm> {
         return state

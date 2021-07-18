@@ -1,10 +1,12 @@
 package com.kudashov.rabbits_farm.repository
 
-import com.kudashov.rabbits_farm.net.*
+import com.kudashov.rabbits_farm.net.response.*
 import io.reactivex.rxjava3.core.Observable
 
 interface DataRepository {
+
     fun getRabbits(): Observable<RabbitServerResponse>
+
     fun getCages(): Observable<CageServerResponse>
 
     fun getTasks(isDone: Boolean): Observable<TaskServerResponse>

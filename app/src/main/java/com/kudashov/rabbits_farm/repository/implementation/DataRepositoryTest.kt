@@ -1,7 +1,7 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
 import com.kudashov.rabbits_farm.data.*
-import com.kudashov.rabbits_farm.net.*
+import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.repository.DataRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -16,13 +16,18 @@ class DataRepositoryTest: DataRepository {
 
         val list: MutableList<Rabbit> = ArrayList()
         for (i in 1..20) {
-            list.add(Rabbit(i.toString(), "48 дн.", "Откорм"))
+            list.add(Rabbit(i, i.toString(), "48 дн.", "Откорм"))
         }
 
-        GlobalScope.launch() {
-            delay(100)
-            response.onNext(RabbitServerResponse("", list))
-        }
+//        GlobalScope.launch() {
+//            delay(100)
+//            response.onNext(
+//                RabbitServerResponse(
+//                    "",
+//                    list
+//                )
+//            )
+//        }
 
         return response
     }
@@ -37,7 +42,12 @@ class DataRepositoryTest: DataRepository {
 
         GlobalScope.launch() {
             delay(100)
-            response.onNext(CageServerResponse("", list))
+            response.onNext(
+                CageServerResponse(
+                    "",
+                    list
+                )
+            )
         }
 
         return response
@@ -57,7 +67,12 @@ class DataRepositoryTest: DataRepository {
 
         GlobalScope.launch() {
             delay(100)
-            response.onNext(TaskServerResponse("", list))
+            response.onNext(
+                TaskServerResponse(
+                    "",
+                    list
+                )
+            )
         }
 
         return response
@@ -76,7 +91,12 @@ class DataRepositoryTest: DataRepository {
 
         GlobalScope.launch() {
             delay(100)
-            response.onNext(BirthServerResponse("", list))
+            response.onNext(
+                BirthServerResponse(
+                    "",
+                    list
+                )
+            )
         }
 
         return response
@@ -92,7 +112,12 @@ class DataRepositoryTest: DataRepository {
 
         GlobalScope.launch() {
             delay(100)
-            response.onNext(OperationsResponse("", list))
+            response.onNext(
+                OperationsResponse(
+                    "",
+                    list
+                )
+            )
         }
 
         return response

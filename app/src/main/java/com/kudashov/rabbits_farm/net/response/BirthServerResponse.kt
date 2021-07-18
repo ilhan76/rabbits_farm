@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.net
+package com.kudashov.rabbits_farm.net.response
 
 import com.kudashov.rabbits_farm.data.BirthListItemTypes
 

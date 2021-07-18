@@ -9,18 +9,11 @@ import com.kudashov.rabbits_farm.data.Rabbit
 import com.kudashov.rabbits_farm.data.RabbitMapper
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
+import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-sealed class StateAboutFarm {
-    class Default: StateAboutFarm()
-    class Sending: StateAboutFarm()
-    class ListOfRabbitsReceived(val list: List<Rabbit>): StateAboutFarm()
-    class ListOfCageReceived(val list: List<Cage>): StateAboutFarm()
-    class Error<T>(val message: T): StateAboutFarm()
-}
-
-class AboutFarmViewModel(application: Application): AndroidViewModel(application) {
+class FarmViewModel(application: Application): AndroidViewModel(application) {
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()

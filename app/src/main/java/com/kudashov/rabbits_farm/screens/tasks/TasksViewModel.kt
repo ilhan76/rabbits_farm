@@ -7,15 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.TasksListItemTypes
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryTest
+import com.kudashov.rabbits_farm.utilits.StateTasks
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-sealed class StateTasks {
-    class Default: StateTasks()
-    class Sending: StateTasks()
-    class ListOfTasksReceived(val list: List<TasksListItemTypes>): StateTasks()
-    class Error<T>(val message: T): StateTasks()
-}
 class TasksViewModel(application: Application): AndroidViewModel(application) {
 
     private val TAG: String = this::class.java.simpleName

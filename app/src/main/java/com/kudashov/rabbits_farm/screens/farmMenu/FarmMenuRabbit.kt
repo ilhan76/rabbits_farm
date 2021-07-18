@@ -19,7 +19,7 @@ class FarmMenuRabbit : Fragment() {
     private var _binding: FragmentFarmRabbitMenuBinding? = null
     private val mBinding get() = _binding!!
 
-    private lateinit var mViewModel: AboutFarmMenuViewModel
+    private lateinit var mViewModel: FarmMenuViewModel
 
     private lateinit var adapterNumberOfFarm: SpinnerAdapter
     private lateinit var adapterBreed: SpinnerAdapter
@@ -43,7 +43,7 @@ class FarmMenuRabbit : Fragment() {
     }
 
     private fun init() {
-        mViewModel = ViewModelProvider(this).get(AboutFarmMenuViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(FarmMenuViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
         var list: List<String> = listOf("Фирма №1", "Фирма №2", "Фирма №3")

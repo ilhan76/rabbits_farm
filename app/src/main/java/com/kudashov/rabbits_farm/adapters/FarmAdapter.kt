@@ -1,6 +1,5 @@
 package com.kudashov.rabbits_farm.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.AboutFarmListItemType
 import com.kudashov.rabbits_farm.data.Cage
 import com.kudashov.rabbits_farm.data.Rabbit
 import java.util.*
-
-interface FarmDelegate {
-    fun openMoreRabbitInfo(rabbit: Rabbit)
-}
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

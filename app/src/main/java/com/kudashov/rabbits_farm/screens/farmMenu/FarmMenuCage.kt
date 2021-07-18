@@ -15,7 +15,7 @@ class FarmMenuCage : Fragment() {
     private var _binding: FragmentFarmCageMenuBinding? = null
     private val mBinding get() = _binding!!
 
-    private lateinit var mViewModel: AboutFarmMenuViewModel
+    private lateinit var mViewModel: FarmMenuViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,

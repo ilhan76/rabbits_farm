@@ -24,7 +24,7 @@ class Farm: Fragment(), FarmDelegate {
     private var _binding: FragmentFarmBinding? = null
     private val mBinding get() = _binding!!
 
-    private lateinit var mViewModel: AboutFarmViewModel
+    private lateinit var mViewModel: FarmViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FarmAdapter
@@ -56,7 +56,7 @@ class Farm: Fragment(), FarmDelegate {
 
         adapter.attachDelegate(this)
 
-        mViewModel = ViewModelProvider(this).get(AboutFarmViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
         mViewModel.getStates().observe(this, this::stateProcessing)
 
         initButtons()

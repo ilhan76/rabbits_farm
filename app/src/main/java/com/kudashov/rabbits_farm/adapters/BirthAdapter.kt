@@ -10,14 +10,12 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.ui.res.stringResource
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.data.BirthListItem
 import com.kudashov.rabbits_farm.data.BirthListItemTypes
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.RH
 
-interface BirthDelegate{
-    fun openBirthDialog()
-}
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val listOfData: MutableList<BirthListItemTypes> = ArrayList()

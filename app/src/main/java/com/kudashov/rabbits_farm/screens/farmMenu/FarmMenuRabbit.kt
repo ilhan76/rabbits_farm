@@ -12,6 +12,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitMenuBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.StateAboutFarmMenu
 
 class FarmMenuRabbit : Fragment() {
 

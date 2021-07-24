@@ -15,6 +15,7 @@ import com.kudashov.rabbits_farm.adapters.RabbitOperationsAdapter
 import com.kudashov.rabbits_farm.databinding.FloatingActionFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.RH
+import com.kudashov.rabbits_farm.utilits.StateRabbit
 
 class RabbitDialog : DialogFragment() {
 

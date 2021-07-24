@@ -21,21 +21,21 @@ class DataRepositoryHeroku: DataRepository {
         val resp: PublishSubject<RabbitServerResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
-            .getRabbits()
+            .getRabbits("Token 1324123412342134123")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<List<RabbitDto>> {
+            .subscribe(object : Observer<RabbitServerResponse> {
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
-                override fun onNext(t: List<RabbitDto>?) {
-                    Log.d(TAG, "onNext: $t")
-                    resp.onNext(RabbitServerResponse("", t))
-                }
-
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(RabbitServerResponse(e?.localizedMessage, null))
+                    resp.onNext(RabbitServerResponse(e?.localizedMessage, 0, null))
+                }
+
+                override fun onNext(t: RabbitServerResponse?) {
+                    Log.d(TAG, "onNext: $t")
+                    resp.onNext(t)
                 }
             })
 
@@ -43,7 +43,28 @@ class DataRepositoryHeroku: DataRepository {
     }
 
     override fun getCages(): Observable<CageServerResponse> {
-        TODO("Not yet implemented")
+        val resp: PublishSubject<CageServerResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .getCages("Token 1324123412342134123")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<CageServerResponse> {
+                override fun onComplete() {}
+                override fun onSubscribe(d: Disposable?) {}
+
+                override fun onError(e: Throwable?) {
+                    Log.d(TAG, "onError: ${e?.localizedMessage}")
+                    resp.onNext(CageServerResponse(e?.localizedMessage,  null))
+                }
+
+                override fun onNext(t: CageServerResponse?) {
+                    Log.d(TAG, "onNext: $t")
+                    resp.onNext(t)
+                }
+            })
+
+        return resp
     }
 
     override fun getTasks(isDone: Boolean): Observable<TaskServerResponse> {

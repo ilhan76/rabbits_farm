@@ -36,10 +36,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setupWithNavController(navController = navController)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            underlineSelectedItem(item)
+        bottomNavigationView.setOnItemSelectedListener {
+            underlineSelectedItem(it)
             true
         }
+/*        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            underlineSelectedItem(item)
+            true
+        }*/
     }
     private fun underlineSelectedItem(item: MenuItem?) {
         if (item == null) return
@@ -47,22 +51,16 @@ class MainActivity : AppCompatActivity() {
         val transition: Transition = ChangeBounds()
 
         transition.addListener(object : Transition.TransitionListener {
-            override fun onTransitionStart(transition: Transition?) {
-            }
+            override fun onTransitionStart(transition: Transition?) {}
             override fun onTransitionEnd(transition: Transition?) {
                 NavigationUI.onNavDestinationSelected(item, navController)
             }
-            override fun onTransitionCancel(transition: Transition?) {
-            }
-            override fun onTransitionPause(transition: Transition?) {
-            }
-            override fun onTransitionResume(transition: Transition?) {
-            }
+            override fun onTransitionCancel(transition: Transition?) {}
+            override fun onTransitionPause(transition: Transition?) {}
+            override fun onTransitionResume(transition: Transition?) {}
         })
         TransitionManager.beginDelayedTransition(mBinding.main, transition)
-
         val constraintSet = ConstraintSet()
-
         constraintSet.clone(mBinding.main)
         constraintSet.setHorizontalBias(R.id.underline, getItemPosition(item.itemId) * 0.5f)
         constraintSet.applyTo(mBinding.main)

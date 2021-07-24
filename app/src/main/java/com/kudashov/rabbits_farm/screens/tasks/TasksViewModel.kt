@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.TasksListItemTypes
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryTest
 import com.kudashov.rabbits_farm.utilits.StateTasks

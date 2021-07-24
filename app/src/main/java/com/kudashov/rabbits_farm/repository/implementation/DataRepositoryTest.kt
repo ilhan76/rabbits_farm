@@ -1,6 +1,8 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
 import com.kudashov.rabbits_farm.data.*
+import com.kudashov.rabbits_farm.data.dto.CageDto
+import com.kudashov.rabbits_farm.data.item.*
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.repository.DataRepository
 import io.reactivex.rxjava3.core.Observable
@@ -16,7 +18,14 @@ class DataRepositoryTest: DataRepository {
 
         val list: MutableList<Rabbit> = ArrayList()
         for (i in 1..20) {
-            list.add(Rabbit(i, i.toString(), "48 дн.", "Откорм"))
+            list.add(
+                Rabbit(
+                    i,
+                    i.toString(),
+                    "48 дн.",
+                    "Откорм"
+                )
+            )
         }
 
 //        GlobalScope.launch() {
@@ -35,9 +44,20 @@ class DataRepositoryTest: DataRepository {
     override fun getCages(): Observable<CageServerResponse> {
         val response: PublishSubject<CageServerResponse> = PublishSubject.create()
 
-        val list: MutableList<Cage> = ArrayList()
+        val list: MutableList<CageDto> = ArrayList()
         for (i in 1..20) {
-            list.add(Cage(i.toString(), "1", "МАТ 1", "Уб., Рем."))
+            list.add(
+                CageDto(
+                    i,
+                    1,
+                    i ,
+                    'A',
+                    "M",
+                    false,
+                    7,
+                    listOf()
+                )
+            )
         }
 
         GlobalScope.launch() {
@@ -58,11 +78,45 @@ class DataRepositoryTest: DataRepository {
 
         val list: MutableList<TasksListItemTypes> = ArrayList()
         for (i in 1..20) {
-            list.add(Deposition("01.01.2021", "113", "110", isDone))
-            list.add(Vaccination("01.01.2021", "113",  isDone))
-            list.add(Inspection("01.01.2021", "113",  null, isDone))
-            list.add(Reproduction("01.01.2021", "113", "110", isDone))
-            list.add(Kill("01.01.2021", "113", 4.5, isDone))
+            list.add(
+                Deposition(
+                    "01.01.2021",
+                    "113",
+                    "110",
+                    isDone
+                )
+            )
+            list.add(
+                Vaccination(
+                    "01.01.2021",
+                    "113",
+                    isDone
+                )
+            )
+            list.add(
+                Inspection(
+                    "01.01.2021",
+                    "113",
+                    null,
+                    isDone
+                )
+            )
+            list.add(
+                Reproduction(
+                    "01.01.2021",
+                    "113",
+                    "110",
+                    isDone
+                )
+            )
+            list.add(
+                Kill(
+                    "01.01.2021",
+                    "113",
+                    4.5,
+                    isDone
+                )
+            )
         }
 
         GlobalScope.launch() {
@@ -84,9 +138,21 @@ class DataRepositoryTest: DataRepository {
         val list: MutableList<BirthListItemTypes> = ArrayList()
         for (i in 1..20) {
             if (isConfirmed)
-                list.add(BirthListItem("21 дн.", "113Б", "Оплодотворена"))
+                list.add(
+                    BirthListItem(
+                        "21 дн.",
+                        "113Б",
+                        "Оплодотворена"
+                    )
+                )
             else
-                list.add(BirthListItem("21 дн.", "113Б", "Не оплодотворена"))
+                list.add(
+                    BirthListItem(
+                        "21 дн.",
+                        "113Б",
+                        "Не оплодотворена"
+                    )
+                )
         }
 
         GlobalScope.launch() {

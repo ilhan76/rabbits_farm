@@ -6,14 +6,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.res.stringResource
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
-import com.kudashov.rabbits_farm.data.BirthListItem
-import com.kudashov.rabbits_farm.data.BirthListItemTypes
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.data.item.BirthListItem
+import com.kudashov.rabbits_farm.data.item.BirthListItemTypes
 import com.kudashov.rabbits_farm.utilits.RH
 
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

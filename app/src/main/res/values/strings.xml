@@ -23,6 +23,11 @@
     <string name="farm_cages_txt_number">Номер</string>
     <string name="farm_cages_txt_type">Тип</string>
     <string name="farm_cages_txt_status">Статус</string>
+
+    <string name="farm_button_area_cage_is_repaired">Клетка отремонтирована</string>
+    <string name="farm_button_area_cage_is_cleaned">Клетка убрана</string>
+    <string name="farm_button_area_need_repair">Требуется ремонт</string>
+    <string name="farm_button_area_need_clean">Требуется уборка</string>
     <!-- About Farm Cages -->
 
     <!-- About Farm Rabbit Settings -->
@@ -137,10 +142,6 @@
     <string name="birth_floating_action_title">Принять роды</string>
     <string name="birth_floating_action_count_of_rabbit">Количество рожденных кроликов</string>
     <string name="birth_floating_action_btn_save">Сохранить</string>
-    <string name="farm_button_area_cage_is_repaired">Клетка отремонтирована</string>
-    <string name="farm_button_area_cage_is_cleaned">Клетка убрана</string>
-    <string name="farm_button_area_need_repair">Требуется ремонт</string>
-    <string name="farm_button_area_need_clean">Требуется уборка</string>
     <!-- Floating Action Fragment -->
     <!-- Birth -->
 </resources>

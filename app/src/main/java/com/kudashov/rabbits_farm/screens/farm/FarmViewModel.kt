@@ -4,9 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.Cage
-import com.kudashov.rabbits_farm.data.Rabbit
-import com.kudashov.rabbits_farm.data.RabbitMapper
+import com.kudashov.rabbits_farm.data.mapper.CageMapper
+import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
@@ -27,9 +26,9 @@ class FarmViewModel(application: Application): AndroidViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { rabbitServerResponse ->
-                    if (rabbitServerResponse.respError?.isEmpty()!!){
+                    if (rabbitServerResponse.respError == null){
                         Log.d(TAG, "getRabbits: SUCCESS")
-                        state.postValue(StateAboutFarm.ListOfRabbitsReceived(RabbitMapper.fromApiToListRabbitItem(rabbitServerResponse.rabbits!!)))
+                        state.postValue(StateAboutFarm.ListOfRabbitsReceived(RabbitMapper.fromApiToListRabbitItem(rabbitServerResponse.results!!)))
                     } else {
                         Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.respError}")
                         state.postValue(StateAboutFarm.Error("Error"))
@@ -44,9 +43,9 @@ class FarmViewModel(application: Application): AndroidViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { cageServerResponse ->
-                    if (cageServerResponse.respError?.isEmpty()!!){
+                    if (cageServerResponse.respError == null){
                         Log.i(TAG, "getRabbits: SUCCESS")
-                        state.postValue(StateAboutFarm.ListOfCageReceived(cageServerResponse.cages))
+                        state.postValue(StateAboutFarm.ListOfCageReceived(CageMapper.fromApiToListCageItem(cageServerResponse.results!!)))
                     } else {
                         Log.i(TAG, "getRabbits: ERROR")
                         state.postValue(StateAboutFarm.Error("Error"))

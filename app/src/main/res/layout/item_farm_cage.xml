@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/str_number_of_farm"
-            android:layout_width="@dimen/farm_item_cage_txt_width"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
 
             android:textSize="@dimen/standard_txt_size"
@@ -46,9 +46,10 @@
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_cage_label"
+
             app:layout_constraintBottom_toBottomOf="parent"
 
-            tools:text="113Б" />
+            tools:text="20" />
 
         <TextView
             android:id="@+id/str_number"

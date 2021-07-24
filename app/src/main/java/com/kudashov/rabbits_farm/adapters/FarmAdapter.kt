@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.AboutFarmListItemType
-import com.kudashov.rabbits_farm.data.Cage
-import com.kudashov.rabbits_farm.data.Rabbit
+import com.kudashov.rabbits_farm.data.item.AboutFarmListItemType
+import com.kudashov.rabbits_farm.data.item.Cage
+import com.kudashov.rabbits_farm.data.item.Rabbit
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

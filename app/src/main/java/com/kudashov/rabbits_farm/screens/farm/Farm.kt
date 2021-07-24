@@ -12,17 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
-import com.kudashov.rabbits_farm.adapters.FarmDelegate
-import com.kudashov.rabbits_farm.data.Rabbit
+import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
+import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 
 class Farm: Fragment(), FarmDelegate {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentFarmBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     private lateinit var mViewModel: FarmViewModel
 
@@ -38,7 +39,7 @@ class Farm: Fragment(), FarmDelegate {
     ): View? {
         _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
 
-        return mBinding.root
+        return binding.root
     }
 
     override fun onStart() {
@@ -50,7 +51,7 @@ class Farm: Fragment(), FarmDelegate {
         APP_ACTIVITY.moveUnderline(R.id.farm)
 
         adapter = FarmAdapter()
-        recyclerView = mBinding.farmList
+        recyclerView = binding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
@@ -65,24 +66,39 @@ class Farm: Fragment(), FarmDelegate {
     }
 
     private fun initButtons() {
-        mBinding.btnToMenu.setOnClickListener {
+        binding.btnToMenu.setOnClickListener {
             if (isRabbit)
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
             else
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
         }
 
-        mBinding.btnRabbits.setOnClickListener{
+        binding.btnRabbits.setOnClickListener{
             isRabbit = true
-            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
-            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
+            binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
+            binding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            binding.buttonsPanel.visibility = View.GONE
+
+            binding.txtListTitle1.text = resources.getString(R.string.farm_rabbits_txt_number_of_cage)
+            binding.txtListTitle2.text = resources.getString(R.string.farm_rabbits_txt_age)
+            binding.txtListTitle3.text = resources.getString(R.string.farm_rabbits_txt_gender)
+            binding.txtListTitle4.text = resources.getString(R.string.farm_rabbits_txt_type)
 
             mViewModel.getRabbits()
         }
-        mBinding.btnCages.setOnClickListener{
+        binding.btnCages.setOnClickListener{
             isRabbit = false
-            mBinding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
-            mBinding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
+            binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
+            binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            binding.buttonsPanel.visibility = View.VISIBLE
+
+            binding.txtListTitle1.text = resources.getString(R.string.farm_cages_txt_number_of_farm)
+            binding.txtListTitle2.text = resources.getString(R.string.farm_cages_txt_number)
+            binding.txtListTitle3.text = resources.getString(R.string.farm_cages_txt_type)
+            binding.txtListTitle4.text = resources.getString(R.string.farm_cages_txt_status)
+
 
             mViewModel.getCages()
         }
@@ -100,11 +116,9 @@ class Farm: Fragment(), FarmDelegate {
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 adapter.setList(state.list)
-                mBinding.buttonsPanel.visibility = View.GONE
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                mBinding.buttonsPanel.visibility = View.VISIBLE
                 adapter.setList(state.list)
             }
             is StateAboutFarm.Error<*> -> {

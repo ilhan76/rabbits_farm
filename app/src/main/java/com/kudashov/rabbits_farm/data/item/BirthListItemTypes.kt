@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.data
+package com.kudashov.rabbits_farm.data.item
 
 sealed class BirthListItemTypes
 

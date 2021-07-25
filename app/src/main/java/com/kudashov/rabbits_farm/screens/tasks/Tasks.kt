@@ -44,7 +44,7 @@ class Tasks : Fragment() {
     }
 
     private fun init() {
-        //APP_ACTIVITY.moveUnderline(R.id.tasks)
+        APP_ACTIVITY.moveUnderline(R.id.tasks)
 
         adapter = TasksAdapter()
         recyclerView = mBinding.tasksList

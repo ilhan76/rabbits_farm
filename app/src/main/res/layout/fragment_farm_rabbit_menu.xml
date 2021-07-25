@@ -156,7 +156,7 @@
             android:layout_marginTop="@dimen/farm_rabbit_settings_vertical_btn_margin"
             android:layout_marginEnd="@dimen/farm_rabbit_settings_horizontal_margin"
 
-            android:src="@drawable/ic_gender_man_white"
+            android:src="@drawable/ic_gender_male_white"
             android:background="@drawable/shape_menu"
 
             android:insetTop="0dp"
@@ -178,7 +178,7 @@
             android:layout_marginTop="@dimen/farm_rabbit_settings_vertical_btn_margin"
             android:layout_marginEnd="@dimen/farm_rabbit_settings_horizontal_margin"
 
-            android:src="@drawable/ic_gender_woman_white"
+            android:src="@drawable/ic_gender_female_white"
             android:background="@drawable/shape_menu"
 
             android:insetTop="0dp"
@@ -247,8 +247,6 @@
             android:id="@+id/spinner_breed"
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
-
-            android:paddingHorizontal="30dp"
 
             android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
             android:popupBackground="@drawable/shape_menu"
@@ -338,8 +336,6 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
 
-            android:paddingHorizontal="30dp"
-
             android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
             android:popupBackground="@drawable/shape_menu"
             android:background="@drawable/selector_spinner_bg"
@@ -348,22 +344,18 @@
             app:layout_constraintTop_toBottomOf="@id/edit_txt_number_of_cage_from" />
 
         <Button
+            android:id="@+id/btn_show"
             android:layout_width="match_parent"
             android:layout_height="@dimen/farm_rabbit_settings_btn_show_height"
-
             android:layout_marginVertical="@dimen/standard_margin"
             android:layout_marginHorizontal="50dp"
-
             android:background="@drawable/shape_btn_show"
-
             android:insetTop="0dp"
             android:insetBottom="0dp"
-
             android:text="@string/farm_rabbits_settings_btn_show"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="@dimen/farm_rabbit_settings_btn_show_text_size"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

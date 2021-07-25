@@ -28,13 +28,6 @@ sealed class StateAboutFarm {
     class Error<T>(val message: T): StateAboutFarm()
 }
 
-sealed class StateAboutFarmMenu {
-    class Default: StateAboutFarmMenu()
-    class Sending: StateAboutFarmMenu()
-    class ListReceivedSuccessfully<T>(val list: List<T>): StateAboutFarmMenu()
-    class Error<T>(val message: T): StateAboutFarmMenu()
-}
-
 sealed class StateTasks {
     class Default: StateTasks()
     class Sending: StateTasks()

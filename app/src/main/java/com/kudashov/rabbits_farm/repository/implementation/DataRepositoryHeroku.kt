@@ -1,7 +1,6 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
 import android.util.Log
-import com.kudashov.rabbits_farm.data.dto.RabbitDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.response.*
@@ -13,15 +12,42 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 
-class DataRepositoryHeroku: DataRepository {
+class DataRepositoryHeroku : DataRepository {
 
     private val TAG: String? = DataRepositoryHeroku::class.java.simpleName
 
-    override fun getRabbits(): Observable<RabbitServerResponse> {
+    override fun getRabbits(
+        page: Int,
+        pageSize: Int,
+        farmNumber: Int?,
+        type: List<String>?,
+        breed: List<Int>?,
+        status: List<String>?,
+        ageFrom: Int?,
+        ageTo: Int?,
+        weightFrom: Double?,
+        weightTo: Double?,
+        isMale: Int?,
+        orderBy: String?
+    ): Observable<RabbitServerResponse> {
         val resp: PublishSubject<RabbitServerResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
-            .getRabbits("Token 1324123412342134123")
+            .getRabbits(
+                "Token 1324123412342134123",
+                page,
+                pageSize,
+                farmNumber,
+                type,
+                breed,
+                status,
+                ageFrom,
+                ageTo,
+                weightFrom,
+                weightTo,
+                isMale,
+                orderBy
+            )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<RabbitServerResponse> {
@@ -55,7 +81,7 @@ class DataRepositoryHeroku: DataRepository {
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(CageServerResponse(e?.localizedMessage,  null))
+                    resp.onNext(CageServerResponse(e?.localizedMessage, null))
                 }
 
                 override fun onNext(t: CageServerResponse?) {

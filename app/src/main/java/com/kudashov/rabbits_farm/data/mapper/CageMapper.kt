@@ -2,6 +2,8 @@ package com.kudashov.rabbits_farm.data.mapper
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.item.Cage
+import com.kudashov.rabbits_farm.utilits.statuses.cage.StatusOfCage
+import com.kudashov.rabbits_farm.utilits.statuses.cage.TypeOfCage
 
 class CageMapper {
     companion object {
@@ -30,8 +32,8 @@ class CageMapper {
 
         private fun getCageType(cageDto: CageDto): String {
             return when(cageDto.type){
-                "M" -> "МАТ"
-                "F" -> "ОТКОРМ"
+                TypeOfCage.fattening -> "МАТ"
+                TypeOfCage.mother -> "ОТКОРМ"
                 else -> "???"
             }
         }
@@ -39,8 +41,8 @@ class CageMapper {
         private fun getCageStatus(list: List<String>): String {
             var status = ""
 
-            if (list.contains("C")) status += "Уб."
-            if (list.contains("R")) status += " Рем."
+            if (list.contains(StatusOfCage.needClean)) status += "Уб."
+            if (list.contains(StatusOfCage.needRepair)) status += " Рем."
 
             return status
         }

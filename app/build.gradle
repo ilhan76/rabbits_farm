@@ -46,6 +46,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //Image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //UI
     implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
 

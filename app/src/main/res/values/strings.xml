@@ -31,14 +31,14 @@
     <!-- About Farm Cages -->
 
     <!-- About Farm Rabbit Settings -->
-    <string name="farm_rabbits_settings_txt_number_of_farm">Номер фирмы</string>
+    <string name="farm_rabbits_settings_txt_number_of_farm">Номер фермы</string>
     <string name="farm_rabbits_settings_txt_choose_gender">Выбрать пол</string>
     <string name="farm_rabbits_settings_txt_type_of_rabbit">Тип кролика</string>
     <string name="farm_rabbits_settings_txt_breed_of_rabbit">Порода кролика</string>
     <string name="farm_rabbits_settings_txt_age">Возраст (в днях)</string>
     <string name="farm_rabbits_settings_number_of_cage">Номер клетки</string>
     <string name="farm_rabbits_settings_txt_status_of_cage">Статус клетки</string>
-    <string name="farm_rabbits_settings_btn_show">Отобразить (%s)</string>
+    <string name="farm_rabbits_settings_btn_show">Отобразить</string>
 
     <string name="farm_rabbits_settings_btn_male">Самец</string>
     <string name="farm_rabbits_settings_btn_female">Самка</string>

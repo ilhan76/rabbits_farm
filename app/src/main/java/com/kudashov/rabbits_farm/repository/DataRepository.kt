@@ -5,7 +5,20 @@ import io.reactivex.rxjava3.core.Observable
 
 interface DataRepository {
 
-    fun getRabbits(): Observable<RabbitServerResponse>
+    fun getRabbits(
+        page: Int,
+        pageSize: Int,
+        farmNumber: Int?,
+        type: List<String>?,
+        breed: List<Int>?,
+        status: List<String>?,
+        ageFrom: Int?,
+        ageTo: Int?,
+        weightFrom: Double?,
+        weightTo: Double?,
+        isMale: Int?,
+        orderBy: String?
+    ): Observable<RabbitServerResponse>
 
     fun getCages(): Observable<CageServerResponse>
 

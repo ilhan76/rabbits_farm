@@ -15,6 +15,7 @@ import com.kudashov.rabbits_farm.adapters.BirthAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
 import com.kudashov.rabbits_farm.screens.dialogs.TakeBirthDialog
+import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateBirth
 
 class Birth : Fragment(), BirthDelegate {
@@ -44,7 +45,7 @@ class Birth : Fragment(), BirthDelegate {
     }
 
     private fun init() {
-        //APP_ACTIVITY.moveUnderline(R.id.birth)
+        APP_ACTIVITY.moveUnderline(R.id.birth)
 
         adapter = BirthAdapter()
         recyclerView = mBinding.birthList

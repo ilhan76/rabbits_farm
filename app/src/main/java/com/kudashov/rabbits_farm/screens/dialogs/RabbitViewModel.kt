@@ -11,7 +11,6 @@ import com.kudashov.rabbits_farm.utilits.StateRabbit
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-
 class RabbitViewModel(application: Application): AndroidViewModel(application) {
 
     private val TAG: String? = RabbitViewModel::class.java.simpleName

@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.farmMenu
+package com.kudashov.rabbits_farm.screens.farm.filters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.databinding.FragmentFarmCageMenuBinding
+import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 
 class FarmMenuCage : Fragment() {
 
     private val TAG: String = this::class.java.simpleName
-    private var _binding: FragmentFarmCageMenuBinding? = null
-    private val mBinding get() = _binding!!
 
-    private lateinit var mViewModel: FarmMenuViewModel
+    private var _binding: FragmentFarmCageMenuBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var viewModel: FarmViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -23,7 +25,7 @@ class FarmMenuCage : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFarmCageMenuBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
+        return binding.root
     }
 
     override fun onStart() {
@@ -32,7 +34,7 @@ class FarmMenuCage : Fragment() {
     }
 
     private fun init() {
-        mBinding.btnExit.setOnClickListener {
+        binding.btnExit.setOnClickListener {
             APP_ACTIVITY.navController.navigate(R.id.action_farmMenuCage_to_farm)
         }
     }

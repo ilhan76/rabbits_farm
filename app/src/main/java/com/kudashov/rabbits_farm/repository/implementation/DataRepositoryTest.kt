@@ -11,9 +11,22 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DataRepositoryTest: DataRepository {
+class DataRepositoryTest : DataRepository {
 
-    override fun getRabbits(): Observable<RabbitServerResponse> {
+    override fun getRabbits(
+        page: Int,
+        pageSize: Int,
+        farmNumber: Int?,
+        type: List<String>?,
+        breed: List<Int>?,
+        status: List<String>?,
+        ageFrom: Int?,
+        ageTo: Int?,
+        weightFrom: Double?,
+        weightTo: Double?,
+        isMale: Int?,
+        orderBy: String?
+    ): Observable<RabbitServerResponse> {
         val response: PublishSubject<RabbitServerResponse> = PublishSubject.create()
 
         val list: MutableList<Rabbit> = ArrayList()
@@ -23,20 +36,11 @@ class DataRepositoryTest: DataRepository {
                     i,
                     i.toString(),
                     "48 дн.",
+                    false,
                     "Откорм"
                 )
             )
         }
-
-//        GlobalScope.launch() {
-//            delay(100)
-//            response.onNext(
-//                RabbitServerResponse(
-//                    "",
-//                    list
-//                )
-//            )
-//        }
 
         return response
     }
@@ -50,7 +54,7 @@ class DataRepositoryTest: DataRepository {
                 CageDto(
                     i,
                     1,
-                    i ,
+                    i,
                     'A',
                     "M",
                     false,

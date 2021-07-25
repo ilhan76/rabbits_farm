@@ -95,7 +95,7 @@
 
         android:layout_marginStart="10dp"
 
-        android:src="@drawable/ic_rabbit_gender_man"
+        android:src="@drawable/ic_gender_male_black"
 
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintStart_toEndOf="@+id/title"

@@ -1,5 +1,7 @@
 package com.kudashov.rabbits_farm.adapters
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.AboutFarmListItemType
 import com.kudashov.rabbits_farm.data.item.Cage
 import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.squareup.picasso.Picasso
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -69,11 +72,19 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val gender: ImageView = view.findViewById(R.id.gender)
         private val type: TextView = view.findViewById(R.id.str_type)
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(rabbit: Rabbit) {
             number.text = rabbit.numberOfCage
             age.text = rabbit.age
             type.text = rabbit.type
 
+            if (rabbit.isMale){
+                //Picasso.get().load(R.drawable.ic_gender_male_black).into(gender)
+                gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_male_black))
+            } else {
+                //Picasso.get().load(R.drawable.ic_gender_female_black).into(gender)
+                gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_female_black))
+            }
             view.setOnClickListener {
                 delegate?.openMoreRabbitInfo(rabbit)
             }

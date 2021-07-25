@@ -19,13 +19,13 @@ import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 
-class Farm: Fragment(), FarmDelegate {
+class Farm : Fragment(), FarmDelegate {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentFarmBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mViewModel: FarmViewModel
+    private lateinit var viewModel: FarmViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FarmAdapter
@@ -57,37 +57,44 @@ class Farm: Fragment(), FarmDelegate {
 
         adapter.attachDelegate(this)
 
-        mViewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
-        mViewModel.getStates().observe(this, this::stateProcessing)
+        viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
+        viewModel.getStates().observe(this, this::stateProcessing)
 
         initButtons()
 
-        mViewModel.getRabbits()
+        viewModel.getRabbits()
     }
 
     private fun initButtons() {
+
         binding.btnToMenu.setOnClickListener {
-            if (isRabbit)
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
-            else
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
+            if (isRabbit) {
+                val bundle = Bundle()
+                bundle.putSerializable("viewModel", viewModel)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit, bundle)
+            } else {
+                val bundle = Bundle()
+                bundle.putSerializable("viewModel", viewModel)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage, bundle)
+            }
         }
 
-        binding.btnRabbits.setOnClickListener{
+        binding.btnRabbits.setOnClickListener {
             isRabbit = true
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
 
             binding.buttonsPanel.visibility = View.GONE
 
-            binding.txtListTitle1.text = resources.getString(R.string.farm_rabbits_txt_number_of_cage)
+            binding.txtListTitle1.text =
+                resources.getString(R.string.farm_rabbits_txt_number_of_cage)
             binding.txtListTitle2.text = resources.getString(R.string.farm_rabbits_txt_age)
             binding.txtListTitle3.text = resources.getString(R.string.farm_rabbits_txt_gender)
             binding.txtListTitle4.text = resources.getString(R.string.farm_rabbits_txt_type)
 
-            mViewModel.getRabbits()
+            viewModel.getRabbits()
         }
-        binding.btnCages.setOnClickListener{
+        binding.btnCages.setOnClickListener {
             isRabbit = false
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
@@ -100,16 +107,16 @@ class Farm: Fragment(), FarmDelegate {
             binding.txtListTitle4.text = resources.getString(R.string.farm_cages_txt_status)
 
 
-            mViewModel.getCages()
+            viewModel.getCages()
         }
     }
 
-    private fun stateProcessing(state: StateAboutFarm){
-        when (state){
+    private fun stateProcessing(state: StateAboutFarm) {
+        when (state) {
             is StateAboutFarm.Default -> {
                 Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
             }
-            is StateAboutFarm.Sending ->{
+            is StateAboutFarm.Sending -> {
                 Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
                 //todo - добавить лоадер
             }
@@ -137,6 +144,6 @@ class Farm: Fragment(), FarmDelegate {
 
         val rabbitDialog = RabbitDialog()
         val transaction = parentFragmentManager.beginTransaction()
-        rabbitDialog.show(transaction,"Rabbit")
+        rabbitDialog.show(transaction, "Rabbit")
     }
 }

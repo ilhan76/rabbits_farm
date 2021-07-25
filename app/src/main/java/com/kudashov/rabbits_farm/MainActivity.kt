@@ -40,11 +40,8 @@ class MainActivity : AppCompatActivity() {
             underlineSelectedItem(it)
             true
         }
-/*        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            underlineSelectedItem(item)
-            true
-        }*/
     }
+
     private fun underlineSelectedItem(item: MenuItem?) {
         if (item == null) return
 
@@ -65,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         constraintSet.setHorizontalBias(R.id.underline, getItemPosition(item.itemId) * 0.5f)
         constraintSet.applyTo(mBinding.main)
     }
+
     private fun getItemPosition(itemId: Int): Int {
         return when (itemId) {
             R.id.farm -> 0

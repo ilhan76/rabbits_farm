@@ -3,6 +3,7 @@ package com.kudashov.rabbits_farm.data.mapper
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
 import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.kudashov.rabbits_farm.utilits.statuses.rabbit.TypeOfRabbit
 
 class RabbitMapper {
     companion object {
@@ -25,28 +26,29 @@ class RabbitMapper {
                 getAge(
                     rabbitDto.birthday
                 ),
+                rabbitDto.is_male,
                 getType(
                     rabbitDto.current_type
                 )
             )
 
 
-        private fun getNumberOfCage(cage: CageDto): String? {
+        private fun getNumberOfCage(cage: CageDto): String {
             return cage.farm_number.toString() + cage.number.toString() + cage.letter
         }
 
-        private fun getType(currentType: String): String? {
+        private fun getType(currentType: String): String {
             return when(currentType){
-                "B" -> "Малыш"
-                "D" -> "Мертвый"
-                "F" -> "Откорм."
-                "M" -> "Самка"
-                "P" -> "Самец"
+                TypeOfRabbit.baby -> "Малыш"
+                TypeOfRabbit.death -> "Мертвый"
+                TypeOfRabbit.fattening -> "Откорм."
+                TypeOfRabbit.mather -> "Самка"
+                TypeOfRabbit.father -> "Самец"
                 else -> "???"
             }
         }
 
-        private fun getAge(birthday: String): String? {
+        private fun getAge(birthday: String): String {
             // todo - сделать вычисление возраста
             return "???" + " дн"
         }

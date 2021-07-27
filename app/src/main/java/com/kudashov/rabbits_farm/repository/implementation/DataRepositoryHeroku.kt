@@ -21,12 +21,12 @@ class DataRepositoryHeroku : DataRepository {
         pageSize: Int,
         farmNumber: Int?,
         type: List<String>?,
-        breed: List<Int>?,
-        status: List<String>?,
+        breed: Int?,
+        status: String?,
         ageFrom: Int?,
         ageTo: Int?,
-        weightFrom: Double?,
-        weightTo: Double?,
+        cageNumberFrom: Int?,
+        cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
     ): Observable<RabbitServerResponse> {
@@ -43,8 +43,8 @@ class DataRepositoryHeroku : DataRepository {
                 status,
                 ageFrom,
                 ageTo,
-                weightFrom,
-                weightTo,
+                cageNumberFrom,
+                cageNumberTo,
                 isMale,
                 orderBy
             )

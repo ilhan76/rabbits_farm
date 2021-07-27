@@ -79,10 +79,8 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             type.text = rabbit.type
 
             if (rabbit.isMale){
-                //Picasso.get().load(R.drawable.ic_gender_male_black).into(gender)
                 gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_male_black))
             } else {
-                //Picasso.get().load(R.drawable.ic_gender_female_black).into(gender)
                 gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_female_black))
             }
             view.setOnClickListener {

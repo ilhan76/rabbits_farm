@@ -32,8 +32,8 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
             RabbitFilter.status,
             RabbitFilter.ageFrom,
             RabbitFilter.ageTo,
-            RabbitFilter.weightFrom,
-            RabbitFilter.weightTo,
+            RabbitFilter.cageNumberFrom,
+            RabbitFilter.cageNumberTo,
             RabbitFilter.isMale,
             RabbitFilter.orderBy)
             .subscribeOn(Schedulers.io())
@@ -41,7 +41,6 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
             .subscribe { rabbitServerResponse ->
                 if (rabbitServerResponse.respError == null) {
                     Log.d(TAG, "getRabbits: SUCCESS")
-                    Log.d(TAG, "getRabbits: isMale ${RabbitFilter.isMale}")
                     state.postValue(
                         StateAboutFarm.ListOfRabbitsReceived(
                             RabbitMapper.fromApiToListRabbitItem(
@@ -83,6 +82,4 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
     fun getStates(): MutableLiveData<StateAboutFarm> {
         return state
     }
-
-    // todo фильтры из UI
 }

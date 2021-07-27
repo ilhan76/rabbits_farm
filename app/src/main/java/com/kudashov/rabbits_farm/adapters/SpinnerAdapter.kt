@@ -14,9 +14,9 @@ import com.kudashov.rabbits_farm.R
 class SpinnerAdapter(context: Context) : BaseAdapter() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
-    private val list: MutableList<String> = ArrayList()
+    private val list: MutableList<Any> = ArrayList()
 
-    fun setList(newList: List<String>){
+    fun setList(newList: List<Any>){
         list.clear()
         list.addAll(newList)
     }
@@ -25,7 +25,7 @@ class SpinnerAdapter(context: Context) : BaseAdapter() {
         return list.size
     }
 
-    override fun getItem(position: Int): String? {
+    override fun getItem(position: Int): Any? {
         return list[position]
     }
 
@@ -38,7 +38,7 @@ class SpinnerAdapter(context: Context) : BaseAdapter() {
 
         val txtFarm: TextView = view.findViewById(R.id.spinner_item_number_of_farm)
 
-        txtFarm.text = list[position]
+        txtFarm.text = list[position].toString()
 
         return view
     }

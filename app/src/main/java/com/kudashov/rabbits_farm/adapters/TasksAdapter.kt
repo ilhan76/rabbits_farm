@@ -12,7 +12,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.data.item.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    // todo - рефакторинг ViewHolder'ов
     private var listOfTasks: MutableList<TasksListItemTypes> = ArrayList()
 
     fun setList(list: List<TasksListItemTypes>) {
@@ -27,7 +27,7 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(listOfTasks[position]){
+        return when (listOfTasks[position]) {
             is Deposition -> 0
             is Vaccination -> 1
             is Inspection -> 2
@@ -37,7 +37,7 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
+        when (holder) {
             is DepositionViewHolder -> holder.bind(listOfTasks[position] as Deposition)
             is VaccinationViewHolder -> holder.bind(listOfTasks[position] as Vaccination)
             is InspectionViewHolder -> holder.bind(listOfTasks[position] as Inspection)
@@ -48,16 +48,40 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when(viewType){
-            1 -> VaccinationViewHolder(inflater.inflate(R.layout.item_tasks_vaccination, parent, false))
-            2 -> InspectionViewHolder(inflater.inflate(R.layout.item_tasks_inspection, parent, false))
-            3 -> ReproductionViewHolder(inflater.inflate(R.layout.item_tasks_reproduction, parent, false))
+        return when (viewType) {
+            1 -> VaccinationViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_vaccination,
+                    parent,
+                    false
+                )
+            )
+            2 -> InspectionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_inspection,
+                    parent,
+                    false
+                )
+            )
+            3 -> ReproductionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_reproduction,
+                    parent,
+                    false
+                )
+            )
             4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false))
-            else -> DepositionViewHolder(inflater.inflate(R.layout.item_tasks_deposition, parent, false))
+            else -> DepositionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition,
+                    parent,
+                    false
+                )
+            )
         }
     }
 
-    class DepositionViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class DepositionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var data: TextView = view.findViewById(R.id.data)
         var cageFrom: TextView = view.findViewById(R.id.txt_from)
         var cageTo: TextView = view.findViewById(R.id.txt_to)
@@ -69,13 +93,18 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
-        fun bind(deposition: Deposition){
+        fun bind(deposition: Deposition) {
             data.text = deposition.data
             cageFrom.text = deposition.numberOfCageFrom
             cageTo.text = deposition.numberOfCageTo
 
-            countOfMale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+            countOfMale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
@@ -85,8 +114,13 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             })
             txtCountOfMale.text = "0"
 
-            countOfFemale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+            countOfFemale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
@@ -96,7 +130,7 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             })
             txtCountOfFemale.text = "0"
 
-            if (deposition.isDone){
+            if (deposition.isDone) {
                 btnDone.setText(R.string.task_item_btn_done)
                 btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             } else {
@@ -106,17 +140,18 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             //todo - обработчики
         }
     }
-    class VaccinationViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+    class VaccinationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var data: TextView = view.findViewById(R.id.data)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
 
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
-        fun bind(vaccination: Vaccination){
+        fun bind(vaccination: Vaccination) {
             data.text = vaccination.data
             numberOfCage.text = vaccination.numberOfCage
 
-            if (vaccination.isDone){
+            if (vaccination.isDone) {
                 btnDone.setText(R.string.task_item_btn_done)
                 btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             } else {
@@ -126,18 +161,19 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             //todo - обработчики
         }
     }
-    class InspectionViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+    class InspectionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var data: TextView = view.findViewById(R.id.data)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
         var weight: EditText = view.findViewById(R.id.txt_weight)
 
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
-        fun bind(inspection: Inspection){
+        fun bind(inspection: Inspection) {
             data.text = inspection.data
             numberOfCage.text = inspection.numberOfCage
 
-            if (inspection.isDone){
+            if (inspection.isDone) {
                 btnDone.setText(R.string.task_item_btn_done)
                 btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             } else {
@@ -147,19 +183,20 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             //todo - обработчики
         }
     }
-    class ReproductionViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+    class ReproductionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var data: TextView = view.findViewById(R.id.data)
         var takeFrom: TextView = view.findViewById(R.id.txt_from)
         var takeTo: TextView = view.findViewById(R.id.txt_to)
 
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
-        fun bind(reproduction: Reproduction){
+        fun bind(reproduction: Reproduction) {
             data.text = reproduction.data
             takeFrom.text = reproduction.takeFemaleFrom
             takeTo.text = reproduction.takeFemaleTo
 
-            if (reproduction.isDone){
+            if (reproduction.isDone) {
                 btnDone.setText(R.string.task_item_btn_done)
                 btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             } else {
@@ -169,18 +206,19 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             //todo - обработчики
         }
     }
-    class KillViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+    class KillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var data: TextView = view.findViewById(R.id.data)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
         var weight: TextView = view.findViewById(R.id.txt_weight)
 
         var btnDone: Button = view.findViewById(R.id.btn_done)
 
-        fun bind(kill: Kill){
+        fun bind(kill: Kill) {
             data.text = kill.data
             numberOfCage.text = kill.numberOfCage
 
-            if (kill.isDone){
+            if (kill.isDone) {
                 btnDone.setText(R.string.task_item_btn_done)
                 btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             } else {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
+import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.StateAboutFarm
+import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
+import com.kudashov.rabbits_farm.utilits.*
 
 class Farm : Fragment(), FarmDelegate {
 
@@ -28,9 +30,11 @@ class Farm : Fragment(), FarmDelegate {
     private lateinit var viewModel: FarmViewModel
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: FarmAdapter
+    private lateinit var rvAdapter: FarmAdapter
+    private lateinit var spinnerAdapter: SpinnerAdapter
 
     private var isRabbit: Boolean = true
+    private lateinit var typesOfSort: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +42,6 @@ class Farm : Fragment(), FarmDelegate {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
-
         return binding.root
     }
 
@@ -49,24 +52,40 @@ class Farm : Fragment(), FarmDelegate {
 
     private fun init() {
         APP_ACTIVITY.moveUnderline(R.id.farm)
+        typesOfSort = listOf(
+            "",
+            SORT_AGE,
+            SORT_AGE_INV,
+            SORT_SEX,
+            SORT_FARM_NUMBER,
+            SORT_CAGE_NUMBER,
+            SORT_TYPE,
+            SORT_BREED,
+            SORT_STATUS,
+            SORT_WEIGHT,
+            SORT_WEIGHT_INV
+        )
+        spinnerAdapter = SpinnerAdapter(requireContext())
+        spinnerAdapter.setList(typesOfSort)
+        binding.spinner.adapter = spinnerAdapter
 
-        adapter = FarmAdapter()
+        rvAdapter = FarmAdapter()
         recyclerView = binding.farmList
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = rvAdapter
 
-        adapter.attachDelegate(this)
+        rvAdapter.attachDelegate(this)
 
         viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
 
         initButtons()
+        initListeners()
 
         viewModel.getRabbits()
     }
 
-    private fun initButtons() {
-
+    private fun initListeners() {
         binding.btnToMenu.setOnClickListener {
             if (isRabbit) {
                 val bundle = Bundle()
@@ -106,8 +125,29 @@ class Farm : Fragment(), FarmDelegate {
             binding.txtListTitle3.text = resources.getString(R.string.farm_cages_txt_type)
             binding.txtListTitle4.text = resources.getString(R.string.farm_cages_txt_status)
 
-
             viewModel.getCages()
+        }
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (isRabbit) {
+                    RabbitFilter.orderBy = typesOfSort[position]
+                    viewModel.getRabbits()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun initButtons() {
+        if (isRabbit) {
+            binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
         }
     }
 
@@ -122,11 +162,11 @@ class Farm : Fragment(), FarmDelegate {
             }
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                adapter.setList(state.list)
+                rvAdapter.setList(state.list)
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                adapter.setList(state.list)
+                rvAdapter.setList(state.list)
             }
             is StateAboutFarm.Error<*> -> {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()

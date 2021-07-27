@@ -17,12 +17,12 @@ interface ApiInterface {
         @Query("page_size") pageSize: Int,
         @Query("farm_number") farmNumber: Int?,
         @Query("type") type: List<String>?,
-        @Query("breed") breed: List<Int>?,
-        @Query("status") status: List<String>?,
+        @Query("breed") breed: Int?,
+        @Query("status") status: String?,
         @Query("age_from") ageFrom: Int?,
         @Query("age_to") ageTo: Int?,
-        @Query("weight_from") weightFrom: Double?,
-        @Query("weight_to") weightTo: Double?,
+        @Query("cage_number_from") cageNumberFrom: Int?,
+        @Query("cage_number_to") cageNumberTo: Int?,
         @Query("is_male") isMale: Int?,
         @Query("__order_by__") orderBy: String?
     ): Observable<RabbitServerResponse>

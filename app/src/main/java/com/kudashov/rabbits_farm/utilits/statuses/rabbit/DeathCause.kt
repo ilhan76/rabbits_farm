@@ -9,6 +9,7 @@ class DeathCause {
         const val overheating: String = "H"
         const val cold: String = "C"
         const val other: String = "E"
+
         val deathCauses = hashMapOf(
             slaughter to "Убой",
             mother to "Мать",

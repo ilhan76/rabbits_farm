@@ -11,6 +11,7 @@
     <color name="underline">#6CC165</color>
 
     <color name="transparent">#00000000</color>
+    <color name="hint">#DBDBDB</color>
 
     <!--fragment_veterinarian_about_farm_menu-->
     <color name="btn_rabbits_active">#B4B4B4</color>

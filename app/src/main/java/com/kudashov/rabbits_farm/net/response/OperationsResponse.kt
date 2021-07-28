@@ -1,8 +1,8 @@
 package com.kudashov.rabbits_farm.net.response
 
-import com.kudashov.rabbits_farm.data.Operation
+import com.kudashov.rabbits_farm.data.dto.OperationDto
 
 data class OperationsResponse(
-    val respError: String?,
-    val list: List<Operation>
+    val detail: String?,
+    val list: List<OperationDto>
 )

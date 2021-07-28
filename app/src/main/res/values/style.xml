@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Text">
+    <style name="BaseText">
         <item name="android:textColor">@color/standard_txt_color</item>
     </style>
 
@@ -11,7 +11,7 @@
         <item name="android:textSize">@dimen/title_txt_size</item>
     </style>
 
-    <style name="FarmRabbitsSettingsText" parent="@style/Text">
+    <style name="FarmRabbitsSettingsText" parent="@style/BaseText">
 
         <item name="android:layout_marginTop">@dimen/farm_rabbit_settings_vertical_btn_margin</item>
         <item name="android:layout_marginStart">@dimen/farm_rabbit_settings_horizontal_margin</item>

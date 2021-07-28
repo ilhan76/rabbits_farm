@@ -29,8 +29,8 @@ class DataRepositoryHeroku : DataRepository {
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RabbitServerResponse> {
-        val resp: PublishSubject<RabbitServerResponse> = PublishSubject.create()
+    ): Observable<RabbitResponse> {
+        val resp: PublishSubject<RabbitResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .getRabbits(
@@ -50,16 +50,16 @@ class DataRepositoryHeroku : DataRepository {
             )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<RabbitServerResponse> {
+            .subscribe(object : Observer<RabbitResponse> {
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(RabbitServerResponse(e?.localizedMessage, 0, null))
+                    resp.onNext(RabbitResponse(e?.localizedMessage, 0, null))
                 }
 
-                override fun onNext(t: RabbitServerResponse?) {
+                override fun onNext(t: RabbitResponse?) {
                     Log.d(TAG, "onNext: $t")
                     resp.onNext(t)
                 }
@@ -68,23 +68,23 @@ class DataRepositoryHeroku : DataRepository {
         return resp
     }
 
-    override fun getCages(): Observable<CageServerResponse> {
-        val resp: PublishSubject<CageServerResponse> = PublishSubject.create()
+    override fun getCages(): Observable<CageResponse> {
+        val resp: PublishSubject<CageResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .getCages("Token 1324123412342134123")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<CageServerResponse> {
+            .subscribe(object : Observer<CageResponse> {
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(CageServerResponse(e?.localizedMessage, null))
+                    resp.onNext(CageResponse(e?.localizedMessage, null))
                 }
 
-                override fun onNext(t: CageServerResponse?) {
+                override fun onNext(t: CageResponse?) {
                     Log.d(TAG, "onNext: $t")
                     resp.onNext(t)
                 }
@@ -93,11 +93,11 @@ class DataRepositoryHeroku : DataRepository {
         return resp
     }
 
-    override fun getTasks(isDone: Boolean): Observable<TaskServerResponse> {
+    override fun getTasks(isDone: Boolean): Observable<TaskResponse> {
         TODO("Not yet implemented")
     }
 
-    override fun getBirth(isConfirmed: Boolean): Observable<BirthServerResponse> {
+    override fun getBirth(isConfirmed: Boolean): Observable<BirthResponse> {
         TODO("Not yet implemented")
     }
 

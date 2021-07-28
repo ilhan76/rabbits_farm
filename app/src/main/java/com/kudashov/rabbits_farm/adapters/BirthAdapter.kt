@@ -18,7 +18,7 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val listOfData: MutableList<BirthListItemTypes> = ArrayList()
     private var delegate: BirthDelegate? = null
 
-    fun attachDelegate(delegate: BirthDelegate){
+    fun attachDelegate(delegate: BirthDelegate) {
         this.delegate = delegate
     }
 
@@ -40,7 +40,7 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
+        when (holder) {
             is BirthViewHolder -> holder.bind(listOfData[position] as BirthListItem)
         }
     }
@@ -51,7 +51,8 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
-    class BirthViewHolder(view: View, var delegate: BirthDelegate?) : RecyclerView.ViewHolder(view) {
+    class BirthViewHolder(view: View, var delegate: BirthDelegate?) :
+        RecyclerView.ViewHolder(view) {
         var countOfDay: TextView = view.findViewById(R.id.txt_count_of_day)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
         var isConfirmed: ImageView = view.findViewById(R.id.ic_status)

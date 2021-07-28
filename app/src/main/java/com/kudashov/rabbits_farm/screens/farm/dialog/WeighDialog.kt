@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.dialogs
+package com.kudashov.rabbits_farm.screens.farm.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.databinding.FloatingActionFragmentTakeBirthsBinding
+import com.kudashov.rabbits_farm.databinding.DialogFragmentWeighRabbitBinding
 import com.kudashov.rabbits_farm.utilits.RH
 
-class TakeBirthDialog: DialogFragment() {
-    private var _binding: FloatingActionFragmentTakeBirthsBinding? = null
+class WeighDialog : DialogFragment() {
+    private var _binding: DialogFragmentWeighRabbitBinding? = null
     private val mBinding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FloatingActionFragmentTakeBirthsBinding.inflate(layoutInflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = DialogFragmentWeighRabbitBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 
@@ -36,9 +40,8 @@ class TakeBirthDialog: DialogFragment() {
         mBinding.btnExit.setOnClickListener {
             dialog!!.dismiss()
         }
-
         mBinding.btnSave.setOnClickListener {
-            // TODO - запрос к серверу на сохранение
+            // TODO - запрос на сохранение
             dialog!!.dismiss()
         }
     }

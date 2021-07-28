@@ -39,7 +39,7 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { rabbitServerResponse ->
-                if (rabbitServerResponse.respError == null) {
+                if (rabbitServerResponse.detail == null) {
                     Log.d(TAG, "getRabbits: SUCCESS")
                     state.postValue(
                         StateAboutFarm.ListOfRabbitsReceived(
@@ -49,8 +49,8 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
                         )
                     )
                 } else {
-                    Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.respError}")
-                    state.postValue(StateAboutFarm.Error("Error ${rabbitServerResponse.respError}"))
+                    Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.detail}")
+                    state.postValue(StateAboutFarm.Error("Error ${rabbitServerResponse.detail}"))
                 }
             }
     }
@@ -63,7 +63,7 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { cageServerResponse ->
-                if (cageServerResponse.respError == null) {
+                if (cageServerResponse.detail == null) {
                     Log.i(TAG, "getRabbits: SUCCESS")
                     state.postValue(
                         StateAboutFarm.ListOfCageReceived(
@@ -73,8 +73,8 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
                         )
                     )
                 } else {
-                    Log.i(TAG, "getCages: ERROR ${cageServerResponse.respError}")
-                    state.postValue(StateAboutFarm.Error("Error ${cageServerResponse.respError}"))
+                    Log.i(TAG, "getCages: ERROR ${cageServerResponse.detail}")
+                    state.postValue(StateAboutFarm.Error("Error ${cageServerResponse.detail}"))
                 }
             }
     }

@@ -22,7 +22,7 @@ class BirthViewModel(application: Application): AndroidViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { response ->
-                    if (response.respError?.isEmpty()!!){
+                    if (response.detail?.isEmpty()!!){
                         Log.i(TAG, "getRabbits: SUCCESS")
                         state.postValue(StateBirth.ListOfBirthReceived(response.list))
                     } else {

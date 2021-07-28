@@ -2,7 +2,7 @@ package com.kudashov.rabbits_farm.net.response
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
 
-data class CageServerResponse(
-    val respError: String?,
+data class CageResponse(
+    val detail: String?,
     val results: List<CageDto>?
 )

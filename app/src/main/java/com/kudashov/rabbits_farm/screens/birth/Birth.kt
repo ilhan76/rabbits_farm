@@ -14,7 +14,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.BirthAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
-import com.kudashov.rabbits_farm.screens.dialogs.TakeBirthDialog
+import com.kudashov.rabbits_farm.screens.birth.dialog.TakeBirthDialog
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateBirth
 
@@ -105,7 +105,8 @@ class Birth : Fragment(), BirthDelegate {
     }
 
     override fun openBirthDialog() {
-        val dialogBirth = TakeBirthDialog()
+        val dialogBirth =
+            TakeBirthDialog()
         val transaction = parentFragmentManager.beginTransaction()
         dialogBirth.show(transaction, "Dialog_TakeBirth")
     }

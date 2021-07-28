@@ -17,9 +17,10 @@ import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
-import com.kudashov.rabbits_farm.screens.dialogs.RabbitDialog
+import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.*
+import com.kudashov.rabbits_farm.utilits.const.*
 
 class Farm : Fragment(), FarmDelegate {
 
@@ -52,6 +53,7 @@ class Farm : Fragment(), FarmDelegate {
 
     private fun init() {
         APP_ACTIVITY.moveUnderline(R.id.farm)
+
         typesOfSort = listOf(
             "",
             SORT_AGE,
@@ -182,7 +184,8 @@ class Farm : Fragment(), FarmDelegate {
     override fun openMoreRabbitInfo(rabbit: Rabbit) {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
 
-        val rabbitDialog = RabbitDialog()
+        val rabbitDialog =
+            RabbitDialog()
         val transaction = parentFragmentManager.beginTransaction()
         rabbitDialog.show(transaction, "Rabbit")
     }

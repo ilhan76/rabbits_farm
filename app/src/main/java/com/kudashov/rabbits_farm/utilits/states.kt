@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.utilits
 
-import com.kudashov.rabbits_farm.data.*
+import com.kudashov.rabbits_farm.data.dto.OperationDto
 import com.kudashov.rabbits_farm.data.item.BirthListItemTypes
 import com.kudashov.rabbits_farm.data.item.Cage
 import com.kudashov.rabbits_farm.data.item.Rabbit
@@ -16,7 +16,7 @@ sealed class StateBirth {
 sealed class StateRabbit{
     class Default(): StateRabbit()
     class Sending():StateRabbit()
-    class Success(var list: List<Operation>):StateRabbit()
+    class Success(var list: List<OperationDto>):StateRabbit()
     class Error<T>(var message: T): StateRabbit()
 }
 
@@ -33,4 +33,12 @@ sealed class StateTasks {
     class Sending: StateTasks()
     class ListOfTasksReceived(val list: List<TasksListItemTypes>): StateTasks()
     class Error<T>(val message: T): StateTasks()
+}
+
+sealed class StateAuth {
+    object Default : StateAuth()
+    object Sending : StateAuth()
+    class Success(val message: String): StateAuth()
+    object OutdatedToken : StateAuth()
+    class Error<T>(val message: T): StateAuth()
 }

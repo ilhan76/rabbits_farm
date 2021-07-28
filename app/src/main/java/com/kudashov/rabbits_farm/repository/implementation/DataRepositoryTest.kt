@@ -1,7 +1,7 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
-import com.kudashov.rabbits_farm.data.*
 import com.kudashov.rabbits_farm.data.dto.CageDto
+import com.kudashov.rabbits_farm.data.dto.OperationDto
 import com.kudashov.rabbits_farm.data.item.*
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.repository.DataRepository
@@ -26,8 +26,8 @@ class DataRepositoryTest : DataRepository {
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RabbitServerResponse> {
-        val response: PublishSubject<RabbitServerResponse> = PublishSubject.create()
+    ): Observable<RabbitResponse> {
+        val response: PublishSubject<RabbitResponse> = PublishSubject.create()
 
         val list: MutableList<Rabbit> = ArrayList()
         for (i in 1..20) {
@@ -45,8 +45,8 @@ class DataRepositoryTest : DataRepository {
         return response
     }
 
-    override fun getCages(): Observable<CageServerResponse> {
-        val response: PublishSubject<CageServerResponse> = PublishSubject.create()
+    override fun getCages(): Observable<CageResponse> {
+        val response: PublishSubject<CageResponse> = PublishSubject.create()
 
         val list: MutableList<CageDto> = ArrayList()
         for (i in 1..20) {
@@ -67,7 +67,7 @@ class DataRepositoryTest : DataRepository {
         GlobalScope.launch() {
             delay(100)
             response.onNext(
-                CageServerResponse(
+                CageResponse(
                     "",
                     list
                 )
@@ -77,8 +77,8 @@ class DataRepositoryTest : DataRepository {
         return response
     }
 
-    override fun getTasks(isDone: Boolean): Observable<TaskServerResponse> {
-        val response: PublishSubject<TaskServerResponse> = PublishSubject.create()
+    override fun getTasks(isDone: Boolean): Observable<TaskResponse> {
+        val response: PublishSubject<TaskResponse> = PublishSubject.create()
 
         val list: MutableList<TasksListItemTypes> = ArrayList()
         for (i in 1..20) {
@@ -126,7 +126,7 @@ class DataRepositoryTest : DataRepository {
         GlobalScope.launch() {
             delay(100)
             response.onNext(
-                TaskServerResponse(
+                TaskResponse(
                     "",
                     list
                 )
@@ -136,8 +136,8 @@ class DataRepositoryTest : DataRepository {
         return response
     }
 
-    override fun getBirth(isConfirmed: Boolean): Observable<BirthServerResponse> {
-        val response: PublishSubject<BirthServerResponse> = PublishSubject.create()
+    override fun getBirth(isConfirmed: Boolean): Observable<BirthResponse> {
+        val response: PublishSubject<BirthResponse> = PublishSubject.create()
 
         val list: MutableList<BirthListItemTypes> = ArrayList()
         for (i in 1..20) {
@@ -162,7 +162,7 @@ class DataRepositoryTest : DataRepository {
         GlobalScope.launch() {
             delay(100)
             response.onNext(
-                BirthServerResponse(
+                BirthResponse(
                     "",
                     list
                 )
@@ -175,9 +175,14 @@ class DataRepositoryTest : DataRepository {
     override fun getOperations(): Observable<OperationsResponse> {
         val response: PublishSubject<OperationsResponse> = PublishSubject.create()
 
-        val list: MutableList<Operation> = ArrayList()
+        val list: MutableList<OperationDto> = ArrayList()
         for (i in 1..20) {
-            list.add(Operation("01.01.2021", "Какой-то статус"))
+            list.add(
+                OperationDto(
+                    "01.01.2021",
+                    "Какой-то статус"
+                )
+            )
         }
 
         GlobalScope.launch() {

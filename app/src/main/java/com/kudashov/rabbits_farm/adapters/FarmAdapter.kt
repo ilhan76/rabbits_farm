@@ -78,7 +78,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             age.text = rabbit.age
             type.text = rabbit.type
 
-            if (rabbit.isMale){
+            if (rabbit.isMale) {
                 gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_male_black))
             } else {
                 gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_female_black))

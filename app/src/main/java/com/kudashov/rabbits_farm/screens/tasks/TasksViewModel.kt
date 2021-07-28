@@ -23,7 +23,7 @@ class TasksViewModel(application: Application): AndroidViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { response ->
-                    if (response.respError?.isEmpty()!!){
+                    if (response.detail?.isEmpty()!!){
                         Log.i(TAG, "getRabbits: SUCCESS")
                         state.postValue(StateTasks.ListOfTasksReceived(response.tasks))
                     } else {

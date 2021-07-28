@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.utilits
+package com.kudashov.rabbits_farm.utilits.const
 
 const val SORT_AGE = "age"
 const val SORT_AGE_INV = "-age"

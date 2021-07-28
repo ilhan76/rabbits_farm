@@ -13,17 +13,16 @@ import androidx.fragment.app.Fragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.data.dto.BreedDto
-import com.kudashov.rabbits_farm.data.item.Rabbit
-import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitMenuBinding
+import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
 import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.statuses.cage.StatusOfCage
 import com.kudashov.rabbits_farm.utilits.statuses.rabbit.TypeOfRabbit
 
-class FarmMenuRabbit : Fragment() {
+class FarmFilterRabbit : Fragment() {
 
     private val TAG: String = this::class.java.simpleName
-    private var _binding: FragmentFarmRabbitMenuBinding? = null
+    private var _binding: FragmentFarmRabbitFilterBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: FarmViewModel
@@ -42,7 +41,7 @@ class FarmMenuRabbit : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFarmRabbitMenuBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFarmRabbitFilterBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

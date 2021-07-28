@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.dialogs
+package com.kudashov.rabbits_farm.screens.farm.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.RabbitOperationsAdapter
-import com.kudashov.rabbits_farm.databinding.FloatingActionFragmentRabbitMoreInfoBinding
+import com.kudashov.rabbits_farm.databinding.DialogFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.RH
 import com.kudashov.rabbits_farm.utilits.StateRabbit
 
 class RabbitDialog : DialogFragment() {
 
-    private var _binding: FloatingActionFragmentRabbitMoreInfoBinding? = null
+    private var _binding: DialogFragmentRabbitMoreInfoBinding? = null
     private val mBinding get() = _binding!!
 
     private lateinit var mViewModel: RabbitViewModel
@@ -27,8 +27,12 @@ class RabbitDialog : DialogFragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RabbitOperationsAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FloatingActionFragmentRabbitMoreInfoBinding.inflate(layoutInflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = DialogFragmentRabbitMoreInfoBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 
@@ -63,7 +67,8 @@ class RabbitDialog : DialogFragment() {
         }
 
         mBinding.btnWeigh.setOnClickListener {
-            val dialogWeigh = WeighDialog()
+            val dialogWeigh =
+                WeighDialog()
             val transaction = parentFragmentManager.beginTransaction()
             dialogWeigh.show(transaction, "Dialog_Weigh")
         }

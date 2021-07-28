@@ -1,6 +1,5 @@
 package com.kudashov.rabbits_farm.screens.farm.filters
 
-
 class RabbitFilter {
     companion object {
         var page: Int = 1

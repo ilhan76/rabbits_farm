@@ -1,10 +1,9 @@
-package com.kudashov.rabbits_farm.screens.dialogs
+package com.kudashov.rabbits_farm.screens.farm.dialog
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.Operation
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryTest
 import com.kudashov.rabbits_farm.utilits.StateRabbit
@@ -29,7 +28,7 @@ class RabbitViewModel(application: Application): AndroidViewModel(application) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if (it.respError?.isEmpty()!!){
+                    if (it.detail?.isEmpty()!!){
                         Log.d(TAG, "getOperations: SUCCESS")
                         state.postValue(StateRabbit.Success(it.list))
                     } else {

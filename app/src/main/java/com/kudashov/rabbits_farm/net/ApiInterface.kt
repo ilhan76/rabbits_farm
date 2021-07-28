@@ -1,14 +1,19 @@
 package com.kudashov.rabbits_farm.net
 
 import com.kudashov.rabbits_farm.data.dto.UserDto
-import com.kudashov.rabbits_farm.net.response.CageServerResponse
-import com.kudashov.rabbits_farm.net.response.RabbitServerResponse
+import com.kudashov.rabbits_farm.net.response.AuthResponse
+import com.kudashov.rabbits_farm.net.response.CageResponse
+import com.kudashov.rabbits_farm.net.response.EchoResponse
+import com.kudashov.rabbits_farm.net.response.RabbitResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
 interface ApiInterface {
-    @POST("api/auth/token")
-    fun getToken(@Body userDto: UserDto): Observable<String>
+    @GET("api/echo/")
+    fun echo(@Header("Authorization") token: String) : Observable<EchoResponse>
+
+    @POST("api/auth/token/")
+    fun getToken(@Body userDto: UserDto): Observable<AuthResponse>
 
     @GET("api/rabbit/")
     fun getRabbits(
@@ -25,8 +30,8 @@ interface ApiInterface {
         @Query("cage_number_to") cageNumberTo: Int?,
         @Query("is_male") isMale: Int?,
         @Query("__order_by__") orderBy: String?
-    ): Observable<RabbitServerResponse>
+    ): Observable<RabbitResponse>
 
     @GET("api/cage/")
-    fun getCages(@Header("Authorisation") token: String): Observable<CageServerResponse>
+    fun getCages(@Header("Authorisation") token: String): Observable<CageResponse>
 }

@@ -18,13 +18,13 @@ interface DataRepository {
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RabbitServerResponse>
+    ): Observable<RabbitResponse>
 
-    fun getCages(): Observable<CageServerResponse>
+    fun getCages(): Observable<CageResponse>
 
-    fun getTasks(isDone: Boolean): Observable<TaskServerResponse>
+    fun getTasks(isDone: Boolean): Observable<TaskResponse>
 
-    fun getBirth(isConfirmed: Boolean): Observable<BirthServerResponse>
+    fun getBirth(isConfirmed: Boolean): Observable<BirthResponse>
 
     fun getOperations(): Observable<OperationsResponse>
 }

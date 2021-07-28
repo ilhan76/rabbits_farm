@@ -1,6 +1,10 @@
 package com.kudashov.rabbits_farm.net
 
+import com.kudashov.rabbits_farm.utilits.token
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -10,17 +14,15 @@ import java.util.concurrent.TimeUnit
 class ApiClient {
 
     companion object {
-        val baseUrl: String = "https://rabbit-api--test.herokuapp.com/"
+        private const val baseUrl: String = "https://rabbit-api--test.herokuapp.com/"
         var retrofit: Retrofit? = null
 
         val client: Retrofit
             get() {
                 if (retrofit == null) {
                     val httpClient = OkHttpClient.Builder()
-                    //logging interceptor
-                    val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                        .retryOnConnectionFailure(true)
 
-                    //httpClient.addInterceptor(loggingInterceptor)
                     httpClient.connectTimeout(20, TimeUnit.SECONDS)
 
                     val retrofitBuilder: Retrofit.Builder = Retrofit.Builder()

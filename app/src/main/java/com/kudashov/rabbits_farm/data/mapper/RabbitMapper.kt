@@ -31,19 +31,12 @@ class RabbitMapper {
             return newList
         }
 
-        private fun fromApiToRabbitItem(rabbitDto: RabbitDto): Rabbit =
-            Rabbit(
+        private fun fromApiToRabbitItem(rabbitDto: RabbitDto): Rabbit = Rabbit(
                 rabbitDto.id,
-                getNumberOfCage(
-                    rabbitDto.cage
-                ),
-                getAge(
-                    rabbitDto.birthday
-                ),
+                getNumberOfCage(rabbitDto.cage),
+                getAge(rabbitDto.birthday),
                 rabbitDto.is_male,
-                getType(
-                    rabbitDto.current_type
-                )
+                getType(rabbitDto.current_type)
             )
 
 
@@ -51,7 +44,7 @@ class RabbitMapper {
             return cage.farm_number.toString() + cage.number.toString() + cage.letter
         }
 
-        private fun getType(currentType: String): String {
+        fun getType(currentType: String): String {
             return when (currentType) {
                 TypeOfRabbit.baby -> "Малыш"
                 TypeOfRabbit.death -> "Мертвый"
@@ -62,8 +55,8 @@ class RabbitMapper {
             }
         }
 
-        private fun getAge(birthday: String): String {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        fun getAge(birthday: String?): String {
+            return if (birthday != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val today = dateFormat.format(Date())
 
@@ -74,8 +67,17 @@ class RabbitMapper {
                     LocalDate.parse(today.substring(0, 10), format)
                 )
 
-                "$difference дн"
-            } else "??? дн"
+                "$difference"
+            } else "???"
+        }
+
+        fun getBirthday(birthdayIso: String?): String {
+            return if (birthdayIso != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val birthday = LocalDate.parse(birthdayIso.substring(0, 10), format)
+
+                "$birthday"
+            } else "???"
         }
     }
 }

@@ -59,16 +59,31 @@
     <string name="farm_cage_settings_btn_show">Отобразить</string>
     <!-- About Farm Cage Settings -->
 
-    <!-- Floating Action Fragment Weigh Rabbit -->
-    <string name="farm_floating_action_title">Взвесить кролика</string>
-    <string name="farm_floating_txt_current_weight_of_rabbit">Текущий вес кролика: %s кг</string>
-    <string name="farm_floating_new_weight_of_rabbit">Новый вес кролика</string>
-    <string name="farm_floating_action_btn_save">Сохранить вес кролики</string>
-    <!-- Floating Action Fragment Weigh Rabbit -->
+    <!-- Dialog Fragment Weigh Rabbit -->
+    <string name="dialog_weight_title">Взвесить кролика</string>
+    <string name="dialog_weight_txt_current_weight">Текущий вес кролика: %s кг</string>
+    <string name="dialog_weight_new_weight">Новый вес кролика</string>
+    <string name="dialog_weight_btn_save">Сохранить вес кролики</string>
+    <!-- Dialog Fragment Weigh Rabbit -->
 
-    <!-- Floating Action Fragment Rabbit -->
+    <!-- Dialog Fragment Rabbit -->
+    <string name="dialog_rabbit_txt_title">Кролик</string>
+    <string name="dialog_rabbit_txt_id"><b>#%d</b></string>
+    <string name="dialog_rabbit_txt_weight"><b>%s кг</b></string>
+    
+    <string name="dialog_rabbit_txt_birthday">Дата рождения: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_age">Возраст: <b>%s дней</b></string>
+    
+    <string name="dialog_rabbit_txt_type">Тип: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_breed">Порода: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_number_of_cage">№ клетки: <b>%d%d%s</b></string>
+    
+    <string name="dialog_rabbit_txt_status">Статус: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_output">Кол-во выводов: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_output_efficiency">Средний вывод: <b>%s</b></string>
 
-    <!-- Floating Action Fragment Rabbit -->
+    <string name="dialog_rabbit_txt_history_of_operations">История операций</string>
+    <!-- Dialog Action Fragment Rabbit -->
     <!-- About Farm -->
 
     <!-- Tasks-->

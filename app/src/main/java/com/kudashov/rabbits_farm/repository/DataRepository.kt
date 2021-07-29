@@ -2,6 +2,9 @@ package com.kudashov.rabbits_farm.repository
 
 import com.kudashov.rabbits_farm.net.response.*
 import io.reactivex.rxjava3.core.Observable
+import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface DataRepository {
 
@@ -26,5 +29,9 @@ interface DataRepository {
 
     fun getBirth(isConfirmed: Boolean): Observable<BirthResponse>
 
-    fun getOperations(): Observable<OperationsResponse>
+    fun getRabbitMoreInf(id: Int): Observable<RabbitMoreInfResponse>
+
+    fun getOperations(id: Int): Observable<OperationsResponse>
+
+    fun postWeight(token: String, type: String, id: Int, weight: Double)
 }

@@ -17,7 +17,7 @@ class TasksViewModel(application: Application): AndroidViewModel(application) {
     private val repository: DataRepository = DataRepositoryTest()
 
     fun getTasks(isDone: Boolean){
-        state.postValue(StateTasks.Sending())
+        state.postValue(StateTasks.Sending)
 
         repository.getTasks(isDone)
                 .subscribeOn(Schedulers.io())

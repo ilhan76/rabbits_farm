@@ -21,7 +21,7 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
     private val repository: DataRepository = DataRepositoryHeroku()
 
     fun getRabbits() {
-        state.postValue(StateAboutFarm.Sending())
+        state.postValue(StateAboutFarm.Sending)
 
         repository.getRabbits(
             RabbitFilter.page,
@@ -57,7 +57,7 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
 
     //todo добавить фильтры для клеток
     fun getCages() {
-        state.postValue(StateAboutFarm.Sending())
+        state.postValue(StateAboutFarm.Sending)
 
         repository.getCages()
             .subscribeOn(Schedulers.io())

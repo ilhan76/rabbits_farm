@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.data.dto
 
 data class OperationDto(
-    var data: String,
-    var event: String
+    val type: String,
+    val time: String,
+    val rabbit_id: Int
 )

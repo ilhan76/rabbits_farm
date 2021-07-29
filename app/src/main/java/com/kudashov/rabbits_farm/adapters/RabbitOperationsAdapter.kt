@@ -32,12 +32,13 @@ class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class RabbitOperationViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val data: TextView = view.findViewById(R.id.txt_data)
+        private val time: TextView = view.findViewById(R.id.txt_data)
         private val event: TextView = view.findViewById(R.id.txt_event)
 
         fun bind(operation: OperationDto){
-            data.text = operation.data
-            event.text = operation.event
+            time.text = operation.time.substring(0, 10)
+            event.text = operation.type
+            //todo - мапинг операций
         }
     }
 }

@@ -16,7 +16,7 @@ class BirthViewModel(application: Application): AndroidViewModel(application) {
     private val repository: DataRepository = DataRepositoryTest()
 
     fun getTasks(isConfirmed: Boolean){
-        state.postValue(StateBirth.Sending())
+        state.postValue(StateBirth.Sending)
 
         repository.getBirth(isConfirmed)
                 .subscribeOn(Schedulers.io())

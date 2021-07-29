@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.utilits.statuses.rabbit
 
-class Status {
+class RabbitStatus {
     companion object {
         const val readyToBreed: String = "RF"
         const val rest: String = "R"

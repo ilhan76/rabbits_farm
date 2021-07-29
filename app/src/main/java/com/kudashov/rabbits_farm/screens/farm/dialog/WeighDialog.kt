@@ -6,12 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.databinding.DialogFragmentWeighRabbitBinding
 import com.kudashov.rabbits_farm.utilits.RH
 
 class WeighDialog : DialogFragment() {
+
+    companion object {
+        fun newInstance(bundle: Bundle): WeighDialog {
+            val dialog = WeighDialog()
+            dialog.arguments = bundle
+            return dialog
+        }
+    }
+
     private var _binding: DialogFragmentWeighRabbitBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +29,7 @@ class WeighDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = DialogFragmentWeighRabbitBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
+        return binding.root
     }
 
     override fun onStart() {
@@ -33,14 +43,20 @@ class WeighDialog : DialogFragment() {
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog!!.window?.setBackgroundDrawable(RH.drawable(R.color.transparent))
 
+        binding.txtCurrentWeight.text = resources.getString(
+            R.string.dialog_weight_txt_current_weight,
+            (arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfDto).weight.toString()
+        )
         initButtons()
     }
 
     private fun initButtons() {
-        mBinding.btnExit.setOnClickListener {
+
+        binding.btnExit.setOnClickListener {
             dialog!!.dismiss()
         }
-        mBinding.btnSave.setOnClickListener {
+
+        binding.btnSave.setOnClickListener {
             // TODO - запрос на сохранение
             dialog!!.dismiss()
         }

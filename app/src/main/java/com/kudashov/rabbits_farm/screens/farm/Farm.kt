@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.screens.farm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,10 @@ import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.*
 
 class Farm : Fragment(), FarmDelegate {
+
+    companion object {
+        const val ARG_RABBIT_ID = "rabbit_id"
+    }
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentFarmBinding? = null
@@ -184,9 +189,13 @@ class Farm : Fragment(), FarmDelegate {
     override fun openMoreRabbitInfo(rabbit: Rabbit) {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
 
-        val rabbitDialog =
-            RabbitDialog()
+        val bundle = Bundle()
+        bundle.putInt(ARG_RABBIT_ID, rabbit.id)
+        val rabbitDialog = RabbitDialog.newInstance(bundle)
         val transaction = parentFragmentManager.beginTransaction()
         rabbitDialog.show(transaction, "Rabbit")
+
+        Log.d(TAG, "openMoreRabbitInfo: $rabbitDialog")
+        Log.d(TAG, "openMoreRabbitInfo: Dialog is opened")
     }
 }

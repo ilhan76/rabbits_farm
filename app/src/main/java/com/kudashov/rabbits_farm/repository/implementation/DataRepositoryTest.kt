@@ -172,29 +172,12 @@ class DataRepositoryTest : DataRepository {
         return response
     }
 
-    override fun getOperations(): Observable<OperationsResponse> {
-        val response: PublishSubject<OperationsResponse> = PublishSubject.create()
-
-        val list: MutableList<OperationDto> = ArrayList()
-        for (i in 1..20) {
-            list.add(
-                OperationDto(
-                    "01.01.2021",
-                    "Какой-то статус"
-                )
-            )
-        }
-
-        GlobalScope.launch() {
-            delay(100)
-            response.onNext(
-                OperationsResponse(
-                    "",
-                    list
-                )
-            )
-        }
-
+    override fun getRabbitMoreInf(id: Int): Observable<RabbitMoreInfResponse> {
+        val response: PublishSubject<RabbitMoreInfResponse> = PublishSubject.create()
         return response
+    }
+
+    override fun getOperations(id: Int): Observable<OperationsResponse> {
+        TODO("Not yet implemented")
     }
 }

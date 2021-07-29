@@ -19,6 +19,7 @@ import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
+import com.kudashov.rabbits_farm.screens.farm.filters.CageFilter
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
@@ -31,6 +32,7 @@ class Farm : Fragment(), FarmDelegate {
     companion object {
         const val ARG_RABBIT_ID = "rabbit_id"
         const val ARG_VIEW_MODEL = "view_model"
+        const val ARG_IS_RABBIT = "is_rabbit"
     }
 
     private val TAG: String = this::class.java.simpleName
@@ -62,28 +64,15 @@ class Farm : Fragment(), FarmDelegate {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d(TAG, "onDestroyView: Destroy")
         _binding = null
     }
 
     private fun init() {
         APP_ACTIVITY.moveUnderline(R.id.farm)
 
-        typesOfSort = listOf(
-            "",
-            SORT_AGE,
-            SORT_AGE_INV,
-            SORT_SEX,
-            SORT_FARM_NUMBER,
-            SORT_CAGE_NUMBER,
-            SORT_TYPE,
-            SORT_BREED,
-            SORT_STATUS,
-            SORT_WEIGHT,
-            SORT_WEIGHT_INV
-        )
-        spinnerAdapter = SpinnerAdapter(requireContext())
-        spinnerAdapter.setList(typesOfSort)
-        binding.spinner.adapter = spinnerAdapter
+        viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
+        viewModel.getStates().observe(this, this::stateProcessing)
 
         rvAdapter = FarmAdapter()
         rvAdapter.attachDelegate(this)
@@ -91,10 +80,6 @@ class Farm : Fragment(), FarmDelegate {
         recyclerView = binding.farmList
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = rvAdapter
-
-        viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
-        viewModel.getStates().observe(this, this::stateProcessing)
-
         recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
             override fun loadNextPage() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
@@ -108,10 +93,13 @@ class Farm : Fragment(), FarmDelegate {
             }
         })
 
-        initButtons()
+        isRabbit = try {
+            arguments?.get(ARG_IS_RABBIT) as Boolean
+        } catch (e: Exception) {
+            true
+        }
+        loadData()
         initListeners()
-
-        viewModel.getRabbits()
     }
 
     private fun initListeners() {
@@ -127,10 +115,59 @@ class Farm : Fragment(), FarmDelegate {
 
         binding.btnRabbits.setOnClickListener {
             isRabbit = true
-            viewModel.cleanPage()
+            loadData()
+        }
+        binding.btnCages.setOnClickListener {
+            isRabbit = false
+            loadData()
+        }
 
+        binding.spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.d(TAG, "onItemSelected: SPINNER")
+                    if (isRabbit) {
+                        viewModel.cleanPage()
+                        RabbitFilter.orderBy = typesOfSort[position]
+                        viewModel.getRabbits()
+                    } else {
+                        viewModel.cleanPage()
+                        CageFilter.orderBy = typesOfSort[position]
+                        viewModel.getCages()
+                    }
+                }
+            }
+    }
+
+    private fun loadData() {
+        viewModel.cleanPage()
+
+        if (isRabbit) {
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            typesOfSort = listOf(
+                "",
+                SORT_RABBIT_AGE,
+                SORT_RABBIT_AGE_INV,
+                SORT_RABBIT_SEX,
+                SORT_RABBIT_FARM_NUMBER,
+                SORT_RABBIT_CAGE_NUMBER,
+                SORT_RABBIT_TYPE,
+                SORT_RABBIT_BREED,
+                SORT_RABBIT_STATUS,
+                SORT_RABBIT_WEIGHT,
+                SORT_RABBIT_WEIGHT_INV
+            )
+
+            binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
 
             binding.buttonsPanel.visibility = View.GONE
 
@@ -141,13 +178,23 @@ class Farm : Fragment(), FarmDelegate {
             binding.txtListTitle4.text = resources.getString(R.string.farm_rabbits_txt_type)
 
             viewModel.getRabbits()
-        }
-        binding.btnCages.setOnClickListener {
-            isRabbit = false
-            viewModel.cleanPage()
-
-            binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
+        } else {
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
+            binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
+
+            typesOfSort = listOf(
+                "",
+                SORT_CAGE_FARM_NUMBER,
+                SORT_CAGE_NUMBER,
+                SORT_CAGE_NUMBER_RABBITS,
+                SORT_CAGE_STATUS,
+                SORT_CAGE_FARM_NUMBER_INV,
+                SORT_CAGE_NUMBER_INV,
+                SORT_CAGE_NUMBER_RABBITS_INV,
+                SORT_CAGE_STATUS_INV
+            )
+
+            binding.spinner.setSelection(typesOfSort.indexOf(CageFilter.orderBy))
 
             binding.buttonsPanel.visibility = View.VISIBLE
 
@@ -159,29 +206,9 @@ class Farm : Fragment(), FarmDelegate {
             viewModel.getCages()
         }
 
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (isRabbit) {
-                    RabbitFilter.orderBy = typesOfSort[position]
-                    viewModel.getRabbits()
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-    }
-
-    private fun initButtons() {
-        if (isRabbit) {
-            binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
-        } else {
-
-        }
+        spinnerAdapter = SpinnerAdapter(requireContext())
+        spinnerAdapter.setList(typesOfSort)
+        binding.spinner.adapter = spinnerAdapter
     }
 
     private fun stateProcessing(state: StateAboutFarm) {
@@ -205,7 +232,7 @@ class Farm : Fragment(), FarmDelegate {
                 rvAdapter.setList(state.list)
             }
             is StateAboutFarm.Error<*> -> {
-                Log.d(TAG, "stateProcessing: Birth Error ${state.message.toString()}")
+                Log.d(TAG, "stateProcessing: Farm Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
             }

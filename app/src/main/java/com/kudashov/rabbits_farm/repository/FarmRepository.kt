@@ -25,7 +25,7 @@ interface FarmRepository {
         page: Int,
         pageSize: Int,
         farmNumber: Int?,
-        status: String?,
+        status: List<String>?,
         type: String?,
         isParallel: Int?,
         numberRabbitsFrom: Int?,

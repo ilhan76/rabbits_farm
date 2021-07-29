@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_count_of_rabbit" />
 
         <Spinner
-            android:id="@+id/spinner_farm"
+            android:id="@+id/spinner_farm_number"
             style="@style/FarmRabbitsButton"
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
@@ -96,7 +96,7 @@
             android:popupBackground="@drawable/shape_menu"
             android:textSize="@dimen/standard_txt_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_farm" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_farm_number" />
 
         <EditText
             android:id="@+id/edit_txt_count_of_rabbit"
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
 
         <CheckBox
-            android:id="@+id/btn_need_clear"
+            android:id="@+id/cb_need_clear"
             style="@style/FarmRabbitsButton"
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
@@ -130,7 +130,7 @@
             app:layout_constraintTop_toBottomOf="@id/edit_txt_count_of_rabbit" />
 
         <CheckBox
-            android:id="@+id/btn_need_repair"
+            android:id="@+id/cb_need_repair"
             style="@style/FarmRabbitsButton"
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
@@ -146,9 +146,10 @@
             android:textAllCaps="false"
             android:textSize="@dimen/standard_txt_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_need_clear" />
+            app:layout_constraintTop_toBottomOf="@id/cb_need_clear" />
 
         <Button
+            android:id="@+id/btnShow"
             android:layout_width="match_parent"
             android:layout_height="@dimen/farm_rabbit_settings_btn_show_height"
             android:layout_marginHorizontal="50dp"
@@ -163,7 +164,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_need_repair" />
+            app:layout_constraintTop_toBottomOf="@+id/cb_need_repair" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -36,7 +36,7 @@ interface ApiInterface {
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
         @Query("farm_number") farmNumber: Int?,
-        @Query("status") status: String?,
+        @Query("status") status: List<String>?,
         @Query("type") type: String?,
         @Query("is_parallel") isParallel: Int?,
         @Query("number_rabbits_from") numberRabbitsFrom: Int?,

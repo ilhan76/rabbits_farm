@@ -56,14 +56,14 @@ class FarmFilterRabbit : Fragment() {
     }
 
     private fun init() {
+        viewModel = arguments?.get(Farm.ARG_VIEW_MODEL) as FarmViewModel
+
         listNumberOfFarm = listOf("",
             farm1,
             farm2,
             farm3,
             farm4
         )
-
-        viewModel = arguments?.get(Farm.ARG_VIEW_MODEL) as FarmViewModel
         adapterNumberOfFarm = SpinnerAdapter(requireContext())
         adapterNumberOfFarm.setList(listNumberOfFarm)
         binding.spinnerNumberOfFarm.adapter = adapterNumberOfFarm
@@ -82,15 +82,17 @@ class FarmFilterRabbit : Fragment() {
         adapterStatus.setList(listStatus)
         binding.spinnerStatus.adapter = adapterStatus
 
-        initButton()
         initListeners()
+        loadData()
     }
 
     private fun initListeners() {
         binding.apply {
             btnExit.setOnClickListener {
                 RabbitFilter.throwOff()
-                APP_ACTIVITY.navController.popBackStack()
+                val bundle = Bundle()
+                bundle.putBoolean(Farm.ARG_IS_RABBIT, true)
+                APP_ACTIVITY.navController.navigate(R.id.action_farmMenuRabbit_to_farm, bundle)
             }
 
             btnShow.setOnClickListener {
@@ -109,7 +111,9 @@ class FarmFilterRabbit : Fragment() {
                 else RabbitFilter.cageNumberTo = null
 
                 Log.d(TAG, "initListeners: $RabbitFilter")
-                APP_ACTIVITY.navController.popBackStack()
+                val bundle = Bundle()
+                bundle.putBoolean(Farm.ARG_IS_RABBIT, true)
+                APP_ACTIVITY.navController.navigate(R.id.action_farmMenuRabbit_to_farm, bundle)
             }
 
             spinnerNumberOfFarm.onItemSelectedListener = object : OnItemSelectedListener {
@@ -164,9 +168,7 @@ class FarmFilterRabbit : Fragment() {
             cbFattening.setOnClickListener {
                 if (binding.cbFattening.isChecked) {
                     RabbitFilter.type.add(RABBIT_TYPE_FATTENING)
-                    Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show()
-                } else if (!binding.cbFattening.isChecked) {
-                    Toast.makeText(context, "unchecked", Toast.LENGTH_SHORT).show()
+                } else {
                     RabbitFilter.type.remove(RABBIT_TYPE_FATTENING)
                 }
             }
@@ -206,7 +208,7 @@ class FarmFilterRabbit : Fragment() {
         }
     }
 
-    private fun initButton() {
+    private fun loadData() {
         binding.apply {
             if (RabbitFilter.isMale == 1) {
                 btnMale.setBackgroundResource(R.drawable.shape_btn_green)
@@ -245,7 +247,6 @@ class FarmFilterRabbit : Fragment() {
                 RabbitFilter.cageNumberTo.toString(),
                 TextView.BufferType.EDITABLE
             )
-
 
             when (RabbitFilter.breed) {
                 1 -> spinnerBreed.setSelection(1)

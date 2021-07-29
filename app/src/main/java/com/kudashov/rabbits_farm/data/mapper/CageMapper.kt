@@ -45,7 +45,7 @@ class CageMapper {
 
             if (list.contains(CAGE_STATUS_NEED_CLEAN)) status += "Уб."
             if (list.contains(CAGE_STATUS_NEED_REPAIR)) status += " Рем."
-
+            if (status.isEmpty()) status += "-----"
             return status
         }
     }

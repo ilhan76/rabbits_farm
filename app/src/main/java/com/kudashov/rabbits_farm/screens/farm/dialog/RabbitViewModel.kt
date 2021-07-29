@@ -4,8 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.repository.DataRepository
-import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.FarmRepository
+import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateRabbit
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,7 +15,7 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
 
     private val TAG: String? = RabbitViewModel::class.java.simpleName
     private val state: MutableLiveData<StateRabbit> = MutableLiveData()
-    private val repository: DataRepository = DataRepositoryHeroku()
+    private val repository: FarmRepository = FarmRepositoryHeroku()
 
     fun getStates(): MutableLiveData<StateRabbit> {
         return state

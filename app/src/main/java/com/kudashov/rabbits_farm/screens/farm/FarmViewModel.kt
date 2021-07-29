@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.mapper.CageMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
-import com.kudashov.rabbits_farm.repository.DataRepository
-import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.FarmRepository
+import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
@@ -19,7 +19,7 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()
-    private val repository: DataRepository = DataRepositoryHeroku()
+    private val repository: FarmRepository = FarmRepositoryHeroku()
 
     fun getRabbits() {
         state.postValue(StateAboutFarm.Sending)

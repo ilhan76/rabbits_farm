@@ -4,8 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.repository.DataRepository
-import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryTest
+import com.kudashov.rabbits_farm.repository.BirthRepository
+import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateBirth
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class BirthViewModel(application: Application): AndroidViewModel(application) {
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateBirth> = MutableLiveData()
-    private val repository: DataRepository = DataRepositoryTest()
+    private val repository: BirthRepository = BirthRepositoryHeroku()
 
     fun getTasks(isConfirmed: Boolean){
         state.postValue(StateBirth.Sending)

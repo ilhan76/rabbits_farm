@@ -169,23 +169,28 @@ class RabbitDialog : DialogFragment() {
     private fun stateProcessing(state: StateRabbit) {
         when (state) {
             is StateRabbit.Default -> {
-                Toast.makeText(context, "Rabbit Default", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Rabbit Default")
+                APP_ACTIVITY.hideLoader()
             }
             is StateRabbit.Sending -> {
-                Toast.makeText(context, "Rabbit Sending", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Rabbit Sending")
+                APP_ACTIVITY.showLoader()
             }
             is StateRabbit.SuccessRabbit -> {
-                Toast.makeText(context, "Rabbit Success", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Rabbit Success (Rabbit)")
+                APP_ACTIVITY.hideLoader()
                 arguments?.putSerializable(ARG_RABBIT, state.rabbit)
                 loadData(state.rabbit)
-                //adapter.setList(state.)
             }
             is StateRabbit.SuccessOperations -> {
-                Toast.makeText(context, "Rabbit Success Operations", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Rabbit Success Operations")
+                APP_ACTIVITY.hideLoader()
                 adapter.setList(state.operations)
             }
             is StateRabbit.Error<*> -> {
-                Toast.makeText(context, "Rabbit Error", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Rabbit Error ${state.message.toString()}")
+                Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
             }
         }
 

@@ -18,7 +18,7 @@ class ApiClient {
                     val httpClient = OkHttpClient.Builder()
                         .retryOnConnectionFailure(true)
 
-                    httpClient.connectTimeout(20, TimeUnit.SECONDS)
+                    httpClient.connectTimeout(20000, TimeUnit.SECONDS)
 
                     val retrofitBuilder: Retrofit.Builder = Retrofit.Builder()
                         .baseUrl(baseUrl)

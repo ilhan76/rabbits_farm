@@ -97,4 +97,12 @@ class MainActivity : AppCompatActivity(),
         binding.underline.visibility = View.VISIBLE
         navController.navigate(R.id.action_auth_to_farm)
     }
+
+    fun showLoader(){
+        binding.loadPage.visibility = View.VISIBLE
+    }
+
+    fun hideLoader(){
+        binding.loadPage.visibility = View.GONE
+    }
 }

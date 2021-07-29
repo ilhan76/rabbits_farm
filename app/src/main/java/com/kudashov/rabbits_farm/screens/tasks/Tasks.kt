@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.screens.tasks
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -87,18 +88,22 @@ class Tasks : Fragment() {
     private fun stateProcessing(state: StateTasks){
         when (state){
             is StateTasks.Default -> {
-                Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Tasks Default")
+                APP_ACTIVITY.hideLoader()
             }
             is StateTasks.Sending ->{
-                Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
-                //todo - добавить лоадер
+                Log.d(TAG, "stateProcessing: Tasks Sending")
+                APP_ACTIVITY.showLoader()
             }
             is StateTasks.ListOfTasksReceived -> {
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Tasks Success")
+                APP_ACTIVITY.hideLoader()
                 adapter.setList(state.list)
             }
             is StateTasks.Error<*> -> {
+                Log.d(TAG, "stateProcessing: Tasks Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
             }
         }
     }

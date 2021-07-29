@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Observable
 
 interface FarmRepository {
     fun getRabbits(
+        token: String,
         page: Int,
         pageSize: Int,
         farmNumber: Int?,
@@ -19,11 +20,22 @@ interface FarmRepository {
         orderBy: String?
     ): Observable<RabbitResponse>
 
-    fun getCages(): Observable<CageResponse>
+    fun getCages(
+        token: String,
+        page: Int,
+        pageSize: Int,
+        farmNumber: Int?,
+        status: String?,
+        type: String?,
+        isParallel: Int?,
+        numberRabbitsFrom: Int?,
+        numberRabbitsTo: Int?,
+        orderBy: String?
+    ): Observable<CageResponse>
 
-    fun getRabbitMoreInf(id: Int): Observable<RabbitMoreInfResponse>
+    fun getRabbitMoreInf(token: String, id: Int): Observable<RabbitMoreInfResponse>
 
-    fun getOperations(id: Int): Observable<OperationsResponse>
+    fun getOperations(token: String, id: Int): Observable<OperationsResponse>
 
     fun postWeight(token: String, type: String, id: Int, weight: Double)
 }

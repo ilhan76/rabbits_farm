@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.screens.birth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,7 @@ class Birth : Fragment(), BirthDelegate {
         APP_ACTIVITY.moveUnderline(R.id.birth)
 
         adapter = BirthAdapter()
+        adapter.attachDelegate(this)
         recyclerView = mBinding.birthList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
@@ -82,19 +84,21 @@ class Birth : Fragment(), BirthDelegate {
     private fun stateProcessing(state: StateBirth){
         when (state){
             is StateBirth.Default -> {
-                Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "stateProcessing: Birth Default")
+                APP_ACTIVITY.hideLoader()
             }
             is StateBirth.Sending ->{
-                Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
-                //todo - добавить лоадер
+                Log.d(TAG, "stateProcessing: Birth Sending")
+                APP_ACTIVITY.showLoader()
             }
             is StateBirth.ListOfBirthReceived -> {
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                adapter.setList(state.list)
-                adapter.attachDelegate(this)
+                Log.d(TAG, "stateProcessing: Birth Success")
+                APP_ACTIVITY.hideLoader()
             }
             is StateBirth.Error<*> -> {
+                Log.d(TAG, "stateProcessing: Birth Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
             }
         }
     }

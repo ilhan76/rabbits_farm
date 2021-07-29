@@ -193,7 +193,6 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:background="@drawable/selector_spinner_bg"
-            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
             android:popupBackground="@drawable/shape_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_baby" />
@@ -257,7 +256,6 @@
             android:layout_width="@dimen/farm_rabbit_settings_btn_width"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:background="@drawable/selector_spinner_bg"
-            android:dropDownVerticalOffset="@dimen/farm_rabbit_settings_btn_height"
             android:popupBackground="@drawable/shape_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_txt_number_of_cage_from" />

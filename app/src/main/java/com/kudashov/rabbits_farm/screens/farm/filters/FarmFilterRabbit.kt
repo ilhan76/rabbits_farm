@@ -14,6 +14,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.data.dto.BreedDto
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitFilterBinding
+import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
 import com.kudashov.rabbits_farm.utilits.const.*
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
@@ -62,6 +63,7 @@ class FarmFilterRabbit : Fragment() {
             farm4
         )
 
+        viewModel = arguments?.get(Farm.ARG_VIEW_MODEL) as FarmViewModel
         adapterNumberOfFarm = SpinnerAdapter(requireContext())
         adapterNumberOfFarm.setList(listNumberOfFarm)
         binding.spinnerNumberOfFarm.adapter = adapterNumberOfFarm

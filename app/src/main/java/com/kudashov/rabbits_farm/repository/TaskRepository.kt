@@ -4,5 +4,5 @@ import com.kudashov.rabbits_farm.net.response.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface TaskRepository {
-    fun getTasks(isDone: Boolean): Observable<TaskResponse>
+    fun getTasks(token: String, isDone: Boolean): Observable<TaskResponse>
 }

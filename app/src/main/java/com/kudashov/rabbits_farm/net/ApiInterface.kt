@@ -31,7 +31,18 @@ interface ApiInterface {
     ): Observable<RabbitResponse>
 
     @GET("api/cage/")
-    fun getCages(@Header("Authorisation") token: String): Observable<CageResponse>
+    fun getCages(
+        @Header("Authorisation") token: String,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
+        @Query("farm_number") farmNumber: Int?,
+        @Query("status") status: String?,
+        @Query("type") type: String?,
+        @Query("is_parallel") isParallel: Int?,
+        @Query("number_rabbits_from") numberRabbitsFrom: Int?,
+        @Query("number_rabbits_to") numberRabbitsTo: Int?,
+        @Query("__order_by__") orderBy: String?
+    ): Observable<CageResponse>
 
     @GET("api/rabbit/{id}")
     fun getRabbitMoreInf(

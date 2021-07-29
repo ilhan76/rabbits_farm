@@ -30,6 +30,7 @@ class Farm : Fragment(), FarmDelegate {
 
     companion object {
         const val ARG_RABBIT_ID = "rabbit_id"
+        const val ARG_VIEW_MODEL = "view_model"
     }
 
     private val TAG: String = this::class.java.simpleName
@@ -41,9 +42,6 @@ class Farm : Fragment(), FarmDelegate {
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvAdapter: FarmAdapter
     private lateinit var spinnerAdapter: SpinnerAdapter
-
-    private var isLoadingState: Boolean = false
-    private var isLastPage: Boolean = false
 
     private var isRabbit: Boolean = true
     private lateinit var typesOfSort: List<String>
@@ -60,6 +58,11 @@ class Farm : Fragment(), FarmDelegate {
     override fun onStart() {
         super.onStart()
         init()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun init() {
@@ -83,27 +86,28 @@ class Farm : Fragment(), FarmDelegate {
         binding.spinner.adapter = spinnerAdapter
 
         rvAdapter = FarmAdapter()
-        recyclerView = binding.farmList
+        rvAdapter.attachDelegate(this)
         val linearLayoutManager = LinearLayoutManager(context)
+        recyclerView = binding.farmList
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = rvAdapter
-
-        rvAdapter.attachDelegate(this)
 
         viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
 
         recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
-            override fun loadMoreItems() {
-                Toast.makeText(context, "NEXT PAGE", Toast.LENGTH_SHORT).show()
+            override fun loadNextPage() {
+                Log.d(TAG, "loadMoreItems: NEXT PAGE")
+                viewModel.nextPage()
+
+                if (isRabbit) {
+                    viewModel.getRabbits()
+                } else {
+                    viewModel.getCages()
+                }
             }
-
-            override val isLastPage: Boolean = false
-                get() = field
-            override val isLoading: Boolean
-                get() = isLoadingState
-
         })
+
         initButtons()
         initListeners()
 
@@ -112,19 +116,19 @@ class Farm : Fragment(), FarmDelegate {
 
     private fun initListeners() {
         binding.btnToMenu.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
             if (isRabbit) {
-                val bundle = Bundle()
-                bundle.putSerializable("viewModel", viewModel)
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit, bundle)
             } else {
-                val bundle = Bundle()
-                bundle.putSerializable("viewModel", viewModel)
                 APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage, bundle)
             }
         }
 
         binding.btnRabbits.setOnClickListener {
             isRabbit = true
+            viewModel.cleanPage()
+
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_grey)
 
@@ -140,6 +144,8 @@ class Farm : Fragment(), FarmDelegate {
         }
         binding.btnCages.setOnClickListener {
             isRabbit = false
+            viewModel.cleanPage()
+
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
 
@@ -173,7 +179,7 @@ class Farm : Fragment(), FarmDelegate {
     private fun initButtons() {
         if (isRabbit) {
             binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
-        }  else {
+        } else {
 
         }
     }
@@ -181,34 +187,29 @@ class Farm : Fragment(), FarmDelegate {
     private fun stateProcessing(state: StateAboutFarm) {
         when (state) {
             is StateAboutFarm.Default -> {
-                Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
-                isLoadingState = false
+                Log.d(TAG, "stateProcessing: Farm Default")
+                APP_ACTIVITY.hideLoader()
             }
             is StateAboutFarm.Sending -> {
-                Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
-                isLoadingState = true
-                //todo - добавить лоадер
+                Log.d(TAG, "stateProcessing: Farm Sending")
+                APP_ACTIVITY.showLoader()
             }
             is StateAboutFarm.ListOfRabbitsReceived -> {
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                isLoadingState = false
+                Log.d(TAG, "stateProcessing: Farm Success (List Of Rabbits Received)")
+                APP_ACTIVITY.hideLoader()
                 rvAdapter.setList(state.list)
             }
             is StateAboutFarm.ListOfCageReceived -> {
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                isLoadingState = false
+                Log.d(TAG, "stateProcessing: Farm Success (List Of Cage Received)")
+                APP_ACTIVITY.hideLoader()
                 rvAdapter.setList(state.list)
             }
             is StateAboutFarm.Error<*> -> {
+                Log.d(TAG, "stateProcessing: Birth Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
-                isLoadingState = false
+                APP_ACTIVITY.hideLoader()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun openMoreRabbitInfo(rabbit: Rabbit) {
@@ -220,7 +221,6 @@ class Farm : Fragment(), FarmDelegate {
         val transaction = parentFragmentManager.beginTransaction()
         rabbitDialog.show(transaction, "Rabbit")
 
-        Log.d(TAG, "openMoreRabbitInfo: $rabbitDialog")
         Log.d(TAG, "openMoreRabbitInfo: Dialog is opened")
     }
 }

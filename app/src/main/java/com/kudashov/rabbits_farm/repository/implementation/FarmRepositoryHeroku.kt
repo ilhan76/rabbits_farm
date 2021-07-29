@@ -1,7 +1,5 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.net.ApiClient
@@ -11,9 +9,6 @@ import com.kudashov.rabbits_farm.net.response.OperationsResponse
 import com.kudashov.rabbits_farm.net.response.RabbitMoreInfResponse
 import com.kudashov.rabbits_farm.net.response.RabbitResponse
 import com.kudashov.rabbits_farm.repository.FarmRepository
-import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -25,6 +20,7 @@ class FarmRepositoryHeroku : FarmRepository {
     private val TAG: String = this::class.java.simpleName
 
     override fun getRabbits(
+        token: String,
         page: Int,
         pageSize: Int,
         farmNumber: Int?,
@@ -39,10 +35,6 @@ class FarmRepositoryHeroku : FarmRepository {
         orderBy: String?
     ): Observable<RabbitResponse> {
         val resp: PublishSubject<RabbitResponse> = PublishSubject.create()
-
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE)
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
             .getRabbits(
@@ -80,15 +72,33 @@ class FarmRepositoryHeroku : FarmRepository {
         return resp
     }
 
-    override fun getCages(): Observable<CageResponse> {
+    override fun getCages(
+        token: String,
+        page: Int,
+        pageSize: Int,
+        farmNumber: Int?,
+        status: String?,
+        type: String?,
+        isParallel: Int?,
+        numberRabbitsFrom: Int?,
+        numberRabbitsTo: Int?,
+        orderBy: String?
+    ): Observable<CageResponse> {
         val resp: PublishSubject<CageResponse> = PublishSubject.create()
 
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE)
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
-
         ApiClient.client.create(ApiInterface::class.java)
-            .getCages(token)
+            .getCages(
+                token,
+                page,
+                pageSize,
+                farmNumber,
+                status,
+                type,
+                isParallel,
+                numberRabbitsFrom,
+                numberRabbitsTo,
+                orderBy
+            )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<CageResponse> {
@@ -101,8 +111,8 @@ class FarmRepositoryHeroku : FarmRepository {
                 }
 
                 override fun onNext(t: CageResponse?) {
-                    Log.d(TAG, "onNext: ${t?.results?.size}")
-                    Log.d(TAG, "onNext: $t")
+                    Log.d(TAG, "onNext: count of cage: ${t?.results?.size}")
+                    //Log.d(TAG, "onNext: $t")
                     resp.onNext(t)
                 }
             })
@@ -110,12 +120,8 @@ class FarmRepositoryHeroku : FarmRepository {
         return resp
     }
 
-    override fun getRabbitMoreInf(id: Int): Observable<RabbitMoreInfResponse> {
+    override fun getRabbitMoreInf(token: String, id: Int): Observable<RabbitMoreInfResponse> {
         val response: PublishSubject<RabbitMoreInfResponse> = PublishSubject.create()
-
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE)
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
             .getRabbitMoreInf(token, id)
@@ -141,12 +147,8 @@ class FarmRepositoryHeroku : FarmRepository {
         return response
     }
 
-    override fun getOperations(id: Int): Observable<OperationsResponse> {
+    override fun getOperations(token: String, id: Int): Observable<OperationsResponse> {
         val response: PublishSubject<OperationsResponse> = PublishSubject.create()
-
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE)
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
             .getOperations(token, id)

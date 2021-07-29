@@ -1,42 +1,58 @@
 package com.kudashov.rabbits_farm.screens.farm
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kudashov.rabbits_farm.data.item.Cage
 import com.kudashov.rabbits_farm.data.mapper.CageMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
-import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
+import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
+import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.STATUSES_CAGE
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
 
-class FarmViewModel(application: Application) : AndroidViewModel(application), Serializable{
+class FarmViewModel(val context: Application) : AndroidViewModel(context), Serializable {
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()
     private val repository: FarmRepository = FarmRepositoryHeroku()
+    private val list: MutableList<Cage> = ArrayList()
+
+    private var page: Int = 1
+    private val pageSize: Int = 100
 
     private var isLastPage: Boolean = false
     private var isLoading: Boolean = false
 
-    fun loadMoreItems() {
-        TODO("Not yet implemented")
+    fun nextPage(){
+        page++
+    }
+    fun cleanPage(){
+        page = 1
     }
 
     fun getRabbits() {
         state.postValue(StateAboutFarm.Sending)
 
+        val pref: SharedPreferences = context.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE
+        )
+        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+
         repository.getRabbits(
-            RabbitFilter.page,
-            RabbitFilter.pageSize,
+            token,
+            this.page,
+            this.pageSize,
             RabbitFilter.farmNumber,
             RabbitFilter.type,
             RabbitFilter.breed,
@@ -71,19 +87,29 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
     fun getCages() {
         state.postValue(StateAboutFarm.Sending)
 
-        repository.getCages()
+        val pref: SharedPreferences = context.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE
+        )
+        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+
+        repository.getCages(
+            token,
+            this.page,
+            this.pageSize,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { cageServerResponse ->
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { cageServerResponse ->
                 if (cageServerResponse.detail == null) {
                     Log.i(TAG, "getRabbits: SUCCESS")
-                    state.postValue(
-                        StateAboutFarm.ListOfCageReceived(
-                            CageMapper.fromApiToListCageItem(
-                                cageServerResponse.results!!
-                            )
-                        )
-                    )
+                    list.addAll(CageMapper.fromApiToListCageItem(cageServerResponse.results!!))
+                    state.postValue(StateAboutFarm.ListOfCageReceived(list))
                 } else {
                     Log.i(TAG, "getCages: ERROR ${cageServerResponse.detail}")
                     state.postValue(StateAboutFarm.Error("Error ${cageServerResponse.detail}"))
@@ -95,10 +121,10 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
         return state
     }
 
-    fun getListOfStatuses() : List<String> {
+    fun getListOfStatuses(): List<String> {
         val list: MutableList<String> = ArrayList()
         list.add("")
-        for (i in STATUSES_RABBIT) {
+        for (i in STATUSES_CAGE) {
             list.add(i.second)
         }
         return list

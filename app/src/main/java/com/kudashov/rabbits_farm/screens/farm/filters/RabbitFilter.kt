@@ -2,8 +2,6 @@ package com.kudashov.rabbits_farm.screens.farm.filters
 
 class RabbitFilter {
     companion object {
-        var page: Int = 1
-        var pageSize: Int = 100
         var farmNumber: Int? = null
         var type: MutableList<String> = ArrayList()
         var breed: Int? = null
@@ -16,9 +14,7 @@ class RabbitFilter {
         var orderBy: String? = null
 
         override fun toString(): String {
-            return page.toString() + "\n" +
-                    pageSize.toString() + "\n" +
-                    farmNumber.toString() + "\n" +
+            return farmNumber.toString() + "\n" +
                     type.toString() + "\n" +
                     breed.toString() + "\n" +
                     status.toString() + "\n" +

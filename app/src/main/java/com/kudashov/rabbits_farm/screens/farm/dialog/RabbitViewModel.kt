@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
+import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateRabbit
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -61,10 +62,10 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
 
     fun getStatus(statuses: List<String>): String {
         var res: String = ""
-        for (i in STATUSES_RABBIT){
+        for (i in STATUSES_RABBIT) {
             if (statuses.contains(i.first)) res += i.second + "\n"
         }
-        if (res.isEmpty()) res+ "Статус не определен"
+        if (res.isEmpty()) res + "Статус не определен"
         return res
     }
 }

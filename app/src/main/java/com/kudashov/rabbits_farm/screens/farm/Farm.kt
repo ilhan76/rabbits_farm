@@ -20,9 +20,11 @@ import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
-import com.kudashov.rabbits_farm.utilits.*
+import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
+import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.sort.*
+
 
 class Farm : Fragment(), FarmDelegate {
 
@@ -39,6 +41,9 @@ class Farm : Fragment(), FarmDelegate {
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvAdapter: FarmAdapter
     private lateinit var spinnerAdapter: SpinnerAdapter
+
+    private var isLoadingState: Boolean = false
+    private var isLastPage: Boolean = false
 
     private var isRabbit: Boolean = true
     private lateinit var typesOfSort: List<String>
@@ -79,7 +84,8 @@ class Farm : Fragment(), FarmDelegate {
 
         rvAdapter = FarmAdapter()
         recyclerView = binding.farmList
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = rvAdapter
 
         rvAdapter.attachDelegate(this)
@@ -87,6 +93,17 @@ class Farm : Fragment(), FarmDelegate {
         viewModel = ViewModelProvider(this).get(FarmViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
 
+        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+            override fun loadMoreItems() {
+                Toast.makeText(context, "NEXT PAGE", Toast.LENGTH_SHORT).show()
+            }
+
+            override val isLastPage: Boolean = false
+                get() = field
+            override val isLoading: Boolean
+                get() = isLoadingState
+
+        })
         initButtons()
         initListeners()
 
@@ -156,6 +173,8 @@ class Farm : Fragment(), FarmDelegate {
     private fun initButtons() {
         if (isRabbit) {
             binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
+        }  else {
+
         }
     }
 
@@ -163,21 +182,26 @@ class Farm : Fragment(), FarmDelegate {
         when (state) {
             is StateAboutFarm.Default -> {
                 Toast.makeText(context, "Default", Toast.LENGTH_SHORT).show()
+                isLoadingState = false
             }
             is StateAboutFarm.Sending -> {
                 Toast.makeText(context, "Sending", Toast.LENGTH_SHORT).show()
+                isLoadingState = true
                 //todo - добавить лоадер
             }
             is StateAboutFarm.ListOfRabbitsReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                isLoadingState = false
                 rvAdapter.setList(state.list)
             }
             is StateAboutFarm.ListOfCageReceived -> {
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                isLoadingState = false
                 rvAdapter.setList(state.list)
             }
             is StateAboutFarm.Error<*> -> {
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+                isLoadingState = false
             }
         }
     }

@@ -4,22 +4,32 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.data.mapper.CageMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
+import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
 
-class FarmViewModel(application: Application) : AndroidViewModel(application), Serializable {
+class FarmViewModel(application: Application) : AndroidViewModel(application), Serializable{
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()
     private val repository: FarmRepository = FarmRepositoryHeroku()
+
+    private var isLastPage: Boolean = false
+    private var isLoading: Boolean = false
+
+    fun loadMoreItems() {
+        TODO("Not yet implemented")
+    }
 
     fun getRabbits() {
         state.postValue(StateAboutFarm.Sending)

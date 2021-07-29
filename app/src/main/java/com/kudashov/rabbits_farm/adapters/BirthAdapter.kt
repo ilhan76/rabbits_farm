@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.data.item.BirthListItem
 import com.kudashov.rabbits_farm.data.item.BirthListItemTypes
-import com.kudashov.rabbits_farm.utilits.RH
 
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -51,7 +51,7 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
-    class BirthViewHolder(view: View, var delegate: BirthDelegate?) :
+    class BirthViewHolder(val view: View, var delegate: BirthDelegate?) :
         RecyclerView.ViewHolder(view) {
         var countOfDay: TextView = view.findViewById(R.id.txt_count_of_day)
         var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
@@ -62,11 +62,11 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var btnTakeBirths: Button = view.findViewById(R.id.btn_take_births)
 
         fun bind(birthListItem: BirthListItem) {
-            countOfDay.text = birthListItem.countOfDay
+            countOfDay.text = birthListItem.durationPregnancy
             numberOfCage.text = birthListItem.numberOfCage
 
-            if (birthListItem.status == RH.string(R.string.birth_item_txt_confirmed)) {
-                isConfirmed.setImageDrawable(RH.drawable(R.drawable.ic_confirmed))
+            if (birthListItem.status) {
+                isConfirmed.setImageDrawable(AppCompatResources.getDrawable(view.context, R.drawable.ic_confirmed))
                 btnTakeBirths.visibility = View.VISIBLE
                 btnTakeBirths.setOnClickListener {
                     delegate?.openBirthDialog()
@@ -74,7 +74,7 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 btnFertilizes.visibility = View.GONE
                 btnNotFertilized.visibility = View.GONE
             } else {
-                isConfirmed.setImageDrawable(RH.drawable(R.drawable.ic_not_confirmed))
+                isConfirmed.setImageDrawable(AppCompatResources.getDrawable(view.context, R.drawable.ic_not_confirmed))
                 btnTakeBirths.visibility = View.GONE
                 btnFertilizes.visibility = View.VISIBLE
                 btnNotFertilized.visibility = View.VISIBLE

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.databinding.DialogFragmentDeathBinding
-import com.kudashov.rabbits_farm.utilits.RH
 
 class DeathDialog : DialogFragment() {
     private var _binding: DialogFragmentDeathBinding? = null
@@ -27,7 +27,12 @@ class DeathDialog : DialogFragment() {
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.shape_item_corner)
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog!!.window?.setBackgroundDrawable(RH.drawable(R.color.transparent))
+        dialog!!.window?.setBackgroundDrawable(
+            AppCompatResources.getDrawable(
+                requireContext(),
+                R.color.transparent
+            )
+        )
 
         initButtons()
     }

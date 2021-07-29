@@ -144,17 +144,19 @@ class DataRepositoryTest : DataRepository {
             if (isConfirmed)
                 list.add(
                     BirthListItem(
+                        i,
                         "21 дн.",
                         "113Б",
-                        "Оплодотворена"
+                        true
                     )
                 )
             else
                 list.add(
                     BirthListItem(
+                        i,
                         "21 дн.",
                         "113Б",
-                        "Не оплодотворена"
+                        false
                     )
                 )
         }
@@ -178,6 +180,10 @@ class DataRepositoryTest : DataRepository {
     }
 
     override fun getOperations(id: Int): Observable<OperationsResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override fun postWeight(token: String, type: String, id: Int, weight: Double) {
         TODO("Not yet implemented")
     }
 }

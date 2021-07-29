@@ -2,8 +2,10 @@ package com.kudashov.rabbits_farm.data.mapper
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.item.Cage
-import com.kudashov.rabbits_farm.utilits.statuses.cage.StatusOfCage
-import com.kudashov.rabbits_farm.utilits.statuses.cage.TypeOfCage
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_FATTENING
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_MOTHER
 
 class CageMapper {
     companion object {
@@ -32,8 +34,8 @@ class CageMapper {
 
         private fun getCageType(cageDto: CageDto): String {
             return when(cageDto.type){
-                TypeOfCage.fattening -> "МАТ"
-                TypeOfCage.mother -> "ОТКОРМ"
+                CAGE_TYPE_MOTHER -> "МАТ"
+                CAGE_TYPE_FATTENING -> "ОТКОРМ"
                 else -> "???"
             }
         }
@@ -41,8 +43,8 @@ class CageMapper {
         private fun getCageStatus(list: List<String>): String {
             var status = ""
 
-            if (list.contains(StatusOfCage.needClean)) status += "Уб."
-            if (list.contains(StatusOfCage.needRepair)) status += " Рем."
+            if (list.contains(CAGE_STATUS_NEED_CLEAN)) status += "Уб."
+            if (list.contains(CAGE_STATUS_NEED_REPAIR)) status += " Рем."
 
             return status
         }

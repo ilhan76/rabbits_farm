@@ -1,15 +1,13 @@
 package com.kudashov.rabbits_farm.data.mapper
 
 import android.os.Build
-import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
 import com.kudashov.rabbits_farm.data.item.Rabbit
-import com.kudashov.rabbits_farm.utilits.statuses.rabbit.TypeOfRabbit
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -39,18 +37,17 @@ class RabbitMapper {
                 getType(rabbitDto.current_type)
             )
 
-
         private fun getNumberOfCage(cage: CageDto): String {
             return cage.farm_number.toString() + cage.number.toString() + cage.letter
         }
 
         fun getType(currentType: String): String {
             return when (currentType) {
-                TypeOfRabbit.baby -> "Малыш"
-                TypeOfRabbit.death -> "Мертвый"
-                TypeOfRabbit.fattening -> "Откорм."
-                TypeOfRabbit.mather -> "Самка"
-                TypeOfRabbit.father -> "Самец"
+                RABBIT_TYPE_BABY -> "Малыш"
+                RABBIT_TYPE_DEATH -> "Мертвый"
+                RABBIT_TYPE_FATTENING -> "Откорм."
+                RABBIT_TYPE_MATHER -> "Самка"
+                RABBIT_TYPE_FATHER -> "Самец"
                 else -> "???"
             }
         }

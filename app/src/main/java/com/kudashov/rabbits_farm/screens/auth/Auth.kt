@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.kudashov.rabbits_farm.databinding.FragmentAuthBinding
-import com.kudashov.rabbits_farm.screens.AuthNavigation
+import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
 import com.kudashov.rabbits_farm.utilits.StateAuth
 
 class Auth : Fragment() {
@@ -17,7 +17,7 @@ class Auth : Fragment() {
     private var _binding: FragmentAuthBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var navigation: AuthNavigation
+    private lateinit var navigation: AuthNavigationDelegate
     private lateinit var viewModel: AuthViewModel
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class Auth : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAuthBinding.inflate(layoutInflater, container, false)
-        navigation = activity as AuthNavigation
+        navigation = activity as AuthNavigationDelegate
         return binding.root
     }
 

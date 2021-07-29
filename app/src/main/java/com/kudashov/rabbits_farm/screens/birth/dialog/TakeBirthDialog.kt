@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.databinding.DialogFragmentTakeBirthsBinding
-import com.kudashov.rabbits_farm.utilits.RH
 
 class TakeBirthDialog : DialogFragment() {
     private var _binding: DialogFragmentTakeBirthsBinding? = null
@@ -31,7 +31,7 @@ class TakeBirthDialog : DialogFragment() {
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.shape_item_corner)
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog!!.window?.setBackgroundDrawable(RH.drawable(R.color.transparent))
+        dialog!!.window?.setBackgroundDrawable(AppCompatResources.getDrawable(requireContext(), R.color.transparent))
 
         initButtons()
     }

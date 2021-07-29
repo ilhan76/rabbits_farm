@@ -13,6 +13,7 @@ import com.kudashov.rabbits_farm.net.response.EchoResponse
 import com.kudashov.rabbits_farm.repository.AuthRepository
 import com.kudashov.rabbits_farm.repository.implementation.AuthRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.*
+import com.kudashov.rabbits_farm.utilits.const.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable

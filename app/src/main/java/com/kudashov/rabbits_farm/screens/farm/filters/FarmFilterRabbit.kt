@@ -15,9 +15,13 @@ import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.data.dto.BreedDto
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
-import com.kudashov.rabbits_farm.utilits.*
-import com.kudashov.rabbits_farm.utilits.statuses.cage.StatusOfCage
-import com.kudashov.rabbits_farm.utilits.statuses.rabbit.TypeOfRabbit
+import com.kudashov.rabbits_farm.utilits.const.*
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_BABY
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_FATHER
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_FATTENING
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_MATHER
 
 class FarmFilterRabbit : Fragment() {
 
@@ -51,7 +55,12 @@ class FarmFilterRabbit : Fragment() {
     }
 
     private fun init() {
-        listNumberOfFarm = listOf("", farm1, farm2, farm3, farm4)
+        listNumberOfFarm = listOf("",
+            farm1,
+            farm2,
+            farm3,
+            farm4
+        )
 
         adapterNumberOfFarm = SpinnerAdapter(requireContext())
         adapterNumberOfFarm.setList(listNumberOfFarm)
@@ -66,11 +75,7 @@ class FarmFilterRabbit : Fragment() {
         adapterBreed.setList(listBreed)
         binding.spinnerBreed.adapter = adapterBreed
 
-        listStatus = listOf(
-            "",
-            StatusOfCage.statuses[StatusOfCage.needClean]!!,
-            StatusOfCage.statuses[StatusOfCage.needRepair]!!
-        )
+        listStatus = viewModel.getListOfStatuses()
         adapterStatus = SpinnerAdapter(requireContext())
         adapterStatus.setList(listStatus)
         binding.spinnerStatus.adapter = adapterStatus
@@ -142,8 +147,10 @@ class FarmFilterRabbit : Fragment() {
                     id: Long
                 ) {
                     when (position) {
-                        1 -> RabbitFilter.status = StatusOfCage.needClean
-                        2 -> RabbitFilter.status = StatusOfCage.needRepair
+                        1 -> RabbitFilter.status =
+                            CAGE_STATUS_NEED_CLEAN
+                        2 -> RabbitFilter.status =
+                            CAGE_STATUS_NEED_REPAIR
                         else -> RabbitFilter.status = null
                     }
                     Log.d(TAG, "onItemSelected: ${RabbitFilter.status}")
@@ -154,31 +161,31 @@ class FarmFilterRabbit : Fragment() {
 
             cbFattening.setOnClickListener {
                 if (binding.cbFattening.isChecked) {
-                    RabbitFilter.type.add(TypeOfRabbit.fattening)
+                    RabbitFilter.type.add(RABBIT_TYPE_FATTENING)
                     Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show()
                 } else if (!binding.cbFattening.isChecked) {
                     Toast.makeText(context, "unchecked", Toast.LENGTH_SHORT).show()
-                    RabbitFilter.type.remove(TypeOfRabbit.fattening)
+                    RabbitFilter.type.remove(RABBIT_TYPE_FATTENING)
                 }
             }
             cbBirth.setOnClickListener {
                 if (binding.cbBirth.isChecked) {
                     Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show()
-                    RabbitFilter.type.add(TypeOfRabbit.mather)
-                    RabbitFilter.type.add(TypeOfRabbit.father)
+                    RabbitFilter.type.add(RABBIT_TYPE_MATHER)
+                    RabbitFilter.type.add(RABBIT_TYPE_FATHER)
                 } else if (!binding.cbBirth.isChecked) {
                     Toast.makeText(context, "unchecked", Toast.LENGTH_SHORT).show()
-                    RabbitFilter.type.remove(TypeOfRabbit.mather)
-                    RabbitFilter.type.remove(TypeOfRabbit.father)
+                    RabbitFilter.type.remove(RABBIT_TYPE_MATHER)
+                    RabbitFilter.type.remove(RABBIT_TYPE_FATHER)
                 }
             }
             cbBaby.setOnClickListener {
                 if (binding.cbBaby.isChecked) {
                     Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show()
-                    RabbitFilter.type.add(TypeOfRabbit.baby)
+                    RabbitFilter.type.add(RABBIT_TYPE_BABY)
                 } else if (!binding.cbBaby.isChecked) {
                     Toast.makeText(context, "unchecked", Toast.LENGTH_SHORT).show()
-                    RabbitFilter.type.remove(TypeOfRabbit.baby)
+                    RabbitFilter.type.remove(RABBIT_TYPE_BABY)
                 }
             }
 
@@ -207,13 +214,13 @@ class FarmFilterRabbit : Fragment() {
                 btnFemale.setBackgroundResource(R.drawable.shape_btn_green)
             }
 
-            if (RabbitFilter.type.contains(TypeOfRabbit.baby))
+            if (RabbitFilter.type.contains(RABBIT_TYPE_BABY))
                 cbBaby.isChecked = true
-            if (RabbitFilter.type.contains(TypeOfRabbit.father) ||
-                RabbitFilter.type.contains(TypeOfRabbit.mather)
+            if (RabbitFilter.type.contains(RABBIT_TYPE_FATHER) ||
+                RabbitFilter.type.contains(RABBIT_TYPE_MATHER)
             )
                 cbBirth.isChecked = true
-            if (RabbitFilter.type.contains(TypeOfRabbit.fattening))
+            if (RabbitFilter.type.contains(RABBIT_TYPE_FATTENING))
                 cbFattening.isChecked = true
 
             if (RabbitFilter.farmNumber != null) {
@@ -243,8 +250,8 @@ class FarmFilterRabbit : Fragment() {
             }
 
             when (RabbitFilter.status) {
-                StatusOfCage.needClean -> spinnerStatus.setSelection(1)
-                StatusOfCage.needRepair -> spinnerStatus.setSelection(2)
+                CAGE_STATUS_NEED_CLEAN -> spinnerStatus.setSelection(1)
+                CAGE_STATUS_NEED_REPAIR -> spinnerStatus.setSelection(2)
             }
         }
     }

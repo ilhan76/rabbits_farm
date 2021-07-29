@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -17,10 +18,10 @@ import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
 import com.kudashov.rabbits_farm.databinding.DialogFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.RH
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateRabbit
-import com.kudashov.rabbits_farm.utilits.statuses.rabbit.TypeOfRabbit
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_FATHER
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_MATHER
 
 class RabbitDialog : DialogFragment() {
 
@@ -70,7 +71,12 @@ class RabbitDialog : DialogFragment() {
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.shape_item_corner)
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog!!.window?.setBackgroundDrawable(RH.drawable(R.color.transparent))
+        dialog!!.window?.setBackgroundDrawable(
+            AppCompatResources.getDrawable(
+                requireContext(),
+                R.color.transparent
+            )
+        )
 
         viewModel = ViewModelProvider(this).get(RabbitViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
@@ -144,10 +150,10 @@ class RabbitDialog : DialogFragment() {
             )
             txtStatus.text = resources.getString(
                 R.string.dialog_rabbit_txt_status,
-                rabbit.status
+                viewModel.getStatus(rabbit.status)
             )
             //todo - мапинг и правильное отображение статусов
-            if (rabbit.current_type == TypeOfRabbit.mather || rabbit.current_type == TypeOfRabbit.father) {
+            if (rabbit.current_type == RABBIT_TYPE_MATHER || rabbit.current_type == RABBIT_TYPE_FATHER) {
                 txtCountOfPins.text = resources.getString(
                     R.string.dialog_rabbit_txt_output,
                     rabbit.output.toString()
@@ -157,7 +163,6 @@ class RabbitDialog : DialogFragment() {
                     rabbit.output_efficiency.toString()
                 )
             }
-
         }
     }
 

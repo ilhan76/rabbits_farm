@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.databinding.FragmentFarmCageFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 
 class FarmFilterCage : Fragment() {
 

@@ -1,10 +1,8 @@
-package com.kudashov.rabbits_farm.utilits
+package com.kudashov.rabbits_farm.utilits.const
 
 import com.kudashov.rabbits_farm.MainActivity
 
 lateinit var APP_ACTIVITY: MainActivity
-
-fun token(t: String) = "Token $t"
 
 const val APP_PREFERENCE: String = "pref"
 const val USER_NAME: String = "user_first_name"

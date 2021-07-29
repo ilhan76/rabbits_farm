@@ -1,23 +1,14 @@
 package com.kudashov.rabbits_farm.screens.farm.dialog
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.net.ApiClient
-import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.response.EchoResponse
 import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
-import com.kudashov.rabbits_farm.utilits.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.StateRabbit
-import com.kudashov.rabbits_farm.utilits.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
@@ -64,9 +55,16 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
             }
     }
 
-    fun postWeight(weight: Double, type: String, id: Int){
+    fun postWeight(weight: Double, type: String, id: Int) {
         state.postValue(StateRabbit.Sending)
+    }
 
-
+    fun getStatus(statuses: List<String>): String {
+        var res: String = ""
+        for (i in STATUSES_RABBIT){
+            if (statuses.contains(i.first)) res += i.second + "\n"
+        }
+        if (res.isEmpty()) res+ "Статус не определен"
+        return res
     }
 }

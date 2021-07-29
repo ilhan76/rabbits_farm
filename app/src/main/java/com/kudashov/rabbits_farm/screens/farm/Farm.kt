@@ -21,7 +21,8 @@ import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.*
-import com.kudashov.rabbits_farm.utilits.const.*
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.sort.*
 
 class Farm : Fragment(), FarmDelegate {
 

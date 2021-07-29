@@ -10,6 +10,7 @@ import com.kudashov.rabbits_farm.repository.DataRepository
 import com.kudashov.rabbits_farm.repository.implementation.DataRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
@@ -35,7 +36,8 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
             RabbitFilter.cageNumberFrom,
             RabbitFilter.cageNumberTo,
             RabbitFilter.isMale,
-            RabbitFilter.orderBy)
+            RabbitFilter.orderBy
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { rabbitServerResponse ->
@@ -81,5 +83,14 @@ class FarmViewModel(application: Application) : AndroidViewModel(application), S
 
     fun getStates(): MutableLiveData<StateAboutFarm> {
         return state
+    }
+
+    fun getListOfStatuses() : List<String> {
+        val list: MutableList<String> = ArrayList()
+        list.add("")
+        for (i in STATUSES_RABBIT) {
+            list.add(i.second)
+        }
+        return list
     }
 }

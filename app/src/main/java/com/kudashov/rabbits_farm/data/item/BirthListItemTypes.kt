@@ -3,7 +3,8 @@ package com.kudashov.rabbits_farm.data.item
 sealed class BirthListItemTypes
 
 data class BirthListItem(
-        var countOfDay: String,
+        val id: Int,
+        var durationPregnancy: String,
         var numberOfCage: String,
-        var status: String
+        var status: Boolean
 ): BirthListItemTypes()

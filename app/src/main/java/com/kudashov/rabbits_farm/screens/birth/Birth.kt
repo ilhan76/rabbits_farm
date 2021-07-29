@@ -15,7 +15,7 @@ import com.kudashov.rabbits_farm.adapters.BirthAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
 import com.kudashov.rabbits_farm.screens.birth.dialog.TakeBirthDialog
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateBirth
 
 class Birth : Fragment(), BirthDelegate {

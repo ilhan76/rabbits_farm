@@ -14,10 +14,11 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kudashov.rabbits_farm.databinding.ActivityMainBinding
-import com.kudashov.rabbits_farm.screens.AuthNavigation
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 
-class MainActivity : AppCompatActivity(), AuthNavigation {
+class MainActivity : AppCompatActivity(),
+    AuthNavigationDelegate {
 
     private var TAG: String = this::class.java.simpleName
     lateinit var navController: NavController

@@ -3,15 +3,14 @@ package com.kudashov.rabbits_farm.repository.implementation
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.repository.DataRepository
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
+import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -39,7 +38,8 @@ class DataRepositoryHeroku : DataRepository {
     ): Observable<RabbitResponse> {
         val resp: PublishSubject<RabbitResponse> = PublishSubject.create()
 
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
@@ -81,7 +81,8 @@ class DataRepositoryHeroku : DataRepository {
     override fun getCages(): Observable<CageResponse> {
         val resp: PublishSubject<CageResponse> = PublishSubject.create()
 
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
@@ -98,6 +99,7 @@ class DataRepositoryHeroku : DataRepository {
                 }
 
                 override fun onNext(t: CageResponse?) {
+                    Log.d(TAG, "onNext: ${t?.results?.size}")
                     Log.d(TAG, "onNext: $t")
                     resp.onNext(t)
                 }
@@ -117,7 +119,8 @@ class DataRepositoryHeroku : DataRepository {
     override fun getRabbitMoreInf(id: Int): Observable<RabbitMoreInfResponse> {
         val response: PublishSubject<RabbitMoreInfResponse> = PublishSubject.create()
 
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
@@ -147,7 +150,8 @@ class DataRepositoryHeroku : DataRepository {
     override fun getOperations(id: Int): Observable<OperationsResponse> {
         val response: PublishSubject<OperationsResponse> = PublishSubject.create()
 
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)
@@ -173,7 +177,8 @@ class DataRepositoryHeroku : DataRepository {
     }
 
     override fun postWeight(token: String, type: String, id: Int, weight: Double) {
-        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val pref: SharedPreferences = APP_ACTIVITY.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)

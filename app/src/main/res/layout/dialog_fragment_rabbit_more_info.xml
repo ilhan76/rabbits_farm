@@ -72,10 +72,10 @@
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginStart="10dp"
-        android:src="@drawable/ic_gender_male_black"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="@+id/title"
+        tools:src="@drawable/ic_gender_male_black" />
 
     <ImageView
         android:id="@+id/btn_weigh"

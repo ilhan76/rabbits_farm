@@ -12,12 +12,11 @@ import com.kudashov.rabbits_farm.data.mapper.CageMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
-import com.kudashov.rabbits_farm.screens.farm.filters.CageFilter
-import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
+import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
+import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
-import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_MOTHER
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.STATUSES_CAGE
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.TYPES_CAGE
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -35,12 +34,15 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
     private val listOfRabbit: MutableList<Rabbit> = ArrayList()
 
     private var page: Int = 1
-    private val pageSize: Int = 100
+    private val pageSize: Int = 50
 
-    fun nextPage(){
+    fun nextPage() {
         page++
     }
-    fun cleanPage(){
+
+    fun cleanPage() {
+        listOfRabbit.clear()
+        listOfCage.clear()
         page = 1
     }
 
@@ -54,8 +56,8 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
 
         repository.getRabbits(
             token,
-            this.page,
-            this.pageSize,
+            page,
+            pageSize,
             RabbitFilter.farmNumber,
             RabbitFilter.type,
             RabbitFilter.breed,
@@ -72,13 +74,8 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
             .subscribe { rabbitServerResponse ->
                 if (rabbitServerResponse.detail == null) {
                     Log.d(TAG, "getRabbits: SUCCESS")
-                    state.postValue(
-                        StateAboutFarm.ListOfRabbitsReceived(
-                            RabbitMapper.fromApiToListRabbitItem(
-                                rabbitServerResponse.results!!
-                            )
-                        )
-                    )
+                    listOfRabbit.addAll(RabbitMapper.fromApiToListRabbitItem(rabbitServerResponse.results!!))
+                    state.postValue(StateAboutFarm.ListOfRabbitsReceived(listOfRabbit))
                 } else {
                     Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.detail}")
                     state.postValue(StateAboutFarm.Error("Error ${rabbitServerResponse.detail}"))
@@ -86,10 +83,8 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
             }
     }
 
-    //todo добавить фильтры для клеток
     fun getCages() {
         state.postValue(StateAboutFarm.Sending)
-        Log.d(TAG, "getCages: ")
 
         val pref: SharedPreferences = context.getSharedPreferences(
             APP_PREFERENCE, Context.MODE_PRIVATE
@@ -98,14 +93,14 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
 
         repository.getCages(
             token,
-            this.page,
-            this.pageSize,
+            page,
+            pageSize,
             CageFilter.farmNumber,
             CageFilter.status,
             CageFilter.type,
-            null,
-            (CageFilter.countOfRabbit?.minus(1)),
-            (CageFilter.countOfRabbit?.plus(1)),
+            CageFilter.isParallel,
+            CageFilter.countOfRabbitFrom,
+            CageFilter.countOfRabbitTo,
             CageFilter.orderBy
         )
             .subscribeOn(Schedulers.io())

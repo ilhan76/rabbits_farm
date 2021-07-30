@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/farmMenuRabbit"
-        android:name="com.kudashov.rabbits_farm.screens.farm.filters.FarmFilterRabbit"
+        android:name="com.kudashov.rabbits_farm.screens.farm.filters.rabbit.FarmFilterRabbit"
         android:label="AboutFarmMenu" >
         <action
             android:id="@+id/action_farmMenuRabbit_to_farm"
@@ -34,7 +34,7 @@
         android:label="Tasks" />
     <fragment
         android:id="@+id/farmMenuCage"
-        android:name="com.kudashov.rabbits_farm.screens.farm.filters.FarmFilterCage"
+        android:name="com.kudashov.rabbits_farm.screens.farm.filters.cage.FarmFilterCage"
         android:label="FarmMenuCage" >
         <action
             android:id="@+id/action_farmMenuCage_to_farm"

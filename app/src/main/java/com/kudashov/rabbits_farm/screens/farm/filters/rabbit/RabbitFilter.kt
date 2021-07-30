@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.farm.filters
+package com.kudashov.rabbits_farm.screens.farm.filters.rabbit
 
 class RabbitFilter {
     companion object {

@@ -107,7 +107,7 @@ class RabbitDialog : DialogFragment() {
         }
 
         binding.btnChangeType.setOnClickListener {
-            Toast.makeText(APP_ACTIVITY, "Меняем тип", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Меняем тип", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -117,6 +117,23 @@ class RabbitDialog : DialogFragment() {
                 R.string.dialog_rabbit_txt_id,
                 rabbit.id
             )
+            if (rabbit.is_male != null) {
+                if (rabbit.is_male)
+                    icRabbitGender.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_gender_male_black
+                        )
+                    )
+                else
+                    icRabbitGender.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_gender_female_black
+                        )
+                    )
+
+            }
 
             txtWeight.text = resources.getString(
                 R.string.dialog_rabbit_txt_weight,
@@ -132,7 +149,6 @@ class RabbitDialog : DialogFragment() {
                 R.string.dialog_rabbit_txt_age,
                 RabbitMapper.getAge(rabbit.birthday)
             )
-            //todo - склонение слова "дней"
 
             txtType.text = resources.getString(
                 R.string.dialog_rabbit_txt_type,

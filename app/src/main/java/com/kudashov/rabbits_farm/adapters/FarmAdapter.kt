@@ -1,19 +1,17 @@
 package com.kudashov.rabbits_farm.adapters
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.AboutFarmListItemType
 import com.kudashov.rabbits_farm.data.item.Cage
 import com.kudashov.rabbits_farm.data.item.Rabbit
-import com.squareup.picasso.Picasso
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -66,22 +64,30 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) :
         RecyclerView.ViewHolder(view) {
 
-        private val label: ImageView = view.findViewById(R.id.image_rabbit_label)
         private val number: TextView = view.findViewById(R.id.str_number_of_cage)
         private val age: TextView = view.findViewById(R.id.str_age)
         private val gender: ImageView = view.findViewById(R.id.gender)
         private val type: TextView = view.findViewById(R.id.str_type)
 
-        @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(rabbit: Rabbit) {
             number.text = rabbit.numberOfCage
             age.text = rabbit.age
             type.text = rabbit.type
 
             if (rabbit.isMale) {
-                gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_male_black))
+                gender.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.ic_gender_male_black
+                    )
+                )
             } else {
-                gender.setImageDrawable(view.resources.getDrawable(R.drawable.ic_gender_female_black))
+                gender.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.ic_gender_female_black
+                    )
+                )
             }
             view.setOnClickListener {
                 delegate?.openMoreRabbitInfo(rabbit)

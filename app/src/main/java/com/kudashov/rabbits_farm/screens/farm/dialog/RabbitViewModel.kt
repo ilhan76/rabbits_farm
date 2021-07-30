@@ -80,7 +80,7 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
     }
 
     fun getStatus(statuses: List<String>): String {
-        var res: String = ""
+        var res = ""
         for (i in STATUSES_RABBIT) {
             if (statuses.contains(i.first)) res += i.second + "\n"
         }

@@ -19,8 +19,8 @@ import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.item.Rabbit
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
-import com.kudashov.rabbits_farm.screens.farm.filters.CageFilter
-import com.kudashov.rabbits_farm.screens.farm.filters.RabbitFilter
+import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
+import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
@@ -85,11 +85,10 @@ class Farm : Fragment(), FarmDelegate {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
 
-                if (isRabbit) {
+                if (isRabbit)
                     viewModel.getRabbits()
-                } else {
+                else
                     viewModel.getCages()
-                }
             }
         })
 
@@ -176,8 +175,6 @@ class Farm : Fragment(), FarmDelegate {
             binding.txtListTitle2.text = resources.getString(R.string.farm_rabbits_txt_age)
             binding.txtListTitle3.text = resources.getString(R.string.farm_rabbits_txt_gender)
             binding.txtListTitle4.text = resources.getString(R.string.farm_rabbits_txt_type)
-
-            viewModel.getRabbits()
         } else {
             binding.btnRabbits.setBackgroundResource(R.drawable.shape_btn_grey)
             binding.btnCages.setBackgroundResource(R.drawable.shape_btn_green)
@@ -202,8 +199,6 @@ class Farm : Fragment(), FarmDelegate {
             binding.txtListTitle2.text = resources.getString(R.string.farm_cages_txt_number)
             binding.txtListTitle3.text = resources.getString(R.string.farm_cages_txt_type)
             binding.txtListTitle4.text = resources.getString(R.string.farm_cages_txt_status)
-
-            viewModel.getCages()
         }
 
         spinnerAdapter = SpinnerAdapter(requireContext())

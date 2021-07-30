@@ -72,7 +72,7 @@
     <string name="dialog_rabbit_txt_weight"><b>%s кг</b></string>
     
     <string name="dialog_rabbit_txt_birthday">Дата рождения: <b>%s</b></string>
-    <string name="dialog_rabbit_txt_age">Возраст: <b>%s дней</b></string>
+    <string name="dialog_rabbit_txt_age">Возраст: <b>%s дн.</b></string>
     
     <string name="dialog_rabbit_txt_type">Тип: <b>%s</b></string>
     <string name="dialog_rabbit_txt_breed">Порода: <b>%s</b></string>

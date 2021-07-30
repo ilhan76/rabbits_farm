@@ -1,10 +1,12 @@
 package com.kudashov.rabbits_farm.net
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 class ApiClient {
 
@@ -15,7 +17,11 @@ class ApiClient {
         val client: Retrofit
             get() {
                 if (retrofit == null) {
+                    val logging = HttpLoggingInterceptor()
+                    logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+
                     val httpClient = OkHttpClient.Builder()
+                        .addInterceptor(logging)
                         .retryOnConnectionFailure(true)
 
                     httpClient.connectTimeout(20000, TimeUnit.SECONDS)

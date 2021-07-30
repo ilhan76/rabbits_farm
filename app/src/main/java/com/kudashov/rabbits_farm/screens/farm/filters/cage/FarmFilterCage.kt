@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.screens.farm.filters
+package com.kudashov.rabbits_farm.screens.farm.filters.cage
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,7 @@ import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentFarmCageFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
+import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.const.*
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.*
 
@@ -71,7 +72,7 @@ class FarmFilterCage : Fragment() {
     private fun initListeners() {
         binding.apply {
             btnExit.setOnClickListener {
-                RabbitFilter.throwOff()
+                CageFilter.throwOff()
                 val bundle = Bundle()
                 bundle.putBoolean(Farm.ARG_IS_RABBIT, false)
                 APP_ACTIVITY.navController.navigate(R.id.action_farmMenuCage_to_farm, bundle)
@@ -79,10 +80,16 @@ class FarmFilterCage : Fragment() {
 
             btnShow.setOnClickListener {
                 //todo - валидация
-                if (editTxtCountOfRabbit.text.isNotEmpty())
-                    CageFilter.countOfRabbit = editTxtCountOfRabbit.text.toString().toInt()
+                if (editTxtCountOfRabbitFrom.text.isNotEmpty())
+                    CageFilter.countOfRabbitFrom = editTxtCountOfRabbitFrom.text.toString().toInt()
                 else
-                    CageFilter.countOfRabbit = null
+                    CageFilter.countOfRabbitFrom = null
+
+                if (editTxtCountOfRabbitTo.text.isNotEmpty())
+                    CageFilter.countOfRabbitTo = editTxtCountOfRabbitTo.text.toString().toInt()
+                else
+                    CageFilter.countOfRabbitTo = null
+
                 val bundle = Bundle()
                 bundle.putBoolean(Farm.ARG_IS_RABBIT, false)
                 Log.d(TAG, "initListeners: $CageFilter")
@@ -91,48 +98,48 @@ class FarmFilterCage : Fragment() {
 
             spinnerFarmNumber.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (position != 0)
-                        CageFilter.farmNumber = position
-                    else
-                        CageFilter.farmNumber = null
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (position != 0)
+                            CageFilter.farmNumber = position
+                        else
+                            CageFilter.farmNumber = null
+                    }
+
                 }
-
-            }
             spinnerTypeOfCage.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (position){
-                        1 -> CageFilter.type = CAGE_TYPE_FATTENING
-                        2 -> {
-                            CageFilter.type = CAGE_TYPE_MOTHER
-                            CageFilter.isParallel = 0
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        when (position) {
+                            1 -> CageFilter.type = CAGE_TYPE_FATTENING
+                            2 -> {
+                                CageFilter.type = CAGE_TYPE_MOTHER
+                                CageFilter.isParallel = 0
+                            }
+                            3 -> {
+                                CageFilter.type = CAGE_TYPE_MOTHER_PARALLEL
+                                CageFilter.isParallel = 1
+                            }
+                            else -> CageFilter.type = null
                         }
-                        3 -> {
-                            CageFilter.type = CAGE_TYPE_MOTHER_PARALLEL
-                            CageFilter.isParallel = 1
-                        }
-                        else -> CageFilter.type = null
                     }
                 }
-            }
 
             cbNeedClear.setOnClickListener {
-                if (cbNeedClear.isChecked){
+                if (cbNeedClear.isChecked) {
                     CageFilter.status.add(CAGE_STATUS_NEED_CLEAN)
                 } else {
                     CageFilter.status.remove(CAGE_STATUS_NEED_CLEAN)
@@ -148,7 +155,7 @@ class FarmFilterCage : Fragment() {
     }
 
     private fun loadData() {
-        Log.d(TAG, "loadData: CageFilter ${CageFilter}")
+        Log.d(TAG, "loadData: CageFilter $CageFilter")
         binding.apply {
             if (CageFilter.farmNumber != null)
                 spinnerFarmNumber.setSelection(CageFilter.farmNumber!!)
@@ -164,9 +171,10 @@ class FarmFilterCage : Fragment() {
                 else -> spinnerTypeOfCage.setSelection(0)
             }
 
-            if (CageFilter.countOfRabbit != null) {
-                editTxtCountOfRabbit.setText(CageFilter.countOfRabbit.toString())
-            }
+            if (CageFilter.countOfRabbitFrom != null)
+                editTxtCountOfRabbitFrom.setText(CageFilter.countOfRabbitFrom.toString())
+            if (CageFilter.countOfRabbitTo != null)
+                editTxtCountOfRabbitTo.setText(CageFilter.countOfRabbitTo.toString())
 
             if (CageFilter.status.contains(CAGE_STATUS_NEED_CLEAN))
                 cbNeedClear.isChecked = true

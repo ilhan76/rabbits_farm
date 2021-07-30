@@ -99,14 +99,28 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_farm_number" />
 
         <EditText
-            android:id="@+id/edit_txt_count_of_rabbit"
+            android:id="@+id/edit_txt_count_of_rabbit_from"
             style="@style/FarmRabbitsButton"
-            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_width="75dp"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
-            android:layout_marginHorizontal="@dimen/standard_margin"
-            android:background="@drawable/shape_menu"
-            android:paddingHorizontal="10dp"
-            android:textSize="@dimen/standard_txt_size"
+            android:background="@drawable/selector_menu"
+            android:drawableStart="@drawable/ic_edit_txt_from"
+            android:gravity="center"
+            android:inputType="number"
+            android:paddingHorizontal="5dp"
+            app:layout_constraintEnd_toStartOf="@id/edit_txt_count_of_rabbit_to"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
+
+        <EditText
+            android:id="@+id/edit_txt_count_of_rabbit_to"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:background="@drawable/selector_menu"
+            android:drawableStart="@drawable/ic_edit_txt_to"
+            android:gravity="center"
+            android:inputType="number"
+            android:paddingHorizontal="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
 
@@ -127,7 +141,7 @@
             android:textAllCaps="false"
             android:textSize="@dimen/standard_txt_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_txt_count_of_rabbit" />
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_count_of_rabbit_from" />
 
         <CheckBox
             android:id="@+id/cb_need_repair"

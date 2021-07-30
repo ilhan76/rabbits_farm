@@ -34,7 +34,10 @@ class CageMapper {
 
         private fun getCageType(cageDto: CageDto): String {
             return when(cageDto.type){
-                CAGE_TYPE_MOTHER -> "МАТ"
+                CAGE_TYPE_MOTHER -> {
+                    if (cageDto.is_parallel) "МАТ ||"
+                    else "МАТ |"
+                }
                 CAGE_TYPE_FATTENING -> "ОТКОРМ"
                 else -> "???"
             }

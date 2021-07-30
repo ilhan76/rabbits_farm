@@ -3,7 +3,7 @@ package com.kudashov.rabbits_farm.data.mapper
 import android.os.Build
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
-import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.kudashov.rabbits_farm.data.ui.RabbitItem
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -19,8 +19,8 @@ class RabbitMapper {
     companion object {
         private val TAG: String? = this::class.java.simpleName
 
-        fun fromApiToListRabbitItem(list: List<RabbitDto>): List<Rabbit> {
-            val newList: MutableList<Rabbit> = ArrayList()
+        fun fromApiToListRabbitItem(list: List<RabbitDto>): List<RabbitItem> {
+            val newList: MutableList<RabbitItem> = ArrayList()
             for (element in list) {
                 newList.add(
                     fromApiToRabbitItem(element)
@@ -29,7 +29,7 @@ class RabbitMapper {
             return newList
         }
 
-        private fun fromApiToRabbitItem(rabbitDto: RabbitDto): Rabbit = Rabbit(
+        private fun fromApiToRabbitItem(rabbitDto: RabbitDto): RabbitItem = RabbitItem(
                 rabbitDto.id,
                 getNumberOfCage(rabbitDto.cage),
                 getAge(rabbitDto.birthday),

@@ -1,8 +1,8 @@
-package com.kudashov.rabbits_farm.data.item
+package com.kudashov.rabbits_farm.data.ui
 
 sealed class AboutFarmListItemType
 
-data class Rabbit(
+data class RabbitItem(
         val id: Int,
         val numberOfCage: String,
         val age: String,
@@ -10,7 +10,7 @@ data class Rabbit(
         val type: String
 ) : AboutFarmListItemType()
 
-data class Cage(
+data class CageItem(
         val id: Int,
         val numberOfCage: String,
         val numberOfFarm: String,

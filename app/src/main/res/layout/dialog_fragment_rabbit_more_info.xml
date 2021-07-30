@@ -142,7 +142,7 @@
         android:layout_marginHorizontal="@dimen/standard_margin"
         android:textColor="@color/black"
         android:textSize="@dimen/standard_txt_size"
-        app:layout_constraintEnd_toStartOf="@+id/txt_average_pins"
+
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_type"
@@ -155,8 +155,6 @@
         android:layout_marginHorizontal="@dimen/standard_margin"
         android:textColor="@color/black"
         android:textSize="@dimen/standard_txt_size"
-        app:layout_constraintEnd_toStartOf="@+id/txt_count_of_pins"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_breed"
         tools:text="@string/dialog_rabbit_txt_number_of_cage" />
@@ -181,9 +179,8 @@
         android:layout_marginHorizontal="@dimen/standard_margin"
         android:textColor="@color/black"
         android:textSize="@dimen/standard_txt_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_breed"
-        app:layout_constraintTop_toBottomOf="@+id/txt_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_number_of_cage"
         tools:text="@string/dialog_rabbit_txt_output_efficiency" />
 
     <TextView
@@ -193,8 +190,7 @@
         android:layout_marginHorizontal="@dimen/standard_margin"
         android:textColor="@color/black"
         android:textSize="@dimen/standard_txt_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_number_of_cage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_average_pins"
         tools:text="@string/dialog_rabbit_txt_output" />
 
@@ -209,7 +205,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_number_of_cage">
+        app:layout_constraintTop_toBottomOf="@id/txt_count_of_pins">
 
         <TextView
             android:id="@+id/txt_history_of_operation"

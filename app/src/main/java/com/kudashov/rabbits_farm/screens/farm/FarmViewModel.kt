@@ -6,10 +6,11 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.item.Cage
-import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.kudashov.rabbits_farm.data.ui.CageItem
+import com.kudashov.rabbits_farm.data.ui.RabbitItem
 import com.kudashov.rabbits_farm.data.mapper.CageMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
+import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
@@ -28,10 +29,10 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
     private val TAG: String = this::class.java.simpleName
     private val repository: FarmRepository = FarmRepositoryHeroku()
 
-    private val state: MutableLiveData<StateAboutFarm> = MutableLiveData()
+    private val state = MutableLiveData<StateAboutFarm>().default(initialValue = StateAboutFarm.Default)
 
-    private val listOfCage: MutableList<Cage> = ArrayList()
-    private val listOfRabbit: MutableList<Rabbit> = ArrayList()
+    private val listOfCage: MutableList<CageItem> = ArrayList()
+    private val listOfRabbit: MutableList<RabbitItem> = ArrayList()
 
     private var page: Int = 1
     private val pageSize: Int = 50

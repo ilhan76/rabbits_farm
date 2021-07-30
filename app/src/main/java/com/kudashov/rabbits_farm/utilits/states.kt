@@ -1,11 +1,7 @@
 package com.kudashov.rabbits_farm.utilits
 
-import com.kudashov.rabbits_farm.data.dto.OperationDto
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.item.BirthListItemTypes
-import com.kudashov.rabbits_farm.data.item.Cage
-import com.kudashov.rabbits_farm.data.item.Rabbit
-import com.kudashov.rabbits_farm.data.item.TasksListItemTypes
+import com.kudashov.rabbits_farm.data.ui.*
 
 sealed class StateBirth {
     object Default : StateBirth()
@@ -17,16 +13,16 @@ sealed class StateBirth {
 sealed class StateRabbit{
     object Default : StateRabbit()
     object Sending : StateRabbit()
-    class SuccessRabbit(var rabbit: RabbitMoreInfDto):StateRabbit()
-    class SuccessOperations(var operations: List<OperationDto>):StateRabbit()
-    class Error<T>(var message: T): StateRabbit()
+    class SuccessRabbit(val rabbit: RabbitMoreInfDto):StateRabbit()
+    class SuccessOperations(val operations: List<OperationItem>):StateRabbit()
+    class Error<T>(val message: T): StateRabbit()
 }
 
 sealed class StateAboutFarm {
     object Default : StateAboutFarm()
     object Sending : StateAboutFarm()
-    class ListOfRabbitsReceived(val list: List<Rabbit>): StateAboutFarm()
-    class ListOfCageReceived(val list: List<Cage>): StateAboutFarm()
+    class ListOfRabbitsReceived(val list: List<RabbitItem>): StateAboutFarm()
+    class ListOfCageReceived(val list: List<CageItem>): StateAboutFarm()
     class Error<T>(val message: T): StateAboutFarm()
 }
 

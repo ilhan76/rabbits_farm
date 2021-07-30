@@ -18,20 +18,20 @@ const val RABBIT_STATUS_NEED_JIGGING: String = "NJ"
 const val RABBIT_STATUS_FED_BY_MOTHER: String = "RS"
 
 val STATUSES_RABBIT = listOf(
-    Pair(RABBIT_STATUS_READY_TO_BREED, "Готов к разможению"),
+    Pair(RABBIT_STATUS_READY_TO_BREED, "Г. к размн."),
     Pair(RABBIT_STATUS_REST, "Отдыхает"),
 
-    Pair(RABBIT_STATUS_READY_TO_BREED, "Готова к размножению"),
-    Pair(RABBIT_STATUS_UNCONFIRMED_PREGNANCY, "Неподтвержденная беременность"),
-    Pair(RABBIT_STATUS_NEED_PREGNANCY_CHECKUP, "Нужен осмотр на беременность"),
-    Pair(RABBIT_STATUS_CONFIRMED_PREGNANCY, "Подтвержденная беременность"),
-    Pair(RABBIT_STATUS_FEEDS_BABY, "Кормит крольчат"),
+    Pair(RABBIT_STATUS_READY_TO_BREED, "Г. к размн."),
+    Pair(RABBIT_STATUS_UNCONFIRMED_PREGNANCY, "Непод. бер."),
+    Pair(RABBIT_STATUS_NEED_PREGNANCY_CHECKUP, "Нуж. осм. на бер."),
+    Pair(RABBIT_STATUS_CONFIRMED_PREGNANCY, "Подтв. бер."),
+    Pair(RABBIT_STATUS_FEEDS_BABY, "Корм. кр."),
 
-    Pair(RABBIT_STATUS_NEED_VACCINATION, "Нужна вакцинация"),
-    Pair(RABBIT_STATUS_NEED_INSPECTION_SLAUGHTER, "Нужен осмотр перед убоем"),
-    Pair(RABBIT_STATUS_FEEDS_WITHOUT_COCCIDIOSTATIC, "Кормится без кокцидиостатка"),
-    Pair(RABBIT_STATUS_SLAUGHTER, "Готов к убою"),
+    Pair(RABBIT_STATUS_NEED_VACCINATION, "Н. вакц."),
+    Pair(RABBIT_STATUS_NEED_INSPECTION_SLAUGHTER, "Н. осм. пер. уб."),
+    Pair(RABBIT_STATUS_FEEDS_WITHOUT_COCCIDIOSTATIC, "Корм. без кокц."),
+    Pair(RABBIT_STATUS_SLAUGHTER, "Г. к уб."),
 
-    Pair(RABBIT_STATUS_NEED_JIGGING, "Нужна отсадка"),
-    Pair(RABBIT_STATUS_FED_BY_MOTHER, "Кормится у матери")
+    Pair(RABBIT_STATUS_NEED_JIGGING, "Н. отс."),
+    Pair(RABBIT_STATUS_FED_BY_MOTHER, "Корм. у мат.")
 )

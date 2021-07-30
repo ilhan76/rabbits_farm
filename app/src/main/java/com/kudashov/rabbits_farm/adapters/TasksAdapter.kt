@@ -9,7 +9,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.item.*
+import com.kudashov.rabbits_farm.data.ui.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // todo - рефакторинг ViewHolder'ов

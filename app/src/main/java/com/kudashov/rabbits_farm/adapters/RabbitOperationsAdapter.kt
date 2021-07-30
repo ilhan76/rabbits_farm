@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.dto.OperationDto
+import com.kudashov.rabbits_farm.data.ui.OperationItem
 
 class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val list: MutableList<OperationDto> = ArrayList()
+    private val list: MutableList<OperationItem> = ArrayList()
 
-    fun setList(newList: List<OperationDto>){
+    fun setList(newList: List<OperationItem>){
         list.clear()
         list.addAll(newList)
 
@@ -35,10 +35,9 @@ class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val time: TextView = view.findViewById(R.id.txt_data)
         private val event: TextView = view.findViewById(R.id.txt_event)
 
-        fun bind(operation: OperationDto){
-            time.text = operation.time.substring(0, 10)
+        fun bind(operation: OperationItem){
+            time.text = operation.time
             event.text = operation.type
-            //todo - мапинг операций
         }
     }
 }

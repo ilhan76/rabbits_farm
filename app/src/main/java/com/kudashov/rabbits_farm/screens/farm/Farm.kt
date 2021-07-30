@@ -16,7 +16,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.kudashov.rabbits_farm.data.ui.RabbitItem
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
@@ -65,6 +65,7 @@ class Farm : Fragment(), FarmDelegate {
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView: Destroy")
+        APP_ACTIVITY.hideLoader()
         _binding = null
     }
 
@@ -97,7 +98,7 @@ class Farm : Fragment(), FarmDelegate {
         } catch (e: Exception) {
             true
         }
-        loadData()
+
         initListeners()
     }
 
@@ -210,6 +211,7 @@ class Farm : Fragment(), FarmDelegate {
         when (state) {
             is StateAboutFarm.Default -> {
                 Log.d(TAG, "stateProcessing: Farm Default")
+                loadData()
                 APP_ACTIVITY.hideLoader()
             }
             is StateAboutFarm.Sending -> {
@@ -234,7 +236,7 @@ class Farm : Fragment(), FarmDelegate {
         }
     }
 
-    override fun openMoreRabbitInfo(rabbit: Rabbit) {
+    override fun openMoreRabbitInfo(rabbit: RabbitItem) {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
 
         val bundle = Bundle()

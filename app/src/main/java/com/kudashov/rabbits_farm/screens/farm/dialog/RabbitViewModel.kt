@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.kudashov.rabbits_farm.data.mapper.OperationMapper
 import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
@@ -20,7 +21,7 @@ import java.io.Serializable
 class RabbitViewModel(val context: Application) : AndroidViewModel(context), Serializable {
 
     private val TAG: String? = RabbitViewModel::class.java.simpleName
-    private val state: MutableLiveData<StateRabbit> = MutableLiveData<StateRabbit>().default(initialValue = StateRabbit.Default)
+    private val state = MutableLiveData<StateRabbit>().default(initialValue = StateRabbit.Default)
     private val repository: FarmRepository = FarmRepositoryHeroku()
 
     fun getStates(): MutableLiveData<StateRabbit> {
@@ -63,7 +64,7 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
             .subscribe {
                 if (it.detail == null || it.detail.isEmpty()) {
                     Log.d(TAG, "getOperations: SUCCESS")
-                    state.postValue(StateRabbit.SuccessOperations(it.results!!))
+                    state.postValue(StateRabbit.SuccessOperations(OperationMapper.fromApiToListItem(it.results!!)))
                 } else {
                     Log.d(TAG, "getOperations: ERROR ${it.detail}")
                     state.postValue(StateRabbit.Error(it.detail))
@@ -104,7 +105,7 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
     fun getStatuses(statuses: List<String>): String {
         var res = ""
         for (i in STATUSES_RABBIT) {
-            if (statuses.contains(i.first)) res += i.second + "\n"
+            if (statuses.contains(i.first)) res += "\n" + i.second
         }
         if (res.isEmpty()) res + "Статус не определен"
         return res

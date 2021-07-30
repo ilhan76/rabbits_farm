@@ -10,8 +10,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
-import com.kudashov.rabbits_farm.data.item.BirthListItem
-import com.kudashov.rabbits_farm.data.item.BirthListItemTypes
+import com.kudashov.rabbits_farm.data.ui.BirthListItem
+import com.kudashov.rabbits_farm.data.ui.BirthListItemTypes
 
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

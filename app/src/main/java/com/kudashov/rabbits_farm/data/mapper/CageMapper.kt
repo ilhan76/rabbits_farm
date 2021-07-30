@@ -1,7 +1,7 @@
 package com.kudashov.rabbits_farm.data.mapper
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
-import com.kudashov.rabbits_farm.data.item.Cage
+import com.kudashov.rabbits_farm.data.ui.CageItem
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_FATTENING
@@ -9,8 +9,8 @@ import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_MOTHER
 
 class CageMapper {
     companion object {
-        fun fromApiToListCageItem(list: List<CageDto>): List<Cage> {
-            val newList: MutableList<Cage> = ArrayList()
+        fun fromApiToListCageItem(list: List<CageDto>): List<CageItem> {
+            val newList: MutableList<CageItem> = ArrayList()
             for (element in list) {
                 newList.add(
                     fromApiToCageItem(element)
@@ -19,8 +19,8 @@ class CageMapper {
             return newList
         }
 
-        private fun fromApiToCageItem(cageDto: CageDto): Cage =
-            Cage(
+        private fun fromApiToCageItem(cageDto: CageDto): CageItem =
+            CageItem(
                 cageDto.id,
                 getNumberOfCage(cageDto),
                 cageDto.farm_number.toString(),

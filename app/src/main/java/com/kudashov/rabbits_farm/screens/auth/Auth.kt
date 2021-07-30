@@ -1,5 +1,6 @@
 package com.kudashov.rabbits_farm.screens.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.kudashov.rabbits_farm.databinding.FragmentAuthBinding
 import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
 import com.kudashov.rabbits_farm.utilits.StateAuth
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 
 class Auth : Fragment() {
 

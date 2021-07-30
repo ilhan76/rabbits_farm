@@ -9,9 +9,9 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.item.AboutFarmListItemType
-import com.kudashov.rabbits_farm.data.item.Cage
-import com.kudashov.rabbits_farm.data.item.Rabbit
+import com.kudashov.rabbits_farm.data.ui.AboutFarmListItemType
+import com.kudashov.rabbits_farm.data.ui.CageItem
+import com.kudashov.rabbits_farm.data.ui.RabbitItem
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,8 +32,8 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (listData[position]) {
-            is Rabbit -> 1
-            is Cage -> 2
+            is RabbitItem -> 1
+            is CageItem -> 2
         }
     }
 
@@ -44,9 +44,9 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is RabbitViewHolder -> {
-                holder.bind(listData[position] as Rabbit)
+                holder.bind(listData[position] as RabbitItem)
             }
-            is CageViewHolder -> holder.bind(listData[position] as Cage)
+            is CageViewHolder -> holder.bind(listData[position] as CageItem)
         }
     }
 
@@ -69,12 +69,12 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val gender: ImageView = view.findViewById(R.id.gender)
         private val type: TextView = view.findViewById(R.id.str_type)
 
-        fun bind(rabbit: Rabbit) {
-            number.text = rabbit.numberOfCage
-            age.text = rabbit.age
-            type.text = rabbit.type
+        fun bind(rabbitItem: RabbitItem) {
+            number.text = rabbitItem.numberOfCage
+            age.text = rabbitItem.age
+            type.text = rabbitItem.type
 
-            if (rabbit.isMale) {
+            if (rabbitItem.isMale) {
                 gender.setImageDrawable(
                     AppCompatResources.getDrawable(
                         view.context,
@@ -90,7 +90,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
             }
             view.setOnClickListener {
-                delegate?.openMoreRabbitInfo(rabbit)
+                delegate?.openMoreRabbitInfo(rabbitItem)
             }
         }
     }
@@ -103,11 +103,11 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val typeOfCage: TextView = view.findViewById(R.id.str_type_of_cage)
         private val status: TextView = view.findViewById(R.id.str_status_of_cage)
 
-        fun bind(cage: Cage) {
-            numberOfFarm.text = cage.numberOfFarm
-            number.text = cage.numberOfCage
-            typeOfCage.text = cage.type
-            status.text = cage.status
+        fun bind(cageItem: CageItem) {
+            numberOfFarm.text = cageItem.numberOfFarm
+            number.text = cageItem.numberOfCage
+            typeOfCage.text = cageItem.type
+            status.text = cageItem.status
         }
     }
 }

@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentFarmCageFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
-import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.const.*
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.*
 
@@ -93,6 +93,7 @@ class FarmFilterCage : Fragment() {
                 val bundle = Bundle()
                 bundle.putBoolean(Farm.ARG_IS_RABBIT, false)
                 Log.d(TAG, "initListeners: $CageFilter")
+                Toast.makeText(context, "false", Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.navController.navigate(R.id.action_farmMenuCage_to_farm, bundle)
             }
 

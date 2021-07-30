@@ -1,5 +1,6 @@
 package com.kudashov.rabbits_farm.net
 
+import com.kudashov.rabbits_farm.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,7 +19,7 @@ class ApiClient {
             get() {
                 if (retrofit == null) {
                     val logging = HttpLoggingInterceptor()
-                    logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+                    logging.setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
 
                     val httpClient = OkHttpClient.Builder()
                         .addInterceptor(logging)

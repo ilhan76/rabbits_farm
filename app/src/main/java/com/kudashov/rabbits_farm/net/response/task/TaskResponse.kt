@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.net.response
+package com.kudashov.rabbits_farm.net.response.task
 
 import com.kudashov.rabbits_farm.data.item.TasksListItemTypes
 

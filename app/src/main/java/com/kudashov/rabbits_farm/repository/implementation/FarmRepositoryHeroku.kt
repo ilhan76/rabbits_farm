@@ -4,10 +4,8 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.response.CageResponse
-import com.kudashov.rabbits_farm.net.response.OperationsResponse
-import com.kudashov.rabbits_farm.net.response.RabbitMoreInfResponse
-import com.kudashov.rabbits_farm.net.response.RabbitResponse
+import com.kudashov.rabbits_farm.net.request.WeightRequest
+import com.kudashov.rabbits_farm.net.response.farm.*
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -60,7 +58,13 @@ class FarmRepositoryHeroku : FarmRepository {
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(RabbitResponse(e?.localizedMessage, 0, null))
+                    resp.onNext(
+                        RabbitResponse(
+                            e?.localizedMessage,
+                            0,
+                            null
+                        )
+                    )
                 }
 
                 override fun onNext(t: RabbitResponse?) {
@@ -107,7 +111,12 @@ class FarmRepositoryHeroku : FarmRepository {
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    resp.onNext(CageResponse(e?.localizedMessage, null))
+                    resp.onNext(
+                        CageResponse(
+                            e?.localizedMessage,
+                            null
+                        )
+                    )
                 }
 
                 override fun onNext(t: CageResponse?) {
@@ -134,12 +143,22 @@ class FarmRepositoryHeroku : FarmRepository {
 
                 override fun onNext(t: RabbitMoreInfDto?) {
                     Log.d(TAG, "onNext: $t")
-                    response.onNext(RabbitMoreInfResponse(t, ""))
+                    response.onNext(
+                        RabbitMoreInfResponse(
+                            t,
+                            ""
+                        )
+                    )
                 }
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(RabbitMoreInfResponse(null, e?.localizedMessage))
+                    response.onNext(
+                        RabbitMoreInfResponse(
+                            null,
+                            e?.localizedMessage
+                        )
+                    )
                 }
 
             })
@@ -165,14 +184,39 @@ class FarmRepositoryHeroku : FarmRepository {
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(OperationsResponse(null, e?.localizedMessage))
+                    response.onNext(
+                        OperationsResponse(
+                            null,
+                            e?.localizedMessage
+                        )
+                    )
                 }
             })
 
         return response
     }
 
-    override fun postWeight(token: String, type: String, id: Int, weight: Double) {
-        TODO("Not yet implemented")
+    override fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<PostWeightResponse> {
+        val response: PublishSubject<PostWeightResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .postWeight(token, pathType, id, WeightRequest(weight = weight))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<PostWeightResponse> {
+                override fun onComplete() {}
+                override fun onSubscribe(d: Disposable?) {}
+
+                override fun onNext(t: PostWeightResponse?) {
+                    Log.d(TAG, "onNext: The data was sent successfully")
+                    response.onNext(PostWeightResponse(null))
+                }
+
+                override fun onError(e: Throwable?) {
+                    Log.d(TAG, "onError: ${e?.localizedMessage}")
+                    response.onNext(PostWeightResponse(e?.localizedMessage))
+                }
+            })
+        return response
     }
 }

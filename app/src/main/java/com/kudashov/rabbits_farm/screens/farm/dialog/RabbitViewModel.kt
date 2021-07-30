@@ -6,20 +6,21 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
-import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateRabbit
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
-import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.STATUSES_RABBIT
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.io.Serializable
 
-class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
+class RabbitViewModel(val context: Application) : AndroidViewModel(context), Serializable {
 
     private val TAG: String? = RabbitViewModel::class.java.simpleName
-    private val state: MutableLiveData<StateRabbit> = MutableLiveData()
+    private val state: MutableLiveData<StateRabbit> = MutableLiveData<StateRabbit>().default(initialValue = StateRabbit.Default)
     private val repository: FarmRepository = FarmRepositoryHeroku()
 
     fun getStates(): MutableLiveData<StateRabbit> {
@@ -77,9 +78,30 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context) {
             APP_PREFERENCE, Context.MODE_PRIVATE
         )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
+
+        var pathType = ""
+        when (type) {
+            RABBIT_TYPE_BABY -> pathType = RABBIT_TYPE_PATH_BABY
+            RABBIT_TYPE_MATHER -> pathType = RABBIT_TYPE_PATH_MATHER
+            RABBIT_TYPE_FATHER -> pathType = RABBIT_TYPE_PATH_FATHER
+            RABBIT_TYPE_FATTENING -> pathType = RABBIT_TYPE_PATH_FATTENING
+        }
+
+        repository.postWeight(token, weight = weight, id = id, pathType = pathType)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.detail == null || it.detail.isEmpty()) {
+                    Log.d(TAG, "postWeight: Success")
+                    state.postValue(StateRabbit.Default)
+                } else {
+                    Log.d(TAG, "getOperations: Error ${it.detail}")
+                    state.postValue(StateRabbit.Error(it.detail))
+                }
+            }
     }
 
-    fun getStatus(statuses: List<String>): String {
+    fun getStatuses(statuses: List<String>): String {
         var res = ""
         for (i in STATUSES_RABBIT) {
             if (statuses.contains(i.first)) res += i.second + "\n"

@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.repository.implementation
 
-import com.kudashov.rabbits_farm.net.response.TaskResponse
+import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import com.kudashov.rabbits_farm.repository.TaskRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject

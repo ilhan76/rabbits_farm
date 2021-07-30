@@ -27,6 +27,7 @@ class RabbitDialog : DialogFragment() {
 
     companion object {
         const val ARG_RABBIT: String = "rabbit"
+        const val ARG_VIEW_MODEL: String = "view_model"
 
         fun newInstance(bundle: Bundle): RabbitDialog {
             val dialog = RabbitDialog()
@@ -50,7 +51,7 @@ class RabbitDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "onCreateView: Dialog is created")
+        Log.d(TAG, "onCreateView: Rabbit dialog is created")
         _binding = DialogFragmentRabbitMoreInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -62,7 +63,7 @@ class RabbitDialog : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView: Dialog is destroyed")
+        Log.d(TAG, "onDestroyView: Rabbit dialog is destroyed")
         _binding = null
     }
 
@@ -86,19 +87,17 @@ class RabbitDialog : DialogFragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
-        initButtons()
-
-        viewModel.getRabbitMoreInf(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
-        viewModel.getOperations(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
+        initListeners()
     }
 
-    private fun initButtons() {
+    private fun initListeners() {
         binding.btnExit.setOnClickListener {
             dialog!!.dismiss()
         }
 
         binding.btnWeigh.setOnClickListener {
             val bundle = Bundle()
+            bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
             bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfDto)
 
             val dialogWeigh = WeighDialog.newInstance(bundle)
@@ -113,6 +112,7 @@ class RabbitDialog : DialogFragment() {
 
     private fun loadData(rabbit: RabbitMoreInfDto) {
         binding.apply {
+            Log.d(TAG, "loadData: ${rabbit.weight}")
             txtRabbitId.text = resources.getString(
                 R.string.dialog_rabbit_txt_id,
                 rabbit.id
@@ -166,9 +166,8 @@ class RabbitDialog : DialogFragment() {
             )
             txtStatus.text = resources.getString(
                 R.string.dialog_rabbit_txt_status,
-                viewModel.getStatus(rabbit.status)
+                viewModel.getStatuses(rabbit.status)
             )
-            //todo - мапинг и правильное отображение статусов
             if (rabbit.current_type == RABBIT_TYPE_MATHER || rabbit.current_type == RABBIT_TYPE_FATHER) {
                 txtCountOfPins.text = resources.getString(
                     R.string.dialog_rabbit_txt_output,
@@ -186,6 +185,8 @@ class RabbitDialog : DialogFragment() {
         when (state) {
             is StateRabbit.Default -> {
                 Log.d(TAG, "stateProcessing: Rabbit Default")
+                viewModel.getRabbitMoreInf(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
+                viewModel.getOperations(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
                 APP_ACTIVITY.hideLoader()
             }
             is StateRabbit.Sending -> {
@@ -199,7 +200,7 @@ class RabbitDialog : DialogFragment() {
                 loadData(state.rabbit)
             }
             is StateRabbit.SuccessOperations -> {
-                Log.d(TAG, "stateProcessing: Rabbit Success Operations")
+                Log.d(TAG, "stateProcessing: Rabbit Success (Operations)")
                 APP_ACTIVITY.hideLoader()
                 adapter.setList(state.operations)
             }

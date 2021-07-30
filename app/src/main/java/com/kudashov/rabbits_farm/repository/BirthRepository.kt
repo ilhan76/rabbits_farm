@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.repository
 
-import com.kudashov.rabbits_farm.net.response.BirthResponse
+import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface BirthRepository {

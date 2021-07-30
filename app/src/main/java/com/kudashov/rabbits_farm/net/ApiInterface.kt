@@ -2,7 +2,13 @@ package com.kudashov.rabbits_farm.net
 
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.dto.UserDto
+import com.kudashov.rabbits_farm.net.request.WeightRequest
 import com.kudashov.rabbits_farm.net.response.*
+import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
+import com.kudashov.rabbits_farm.net.response.farm.CageResponse
+import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
+import com.kudashov.rabbits_farm.net.response.farm.PostWeightResponse
+import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
@@ -50,17 +56,17 @@ interface ApiInterface {
         @Path("id") id: Int
     ): Observable<RabbitMoreInfDto>
 
-    @GET("/api/operation/")
+    @GET("api/operation/")
     fun getOperations(
         @Header("Authorisation") token: String,
         @Query("rabbit_id") id: Int
     ): Observable<OperationsResponse>
 
-    @POST("/rabbit/{type}/{id}/")
+    @PUT("api/rabbit/{pathType}/{id}/")
     fun postWeight(
         @Header("Authorisation") token: String,
-        @Path("type") type: String,
+        @Path("pathType") pathType: String,
         @Path("id") id: Int,
-        @Body weight: Double
-    )
+        @Body weight: WeightRequest
+    ) : Observable<PostWeightResponse>
 }

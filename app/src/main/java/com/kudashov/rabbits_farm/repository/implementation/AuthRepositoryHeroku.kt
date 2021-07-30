@@ -4,7 +4,7 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.UserDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.response.AuthResponse
+import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.repository.AuthRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -36,7 +36,13 @@ class AuthRepositoryHeroku: AuthRepository {
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(AuthResponse(null, null, e?.localizedMessage))
+                    response.onNext(
+                        AuthResponse(
+                            null,
+                            null,
+                            e?.localizedMessage
+                        )
+                    )
                 }
             })
 

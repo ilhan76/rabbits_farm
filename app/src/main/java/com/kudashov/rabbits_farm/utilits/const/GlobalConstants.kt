@@ -5,6 +5,7 @@ import com.kudashov.rabbits_farm.MainActivity
 lateinit var APP_ACTIVITY: MainActivity
 
 const val APP_PREFERENCE: String = "pref"
+
 const val USER_NAME: String = "user_first_name"
 const val USER_LAST_NAME: String = "user_last_name"
 const val USER_EMAIL: String = "user_email"

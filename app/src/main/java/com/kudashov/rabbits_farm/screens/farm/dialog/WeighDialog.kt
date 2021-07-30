@@ -23,6 +23,8 @@ class WeighDialog : DialogFragment() {
     private var _binding: DialogFragmentWeighRabbitBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: RabbitViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +49,7 @@ class WeighDialog : DialogFragment() {
                 R.color.transparent
             )
         )
+        viewModel = arguments?.get(RabbitDialog.ARG_VIEW_MODEL) as RabbitViewModel
 
         binding.txtCurrentWeight.text = resources.getString(
             R.string.dialog_weight_txt_current_weight,
@@ -62,7 +65,13 @@ class WeighDialog : DialogFragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            // TODO - запрос на сохранение
+            // TODO - валидация
+            val rabbit = arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfDto
+            viewModel.postWeight(
+                weight = binding.editTxtNewWeight.text.toString().toDouble(),
+                id = rabbit.id,
+                type = rabbit.current_type
+            )
             dialog!!.dismiss()
         }
     }

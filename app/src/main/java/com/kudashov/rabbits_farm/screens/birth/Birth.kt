@@ -16,6 +16,7 @@ import com.kudashov.rabbits_farm.adapters.BirthAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentBirthBinding
 import com.kudashov.rabbits_farm.screens.birth.dialog.TakeBirthDialog
+import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateBirth
 
@@ -51,8 +52,20 @@ class Birth : Fragment(), BirthDelegate {
         adapter = BirthAdapter()
         adapter.attachDelegate(this)
         recyclerView = binding.birthList
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+            override fun loadNextPage() {
+                Log.d(TAG, "loadMoreItems: NEXT PAGE")
+                viewModel.nextPage()
+
+                if (isConfirmed)
+                    viewModel.getBirth(isConfirmed, null)
+                else
+                    viewModel.getBirth(isConfirmed, null)
+            }
+        })
 
         viewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
@@ -79,12 +92,12 @@ class Birth : Fragment(), BirthDelegate {
             binding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
             binding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
 
-            viewModel.getTasks(isConfirmed, null)
+            viewModel.getBirth(isConfirmed, null)
         } else {
             binding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
             binding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
 
-            viewModel.getTasks(isConfirmed, null)
+            viewModel.getBirth(isConfirmed, null)
         }
     }
 
@@ -118,8 +131,7 @@ class Birth : Fragment(), BirthDelegate {
     }
 
     override fun openBirthDialog() {
-        val dialogBirth =
-            TakeBirthDialog()
+        val dialogBirth = TakeBirthDialog()
         val transaction = parentFragmentManager.beginTransaction()
         dialogBirth.show(transaction, "Dialog_TakeBirth")
     }

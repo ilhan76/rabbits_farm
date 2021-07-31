@@ -7,6 +7,7 @@ data class RabbitMoreInfUi (
     val id: Int,
     val is_male: Boolean?,
     val birthday: String,
+    val age: String,
     val breed: String,
     val currentType: String,
     val currentTypeString: String,

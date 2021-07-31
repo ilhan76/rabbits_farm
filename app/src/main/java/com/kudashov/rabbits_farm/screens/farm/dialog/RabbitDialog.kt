@@ -147,7 +147,7 @@ class RabbitDialog : DialogFragment() {
 
             txtAge.text = resources.getString(
                 R.string.dialog_rabbit_txt_age,
-                rabbit.birthday
+                rabbit.age
             )
 
             txtType.text = resources.getString(

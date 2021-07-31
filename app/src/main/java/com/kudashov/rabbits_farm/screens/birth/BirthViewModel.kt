@@ -37,7 +37,7 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context) {
         page = 1
     }
 
-    fun getTasks(isConfirmed: Boolean, orderBy: String?) {
+    fun getBirth(isConfirmed: Boolean, orderBy: String?) {
         state.postValue(StateBirth.Sending)
 
         val pref: SharedPreferences = context.getSharedPreferences(

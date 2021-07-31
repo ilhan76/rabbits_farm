@@ -38,7 +38,6 @@ class RabbitMapper {
                 rabbitDto.is_male,
                 getType(rabbitDto.current_type)
             )
-
         private fun getNumberOfCage(cage: CageDto): String {
             return cage.farm_number.toString() + cage.number.toString() + cage.letter
         }
@@ -72,6 +71,7 @@ class RabbitMapper {
             rabbit.id,
             rabbit.is_male,
             getBirthday(rabbit.birthday),
+            getAge(rabbit.birthday),
             rabbit.breed,
             rabbit.current_type,
             getType(rabbit.current_type),

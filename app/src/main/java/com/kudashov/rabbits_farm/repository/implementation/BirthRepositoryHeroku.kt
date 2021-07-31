@@ -29,29 +29,55 @@ class BirthRepositoryHeroku : BirthRepository {
     ): Observable<BirthResponse> {
         val response: PublishSubject<BirthResponse> = PublishSubject.create()
 
-        ApiClient.client.create(ApiInterface::class.java)
-            .getBirth(
-                token,
-                page,
-                pageSize,
-                orderBy
-            )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<BirthResponse> {
-                override fun onComplete() {}
-                override fun onSubscribe(d: Disposable?) {}
+        if (isConfirmed){
+            ApiClient.client.create(ApiInterface::class.java)
+                .getBirthConfirmed(
+                    token,
+                    page,
+                    pageSize,
+                    orderBy
+                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<BirthResponse> {
+                    override fun onComplete() {}
+                    override fun onSubscribe(d: Disposable?) {}
 
-                override fun onNext(t: BirthResponse?) {
-                    Log.d(TAG, "onNext: $t")
-                    response.onNext(t)
-                }
+                    override fun onNext(t: BirthResponse?) {
+                        Log.d(TAG, "onNext: $t")
+                        response.onNext(t)
+                    }
 
-                override fun onError(e: Throwable?) {
-                    Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(BirthResponse(e?.localizedMessage, null))
-                }
-            })
+                    override fun onError(e: Throwable?) {
+                        Log.d(TAG, "onError: ${e?.localizedMessage}")
+                        response.onNext(BirthResponse(e?.localizedMessage, null))
+                    }
+                })
+        } else {
+            ApiClient.client.create(ApiInterface::class.java)
+                .getBirthUnconfirmed(
+                    token,
+                    page,
+                    pageSize,
+                    orderBy
+                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<BirthResponse> {
+                    override fun onComplete() {}
+                    override fun onSubscribe(d: Disposable?) {}
+
+                    override fun onNext(t: BirthResponse?) {
+                        Log.d(TAG, "onNext: $t")
+                        response.onNext(t)
+                    }
+
+                    override fun onError(e: Throwable?) {
+                        Log.d(TAG, "onError: ${e?.localizedMessage}")
+                        response.onNext(BirthResponse(e?.localizedMessage, null))
+                    }
+                })
+        }
         return response
     }
 

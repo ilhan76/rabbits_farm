@@ -22,6 +22,11 @@ import com.kudashov.rabbits_farm.utilits.StateBirth
 
 class Birth : Fragment(), BirthDelegate {
 
+    companion object {
+        const val ARG_ID = "birth_id"
+        const val ARG_VIEW_MODEL = "view_model"
+    }
+
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentBirthBinding? = null
     private val binding get() = _binding!!
@@ -85,10 +90,10 @@ class Birth : Fragment(), BirthDelegate {
         }
     }
 
-    private fun loadData(){
+    private fun loadData() {
         viewModel.cleanPage()
 
-        if (isConfirmed){
+        if (isConfirmed) {
             binding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
             binding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
 
@@ -101,14 +106,14 @@ class Birth : Fragment(), BirthDelegate {
         }
     }
 
-    private fun stateProcessing(state: StateBirth){
-        when (state){
+    private fun stateProcessing(state: StateBirth) {
+        when (state) {
             is StateBirth.Default -> {
                 Log.d(TAG, "stateProcessing: Birth Default")
                 loadData()
                 APP_ACTIVITY.hideLoader()
             }
-            is StateBirth.Sending ->{
+            is StateBirth.Sending -> {
                 Log.d(TAG, "stateProcessing: Birth Sending")
                 APP_ACTIVITY.showLoader()
             }
@@ -130,17 +135,16 @@ class Birth : Fragment(), BirthDelegate {
         _binding = null
     }
 
-    override fun openBirthDialog() {
-        val dialogBirth = TakeBirthDialog()
-        val transaction = parentFragmentManager.beginTransaction()
-        dialogBirth.show(transaction, "Dialog_TakeBirth")
-    }
-
     override fun confirmPregnancy(id: Int, isConfirmed: Boolean) {
         viewModel.confirmPregnancy(id, isConfirmed)
     }
 
-    override fun takeBirth(id: Int, bornBunnies: Int) {
-        TODO("Not yet implemented")
+    override fun takeBirth(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt(ARG_ID, id)
+        bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
+        val dialogBirth = TakeBirthDialog.newInstance(bundle)
+        val transaction = parentFragmentManager.beginTransaction()
+        dialogBirth.show(transaction, "Dialog_TakeBirth")
     }
 }

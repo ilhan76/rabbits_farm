@@ -81,6 +81,22 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<BirthResponse>
 
+    @GET("/api/birth/confirmed/")
+    fun getBirthConfirmed(
+        @Header("Authorisation") token: String,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
+        @Query("__order_by__") orderBy: String?
+    ): Observable<BirthResponse>
+
+    @GET("/api/birth/unconfirmed/")
+    fun getBirthUnconfirmed(
+        @Header("Authorisation") token: String,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
+        @Query("__order_by__") orderBy: String?
+    ): Observable<BirthResponse>
+
     @PUT("/api/birth/unconfirmed/{id}/")
     fun confirmPregnancy(
         @Header("Authorisation") token: String,
@@ -88,7 +104,7 @@ interface ApiInterface {
         @Body confirm: ConfirmRequest
     ): Observable<PutResponse>
 
-    @PUT("/api/birth/confirmed/<id>/")
+    @PUT("/api/birth/confirmed/{id}/")
     fun takeBirth(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,

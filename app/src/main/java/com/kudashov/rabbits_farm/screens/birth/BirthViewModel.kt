@@ -22,8 +22,9 @@ import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.http.Query
+import java.io.Serializable
 
-class BirthViewModel(val context: Application) : AndroidViewModel(context) {
+class BirthViewModel(val context: Application) : AndroidViewModel(context), Serializable {
     private val TAG: String = this::class.java.simpleName
 
     private val state = MutableLiveData<StateBirth>().default(initialValue = StateBirth.Default)

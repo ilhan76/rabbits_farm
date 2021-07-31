@@ -24,7 +24,7 @@ class BirthViewHolder(val view: View, private val delegate: BirthDelegate?) :
 
     init {
         btnTakeBirths.setOnClickListener {
-            delegate?.openBirthDialog()
+            delegate?.takeBirth(birthListItem.id)
         }
 
         btnFertilizes.setOnClickListener {

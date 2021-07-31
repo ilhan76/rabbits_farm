@@ -12,22 +12,30 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import retrofit2.http.Query
 
-class BirthRepositoryHeroku: BirthRepository {
+class BirthRepositoryHeroku : BirthRepository {
     private val TAG: String = this::class.java.simpleName
 
     override fun getBirth(
         token: String,
+        page: Int,
+        pageSize: Int,
         isConfirmed: Boolean,
         orderBy: String?
     ): Observable<BirthResponse> {
         val response: PublishSubject<BirthResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
-            .getBirth(token, orderBy)
+            .getBirth(
+                token,
+                page,
+                pageSize,
+                orderBy
+            )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<BirthResponse>{
+            .subscribe(object : Observer<BirthResponse> {
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 

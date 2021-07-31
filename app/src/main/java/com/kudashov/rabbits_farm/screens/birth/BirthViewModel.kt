@@ -16,6 +16,7 @@ import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.http.Query
 
 class BirthViewModel(val context: Application) : AndroidViewModel(context) {
     private val TAG: String = this::class.java.simpleName
@@ -45,7 +46,13 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context) {
         )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        repository.getBirth(token, isConfirmed, orderBy)
+        repository.getBirth(
+            token,
+            page,
+            pageSize,
+            isConfirmed,
+            orderBy
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
@@ -65,6 +72,9 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context) {
             }
     }
 
+    fun confirmPregnancy(id: Int, isConfirmed: Boolean){
+
+    }
 
     fun getStates(): MutableLiveData<StateBirth> {
         return state

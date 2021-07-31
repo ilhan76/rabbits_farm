@@ -135,4 +135,12 @@ class Birth : Fragment(), BirthDelegate {
         val transaction = parentFragmentManager.beginTransaction()
         dialogBirth.show(transaction, "Dialog_TakeBirth")
     }
+
+    override fun confirmPregnancy(id: Int, isConfirmed: Boolean) {
+        viewModel.confirmPregnancy(id, isConfirmed)
+    }
+
+    override fun takeBirth(id: Int, bornBunnies: Int) {
+        TODO("Not yet implemented")
+    }
 }

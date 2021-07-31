@@ -76,6 +76,8 @@ interface ApiInterface {
     @GET("api/birth/")
     fun getBirth(
         @Header("Authorisation") token: String,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
         @Query("__order_by__") orderBy: String?
     ) : Observable<BirthResponse>
 

@@ -9,12 +9,17 @@ import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.mapper.BirthMapper
 import com.kudashov.rabbits_farm.data.ui.BirthListItem
 import com.kudashov.rabbits_farm.extensions.default
+import com.kudashov.rabbits_farm.net.request.ConfirmRequest
+import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
+import com.kudashov.rabbits_farm.net.response.PutResponse
 import com.kudashov.rabbits_farm.repository.BirthRepository
 import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateBirth
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.http.Query
 
@@ -57,7 +62,7 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
                 if (response.detail == null || response.detail.isEmpty()) {
-                    Log.i(TAG, "getRabbits: SUCCESS")
+                    Log.d(TAG, "getBirth: Success")
                     state.postValue(
                         StateBirth.ListOfBirthReceived(
                             BirthMapper.fromApiToListItem(
@@ -66,14 +71,54 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context) {
                         )
                     )
                 } else {
-                    Log.i(TAG, "getRabbits: ERROR")
+                    Log.d(TAG, "getBirth: ${response.detail}")
                     state.postValue(StateBirth.Error(response.detail))
                 }
             }
     }
 
-    fun confirmPregnancy(id: Int, isConfirmed: Boolean){
+    fun confirmPregnancy(id: Int, isConfirmed: Boolean) {
+        state.postValue(StateBirth.Sending)
 
+        val pref: SharedPreferences = context.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE
+        )
+        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+
+        repository.confirmPregnancy(token, id, ConfirmRequest(isConfirmed))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response ->
+                if (response.detail == null || response.detail.isEmpty()) {
+                    Log.d(TAG, "confirmPregnancy: Success")
+                    state.postValue(StateBirth.Default)
+                } else {
+                    Log.d(TAG, "confirmPregnancy: ${response.detail}")
+                    state.postValue(StateBirth.Error(response.detail))
+                }
+            }
+    }
+
+    fun takeBirth(id: Int, bornBunnies: Int) {
+        state.postValue(StateBirth.Sending)
+
+        val pref: SharedPreferences = context.getSharedPreferences(
+            APP_PREFERENCE, Context.MODE_PRIVATE
+        )
+        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+
+        repository.takeBirth(token, id, TakeBirthRequest(bornBunnies))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { response ->
+                if (response.detail == null || response.detail.isEmpty()) {
+                    Log.d(TAG, "takeBirth: Success")
+                    state.postValue(StateBirth.Default)
+                } else {
+                    Log.d(TAG, "takeBirth: ${response.detail}")
+                    state.postValue(StateBirth.Error(response.detail))
+                }
+            }
     }
 
     fun getStates(): MutableLiveData<StateBirth> {

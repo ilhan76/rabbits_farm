@@ -10,7 +10,7 @@ import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.net.response.farm.CageResponse
 import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
-import com.kudashov.rabbits_farm.net.response.farm.PostWeightResponse
+import com.kudashov.rabbits_farm.net.response.PutResponse
 import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -71,7 +71,7 @@ interface ApiInterface {
         @Path("pathType") pathType: String,
         @Path("id") id: Int,
         @Body weight: WeightRequest
-    ) : Observable<PostWeightResponse>
+    ): Observable<PutResponse>
 
     @GET("api/birth/")
     fun getBirth(
@@ -79,19 +79,19 @@ interface ApiInterface {
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
         @Query("__order_by__") orderBy: String?
-    ) : Observable<BirthResponse>
+    ): Observable<BirthResponse>
 
     @PUT("/api/birth/unconfirmed/{id}/")
     fun confirmPregnancy(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body confirm: ConfirmRequest
-    )
+    ): Observable<PutResponse>
 
     @PUT("/api/birth/confirmed/<id>/")
     fun takeBirth(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body count: TakeBirthRequest
-    )
+    ): Observable<PutResponse>
 }

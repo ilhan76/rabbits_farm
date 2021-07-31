@@ -1,5 +1,6 @@
 package com.kudashov.rabbits_farm.repository
 
+import com.kudashov.rabbits_farm.net.response.PutResponse
 import com.kudashov.rabbits_farm.net.response.farm.*
 import io.reactivex.rxjava3.core.Observable
 
@@ -37,5 +38,5 @@ interface FarmRepository {
 
     fun getOperations(token: String, id: Int): Observable<OperationsResponse>
 
-    fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<PostWeightResponse>
+    fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<PutResponse>
 }

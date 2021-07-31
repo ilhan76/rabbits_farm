@@ -28,10 +28,10 @@ class BirthViewHolder(val view: View, private val delegate: BirthDelegate?) :
         }
 
         btnFertilizes.setOnClickListener {
-
+            delegate?.confirmPregnancy(birthListItem.id, true)
         }
         btnNotFertilized.setOnClickListener {
-
+            delegate?.confirmPregnancy(birthListItem.id, false)
         }
     }
 

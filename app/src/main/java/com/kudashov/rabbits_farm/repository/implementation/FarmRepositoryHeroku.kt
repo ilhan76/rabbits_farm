@@ -5,6 +5,7 @@ import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.request.WeightRequest
+import com.kudashov.rabbits_farm.net.response.PutResponse
 import com.kudashov.rabbits_farm.net.response.farm.*
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -196,25 +197,33 @@ class FarmRepositoryHeroku : FarmRepository {
         return response
     }
 
-    override fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<PostWeightResponse> {
-        val response: PublishSubject<PostWeightResponse> = PublishSubject.create()
+    override fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<PutResponse> {
+        val response: PublishSubject<PutResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .postWeight(token, pathType, id, WeightRequest(weight = weight))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<PostWeightResponse> {
+            .subscribe(object : Observer<PutResponse> {
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
-                override fun onNext(t: PostWeightResponse?) {
+                override fun onNext(t: PutResponse?) {
                     Log.d(TAG, "onNext: The data was sent successfully")
-                    response.onNext(PostWeightResponse(null))
+                    response.onNext(
+                        PutResponse(
+                            null
+                        )
+                    )
                 }
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(PostWeightResponse(e?.localizedMessage))
+                    response.onNext(
+                        PutResponse(
+                            e?.localizedMessage
+                        )
+                    )
                 }
             })
         return response

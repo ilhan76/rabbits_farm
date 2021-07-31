@@ -6,7 +6,10 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.mapper.OperationMapper
+import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
+import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
@@ -23,6 +26,8 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
     private val TAG: String? = RabbitViewModel::class.java.simpleName
     private val state = MutableLiveData<StateRabbit>().default(initialValue = StateRabbit.Default)
     private val repository: FarmRepository = FarmRepositoryHeroku()
+
+    private var rabbitDto: RabbitMoreInfDto? = null
 
     fun getStates(): MutableLiveData<StateRabbit> {
         return state
@@ -42,7 +47,8 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
             .subscribe {
                 if (it.detail != null && it.detail.isEmpty()) {
                     Log.d(TAG, "getRabbitMoreInf: SUCCESS")
-                    state.postValue(StateRabbit.SuccessRabbit(it.rabbit!!))
+                    rabbitDto = it.rabbit
+                    state.postValue(StateRabbit.SuccessRabbit(RabbitMapper.fromApiToRabbitUi(it.rabbit!!)))
                 } else {
                     Log.d(TAG, "getRabbitMoreInf: ERROR ${it.detail}")
                     state.postValue(StateRabbit.Error(it.detail))
@@ -64,7 +70,13 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
             .subscribe {
                 if (it.detail == null || it.detail.isEmpty()) {
                     Log.d(TAG, "getOperations: SUCCESS")
-                    state.postValue(StateRabbit.SuccessOperations(OperationMapper.fromApiToListItem(it.results!!)))
+                    state.postValue(
+                        StateRabbit.SuccessOperations(
+                            OperationMapper.fromApiToListItem(
+                                it.results!!
+                            )
+                        )
+                    )
                 } else {
                     Log.d(TAG, "getOperations: ERROR ${it.detail}")
                     state.postValue(StateRabbit.Error(it.detail))
@@ -100,14 +112,5 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
                     state.postValue(StateRabbit.Error(it.detail))
                 }
             }
-    }
-
-    fun getStatuses(statuses: List<String>): String {
-        var res = ""
-        for (i in STATUSES_RABBIT) {
-            if (statuses.contains(i.first)) res += "\n" + i.second
-        }
-        if (res.isEmpty()) res + "Статус не определен"
-        return res
     }
 }

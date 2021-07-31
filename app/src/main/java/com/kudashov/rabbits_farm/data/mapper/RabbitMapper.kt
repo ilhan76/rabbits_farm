@@ -3,7 +3,9 @@ package com.kudashov.rabbits_farm.data.mapper
 import android.os.Build
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
+import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.ui.RabbitItem
+import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -40,8 +42,7 @@ class RabbitMapper {
         private fun getNumberOfCage(cage: CageDto): String {
             return cage.farm_number.toString() + cage.number.toString() + cage.letter
         }
-
-        fun getType(currentType: String): String {
+        private fun getType(currentType: String): String {
             return when (currentType) {
                 RABBIT_TYPE_BABY -> "Малыш"
                 RABBIT_TYPE_DEATH -> "Мертвый"
@@ -51,8 +52,7 @@ class RabbitMapper {
                 else -> "???"
             }
         }
-
-        fun getAge(birthday: String?): String {
+        private fun getAge(birthday: String?): String {
             return if (birthday != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val today = dateFormat.format(Date())
@@ -68,13 +68,36 @@ class RabbitMapper {
             } else "???"
         }
 
-        fun getBirthday(birthdayIso: String?): String {
+        fun fromApiToRabbitUi(rabbit: RabbitMoreInfDto) = RabbitMoreInfUi(
+            rabbit.id,
+            rabbit.is_male,
+            getBirthday(rabbit.birthday),
+            rabbit.breed,
+            rabbit.current_type,
+            getType(rabbit.current_type),
+            rabbit.cage,
+            getStatuses(rabbit.status),
+            rabbit.output,
+            rabbit.output_efficiency,
+            rabbit.weight
+        )
+
+        private fun getBirthday(birthdayIso: String?): String {
             return if (birthdayIso != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
                 val birthday = LocalDate.parse(birthdayIso.substring(0, 10), format)
 
                 "$birthday"
             } else "???"
+        }
+
+        private fun getStatuses(statuses: List<String>): String {
+            var res = ""
+            for (i in STATUSES_RABBIT) {
+                if (statuses.contains(i.first)) res += "\n" + i.second
+            }
+            if (res.isEmpty()) res + "Статус не определен"
+            return res
         }
     }
 }

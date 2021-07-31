@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.RabbitOperationsAdapter
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
+import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.databinding.DialogFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
@@ -98,7 +98,7 @@ class RabbitDialog : DialogFragment() {
         binding.btnWeigh.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
-            bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfDto)
+            bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfUi)
 
             val dialogWeigh = WeighDialog.newInstance(bundle)
             val transaction = parentFragmentManager.beginTransaction()
@@ -110,7 +110,7 @@ class RabbitDialog : DialogFragment() {
         }
     }
 
-    private fun loadData(rabbit: RabbitMoreInfDto) {
+    private fun loadData(rabbit: RabbitMoreInfUi) {
         binding.apply {
             Log.d(TAG, "loadData: ${rabbit.weight}")
             txtRabbitId.text = resources.getString(
@@ -142,17 +142,17 @@ class RabbitDialog : DialogFragment() {
 
             txtBirthday.text = resources.getString(
                 R.string.dialog_rabbit_txt_birthday,
-                RabbitMapper.getBirthday(rabbit.birthday)
+                rabbit.birthday
             )
 
             txtAge.text = resources.getString(
                 R.string.dialog_rabbit_txt_age,
-                RabbitMapper.getAge(rabbit.birthday)
+                rabbit.birthday
             )
 
             txtType.text = resources.getString(
                 R.string.dialog_rabbit_txt_type,
-                RabbitMapper.getType(rabbit.current_type)
+                rabbit.currentTypeString
             )
             txtBreed.text = resources.getString(
                 R.string.dialog_rabbit_txt_breed,
@@ -166,14 +166,14 @@ class RabbitDialog : DialogFragment() {
             )
             txtStatus.text = resources.getString(
                 R.string.dialog_rabbit_txt_status,
-                viewModel.getStatuses(rabbit.status)
+                rabbit.status
             )
-            if (rabbit.current_type == RABBIT_TYPE_MATHER || rabbit.current_type == RABBIT_TYPE_FATHER) {
-                txtCountOfPins.text = resources.getString(
+            if (rabbit.currentType == RABBIT_TYPE_MATHER || rabbit.currentType == RABBIT_TYPE_FATHER) {
+                txtCountOfPins.text =  resources.getString(
                     R.string.dialog_rabbit_txt_output,
                     rabbit.output.toString()
                 )
-                txtAveragePins.text = resources.getString(
+                txtAveragePins.text =  resources.getString(
                     R.string.dialog_rabbit_txt_output_efficiency,
                     rabbit.output_efficiency.toString()
                 )

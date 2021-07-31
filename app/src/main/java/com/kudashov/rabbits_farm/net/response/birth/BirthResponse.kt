@@ -1,8 +1,8 @@
 package com.kudashov.rabbits_farm.net.response.birth
 
-import com.kudashov.rabbits_farm.data.ui.BirthListItemTypes
+import com.kudashov.rabbits_farm.data.dto.BirthDto
 
-class BirthResponse(
+data class BirthResponse(
     val detail: String?,
-    val list: List<BirthListItemTypes>
+    val results: List<BirthDto>?
 )

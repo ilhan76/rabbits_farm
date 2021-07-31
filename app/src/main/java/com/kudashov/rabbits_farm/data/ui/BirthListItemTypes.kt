@@ -4,7 +4,7 @@ sealed class BirthListItemTypes
 
 data class BirthListItem(
         val id: Int,
-        var durationPregnancy: String,
         var numberOfCage: String,
-        var status: Boolean
+        var durationPregnancy: String,
+        var isConfirmed: Boolean
 ): BirthListItemTypes()

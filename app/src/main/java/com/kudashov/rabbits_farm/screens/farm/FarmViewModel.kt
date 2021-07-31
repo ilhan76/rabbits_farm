@@ -75,7 +75,7 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
             .subscribe { rabbitServerResponse ->
                 if (rabbitServerResponse.detail == null) {
                     Log.d(TAG, "getRabbits: SUCCESS")
-                    listOfRabbit.addAll(RabbitMapper.fromApiToListRabbitItem(rabbitServerResponse.results!!))
+                    listOfRabbit.addAll(RabbitMapper.fromApiToListItem(rabbitServerResponse.results!!))
                     state.postValue(StateAboutFarm.ListOfRabbitsReceived(listOfRabbit))
                 } else {
                     Log.d(TAG, "getRabbits: ERROR ${rabbitServerResponse.detail}")

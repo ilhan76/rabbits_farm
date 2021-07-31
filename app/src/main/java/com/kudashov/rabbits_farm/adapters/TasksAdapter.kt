@@ -9,10 +9,10 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.viewHolders.tasks.*
 import com.kudashov.rabbits_farm.data.ui.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    // todo - рефакторинг ViewHolder'ов
     private var listOfTasks: MutableList<TasksListItemTypes> = ArrayList()
 
     fun setList(list: List<TasksListItemTypes>) {
@@ -78,154 +78,6 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     false
                 )
             )
-        }
-    }
-
-    class DepositionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var data: TextView = view.findViewById(R.id.data)
-        var cageFrom: TextView = view.findViewById(R.id.txt_from)
-        var cageTo: TextView = view.findViewById(R.id.txt_to)
-
-        var countOfMale: SeekBar = view.findViewById(R.id.sb_count_of_male)
-        var txtCountOfMale: TextView = view.findViewById(R.id.txt_sb_count_of_male)
-        var txtCountOfFemale: TextView = view.findViewById(R.id.txt_sb_count_of_female)
-        var countOfFemale: SeekBar = view.findViewById(R.id.sb_count_of_female)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(deposition: Deposition) {
-            data.text = deposition.data
-            cageFrom.text = deposition.numberOfCageFrom
-            cageTo.text = deposition.numberOfCageTo
-
-            countOfMale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    txtCountOfMale.text = seekBar?.progress.toString()
-                }
-            })
-            txtCountOfMale.text = "0"
-
-            countOfFemale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    txtCountOfFemale.text = seekBar?.progress.toString()
-                }
-            })
-            txtCountOfFemale.text = "0"
-
-            if (deposition.isDone) {
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-
-    class VaccinationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(vaccination: Vaccination) {
-            data.text = vaccination.data
-            numberOfCage.text = vaccination.numberOfCage
-
-            if (vaccination.isDone) {
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-
-    class InspectionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-        var weight: EditText = view.findViewById(R.id.txt_weight)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(inspection: Inspection) {
-            data.text = inspection.data
-            numberOfCage.text = inspection.numberOfCage
-
-            if (inspection.isDone) {
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-
-    class ReproductionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var data: TextView = view.findViewById(R.id.data)
-        var takeFrom: TextView = view.findViewById(R.id.txt_from)
-        var takeTo: TextView = view.findViewById(R.id.txt_to)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(reproduction: Reproduction) {
-            data.text = reproduction.data
-            takeFrom.text = reproduction.takeFemaleFrom
-            takeTo.text = reproduction.takeFemaleTo
-
-            if (reproduction.isDone) {
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-
-    class KillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-        var weight: TextView = view.findViewById(R.id.txt_weight)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(kill: Kill) {
-            data.text = kill.data
-            numberOfCage.text = kill.numberOfCage
-
-            if (kill.isDone) {
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
         }
     }
 }

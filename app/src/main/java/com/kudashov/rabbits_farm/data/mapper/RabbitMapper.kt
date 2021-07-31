@@ -21,17 +21,17 @@ class RabbitMapper {
     companion object {
         private val TAG: String? = this::class.java.simpleName
 
-        fun fromApiToListRabbitItem(list: List<RabbitDto>): List<RabbitItem> {
+        fun fromApiToListItem(list: List<RabbitDto>): List<RabbitItem> {
             val newList: MutableList<RabbitItem> = ArrayList()
             for (element in list) {
                 newList.add(
-                    fromApiToRabbitItem(element)
+                    fromApiToItem(element)
                 )
             }
             return newList
         }
 
-        private fun fromApiToRabbitItem(rabbitDto: RabbitDto): RabbitItem = RabbitItem(
+        private fun fromApiToItem(rabbitDto: RabbitDto): RabbitItem = RabbitItem(
                 rabbitDto.id,
                 getNumberOfCage(rabbitDto.cage),
                 getAge(rabbitDto.birthday),

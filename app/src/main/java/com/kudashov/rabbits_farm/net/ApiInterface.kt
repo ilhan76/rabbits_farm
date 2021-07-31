@@ -2,9 +2,12 @@ package com.kudashov.rabbits_farm.net
 
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.dto.UserDto
+import com.kudashov.rabbits_farm.net.request.ConfirmRequest
+import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
 import com.kudashov.rabbits_farm.net.request.WeightRequest
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
+import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.net.response.farm.CageResponse
 import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
 import com.kudashov.rabbits_farm.net.response.farm.PostWeightResponse
@@ -69,4 +72,24 @@ interface ApiInterface {
         @Path("id") id: Int,
         @Body weight: WeightRequest
     ) : Observable<PostWeightResponse>
+
+    @GET("api/birth/")
+    fun getBirth(
+        @Header("Authorisation") token: String,
+        @Query("__order_by__") orderBy: String?
+    ) : Observable<BirthResponse>
+
+    @PUT("/api/birth/unconfirmed/{id}/")
+    fun confirmPregnancy(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int,
+        @Body confirm: ConfirmRequest
+    )
+
+    @PUT("/api/birth/confirmed/<id>/")
+    fun takeBirth(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int,
+        @Body count: TakeBirthRequest
+    )
 }

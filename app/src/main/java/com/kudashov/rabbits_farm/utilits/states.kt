@@ -1,6 +1,5 @@
 package com.kudashov.rabbits_farm.utilits
 
-import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.ui.*
 
 sealed class StateBirth {

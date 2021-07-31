@@ -23,9 +23,9 @@ class Birth : Fragment(), BirthDelegate {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentBirthBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
-    private lateinit var mViewModel: BirthViewModel
+    private lateinit var viewModel: BirthViewModel
 
     private lateinit var adapter: BirthAdapter
     private lateinit var recyclerView: RecyclerView
@@ -37,7 +37,7 @@ class Birth : Fragment(), BirthDelegate {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBirthBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
+        return binding.root
     }
 
     override fun onStart() {
@@ -50,34 +50,41 @@ class Birth : Fragment(), BirthDelegate {
 
         adapter = BirthAdapter()
         adapter.attachDelegate(this)
-        recyclerView = mBinding.birthList
+        recyclerView = binding.birthList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
-        mViewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
-        mViewModel.getStates().observe(this, this::stateProcessing)
+        viewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
+        viewModel.getStates().observe(this, this::stateProcessing)
 
-        initButtons()
-
-        mViewModel.getTasks(isConfirmed)
-        mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+        initListeners()
     }
 
-    private fun initButtons() {
-        mBinding.btnConfirmed.setOnClickListener {
+    private fun initListeners() {
+        binding.btnConfirmed.setOnClickListener {
             isConfirmed = true
-            mBinding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
-            mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
-
-            mViewModel.getTasks(isConfirmed)
+            loadData()
         }
 
-        mBinding.btnNotYetConfirmed.setOnClickListener {
+        binding.btnNotYetConfirmed.setOnClickListener {
             isConfirmed = false
-            mBinding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
-            mBinding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+            loadData()
+        }
+    }
 
-            mViewModel.getTasks(isConfirmed)
+    private fun loadData(){
+        viewModel.cleanPage()
+
+        if (isConfirmed){
+            binding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+            binding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
+
+            viewModel.getTasks(isConfirmed, null)
+        } else {
+            binding.btnConfirmed.setBackgroundResource(R.drawable.shape_btn_grey)
+            binding.btnNotYetConfirmed.setBackgroundResource(R.drawable.shape_btn_orange)
+
+            viewModel.getTasks(isConfirmed, null)
         }
     }
 
@@ -85,6 +92,7 @@ class Birth : Fragment(), BirthDelegate {
         when (state){
             is StateBirth.Default -> {
                 Log.d(TAG, "stateProcessing: Birth Default")
+                loadData()
                 APP_ACTIVITY.hideLoader()
             }
             is StateBirth.Sending ->{
@@ -93,6 +101,7 @@ class Birth : Fragment(), BirthDelegate {
             }
             is StateBirth.ListOfBirthReceived -> {
                 Log.d(TAG, "stateProcessing: Birth Success")
+                adapter.setList(state.list)
                 APP_ACTIVITY.hideLoader()
             }
             is StateBirth.Error<*> -> {

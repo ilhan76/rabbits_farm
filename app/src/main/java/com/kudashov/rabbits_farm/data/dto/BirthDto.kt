@@ -1,0 +1,11 @@
+package com.kudashov.rabbits_farm.data.dto
+
+import com.google.gson.annotations.SerializedName
+
+data class BirthDto (
+    val id: Int,
+    val cage: CageDto,
+    val last_fertilisation: String,
+    @SerializedName("is_confirmed")
+    val is_confirmed: Boolean
+)

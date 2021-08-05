@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.mapper.OperationMapper
 import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
-import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku

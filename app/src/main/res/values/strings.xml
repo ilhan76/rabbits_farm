@@ -76,7 +76,7 @@
     
     <string name="dialog_rabbit_txt_type">Тип: <b>%s</b></string>
     <string name="dialog_rabbit_txt_breed">Порода: <b>%s</b></string>
-    <string name="dialog_rabbit_txt_number_of_cage">№ клетки: <b>%d%d%s</b></string>
+    <string name="dialog_rabbit_txt_number_of_cage">№ клетки: <b>%d-%d(%s)</b></string>
     
     <string name="dialog_rabbit_txt_status">Статус: <b>%s</b></string>
     <string name="dialog_rabbit_txt_output">Кол-во выводов: <b>%s</b></string>

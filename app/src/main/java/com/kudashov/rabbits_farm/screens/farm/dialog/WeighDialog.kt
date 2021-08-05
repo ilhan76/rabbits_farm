@@ -60,7 +60,6 @@ class WeighDialog : DialogFragment() {
     }
 
     private fun initButtons() {
-
         binding.btnExit.setOnClickListener {
             dialog!!.dismiss()
         }

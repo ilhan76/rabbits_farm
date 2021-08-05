@@ -1,5 +1,5 @@
 package com.kudashov.rabbits_farm.net.response
 
-data class PutResponse (
+data class BaseResponse (
     val detail: String?
 )

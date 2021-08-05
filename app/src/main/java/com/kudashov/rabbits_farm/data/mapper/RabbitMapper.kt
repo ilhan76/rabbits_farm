@@ -39,7 +39,7 @@ class RabbitMapper {
                 getType(rabbitDto.current_type)
             )
         private fun getNumberOfCage(cage: CageDto): String {
-            return cage.farm_number.toString() + cage.number.toString() + cage.letter
+            return cage.farm_number.toString() + "-" + cage.number.toString() + "(${cage.letter})"
         }
         private fun getType(currentType: String): String {
             return when (currentType) {

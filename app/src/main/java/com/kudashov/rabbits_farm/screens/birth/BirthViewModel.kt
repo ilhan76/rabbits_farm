@@ -11,17 +11,13 @@ import com.kudashov.rabbits_farm.data.ui.BirthListItem
 import com.kudashov.rabbits_farm.extensions.default
 import com.kudashov.rabbits_farm.net.request.ConfirmRequest
 import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
-import com.kudashov.rabbits_farm.net.response.PutResponse
 import com.kudashov.rabbits_farm.repository.BirthRepository
 import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateBirth
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.http.Query
 import java.io.Serializable
 
 class BirthViewModel(val context: Application) : AndroidViewModel(context), Serializable {

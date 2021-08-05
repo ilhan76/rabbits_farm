@@ -3,6 +3,7 @@ package com.kudashov.rabbits_farm.net
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.dto.UserDto
 import com.kudashov.rabbits_farm.net.request.ConfirmRequest
+import com.kudashov.rabbits_farm.net.request.DeathRequest
 import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
 import com.kudashov.rabbits_farm.net.request.WeightRequest
 import com.kudashov.rabbits_farm.net.response.*
@@ -10,7 +11,7 @@ import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.net.response.farm.CageResponse
 import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
-import com.kudashov.rabbits_farm.net.response.PutResponse
+import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -71,15 +72,7 @@ interface ApiInterface {
         @Path("pathType") pathType: String,
         @Path("id") id: Int,
         @Body weight: WeightRequest
-    ): Observable<PutResponse>
-
-    @GET("api/birth/")
-    fun getBirth(
-        @Header("Authorisation") token: String,
-        @Query("page") page: Int,
-        @Query("page_size") pageSize: Int,
-        @Query("__order_by__") orderBy: String?
-    ): Observable<BirthResponse>
+    ): Observable<BaseResponse>
 
     @GET("/api/birth/confirmed/")
     fun getBirthConfirmed(
@@ -102,12 +95,18 @@ interface ApiInterface {
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body confirm: ConfirmRequest
-    ): Observable<PutResponse>
+    ): Observable<BaseResponse>
 
     @PUT("/api/birth/confirmed/{id}/")
     fun takeBirth(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body count: TakeBirthRequest
-    ): Observable<PutResponse>
+    ): Observable<BaseResponse>
+
+    @POST("api/rabbit/death/")
+    fun death(
+        @Header("Authorisation") token: String,
+        @Body deathRequest: DeathRequest
+    ) : Observable<BaseResponse>
 }

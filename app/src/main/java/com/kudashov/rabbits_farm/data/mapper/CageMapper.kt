@@ -29,7 +29,7 @@ class CageMapper {
             )
 
         private fun getNumberOfCage(cageDto: CageDto): String {
-            return cageDto.farm_number.toString() + cageDto.number.toString() + cageDto.letter
+            return cageDto.number.toString() + "(${cageDto.letter})"
         }
 
         private fun getCageType(cageDto: CageDto): String {

@@ -16,6 +16,7 @@ import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -24,11 +25,12 @@ class AuthViewModel(val context: Application) : AndroidViewModel(context) {
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAuth> = MutableLiveData()
     private val repository: AuthRepository = AuthRepositoryHeroku()
+    private val compositeDisposable = CompositeDisposable()
 
     fun auth(username: String, pass: String) {
         state.postValue(StateAuth.Sending)
 
-        repository.auth(username, pass)
+        compositeDisposable.add(repository.auth(username, pass)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
@@ -52,31 +54,23 @@ class AuthViewModel(val context: Application) : AndroidViewModel(context) {
                     Log.d(TAG, "getToken: ERROR ${response.detail}")
                     state.postValue(StateAuth.Error("Error ${response.detail}"))
                 }
-            }
+            })
     }
 
     fun echo(){
         val pref: SharedPreferences = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         val t = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        Toast.makeText(context, t, Toast.LENGTH_SHORT).show()
         ApiClient.client.create(ApiInterface::class.java)
             .echo(t)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<EchoResponse> {
-                override fun onComplete() {}
-                override fun onSubscribe(d: Disposable?) {}
-
-                override fun onNext(t: EchoResponse?) {
-                    Log.d(TAG, "onNext: $t")
-                    Toast.makeText(context, t?.detail, Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onError(e: Throwable?) {
-                    Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    Toast.makeText(context, e?.localizedMessage, Toast.LENGTH_SHORT).show()
-                }
+            .subscribe({
+                Log.d(TAG, "onNext: $t")
+                Toast.makeText(context, it?.detail, Toast.LENGTH_SHORT).show()
+            }, {
+                Log.d(TAG, "onError: ${it?.localizedMessage}")
+                Toast.makeText(context, it?.localizedMessage, Toast.LENGTH_SHORT).show()
             })
     }
 

@@ -14,9 +14,9 @@ import com.kudashov.rabbits_farm.R
 class SpinnerAdapter(context: Context) : BaseAdapter() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
-    private val list: MutableList<Any> = ArrayList()
+    private val list: MutableList<Any?> = ArrayList()
 
-    fun setList(newList: List<Any>) {
+    fun setList(newList: List<Any?>) {
         list.clear()
         list.addAll(newList)
     }

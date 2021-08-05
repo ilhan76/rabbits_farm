@@ -5,17 +5,15 @@ import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.request.ConfirmRequest
 import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
-import com.kudashov.rabbits_farm.net.response.PutResponse
+import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.repository.BirthRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
-import retrofit2.http.Query
 
 class BirthRepositoryHeroku : BirthRepository {
     private val TAG: String = this::class.java.simpleName
@@ -85,25 +83,25 @@ class BirthRepositoryHeroku : BirthRepository {
         token: String,
         id: Int,
         confirm: ConfirmRequest
-    ): Observable<PutResponse> {
-        val response: PublishSubject<PutResponse> = PublishSubject.create()
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .confirmPregnancy(token, id, confirm)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<PutResponse>{
+            .subscribe(object : Observer<BaseResponse>{
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
-                override fun onNext(t: PutResponse?) {
+                override fun onNext(t: BaseResponse?) {
                     Log.d(TAG, "onNext: put success")
                     response.onNext(t)
                 }
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(PutResponse(e?.localizedMessage))
+                    response.onNext(BaseResponse(e?.localizedMessage))
                 }
             })
 
@@ -114,25 +112,25 @@ class BirthRepositoryHeroku : BirthRepository {
         token: String,
         id: Int,
         count: TakeBirthRequest
-    ): Observable<PutResponse> {
-        val response: PublishSubject<PutResponse> = PublishSubject.create()
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .takeBirth(token, id, count)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<PutResponse>{
+            .subscribe(object : Observer<BaseResponse>{
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable?) {}
 
-                override fun onNext(t: PutResponse?) {
+                override fun onNext(t: BaseResponse?) {
                     Log.d(TAG, "onNext: put success")
                     response.onNext(t)
                 }
 
                 override fun onError(e: Throwable?) {
                     Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(PutResponse(e?.localizedMessage))
+                    response.onNext(BaseResponse(e?.localizedMessage))
                 }
             })
 

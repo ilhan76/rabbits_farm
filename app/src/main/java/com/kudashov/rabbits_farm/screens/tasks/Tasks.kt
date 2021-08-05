@@ -22,9 +22,9 @@ class Tasks : Fragment() {
 
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentTasksBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
-    private lateinit var mViewModel: TasksViewModel
+    private lateinit var viewModel: TasksViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TasksAdapter
@@ -32,11 +32,12 @@ class Tasks : Fragment() {
     private var isDone: Boolean = false
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTasksBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
+        return binding.root
     }
 
     override fun onStart() {
@@ -48,50 +49,57 @@ class Tasks : Fragment() {
         APP_ACTIVITY.moveUnderline(R.id.tasks)
 
         adapter = TasksAdapter()
-        recyclerView = mBinding.tasksList
+        recyclerView = binding.tasksList
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
-        mViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
-        mViewModel.getStates().observe(this, this::stateProcessing)
+        viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+        viewModel.getStates().observe(this, this::stateProcessing)
 
-        initButtons()
-
-        mViewModel.getTasks(isDone)
-        mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
+        initListeners()
     }
 
-    private fun initButtons() {
-        mBinding.btnDeath.setOnClickListener {
-            val dialogDeath = DeathDialog()
+    private fun initListeners() {
+        binding.btnDeath.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable(DeathDialog.ARG_VIEW_MODEL, viewModel)
+            bundle.putSerializable("123", "4546")
+
+            val dialogDeath = DeathDialog.newInstance(bundle)
             val transaction = parentFragmentManager.beginTransaction()
             dialogDeath.show(transaction, "Dialog_Death")
+            Log.d(TAG, "initButtons: create")
         }
 
-        mBinding.btnDone.setOnClickListener {
+        binding.btnDone.setOnClickListener {
             isDone = true
-            mBinding.btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_grey)
-
-            mViewModel.getTasks(isDone)
+            loadData()
         }
 
-        mBinding.btnNotDone.setOnClickListener {
+        binding.btnNotDone.setOnClickListener {
             isDone = false
-            mBinding.btnDone.setBackgroundResource(R.drawable.shape_btn_grey)
-            mBinding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
-
-            mViewModel.getTasks(isDone)
+            loadData()
         }
     }
 
-    private fun stateProcessing(state: StateTasks){
-        when (state){
+    private fun loadData(){
+        if (isDone){
+            binding.btnDone.setBackgroundResource(R.drawable.shape_btn_green)
+            binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_grey)
+        } else {
+            binding.btnDone.setBackgroundResource(R.drawable.shape_btn_grey)
+            binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
+        }
+    }
+
+    private fun stateProcessing(state: StateTasks) {
+        when (state) {
             is StateTasks.Default -> {
                 Log.d(TAG, "stateProcessing: Tasks Default")
+                loadData()
                 APP_ACTIVITY.hideLoader()
             }
-            is StateTasks.Sending ->{
+            is StateTasks.Sending -> {
                 Log.d(TAG, "stateProcessing: Tasks Sending")
                 APP_ACTIVITY.showLoader()
             }

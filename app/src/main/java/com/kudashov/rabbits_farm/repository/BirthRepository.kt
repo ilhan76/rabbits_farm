@@ -2,10 +2,9 @@ package com.kudashov.rabbits_farm.repository
 
 import com.kudashov.rabbits_farm.net.request.ConfirmRequest
 import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
-import com.kudashov.rabbits_farm.net.response.PutResponse
+import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.http.*
 
 interface BirthRepository {
     fun getBirth(
@@ -20,12 +19,12 @@ interface BirthRepository {
         token: String,
         id: Int,
         confirm: ConfirmRequest
-    ): Observable<PutResponse>
+    ): Observable<BaseResponse>
 
 
     fun takeBirth(
         token: String,
         id: Int,
         count: TakeBirthRequest
-    ): Observable<PutResponse>
+    ): Observable<BaseResponse>
 }

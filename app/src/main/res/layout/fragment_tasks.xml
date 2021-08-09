@@ -101,7 +101,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tasks_list"
+        android:id="@+id/rvTasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -111,17 +111,19 @@
         app:layout_constraintTop_toBottomOf="@+id/menu_area" />
 
     <TextView
-        android:layout_width="0dp"
+        android:id="@+id/txtNoItem"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/standard_margin"
         android:background="@drawable/shape_menu"
+        android:visibility="gone"
         android:paddingHorizontal="10dp"
-        android:text="Данная страница находится в разрабоотке. Реализована кнопки Смерть"
+        android:text="Список задач пуст"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/rvTasks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

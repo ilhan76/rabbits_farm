@@ -96,9 +96,11 @@
 
     <string name="task_item_btn_not_yet_done">Не выполнено</string>
     <string name="task_item_btn_done">Выполнено</string>
+    <string name="task_item_cage_format">%d-%d(%s)</string>
 
     <!-- Item deposition-->
-    <string name="task_item_deposition_txt_title">Отсадка от мат.</string>
+    <string name="task_item_deposition_txt_title">Отсадка</string>
+    <string name="task_item_deposition_from_mother_txt_title">Отсадка от мат.</string>
     <string name="task_item_deposition_txt_number_of_cage_from">№ клетки ИЗ</string>
     <string name="task_item_deposition_txt_number_of_cage_to">№ клетки В</string>
     <string name="task_item_deposition_txt_count_of_male">Количество самцов</string>

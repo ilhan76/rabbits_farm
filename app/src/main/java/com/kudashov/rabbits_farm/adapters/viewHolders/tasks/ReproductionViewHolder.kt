@@ -5,16 +5,16 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.ui.Reproduction
+import com.kudashov.rabbits_farm.data.domain.ReproductionDomain
 
-class ReproductionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ReproductionViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val data: TextView = view.findViewById(R.id.data)
     private val takeFrom: TextView = view.findViewById(R.id.txt_from)
     private val takeTo: TextView = view.findViewById(R.id.txt_to)
 
     private val btnDone: Button = view.findViewById(R.id.btn_done)
 
-    private lateinit var reproduction: Reproduction
+    private lateinit var reproduction: ReproductionDomain
     private var isDone: Boolean = false
 
     init {
@@ -25,12 +25,22 @@ class ReproductionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bind(reproduction: Reproduction) {
+    fun bind(reproduction: ReproductionDomain) {
         this.reproduction = reproduction
 
-        data.text = reproduction.data
-        takeFrom.text = reproduction.takeFemaleFrom
-        takeTo.text = reproduction.takeFemaleTo
+        data.text = reproduction.date
+        takeFrom.text = view.context.getString(
+            R.string.task_item_cage_format,
+            reproduction.cageFrom.farmNumber,
+            reproduction.cageFrom.cageNumber,
+            reproduction.cageFrom.letter
+        )
+        takeTo.text = view.context.getString(
+            R.string.task_item_cage_format,
+            reproduction.cageFrom.farmNumber,
+            reproduction.cageFrom.cageNumber,
+            reproduction.cageFrom.letter
+        )
         isDone = reproduction.isDone
 
         if (reproduction.isDone) {

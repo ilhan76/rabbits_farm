@@ -1,19 +1,15 @@
 package com.kudashov.rabbits_farm.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.adapters.viewHolders.farm.CageViewHolder
 import com.kudashov.rabbits_farm.adapters.viewHolders.farm.RabbitViewHolder
-import com.kudashov.rabbits_farm.data.ui.AboutFarmListItemType
-import com.kudashov.rabbits_farm.data.ui.CageItem
-import com.kudashov.rabbits_farm.data.ui.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.AboutFarmListItemType
+import com.kudashov.rabbits_farm.data.domain.CageItem
+import com.kudashov.rabbits_farm.data.domain.RabbitItem
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -6,11 +6,11 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.ui.CageItem
-import com.kudashov.rabbits_farm.data.ui.RabbitItem
-import com.kudashov.rabbits_farm.data.mapper.CageMapper
-import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
-import com.kudashov.rabbits_farm.extensions.default
+import com.kudashov.rabbits_farm.data.domain.CageItem
+import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.converters.CageMapper
+import com.kudashov.rabbits_farm.data.converters.RabbitMapper
+import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter

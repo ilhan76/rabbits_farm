@@ -1,13 +1,11 @@
 package com.kudashov.rabbits_farm.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.viewHolders.RabbitOperationViewHolder
-import com.kudashov.rabbits_farm.data.ui.OperationItem
+import com.kudashov.rabbits_farm.data.domain.OperationItem
 
 class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

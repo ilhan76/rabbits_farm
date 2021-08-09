@@ -1,7 +1,7 @@
-package com.kudashov.rabbits_farm.data.mapper
+package com.kudashov.rabbits_farm.data.converters
 
 import com.kudashov.rabbits_farm.data.dto.OperationDto
-import com.kudashov.rabbits_farm.data.ui.OperationItem
+import com.kudashov.rabbits_farm.data.domain.OperationItem
 import com.kudashov.rabbits_farm.utilits.const.OPERATIONS
 
 class OperationMapper {

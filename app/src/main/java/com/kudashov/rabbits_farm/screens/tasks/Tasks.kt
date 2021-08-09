@@ -35,7 +35,7 @@ class Tasks : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTasksBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -49,7 +49,7 @@ class Tasks : Fragment() {
         APP_ACTIVITY.moveUnderline(R.id.tasks)
 
         adapter = TasksAdapter()
-        recyclerView = binding.tasksList
+        recyclerView = binding.rvTasks
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
@@ -90,6 +90,7 @@ class Tasks : Fragment() {
             binding.btnDone.setBackgroundResource(R.drawable.shape_btn_grey)
             binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
         }
+        viewModel.getTasks(isDone, null)
     }
 
     private fun stateProcessing(state: StateTasks) {
@@ -97,20 +98,27 @@ class Tasks : Fragment() {
             is StateTasks.Default -> {
                 Log.d(TAG, "stateProcessing: Tasks Default")
                 loadData()
-                APP_ACTIVITY.hideLoader()
             }
             is StateTasks.Sending -> {
                 Log.d(TAG, "stateProcessing: Tasks Sending")
+                binding.txtNoItem.visibility = View.GONE
                 APP_ACTIVITY.showLoader()
             }
             is StateTasks.ListOfTasksReceived -> {
                 Log.d(TAG, "stateProcessing: Tasks Success")
                 APP_ACTIVITY.hideLoader()
+                binding.txtNoItem.visibility = View.GONE
                 adapter.setList(state.list)
             }
             is StateTasks.Error<*> -> {
                 Log.d(TAG, "stateProcessing: Tasks Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
+                binding.txtNoItem.visibility = View.GONE
+                APP_ACTIVITY.hideLoader()
+            }
+            StateTasks.NoItem -> {
+                Log.d(TAG, "stateProcessing: No Item")
+                binding.txtNoItem.visibility = View.VISIBLE
                 APP_ACTIVITY.hideLoader()
             }
         }

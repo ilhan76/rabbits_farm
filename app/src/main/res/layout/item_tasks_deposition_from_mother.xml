@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
             android:layout_marginTop="@dimen/tasks_item_deposition_title_margin_top"
-            android:text="@string/task_item_deposition_txt_title"
+            android:text="@string/task_item_deposition_from_mother_txt_title"
             android:textColor="@color/black"
             android:textSize="@dimen/title_item_txt_size"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +94,82 @@
             app:layout_constraintTop_toBottomOf="@+id/srt_to"
             tools:text="113Б" />
 
+        <TextView
+            android:id="@+id/str_count_of_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_deposition_txt_margin_top"
+            android:text="@string/task_item_deposition_txt_count_of_male"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_to" />
+
+        <SeekBar
+            android:id="@+id/sb_count_of_male"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_deposition_seek_bar_margin_top"
+            android:splitTrack="false"
+            android:thumb="@drawable/shape_thumb"
+            app:layout_constraintEnd_toStartOf="@+id/txt_sb_count_of_male"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/str_count_of_male" />
+
+        <TextView
+            android:id="@+id/txt_sb_count_of_male"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tasks_item_deposition_margin_horizontal"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintBottom_toBottomOf="@+id/sb_count_of_male"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sb_count_of_male"
+            app:layout_constraintTop_toTopOf="@+id/sb_count_of_male"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/str_count_of_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_deposition_seek_bar_margin_top"
+            android:text="@string/task_item_deposition_txt_count_of_female"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sb_count_of_male" />
+
+        <SeekBar
+            android:id="@+id/sb_count_of_female"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tasks_item_deposition_margin_horizontal"
+            android:layout_marginTop="@dimen/tasks_item_deposition_seek_bar_margin_top"
+            android:splitTrack="false"
+            android:thumb="@drawable/shape_thumb"
+            app:layout_constraintEnd_toStartOf="@+id/txt_sb_count_of_female"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/str_count_of_female" />
+
+        <TextView
+            android:id="@+id/txt_sb_count_of_female"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tasks_item_deposition_margin_horizontal"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintBottom_toBottomOf="@+id/sb_count_of_female"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sb_count_of_female"
+            app:layout_constraintTop_toTopOf="@+id/sb_count_of_female"
+            tools:text="20" />
+
         <Button
             android:id="@+id/btn_done"
             android:layout_width="match_parent"
@@ -109,7 +185,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_to" />
+            app:layout_constraintTop_toBottomOf="@+id/sb_count_of_female" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

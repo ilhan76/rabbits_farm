@@ -1,7 +1,7 @@
-package com.kudashov.rabbits_farm.data.mapper
+package com.kudashov.rabbits_farm.data.converters
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
-import com.kudashov.rabbits_farm.data.ui.CageItem
+import com.kudashov.rabbits_farm.data.domain.CageItem
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_FATTENING

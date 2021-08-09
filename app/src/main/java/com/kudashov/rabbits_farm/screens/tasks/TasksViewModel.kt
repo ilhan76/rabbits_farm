@@ -2,17 +2,18 @@ package com.kudashov.rabbits_farm.screens.tasks
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.extensions.default
+import com.kudashov.rabbits_farm.data.converters.implementation.TaskConverterImpl
+import com.kudashov.rabbits_farm.data.domain.TaskListItemType
+import com.kudashov.rabbits_farm.data.source.implementation.TaskProviderHeroku
+import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.TaskRepository
-import com.kudashov.rabbits_farm.repository.implementation.TaskRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.implementation.TaskRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.StateTasks
-import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
+import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -23,31 +24,47 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
 
     private val TAG: String = this::class.java.simpleName
     private val state = MutableLiveData<StateTasks>().default(initialValue = StateTasks.Default)
-    private val repository: TaskRepository = TaskRepositoryHeroku()
+    private val repository: TaskRepository =
+        TaskRepositoryImpl(converter = TaskConverterImpl(), provider = TaskProviderHeroku())
     private val compositeDisposable = CompositeDisposable()
+    private val pref = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
     private var deathCause: String? = null
+    private val listOfTask: MutableList<TaskListItemType> = ArrayList()
+    private var page: Int = 1
+    private val pageSize: Int = 50
+
+    fun nextPage() {
+        page++
+    }
+
+    fun cleanPage() {
+        listOfTask.clear()
+        page = 1
+    }
 
     fun setDeathCause(cause: String?) {
         deathCause = cause
     }
 
-    fun getTasks(isDone: Boolean) {
+    fun getTasks(isDone: Boolean, orderBy: String?) {
         state.postValue(StateTasks.Sending)
 
-        val pref = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        compositeDisposable.add(repository.getTasks(token, isDone)
+        compositeDisposable.add(repository.getTasks(token, isDone, page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
-                if (response.detail?.isEmpty()!!) {
+                if (response.content != null) {
                     Log.i(TAG, "getRabbits: SUCCESS")
-                    state.postValue(StateTasks.ListOfTasksReceived(response.tasks))
+                    state.postValue(StateTasks.ListOfTasksReceived(response.content))
                 } else {
-                    Log.i(TAG, "getRabbits: ERROR")
-                    state.postValue(StateTasks.Error("Error"))
+                    Log.d(TAG, "getTasks: Error")
+                    if (response.detail == ERROR_NO_ITEM) {
+                        Log.d(TAG, "getTasks: No Item")
+                        state.postValue(StateTasks.NoItem)
+                    }
                 }
             })
     }
@@ -55,14 +72,13 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     fun putDeath(farmNumber: Int, cageNumber: Int, letter: String) {
         state.postValue(StateTasks.Sending)
 
-        val pref = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         compositeDisposable.add(
             repository.putDeath(token, farmNumber, cageNumber, letter, deathCause)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({
+                .subscribe({
                     Log.d(TAG, "putDeath: Success")
                     state.postValue(StateTasks.Default)
                 }, {

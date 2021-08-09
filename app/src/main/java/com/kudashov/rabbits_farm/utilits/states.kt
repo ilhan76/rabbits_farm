@@ -1,6 +1,6 @@
 package com.kudashov.rabbits_farm.utilits
 
-import com.kudashov.rabbits_farm.data.ui.*
+import com.kudashov.rabbits_farm.data.domain.*
 
 sealed class StateBirth {
     object Default : StateBirth()
@@ -28,7 +28,8 @@ sealed class StateAboutFarm {
 sealed class StateTasks {
     object Default : StateTasks()
     object Sending : StateTasks()
-    class ListOfTasksReceived(val list: List<TasksListItemTypes>): StateTasks()
+    object NoItem: StateTasks()
+    class ListOfTasksReceived(val list: List<TaskListItemType>): StateTasks()
     class Error<T>(val message: T): StateTasks()
 }
 

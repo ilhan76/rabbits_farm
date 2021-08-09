@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.ui.OperationItem
+import com.kudashov.rabbits_farm.data.domain.OperationItem
 
 class RabbitOperationViewHolder(view: View): RecyclerView.ViewHolder(view){
     private val time: TextView = view.findViewById(R.id.txt_data)

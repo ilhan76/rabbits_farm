@@ -5,15 +5,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.ui.Vaccination
+import com.kudashov.rabbits_farm.data.domain.VaccinationDomain
 
-class VaccinationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class VaccinationViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val data: TextView = view.findViewById(R.id.data)
     private val numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
 
     private val btnDone: Button = view.findViewById(R.id.btn_done)
 
-    private lateinit var vaccination: Vaccination
+    private lateinit var vaccination: VaccinationDomain
     private var isDone: Boolean = false
 
     init {
@@ -24,12 +24,17 @@ class VaccinationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bind(vaccination: Vaccination) {
+    fun bind(vaccination: VaccinationDomain) {
         this.vaccination = vaccination
 
-        data.text = vaccination.data
-        numberOfCage.text = vaccination.numberOfCage
-        isDone = isDone
+        data.text = vaccination.date
+        numberOfCage.text = view.context.getString(
+            R.string.task_item_cage_format,
+            vaccination.cage.farmNumber,
+            vaccination.cage.cageNumber,
+            vaccination.cage.letter
+        )
+        isDone = vaccination.isDone
 
         if (vaccination.isDone) {
             btnDone.setText(R.string.task_item_btn_done)

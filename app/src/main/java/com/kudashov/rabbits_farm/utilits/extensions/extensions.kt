@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.extensions
+package com.kudashov.rabbits_farm.utilits.extensions
 
 import androidx.lifecycle.MutableLiveData
 

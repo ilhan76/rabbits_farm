@@ -8,7 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
-import com.kudashov.rabbits_farm.data.ui.BirthListItem
+import com.kudashov.rabbits_farm.data.domain.BirthListItem
 
 class BirthViewHolder(val view: View, private val delegate: BirthDelegate?) :
     RecyclerView.ViewHolder(view) {

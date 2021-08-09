@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.adapters.viewHolders.BirthViewHolder
-import com.kudashov.rabbits_farm.data.ui.BirthListItem
-import com.kudashov.rabbits_farm.data.ui.BirthListItemTypes
+import com.kudashov.rabbits_farm.data.domain.BirthListItem
+import com.kudashov.rabbits_farm.data.domain.BirthListItemTypes
 
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

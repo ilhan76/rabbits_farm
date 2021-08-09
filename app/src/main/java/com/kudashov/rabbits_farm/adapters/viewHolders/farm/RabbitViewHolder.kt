@@ -7,7 +7,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.ui.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitItem
 
 class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) :
     RecyclerView.ViewHolder(view) {

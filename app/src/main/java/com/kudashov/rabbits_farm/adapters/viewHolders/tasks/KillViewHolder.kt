@@ -5,16 +5,16 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.ui.Kill
+import com.kudashov.rabbits_farm.data.domain.KillDomain
 
-class KillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class KillViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val data: TextView = view.findViewById(R.id.data)
     private val numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
     private val weight: TextView = view.findViewById(R.id.txt_weight)
 
     private val btnDone: Button = view.findViewById(R.id.btn_done)
 
-    private lateinit var kill: Kill
+    private lateinit var kill: KillDomain
     private var isDone: Boolean = false
 
     init {
@@ -25,11 +25,16 @@ class KillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bind(kill: Kill) {
+    fun bind(kill: KillDomain) {
         this.kill = kill
 
-        data.text = kill.data
-        numberOfCage.text = kill.numberOfCage
+        data.text = kill.date
+        numberOfCage.text = view.context.getString(
+            R.string.task_item_cage_format,
+            kill.cage.farmNumber,
+            kill.cage.cageNumber,
+            kill.cage.letter
+        )
         isDone = kill.isDone
 
         if (kill.isDone) {

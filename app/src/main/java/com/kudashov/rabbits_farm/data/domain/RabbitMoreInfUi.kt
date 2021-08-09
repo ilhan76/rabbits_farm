@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.data.ui
+package com.kudashov.rabbits_farm.data.domain
 
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import java.io.Serializable

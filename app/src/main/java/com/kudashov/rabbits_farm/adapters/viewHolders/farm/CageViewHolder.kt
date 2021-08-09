@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.ui.CageItem
+import com.kudashov.rabbits_farm.data.domain.CageItem
 
 class CageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 

@@ -13,6 +13,7 @@ import com.kudashov.rabbits_farm.net.response.farm.CageResponse
 import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
+import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
@@ -72,6 +73,32 @@ interface ApiInterface {
         @Path("pathType") pathType: String,
         @Path("id") id: Int,
         @Body weight: WeightRequest
+    ): Observable<BaseResponse>
+
+    @GET("api/task/in_progress/")
+    fun getTasks(
+        @Header("Authorisation") token: String,
+        //@Query("page") page: Int,
+        //@Query("page_size") pageSize: Int,
+        @Query("__order_by__") orderBy: String?
+    ): Observable<TaskResponse>
+
+    @PUT("api/task/in_progress/{id}/")
+    fun confirmSimpleTask(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int
+    ): Observable<TaskResponse>
+
+    @PUT("api/task/in_progress/bunny_jigging/{id}/")
+    fun confirmBunnyJigging(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int // todo - дополнить
+    ) : Observable<BaseResponse>
+
+    @PUT("api/task/in_progress/slaughter_inspection/{id}/")
+    fun confirmSlaughterInspection(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int // todo - дополнить
     ): Observable<BaseResponse>
 
     @GET("/api/birth/confirmed/")

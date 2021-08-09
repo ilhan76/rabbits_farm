@@ -6,9 +6,9 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.mapper.BirthMapper
-import com.kudashov.rabbits_farm.data.ui.BirthListItem
-import com.kudashov.rabbits_farm.extensions.default
+import com.kudashov.rabbits_farm.data.converters.BirthMapper
+import com.kudashov.rabbits_farm.data.domain.BirthListItem
+import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.net.request.ConfirmRequest
 import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
 import com.kudashov.rabbits_farm.repository.BirthRepository

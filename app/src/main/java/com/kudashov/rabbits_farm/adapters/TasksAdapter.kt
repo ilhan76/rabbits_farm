@@ -1,21 +1,16 @@
 package com.kudashov.rabbits_farm.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.viewHolders.tasks.*
-import com.kudashov.rabbits_farm.data.ui.*
+import com.kudashov.rabbits_farm.data.domain.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var listOfTasks: MutableList<TasksListItemTypes> = ArrayList()
+    private var listOfTasks: MutableList<TaskListItemType> = ArrayList()
 
-    fun setList(list: List<TasksListItemTypes>) {
+    fun setList(list: List<TaskListItemType>) {
         listOfTasks.clear()
         listOfTasks.addAll(list)
 
@@ -28,21 +23,23 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (listOfTasks[position]) {
-            is Deposition -> 0
-            is Vaccination -> 1
-            is Inspection -> 2
-            is Reproduction -> 3
-            is Kill -> 4
+            is DepositionFromMotherDomain -> 0
+            is VaccinationDomain -> 1
+            is InspectionDomain -> 2
+            is ReproductionDomain -> 3
+            is KillDomain -> 4
+            is DepositionDomain -> 5
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is DepositionViewHolder -> holder.bind(listOfTasks[position] as Deposition)
-            is VaccinationViewHolder -> holder.bind(listOfTasks[position] as Vaccination)
-            is InspectionViewHolder -> holder.bind(listOfTasks[position] as Inspection)
-            is ReproductionViewHolder -> holder.bind(listOfTasks[position] as Reproduction)
-            is KillViewHolder -> holder.bind(listOfTasks[position] as Kill)
+            is DepositionFromMotherViewHolder -> holder.bind(listOfTasks[position] as DepositionFromMotherDomain)
+            is VaccinationViewHolder -> holder.bind(listOfTasks[position] as VaccinationDomain)
+            is InspectionViewHolder -> holder.bind(listOfTasks[position] as InspectionDomain)
+            is ReproductionViewHolder -> holder.bind(listOfTasks[position] as ReproductionDomain)
+            is KillViewHolder -> holder.bind(listOfTasks[position] as KillDomain)
+            is DepositionViewHolder -> holder.bind(listOfTasks[position] as DepositionDomain)
         }
     }
 
@@ -71,9 +68,16 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
             )
             4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false))
-            else -> DepositionViewHolder(
+            5 -> DepositionViewHolder(
                 inflater.inflate(
                     R.layout.item_tasks_deposition,
+                    parent,
+                    false
+                )
+            )
+            else -> DepositionFromMotherViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition_from_mother,
                     parent,
                     false
                 )

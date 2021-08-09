@@ -16,7 +16,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.ui.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitItem
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter

@@ -7,9 +7,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.mapper.OperationMapper
-import com.kudashov.rabbits_farm.data.mapper.RabbitMapper
-import com.kudashov.rabbits_farm.extensions.default
+import com.kudashov.rabbits_farm.data.converters.OperationMapper
+import com.kudashov.rabbits_farm.data.converters.RabbitMapper
+import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateRabbit

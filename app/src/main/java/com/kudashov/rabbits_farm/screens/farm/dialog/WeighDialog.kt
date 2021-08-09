@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.databinding.DialogFragmentWeighRabbitBinding
 
 class WeighDialog : DialogFragment() {

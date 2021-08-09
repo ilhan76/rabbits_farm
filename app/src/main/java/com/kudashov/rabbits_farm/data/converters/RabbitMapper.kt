@@ -1,11 +1,11 @@
-package com.kudashov.rabbits_farm.data.mapper
+package com.kudashov.rabbits_farm.data.converters
 
 import android.os.Build
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.ui.RabbitItem
-import com.kudashov.rabbits_farm.data.ui.RabbitMoreInfUi
+import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfUi
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat

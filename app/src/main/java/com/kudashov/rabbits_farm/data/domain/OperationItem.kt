@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.data.ui
+package com.kudashov.rabbits_farm.data.domain
 
 data class OperationItem (
     val rabbit_id: Int,

@@ -5,9 +5,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.data.domain.DepositionDomain
 
-class DepositionViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+class DepositionViewHolder(val view: View, val delegate: TaskDelegate?) :
+    RecyclerView.ViewHolder(view) {
     private val data: TextView = view.findViewById(R.id.data)
     private val takeFrom: TextView = view.findViewById(R.id.txt_from)
     private val takeTo: TextView = view.findViewById(R.id.txt_to)
@@ -19,8 +21,8 @@ class DepositionViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
     init {
         btnDone.setOnClickListener {
-            if (isDone){
-
+            if (!isDone) {
+                delegate?.confirmSimpleTask(deposition.id)
             }
         }
     }

@@ -5,7 +5,7 @@ import com.kudashov.rabbits_farm.data.dto.CageDto
 import com.kudashov.rabbits_farm.data.dto.RabbitDto
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.domain.RabbitItem
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfUi
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -67,7 +67,7 @@ class RabbitMapper {
             } else "???"
         }
 
-        fun fromApiToRabbitUi(rabbit: RabbitMoreInfDto) = RabbitMoreInfUi(
+        fun fromApiToRabbitUi(rabbit: RabbitMoreInfDto) = RabbitMoreInfDomain(
             rabbit.id,
             rabbit.is_male,
             getBirthday(rabbit.birthday),

@@ -4,17 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.adapters.viewHolders.tasks.*
 import com.kudashov.rabbits_farm.data.domain.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listOfTasks: MutableList<TaskListItemType> = ArrayList()
+    private var delegate: TaskDelegate? = null
 
     fun setList(list: List<TaskListItemType>) {
         listOfTasks.clear()
         listOfTasks.addAll(list)
 
         notifyDataSetChanged()
+    }
+
+    fun attachDelegate(delegate: TaskDelegate) {
+        this.delegate = delegate
     }
 
     override fun getItemCount(): Int {
@@ -51,36 +57,36 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     R.layout.item_tasks_vaccination,
                     parent,
                     false
-                )
+                ), delegate
             )
             2 -> InspectionViewHolder(
                 inflater.inflate(
                     R.layout.item_tasks_inspection,
                     parent,
                     false
-                )
+                ), delegate
             )
             3 -> ReproductionViewHolder(
                 inflater.inflate(
                     R.layout.item_tasks_reproduction,
                     parent,
                     false
-                )
+                ), delegate
             )
-            4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false))
+            4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false), delegate)
             5 -> DepositionViewHolder(
                 inflater.inflate(
                     R.layout.item_tasks_deposition,
                     parent,
                     false
-                )
+                ), delegate
             )
             else -> DepositionFromMotherViewHolder(
                 inflater.inflate(
                     R.layout.item_tasks_deposition_from_mother,
                     parent,
                     false
-                )
+                ), delegate
             )
         }
     }

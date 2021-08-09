@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.adapters.viewHolders
+package com.kudashov.rabbits_farm.adapters.viewHolders.farm
 
 import android.view.View
 import android.widget.TextView

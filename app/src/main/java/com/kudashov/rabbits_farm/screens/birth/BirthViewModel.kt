@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.data.converters.BirthMapper
 import com.kudashov.rabbits_farm.data.domain.BirthListItem
 import com.kudashov.rabbits_farm.utilits.extensions.default
-import com.kudashov.rabbits_farm.net.request.ConfirmRequest
-import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
+import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
+import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
 import com.kudashov.rabbits_farm.repository.BirthRepository
 import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryHeroku
 import com.kudashov.rabbits_farm.utilits.StateBirth
@@ -82,7 +82,7 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
         )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        repository.confirmPregnancy(token, id, ConfirmRequest(isConfirmed))
+        repository.confirmPregnancy(token, id, ConfirmPregnancyRequest(isConfirmed))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->

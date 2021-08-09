@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfUi
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
 import com.kudashov.rabbits_farm.databinding.DialogFragmentWeighRabbitBinding
 
 class WeighDialog : DialogFragment() {
@@ -53,7 +53,7 @@ class WeighDialog : DialogFragment() {
 
         binding.txtCurrentWeight.text = resources.getString(
             R.string.dialog_weight_txt_current_weight,
-            (arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfUi).weight.toString()
+            (arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfDomain).weight.toString()
         )
         initButtons()
     }
@@ -64,7 +64,7 @@ class WeighDialog : DialogFragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            val rabbit = arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfUi
+            val rabbit = arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfDomain
             viewModel.postWeight(
                 weight = binding.editTxtNewWeight.text.toString().toDouble(),
                 id = rabbit.id,

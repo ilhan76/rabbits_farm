@@ -3,8 +3,8 @@ package com.kudashov.rabbits_farm.repository.implementation
 import android.util.Log
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.request.ConfirmRequest
-import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
+import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
+import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.repository.BirthRepository
@@ -82,7 +82,7 @@ class BirthRepositoryHeroku : BirthRepository {
     override fun confirmPregnancy(
         token: String,
         id: Int,
-        confirm: ConfirmRequest
+        confirm: ConfirmPregnancyRequest
     ): Observable<BaseResponse> {
         val response: PublishSubject<BaseResponse> = PublishSubject.create()
 

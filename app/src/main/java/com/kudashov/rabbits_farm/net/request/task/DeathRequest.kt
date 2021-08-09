@@ -1,4 +1,4 @@
-package com.kudashov.rabbits_farm.net.request
+package com.kudashov.rabbits_farm.net.request.task
 
 import com.kudashov.rabbits_farm.data.dto.CageSimpleDto
 

@@ -15,6 +15,23 @@ interface TaskRepository {
         orderBy: String?
     ): Observable<RepoResponse<List<TaskListItemType>>>
 
+    fun confirmSimpleTask(
+        token: String,
+        id: Int
+    ): Observable<BaseResponse>
+
+    fun confirmSlaughterInspectionTask(
+        token: String,
+        id: Int,
+        weights: List<Int>)
+    : Observable<BaseResponse>
+
+    fun confirmDepositionFromMotherTask(
+        token: String,
+        id: Int,
+        countMales: Int
+    ): Observable<BaseResponse>
+
     fun putDeath(
         token: String,
         farmNumber: Int?,

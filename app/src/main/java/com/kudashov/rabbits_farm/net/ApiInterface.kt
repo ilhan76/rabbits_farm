@@ -2,10 +2,12 @@ package com.kudashov.rabbits_farm.net
 
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.dto.UserDto
-import com.kudashov.rabbits_farm.net.request.ConfirmRequest
-import com.kudashov.rabbits_farm.net.request.DeathRequest
-import com.kudashov.rabbits_farm.net.request.TakeBirthRequest
-import com.kudashov.rabbits_farm.net.request.WeightRequest
+import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
+import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
+import com.kudashov.rabbits_farm.net.request.farm.WeightRequest
+import com.kudashov.rabbits_farm.net.request.task.BunnyJiggingTaskRequest
+import com.kudashov.rabbits_farm.net.request.task.DeathRequest
+import com.kudashov.rabbits_farm.net.request.task.SlaughterInspectionTaskRequest
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
@@ -78,8 +80,8 @@ interface ApiInterface {
     @GET("api/task/in_progress/")
     fun getTasks(
         @Header("Authorisation") token: String,
-        //@Query("page") page: Int,
-        //@Query("page_size") pageSize: Int,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
         @Query("__order_by__") orderBy: String?
     ): Observable<TaskResponse>
 
@@ -87,18 +89,20 @@ interface ApiInterface {
     fun confirmSimpleTask(
         @Header("Authorisation") token: String,
         @Path("id") id: Int
-    ): Observable<TaskResponse>
+    ): Observable<BaseResponse>
 
     @PUT("api/task/in_progress/bunny_jigging/{id}/")
     fun confirmBunnyJigging(
         @Header("Authorisation") token: String,
-        @Path("id") id: Int // todo - дополнить
+        @Path("id") id: Int,
+        @Body body: BunnyJiggingTaskRequest
     ) : Observable<BaseResponse>
 
     @PUT("api/task/in_progress/slaughter_inspection/{id}/")
     fun confirmSlaughterInspection(
         @Header("Authorisation") token: String,
-        @Path("id") id: Int // todo - дополнить
+        @Path("id") id: Int,
+        @Body body: SlaughterInspectionTaskRequest
     ): Observable<BaseResponse>
 
     @GET("/api/birth/confirmed/")
@@ -121,19 +125,19 @@ interface ApiInterface {
     fun confirmPregnancy(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
-        @Body confirm: ConfirmRequest
+        @Body body: ConfirmPregnancyRequest
     ): Observable<BaseResponse>
 
     @PUT("/api/birth/confirmed/{id}/")
     fun takeBirth(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
-        @Body count: TakeBirthRequest
+        @Body body: TakeBirthRequest
     ): Observable<BaseResponse>
 
     @POST("api/rabbit/death/")
     fun death(
         @Header("Authorisation") token: String,
-        @Body deathRequest: DeathRequest
+        @Body body: DeathRequest
     ) : Observable<BaseResponse>
 }

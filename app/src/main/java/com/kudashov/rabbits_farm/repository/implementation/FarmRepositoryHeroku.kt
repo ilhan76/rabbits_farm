@@ -4,7 +4,7 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.request.WeightRequest
+import com.kudashov.rabbits_farm.net.request.farm.WeightRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.farm.*
 import com.kudashov.rabbits_farm.repository.FarmRepository

@@ -3,7 +3,7 @@ package com.kudashov.rabbits_farm.data.domain
 import com.kudashov.rabbits_farm.data.dto.CageDto
 import java.io.Serializable
 
-data class RabbitMoreInfUi (
+data class RabbitMoreInfDomain (
     val id: Int,
     val is_male: Boolean?,
     val birthday: String,

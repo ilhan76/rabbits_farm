@@ -7,9 +7,11 @@ import android.widget.TextView
 import androidx.compose.ui.res.stringResource
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.data.domain.DepositionFromMotherDomain
 
-class DepositionFromMotherViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class DepositionFromMotherViewHolder(val view: View, val delegate: TaskDelegate?) :
+    RecyclerView.ViewHolder(view) {
     private val date: TextView = view.findViewById(R.id.data)
     private val cageFrom: TextView = view.findViewById(R.id.txt_from)
     private val cageTo: TextView = view.findViewById(R.id.txt_to)
@@ -41,7 +43,8 @@ class DepositionFromMotherViewHolder(val view: View) : RecyclerView.ViewHolder(v
                     )
                 else countOfFemale.progress = countBunnies?.minus(seekBar?.progress ?: 0) ?: 0
 
-                txtCountOfFemale.text = (countBunnies?.minus(seekBar?.progress ?: 0) ?: 0).toString()
+                txtCountOfFemale.text =
+                    (countBunnies?.minus(seekBar?.progress ?: 0) ?: 0).toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -49,9 +52,28 @@ class DepositionFromMotherViewHolder(val view: View) : RecyclerView.ViewHolder(v
             }
         })
 
-        btnDone.setOnClickListener {
-            if (isDone) {
+        countOfFemale.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                txtCountOfFemale.text = seekBar?.progress.toString()
 
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
+                    countOfMale.setProgress(
+                        countBunnies?.minus(seekBar?.progress ?: 0) ?: 0,
+                        true
+                    )
+                else countOfMale.progress = countBunnies?.minus(seekBar?.progress ?: 0) ?: 0
+
+                txtCountOfMale.text =
+                    (countBunnies?.minus(seekBar?.progress ?: 0) ?: 0).toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        btnDone.setOnClickListener {
+            if (!isDone) {
+                delegate?.confirmDepositionFromMotherTask(deposition.id, txtCountOfMale.text.toString().toInt())
             }
         }
     }
@@ -66,13 +88,15 @@ class DepositionFromMotherViewHolder(val view: View) : RecyclerView.ViewHolder(v
             deposition.cageFrom.cageNumber,
             deposition.cageFrom.letter
         )
-        // todo - спросить, что здесь делать
-/*        cageTo.text = view.context.getString(
-            R.string.task_item_cage_format,
-            deposition.cageTo.farmNumber,
-            deposition.cageTo.cageNumber,
-            deposition.cageTo.letter
-        )*/
+        cageTo.text = view.context.getString(
+            R.string.task_item_deposition_from_mother_txt_cage_to,
+            deposition.maleCageTo.farmNumber,
+            deposition.maleCageTo.cageNumber,
+            deposition.maleCageTo.letter,
+            deposition.femaleCageTo.farmNumber,
+            deposition.femaleCageTo.cageNumber,
+            deposition.femaleCageTo.letter
+        )
 
         isDone = deposition.isDone
         countBunnies = deposition.countBunnies

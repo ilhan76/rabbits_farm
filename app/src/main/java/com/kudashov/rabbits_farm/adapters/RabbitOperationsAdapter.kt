@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.adapters.viewHolders.RabbitOperationViewHolder
+import com.kudashov.rabbits_farm.adapters.viewHolders.farm.RabbitOperationViewHolder
 import com.kudashov.rabbits_farm.data.domain.OperationItem
 
 class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
+import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
 import com.kudashov.rabbits_farm.screens.tasks.dialogs.DeathDialog
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
@@ -49,6 +50,7 @@ class Tasks : Fragment() {
         APP_ACTIVITY.moveUnderline(R.id.tasks)
 
         adapter = TasksAdapter()
+        adapter.attachDelegate(viewModel)
         recyclerView = binding.rvTasks
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
@@ -128,5 +130,4 @@ class Tasks : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

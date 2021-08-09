@@ -6,7 +6,9 @@ import com.kudashov.rabbits_farm.data.dto.TaskDto
 import com.kudashov.rabbits_farm.data.source.TaskProvider
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.request.DeathRequest
+import com.kudashov.rabbits_farm.net.request.task.BunnyJiggingTaskRequest
+import com.kudashov.rabbits_farm.net.request.task.DeathRequest
+import com.kudashov.rabbits_farm.net.request.task.SlaughterInspectionTaskRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -28,8 +30,7 @@ class TaskProviderHeroku : TaskProvider {
         orderBy: String?
     ): Observable<TaskResponse> {
         val response: PublishSubject<TaskResponse> = PublishSubject.create()
-
-        GlobalScope.launch(Dispatchers.IO) {
+/*        GlobalScope.launch(Dispatchers.IO) {
             Thread.sleep(2000)
             response.onNext(
                 TaskResponse(
@@ -47,9 +48,9 @@ class TaskProviderHeroku : TaskProvider {
                     )
                 )
             )
-        }
-/*        ApiClient.client.create(ApiInterface::class.java)
-            .getTasks(token, *//* page, pageSize, *//*orderBy)
+        }*/
+        ApiClient.client.create(ApiInterface::class.java)
+            .getTasks(token,  page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -59,7 +60,69 @@ class TaskProviderHeroku : TaskProvider {
             }, {
                 Log.d(TAG, "getTasks: Error")
                 response.onError(it)
-            })*/
+            })
+        return response
+    }
+
+    override fun confirmSimpleTask(token: String, id: Int): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .confirmSimpleTask(token, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmSimpleTask: Success")
+                response.onNext(it)
+            }, {
+                Log.d(TAG, "confirmSimpleTask: Error")
+                response.onError(it)
+            })
+
+        return response
+    }
+
+    override fun confirmSlaughterInspectionTask(
+        token: String,
+        id: Int,
+        weights: List<Int>
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .confirmSlaughterInspection(token, id, SlaughterInspectionTaskRequest(null, weights))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmSimpleTask: Success")
+                response.onNext(it)
+            }, {
+                Log.d(TAG, "confirmSimpleTask: Error")
+                response.onError(it)
+            })
+
+        return response
+    }
+
+    override fun confirmDepositionFromMotherTask(
+        token: String,
+        id: Int,
+        countMales: Int
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .confirmBunnyJigging(token, id, BunnyJiggingTaskRequest(null, countMales))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmSimpleTask: Success")
+                response.onNext(it)
+            }, {
+                Log.d(TAG, "confirmSimpleTask: Error")
+                response.onError(it)
+            })
+
         return response
     }
 

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.RabbitOperationsAdapter
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfUi
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
 import com.kudashov.rabbits_farm.databinding.DialogFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
@@ -97,7 +97,7 @@ class RabbitDialog : DialogFragment() {
         binding.btnWeigh.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
-            bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfUi)
+            bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfDomain)
 
             val dialogWeigh = WeighDialog.newInstance(bundle)
             val transaction = parentFragmentManager.beginTransaction()
@@ -109,7 +109,7 @@ class RabbitDialog : DialogFragment() {
         }
     }
 
-    private fun loadData(rabbit: RabbitMoreInfUi) {
+    private fun loadData(rabbit: RabbitMoreInfDomain) {
         binding.apply {
             Log.d(TAG, "loadData: ${rabbit.weight}")
             txtRabbitId.text = resources.getString(

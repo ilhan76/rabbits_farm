@@ -12,7 +12,7 @@ sealed class StateBirth {
 sealed class StateRabbit{
     object Default : StateRabbit()
     object Sending : StateRabbit()
-    class SuccessRabbit(val rabbit: RabbitMoreInfUi):StateRabbit()
+    class SuccessRabbit(val rabbit: RabbitMoreInfDomain):StateRabbit()
     class SuccessOperations(val operations: List<OperationItem>):StateRabbit()
     class Error<T>(val message: T): StateRabbit()
 }

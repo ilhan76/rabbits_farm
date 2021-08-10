@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/srt_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tasks_item_inspection_margin_horizontal"
+        android:layout_marginTop="@dimen/tasks_item_inspection_txt_margin_top"
+        android:text="@string/task_item_inspection_txt_weight_of_rabbit"
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_txt_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/tasks_item_inspection_margin_horizontal"
+        android:background="@drawable/shape_item_text"
+        android:gravity="center_vertical|start"
+        android:inputType="numberDecimal"
+        android:paddingHorizontal="@dimen/tasks_item_txt_area_padding_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/srt_to"
+        tools:text="4.456" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

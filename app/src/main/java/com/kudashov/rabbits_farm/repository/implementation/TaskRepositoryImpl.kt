@@ -54,6 +54,59 @@ class TaskRepositoryImpl(
         return response
     }
 
+    override fun confirmSimpleTask(token: String, id: Int): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+        provider.confirmSimpleTask(token, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmSimpleTask: Success")
+                response.onNext(BaseResponse(null))
+            }, {
+                Log.d(TAG, "confirmSimpleTask: Error ${it.localizedMessage}")
+                response.onError(it)
+            })
+        return response
+    }
+
+    override fun confirmSlaughterInspectionTask(
+        token: String,
+        id: Int,
+        weights: List<Double>
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+        provider.confirmSlaughterInspectionTask(token, id, weights)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmSlaughterInspectionTask: Success")
+                response.onNext(BaseResponse(null))
+            }, {
+                Log.d(TAG, "confirmSlaughterInspectionTask: Error ${it.localizedMessage}")
+                response.onError(it)
+            })
+        return response
+    }
+
+    override fun confirmDepositionFromMotherTask(
+        token: String,
+        id: Int,
+        countMales: Int
+    ): Observable<BaseResponse> {
+        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+        provider.confirmDepositionFromMotherTask(token, id, countMales)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "confirmDepositionFromMotherTask: Success")
+                response.onNext(BaseResponse(null))
+            }, {
+                Log.d(TAG, "confirmDepositionFromMotherTask: Error ${it.localizedMessage}")
+                response.onError(it)
+            })
+        return response
+    }
+
     override fun putDeath(
         token: String,
         farmNumber: Int?,

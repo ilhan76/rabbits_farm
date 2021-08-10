@@ -11,7 +11,7 @@ import com.kudashov.rabbits_farm.data.domain.KillDomain
 class KillViewHolder(val view: View, val delegate: TaskDelegate?) : RecyclerView.ViewHolder(view) {
     private val data: TextView = view.findViewById(R.id.data)
     private val numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-    private val weight: TextView = view.findViewById(R.id.txt_weight)
+    private val weight: TextView = view.findViewById(R.id.edit_txt_weight)
 
     private val btnDone: Button = view.findViewById(R.id.btn_done)
 

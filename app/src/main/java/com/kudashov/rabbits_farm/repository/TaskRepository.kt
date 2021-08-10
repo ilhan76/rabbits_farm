@@ -23,8 +23,8 @@ interface TaskRepository {
     fun confirmSlaughterInspectionTask(
         token: String,
         id: Int,
-        weights: List<Int>)
-    : Observable<BaseResponse>
+        weights: List<Double>
+    ): Observable<BaseResponse>
 
     fun confirmDepositionFromMotherTask(
         token: String,

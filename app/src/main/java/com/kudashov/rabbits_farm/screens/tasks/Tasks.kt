@@ -13,11 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
-import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
 import com.kudashov.rabbits_farm.screens.tasks.dialogs.DeathDialog
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.StateTasks
+import com.kudashov.rabbits_farm.utilits.StateTask
 
 class Tasks : Fragment() {
 
@@ -49,14 +48,23 @@ class Tasks : Fragment() {
     private fun init() {
         APP_ACTIVITY.moveUnderline(R.id.tasks)
 
+        viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+        viewModel.getStates().observe(this, this::stateProcessing)
+
         adapter = TasksAdapter()
         adapter.attachDelegate(viewModel)
         recyclerView = binding.rvTasks
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
+/*        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+            override fun loadNextPage() {
+                Log.d(TAG, "loadMoreItems: NEXT PAGE")
+                viewModel.nextPage()
 
-        viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
-        viewModel.getStates().observe(this, this::stateProcessing)
+                viewModel.getTasks(false, "")
+            }
+        })*/
 
         initListeners()
     }
@@ -95,32 +103,37 @@ class Tasks : Fragment() {
         viewModel.getTasks(isDone, null)
     }
 
-    private fun stateProcessing(state: StateTasks) {
+    private fun stateProcessing(state: StateTask) {
         when (state) {
-            is StateTasks.Default -> {
+            is StateTask.Default -> {
                 Log.d(TAG, "stateProcessing: Tasks Default")
                 loadData()
             }
-            is StateTasks.Sending -> {
+            is StateTask.Sending -> {
                 Log.d(TAG, "stateProcessing: Tasks Sending")
                 binding.txtNoItem.visibility = View.GONE
                 APP_ACTIVITY.showLoader()
             }
-            is StateTasks.ListOfTasksReceived -> {
+            is StateTask.ListOfTaskReceived -> {
                 Log.d(TAG, "stateProcessing: Tasks Success")
                 APP_ACTIVITY.hideLoader()
                 binding.txtNoItem.visibility = View.GONE
                 adapter.setList(state.list)
             }
-            is StateTasks.Error<*> -> {
+            is StateTask.Error<*> -> {
                 Log.d(TAG, "stateProcessing: Tasks Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
                 binding.txtNoItem.visibility = View.GONE
                 APP_ACTIVITY.hideLoader()
             }
-            StateTasks.NoItem -> {
+            StateTask.NoItem -> {
                 Log.d(TAG, "stateProcessing: No Item")
                 binding.txtNoItem.visibility = View.VISIBLE
+                APP_ACTIVITY.hideLoader()
+            }
+            StateTask.NotAllFieldsAreFilledIn -> {
+                Log.d(TAG, "stateProcessing: NotAllFieldsAreFilledIn")
+                Toast.makeText(context, "Заполнены не все поля", Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
             }
         }

@@ -6,5 +6,5 @@ class SlaughterInspectionTaskRequest(
     @SerializedName("completed_at")
     val completedAt: String? = null,
     @SerializedName("weights")
-    val weights: List<Int>?
+    val weights: List<Double>?
 )

@@ -30,26 +30,25 @@ class TaskProviderHeroku : TaskProvider {
         orderBy: String?
     ): Observable<TaskResponse> {
         val response: PublishSubject<TaskResponse> = PublishSubject.create()
-/*        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             Thread.sleep(2000)
             response.onNext(
                 TaskResponse(
                     "", listOf(
                         TaskDto(
                             id = 1,
-                            type = "B",
+                            type = "I",
                             date = "11.11.2021:sddvsd",
                             userId = 15,
-                            cageFrom = CageSimpleDto(1, 12, "a"),
+                            cage = CageSimpleDto(1, 12, "a"),
                             maleCageTo = CageSimpleDto(1, 14, "a"),
-                            femaleCageTo = CageSimpleDto(1, 15, "a"),
-                            countBunnies = 12
+                            countRabbit = 3
                         )
                     )
                 )
             )
-        }*/
-        ApiClient.client.create(ApiInterface::class.java)
+        }
+/*        ApiClient.client.create(ApiInterface::class.java)
             .getTasks(token,  page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -60,7 +59,7 @@ class TaskProviderHeroku : TaskProvider {
             }, {
                 Log.d(TAG, "getTasks: Error")
                 response.onError(it)
-            })
+            })*/
         return response
     }
 
@@ -85,7 +84,7 @@ class TaskProviderHeroku : TaskProvider {
     override fun confirmSlaughterInspectionTask(
         token: String,
         id: Int,
-        weights: List<Int>
+        weights: List<Double>
     ): Observable<BaseResponse> {
         val response: PublishSubject<BaseResponse> = PublishSubject.create()
 
@@ -94,10 +93,10 @@ class TaskProviderHeroku : TaskProvider {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "confirmSimpleTask: Success")
+                Log.d(TAG, "confirmSlaughterInspectionTask: Success")
                 response.onNext(it)
             }, {
-                Log.d(TAG, "confirmSimpleTask: Error")
+                Log.d(TAG, "confirmSlaughterInspectionTask: Error")
                 response.onError(it)
             })
 
@@ -116,10 +115,10 @@ class TaskProviderHeroku : TaskProvider {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "confirmSimpleTask: Success")
+                Log.d(TAG, "confirmDepositionFromMotherTask: Success")
                 response.onNext(it)
             }, {
-                Log.d(TAG, "confirmSimpleTask: Error")
+                Log.d(TAG, "confirmDepositionFromMotherTask: Error")
                 response.onError(it)
             })
 

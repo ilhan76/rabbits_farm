@@ -12,7 +12,7 @@ import com.kudashov.rabbits_farm.data.source.implementation.TaskProviderHeroku
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.TaskRepository
 import com.kudashov.rabbits_farm.repository.implementation.TaskRepositoryImpl
-import com.kudashov.rabbits_farm.utilits.StateTasks
+import com.kudashov.rabbits_farm.utilits.StateTask
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
 import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
@@ -25,7 +25,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     TaskDelegate {
 
     private val TAG: String = this::class.java.simpleName
-    private val state = MutableLiveData<StateTasks>().default(initialValue = StateTasks.Default)
+    private val state = MutableLiveData<StateTask>().default(initialValue = StateTask.Default)
     private val repository: TaskRepository = TaskRepositoryImpl(
         converter = TaskConverterImpl(),
         provider = TaskProviderHeroku()
@@ -52,7 +52,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     }
 
     fun getTasks(isDone: Boolean, orderBy: String?) {
-        state.postValue(StateTasks.Sending)
+        state.postValue(StateTask.Sending)
 
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
@@ -63,19 +63,19 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                 .subscribe { response ->
                     if (response.content != null) {
                         Log.i(TAG, "getRabbits: SUCCESS")
-                        state.postValue(StateTasks.ListOfTasksReceived(response.content))
+                        state.postValue(StateTask.ListOfTaskReceived(response.content))
                     } else {
                         Log.d(TAG, "getTasks: Error")
                         if (response.detail == ERROR_NO_ITEM) {
                             Log.d(TAG, "getTasks: No Item")
-                            state.postValue(StateTasks.NoItem)
+                            state.postValue(StateTask.NoItem)
                         }
                     }
                 })
     }
 
     fun putDeath(farmNumber: Int, cageNumber: Int, letter: String) {
-        state.postValue(StateTasks.Sending)
+        state.postValue(StateTask.Sending)
 
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
@@ -85,16 +85,16 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, "putDeath: Success")
-                    state.postValue(StateTasks.Default)
+                    state.postValue(StateTask.Default)
                 }, {
                     Log.d(TAG, "putDeath: Error")
-                    state.postValue(StateTasks.Error(it.localizedMessage))
+                    state.postValue(StateTask.Error(it.localizedMessage))
                 })
         )
     }
 
     override fun confirmSimpleTask(id: Int) {
-        state.postValue(StateTasks.Sending)
+        state.postValue(StateTask.Sending)
 
         compositeDisposable.add(
             repository.confirmSimpleTask(
@@ -105,37 +105,41 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, "confirmSimpleTask: Success")
-                    state.postValue(StateTasks.Default)
+                    state.postValue(StateTask.Default)
                 }, {
                     Log.d(TAG, "confirmSimpleTask: Error")
-                    state.postValue(StateTasks.Error(it.localizedMessage))
+                    state.postValue(StateTask.Error(it.localizedMessage))
                 })
         )
     }
 
-    override fun confirmSlaughterInspectionTask(id: Int, weights: List<Int>) {
-        state.postValue(StateTasks.Sending)
+    override fun confirmSlaughterInspectionTask(id: Int, weights: List<Double>) {
+        if (weights.isEmpty()) {
+            state.postValue(StateTask.NotAllFieldsAreFilledIn)
+        } else{
+            state.postValue(StateTask.Sending)
 
-        compositeDisposable.add(
-            repository.confirmSlaughterInspectionTask(
-                token = "Token ${pref.getString(USER_TOKEN, "")}",
-                id = id,
-                weights = weights
+            compositeDisposable.add(
+                repository.confirmSlaughterInspectionTask(
+                    token = "Token ${pref.getString(USER_TOKEN, "")}",
+                    id = id,
+                    weights = weights
+                )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        Log.d(TAG, "confirmSlaughterInspectionTask: Success")
+                        state.postValue(StateTask.Default)
+                    }, {
+                        Log.d(TAG, "confirmSlaughterInspectionTask: Error")
+                        state.postValue(StateTask.Error(it.localizedMessage))
+                    })
             )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d(TAG, "confirmSlaughterInspectionTask: Success")
-                    state.postValue(StateTasks.Default)
-                }, {
-                    Log.d(TAG, "confirmSlaughterInspectionTask: Error")
-                    state.postValue(StateTasks.Error(it.localizedMessage))
-                })
-        )
+        }
     }
 
     override fun confirmDepositionFromMotherTask(id: Int, countMales: Int) {
-        state.postValue(StateTasks.Sending)
+        state.postValue(StateTask.Sending)
 
         compositeDisposable.add(
             repository.confirmDepositionFromMotherTask(
@@ -147,15 +151,15 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d(TAG, "confirmDepositionFromMotherTask: Success")
-                    state.postValue(StateTasks.Default)
+                    state.postValue(StateTask.Default)
                 }, {
                     Log.d(TAG, "confirmDepositionFromMotherTask: Error")
-                    state.postValue(StateTasks.Error(it.localizedMessage))
+                    state.postValue(StateTask.Error(it.localizedMessage))
                 })
         )
     }
 
-    fun getStates(): MutableLiveData<StateTasks> {
+    fun getStates(): MutableLiveData<StateTask> {
         return state
     }
 

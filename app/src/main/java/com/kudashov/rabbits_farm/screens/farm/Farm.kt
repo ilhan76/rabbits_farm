@@ -26,7 +26,6 @@ import com.kudashov.rabbits_farm.utilits.StateAboutFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.sort.*
 
-
 class Farm : Fragment(), FarmDelegate {
 
     companion object {
@@ -52,7 +51,7 @@ class Farm : Fragment(), FarmDelegate {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

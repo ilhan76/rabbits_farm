@@ -25,12 +25,13 @@ sealed class StateAboutFarm {
     class Error<T>(val message: T): StateAboutFarm()
 }
 
-sealed class StateTasks {
-    object Default : StateTasks()
-    object Sending : StateTasks()
-    object NoItem: StateTasks()
-    class ListOfTasksReceived(val list: List<TaskListItemType>): StateTasks()
-    class Error<T>(val message: T): StateTasks()
+sealed class StateTask {
+    object Default : StateTask()
+    object Sending : StateTask()
+    object NoItem: StateTask()
+    object NotAllFieldsAreFilledIn: StateTask()
+    class ListOfTaskReceived(val list: List<TaskListItemType>): StateTask()
+    class Error<T>(val message: T): StateTask()
 }
 
 sealed class StateAuth {

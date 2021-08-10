@@ -7,7 +7,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 
 class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) :
     RecyclerView.ViewHolder(view) {
@@ -17,22 +17,22 @@ class RabbitViewHolder(var view: View, var delegate: FarmDelegate?) :
     private val gender: ImageView = view.findViewById(R.id.gender)
     private val type: TextView = view.findViewById(R.id.str_type)
 
-    private lateinit var rabbitItem: RabbitItem
+    private lateinit var rabbitDomain: RabbitDomain
 
     init {
         view.setOnClickListener {
-            delegate?.openMoreRabbitInfo(rabbitItem)
+            delegate?.openMoreRabbitInfo(rabbitDomain)
         }
     }
 
-    fun bind(rabbitItem: RabbitItem) {
-        this.rabbitItem = rabbitItem
+    fun bind(rabbitDomain: RabbitDomain) {
+        this.rabbitDomain = rabbitDomain
 
-        number.text = rabbitItem.numberOfCage
-        age.text = rabbitItem.age
-        type.text = rabbitItem.type
+        number.text = rabbitDomain.numberOfCage
+        age.text = rabbitDomain.age
+        type.text = rabbitDomain.type
 
-        if (rabbitItem.isMale) {
+        if (rabbitDomain.isMale) {
             gender.setImageDrawable(
                 AppCompatResources.getDrawable(
                     view.context,

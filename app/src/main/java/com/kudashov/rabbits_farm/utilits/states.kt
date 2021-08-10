@@ -14,16 +14,17 @@ sealed class StateRabbit{
     object Default : StateRabbit()
     object Sending : StateRabbit()
     class SuccessRabbit(val rabbit: RabbitMoreInfDomain):StateRabbit()
-    class SuccessOperations(val operations: List<OperationItem>):StateRabbit()
+    class SuccessOperations(val operations: List<OperationDomain>):StateRabbit()
     class Error<T>(val message: T): StateRabbit()
 }
 
-sealed class StateAboutFarm {
-    object Default : StateAboutFarm()
-    object Sending : StateAboutFarm()
-    class ListOfRabbitsReceived(val list: List<RabbitItem>): StateAboutFarm()
-    class ListOfCageReceived(val list: List<CageItem>): StateAboutFarm()
-    class Error<T>(val message: T): StateAboutFarm()
+sealed class StateFarm {
+    object Default : StateFarm()
+    object Sending : StateFarm()
+    object NoItem: StateFarm()
+    class SuccessRabbits(val list: List<RabbitDomain>): StateFarm()
+    class SuccessCage(val list: List<CageDomain>): StateFarm()
+    class Error<T>(val message: T): StateFarm()
 }
 
 sealed class StateTask {

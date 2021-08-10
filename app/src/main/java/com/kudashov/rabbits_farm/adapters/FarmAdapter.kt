@@ -8,8 +8,8 @@ import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.adapters.viewHolders.farm.CageViewHolder
 import com.kudashov.rabbits_farm.adapters.viewHolders.farm.RabbitViewHolder
 import com.kudashov.rabbits_farm.data.domain.AboutFarmListItemType
-import com.kudashov.rabbits_farm.data.domain.CageItem
-import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.CageDomain
+import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 import java.util.*
 
 class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,8 +30,8 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (listData[position]) {
-            is RabbitItem -> 1
-            is CageItem -> 2
+            is RabbitDomain -> 1
+            is CageDomain -> 2
         }
     }
 
@@ -42,9 +42,9 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is RabbitViewHolder -> {
-                holder.bind(listData[position] as RabbitItem)
+                holder.bind(listData[position] as RabbitDomain)
             }
-            is CageViewHolder -> holder.bind(listData[position] as CageItem)
+            is CageViewHolder -> holder.bind(listData[position] as CageDomain)
         }
     }
 

@@ -2,7 +2,7 @@ package com.kudashov.rabbits_farm.data.domain
 
 sealed class AboutFarmListItemType
 
-data class RabbitItem(
+data class RabbitDomain(
         val id: Int,
         val numberOfCage: String,
         val age: String,
@@ -10,7 +10,7 @@ data class RabbitItem(
         val type: String
 ) : AboutFarmListItemType()
 
-data class CageItem(
+data class CageDomain(
         val id: Int,
         val numberOfCage: String,
         val numberOfFarm: String,

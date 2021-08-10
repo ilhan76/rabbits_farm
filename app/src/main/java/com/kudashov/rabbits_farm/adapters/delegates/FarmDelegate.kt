@@ -1,7 +1,7 @@
 package com.kudashov.rabbits_farm.adapters.delegates
 
-import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 
 interface FarmDelegate {
-    fun openMoreRabbitInfo(rabbit: RabbitItem)
+    fun openMoreRabbitInfo(rabbit: RabbitDomain)
 }

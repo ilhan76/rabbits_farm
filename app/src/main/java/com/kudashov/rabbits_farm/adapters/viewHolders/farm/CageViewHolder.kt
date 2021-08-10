@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.domain.CageItem
+import com.kudashov.rabbits_farm.data.domain.CageDomain
 
 class CageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
@@ -15,7 +15,7 @@ class CageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val typeOfCage: TextView = view.findViewById(R.id.str_type_of_cage)
     private val status: TextView = view.findViewById(R.id.str_status_of_cage)
 
-    private lateinit var cageItem: CageItem
+    private lateinit var cageDomain: CageDomain
 
     init {
         view.setOnClickListener {
@@ -23,12 +23,12 @@ class CageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bind(cageItem: CageItem) {
-        this.cageItem = cageItem
+    fun bind(cageDomain: CageDomain) {
+        this.cageDomain = cageDomain
 
-        numberOfFarm.text = cageItem.numberOfFarm
-        number.text = cageItem.numberOfCage
-        typeOfCage.text = cageItem.type
-        status.text = cageItem.status
+        numberOfFarm.text = cageDomain.numberOfFarm
+        number.text = cageDomain.numberOfCage
+        typeOfCage.text = cageDomain.type
+        status.text = cageDomain.status
     }
 }

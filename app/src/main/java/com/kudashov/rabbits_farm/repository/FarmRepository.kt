@@ -1,7 +1,11 @@
 package com.kudashov.rabbits_farm.repository
 
+import com.kudashov.rabbits_farm.data.domain.CageDomain
+import com.kudashov.rabbits_farm.data.domain.OperationDomain
+import com.kudashov.rabbits_farm.data.domain.RabbitDomain
+import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
 import com.kudashov.rabbits_farm.net.response.BaseResponse
-import com.kudashov.rabbits_farm.net.response.farm.*
+import com.kudashov.rabbits_farm.net.response.RepoResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface FarmRepository {
@@ -19,7 +23,7 @@ interface FarmRepository {
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RabbitResponse>
+    ): Observable<RepoResponse<List<RabbitDomain>>>
 
     fun getCages(
         token: String,
@@ -32,11 +36,22 @@ interface FarmRepository {
         numberRabbitsFrom: Int?,
         numberRabbitsTo: Int?,
         orderBy: String?
-    ): Observable<CageResponse>
+    ): Observable<RepoResponse<List<CageDomain>>>
 
-    fun getRabbitMoreInf(token: String, id: Int): Observable<RabbitMoreInfResponse>
+    fun getRabbitMoreInf(
+        token: String,
+        id: Int
+    ): Observable<RepoResponse<RabbitMoreInfDomain>>
 
-    fun getOperations(token: String, id: Int): Observable<OperationsResponse>
+    fun getOperations(
+        token: String,
+        id: Int
+    ): Observable<RepoResponse<List<OperationDomain>>>
 
-    fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<BaseResponse>
+    fun postWeight(
+        token: String,
+        pathType: String,
+        id: Int,
+        weight: Double
+    ) : Observable<BaseResponse>
 }

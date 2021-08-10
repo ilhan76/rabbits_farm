@@ -6,14 +6,15 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
-import com.kudashov.rabbits_farm.data.converters.OperationMapper
-import com.kudashov.rabbits_farm.data.converters.RabbitMapper
+import com.kudashov.rabbits_farm.data.converters.implementation.FarmConverterImpl
+import com.kudashov.rabbits_farm.data.source.implementation.FarmProviderImpl
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
-import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryImpl
+import com.kudashov.rabbits_farm.utilits.StateFarm
 import com.kudashov.rabbits_farm.utilits.StateRabbit
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
+import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -24,9 +25,14 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
 
     private val TAG: String? = RabbitViewModel::class.java.simpleName
     private val state = MutableLiveData<StateRabbit>().default(initialValue = StateRabbit.Default)
-    private val repository: FarmRepository = FarmRepositoryHeroku()
+    private val repository: FarmRepository = FarmRepositoryImpl(
+        converter = FarmConverterImpl(),
+        provider = FarmProviderImpl()
+    )
 
-    private var rabbitDto: RabbitMoreInfDto? = null
+    private val pref: SharedPreferences = context.getSharedPreferences(
+        APP_PREFERENCE, Context.MODE_PRIVATE
+    )
 
     fun getStates(): MutableLiveData<StateRabbit> {
         return state
@@ -35,22 +41,22 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
     fun getRabbitMoreInf(id: Int) {
         state.postValue(StateRabbit.Sending)
 
-        val pref: SharedPreferences = context.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE
-        )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         repository.getRabbitMoreInf(token, id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it.detail != null && it.detail.isEmpty()) {
-                    Log.d(TAG, "getRabbitMoreInf: SUCCESS")
-                    rabbitDto = it.rabbit
-                    state.postValue(StateRabbit.SuccessRabbit(RabbitMapper.fromApiToRabbitDomain(it.rabbit!!)))
+            .subscribe { response ->
+                if (response.content != null) {
+                    Log.d(TAG, "getRabbitMoreInf: Success")
+
+                    state.postValue(StateRabbit.SuccessRabbit(response.content))
                 } else {
-                    Log.d(TAG, "getRabbitMoreInf: ERROR ${it.detail}")
-                    state.postValue(StateRabbit.Error(it.detail))
+                    Log.d(TAG, "getRabbitMoreInf: Error")
+                    when (response.detail) {
+                        ERROR_NO_ITEM -> StateFarm.NoItem
+                        else -> StateFarm.Error(response.detail)
+                    }
                 }
             }
     }
@@ -58,27 +64,21 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
     fun getOperations(id: Int) {
         state.postValue(StateRabbit.Sending)
 
-        val pref: SharedPreferences = context.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE
-        )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         repository.getOperations(token, id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it.detail == null || it.detail.isEmpty()) {
-                    Log.d(TAG, "getOperations: SUCCESS")
-                    state.postValue(
-                        StateRabbit.SuccessOperations(
-                            OperationMapper.fromApiToListItem(
-                                it.results!!
-                            )
-                        )
-                    )
+            .subscribe { response ->
+                if (response.content != null) {
+                    Log.d(TAG, "getRabbitMoreInf: Success")
+                    state.postValue(StateRabbit.SuccessOperations(response.content))
                 } else {
-                    Log.d(TAG, "getOperations: ERROR ${it.detail}")
-                    state.postValue(StateRabbit.Error(it.detail))
+                    Log.d(TAG, "getRabbitMoreInf: Error")
+                    when (response.detail) {
+                        ERROR_NO_ITEM -> StateFarm.NoItem
+                        else -> StateFarm.Error(response.detail)
+                    }
                 }
             }
     }
@@ -86,9 +86,6 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
     fun postWeight(weight: Double, type: String, id: Int) {
         state.postValue(StateRabbit.Sending)
 
-        val pref: SharedPreferences = context.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE
-        )
         val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
         var pathType = ""
@@ -102,14 +99,12 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
         repository.postWeight(token, weight = weight, id = id, pathType = pathType)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it.detail == null || it.detail.isEmpty()) {
-                    Log.d(TAG, "postWeight: Success")
-                    state.postValue(StateRabbit.Default)
-                } else {
-                    Log.d(TAG, "getOperations: Error ${it.detail}")
-                    state.postValue(StateRabbit.Error(it.detail))
-                }
-            }
+            .subscribe({
+                Log.d(TAG, "postWeight: Success")
+                state.postValue(StateRabbit.Default)
+            }, {
+                Log.d(TAG, "postWeight: Error")
+                state.postValue(StateRabbit.Error(it.localizedMessage))
+            })
     }
 }

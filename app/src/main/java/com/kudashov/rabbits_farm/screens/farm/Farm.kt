@@ -16,13 +16,13 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
-import com.kudashov.rabbits_farm.data.domain.RabbitItem
+import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
 import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
-import com.kudashov.rabbits_farm.utilits.StateAboutFarm
+import com.kudashov.rabbits_farm.utilits.StateFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.sort.*
 
@@ -206,28 +206,28 @@ class Farm : Fragment(), FarmDelegate {
         binding.spinner.adapter = spinnerAdapter
     }
 
-    private fun stateProcessing(state: StateAboutFarm) {
+    private fun stateProcessing(state: StateFarm) {
         when (state) {
-            is StateAboutFarm.Default -> {
+            is StateFarm.Default -> {
                 Log.d(TAG, "stateProcessing: Farm Default")
                 loadData()
                 APP_ACTIVITY.hideLoader()
             }
-            is StateAboutFarm.Sending -> {
+            is StateFarm.Sending -> {
                 Log.d(TAG, "stateProcessing: Farm Sending")
                 APP_ACTIVITY.showLoader()
             }
-            is StateAboutFarm.ListOfRabbitsReceived -> {
+            is StateFarm.SuccessRabbits -> {
                 Log.d(TAG, "stateProcessing: Farm Success (List Of Rabbits Received)")
                 APP_ACTIVITY.hideLoader()
                 rvAdapter.setList(state.list)
             }
-            is StateAboutFarm.ListOfCageReceived -> {
+            is StateFarm.SuccessCage -> {
                 Log.d(TAG, "stateProcessing: Farm Success (List Of Cage Received)")
                 APP_ACTIVITY.hideLoader()
                 rvAdapter.setList(state.list)
             }
-            is StateAboutFarm.Error<*> -> {
+            is StateFarm.Error<*> -> {
                 Log.d(TAG, "stateProcessing: Farm Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
@@ -235,7 +235,7 @@ class Farm : Fragment(), FarmDelegate {
         }
     }
 
-    override fun openMoreRabbitInfo(rabbit: RabbitItem) {
+    override fun openMoreRabbitInfo(rabbit: RabbitDomain) {
         Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
 
         val bundle = Bundle()

@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.viewHolders.farm.RabbitOperationViewHolder
-import com.kudashov.rabbits_farm.data.domain.OperationItem
+import com.kudashov.rabbits_farm.data.domain.OperationDomain
 
 class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val list: MutableList<OperationItem> = ArrayList()
+    private val list: MutableList<OperationDomain> = ArrayList()
 
-    fun setList(newList: List<OperationItem>){
+    fun setList(newList: List<OperationDomain>){
         list.clear()
         list.addAll(newList)
 

@@ -8,7 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
-import com.kudashov.rabbits_farm.data.domain.BirthListItem
+import com.kudashov.rabbits_farm.data.domain.BirthDomain
 
 class BirthViewHolder(val view: View, private val delegate: BirthDelegate?) :
     RecyclerView.ViewHolder(view) {
@@ -20,28 +20,28 @@ class BirthViewHolder(val view: View, private val delegate: BirthDelegate?) :
     private val btnNotFertilized: Button = view.findViewById(R.id.btn_not_fertilized)
     private val btnTakeBirths: Button = view.findViewById(R.id.btn_take_births)
 
-    private lateinit var birthListItem: BirthListItem
+    private lateinit var birthDomain: BirthDomain
 
     init {
         btnTakeBirths.setOnClickListener {
-            delegate?.takeBirth(birthListItem.id)
+            delegate?.takeBirth(birthDomain.id)
         }
 
         btnFertilizes.setOnClickListener {
-            delegate?.confirmPregnancy(birthListItem.id, true)
+            delegate?.confirmPregnancy(birthDomain.id, true)
         }
         btnNotFertilized.setOnClickListener {
-            delegate?.confirmPregnancy(birthListItem.id, false)
+            delegate?.confirmPregnancy(birthDomain.id, false)
         }
     }
 
-    fun bind(birthListItem: BirthListItem) {
-        this.birthListItem = birthListItem
+    fun bind(birthDomain: BirthDomain) {
+        this.birthDomain = birthDomain
 
-        countOfDay.text = birthListItem.durationPregnancy
-        numberOfCage.text = birthListItem.numberOfCage
+        countOfDay.text = birthDomain.durationPregnancy
+        numberOfCage.text = birthDomain.numberOfCage
 
-        if (birthListItem.isConfirmed) {
+        if (birthDomain.isConfirmed) {
             isConfirmed.setImageDrawable(AppCompatResources.getDrawable(view.context, R.drawable.ic_confirmed))
             btnTakeBirths.visibility = View.VISIBLE
 

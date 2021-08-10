@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Rabbits</string>
 
-    <!--IN CODE-->
-    <string name="error_receiving_data">Ошибка получения данных с сервера</string>
-    <!--IN CODE-->
+    <!-- Common -->
+    <string name="common_state_no_item">Список пуст</string>
+    <!-- Common -->
 
     <!-- About Farm -->
     <!-- About Farm Rabbits -->

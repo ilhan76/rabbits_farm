@@ -2,7 +2,7 @@ package com.kudashov.rabbits_farm.data.domain
 
 sealed class BirthListItemTypes
 
-data class BirthListItem(
+data class BirthDomain(
         val id: Int,
         var numberOfCage: String,
         var durationPregnancy: String,

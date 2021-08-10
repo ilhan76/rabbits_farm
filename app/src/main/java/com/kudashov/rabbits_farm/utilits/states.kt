@@ -5,7 +5,8 @@ import com.kudashov.rabbits_farm.data.domain.*
 sealed class StateBirth {
     object Default : StateBirth()
     object Sending : StateBirth()
-    class ListOfBirthReceived(val list: List<BirthListItemTypes>): StateBirth()
+    object NoItem: StateBirth()
+    class SuccessBirth(val list: List<BirthListItemTypes>): StateBirth()
     class Error<T>(val message: T): StateBirth()
 }
 

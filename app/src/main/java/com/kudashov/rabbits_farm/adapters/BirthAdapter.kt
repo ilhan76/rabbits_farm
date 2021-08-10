@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.delegates.BirthDelegate
 import com.kudashov.rabbits_farm.adapters.viewHolders.BirthViewHolder
-import com.kudashov.rabbits_farm.data.domain.BirthListItem
+import com.kudashov.rabbits_farm.data.domain.BirthDomain
 import com.kudashov.rabbits_farm.data.domain.BirthListItemTypes
 
 class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -31,13 +31,13 @@ class BirthAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (listOfData[position]) {
-            is BirthListItem -> 0
+            is BirthDomain -> 0
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is BirthViewHolder -> holder.bind(listOfData[position] as BirthListItem)
+            is BirthViewHolder -> holder.bind(listOfData[position] as BirthDomain)
         }
     }
 

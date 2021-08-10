@@ -67,7 +67,7 @@ class RabbitMapper {
             } else "???"
         }
 
-        fun fromApiToRabbitUi(rabbit: RabbitMoreInfDto) = RabbitMoreInfDomain(
+        fun fromApiToRabbitDomain(rabbit: RabbitMoreInfDto) = RabbitMoreInfDomain(
             rabbit.id,
             rabbit.is_male,
             getBirthday(rabbit.birthday),
@@ -90,7 +90,6 @@ class RabbitMapper {
                 "$birthday"
             } else "???"
         }
-
         private fun getStatuses(statuses: List<String>): String {
             var res = ""
             for (i in STATUSES_RABBIT) {

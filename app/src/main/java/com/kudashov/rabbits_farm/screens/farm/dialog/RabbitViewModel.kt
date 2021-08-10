@@ -47,7 +47,7 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
                 if (it.detail != null && it.detail.isEmpty()) {
                     Log.d(TAG, "getRabbitMoreInf: SUCCESS")
                     rabbitDto = it.rabbit
-                    state.postValue(StateRabbit.SuccessRabbit(RabbitMapper.fromApiToRabbitUi(it.rabbit!!)))
+                    state.postValue(StateRabbit.SuccessRabbit(RabbitMapper.fromApiToRabbitDomain(it.rabbit!!)))
                 } else {
                     Log.d(TAG, "getRabbitMoreInf: ERROR ${it.detail}")
                     state.postValue(StateRabbit.Error(it.detail))

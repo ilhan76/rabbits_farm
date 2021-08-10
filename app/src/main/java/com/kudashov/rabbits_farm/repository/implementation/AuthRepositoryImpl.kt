@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 
-class AuthRepositoryHeroku: AuthRepository {
+class AuthRepositoryImpl: AuthRepository {
     private val TAG: String = this::class.java.simpleName
 
     override fun auth(username: String, pass: String): Observable<AuthResponse> {

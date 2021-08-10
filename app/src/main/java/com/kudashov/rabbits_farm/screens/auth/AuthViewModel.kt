@@ -9,22 +9,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
-import com.kudashov.rabbits_farm.net.response.EchoResponse
 import com.kudashov.rabbits_farm.repository.AuthRepository
-import com.kudashov.rabbits_farm.repository.implementation.AuthRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.implementation.AuthRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class AuthViewModel(val context: Application) : AndroidViewModel(context) {
 
     private val TAG: String = this::class.java.simpleName
     private val state: MutableLiveData<StateAuth> = MutableLiveData()
-    private val repository: AuthRepository = AuthRepositoryHeroku()
+    private val repository: AuthRepository = AuthRepositoryImpl()
     private val compositeDisposable = CompositeDisposable()
 
     fun auth(username: String, pass: String) {

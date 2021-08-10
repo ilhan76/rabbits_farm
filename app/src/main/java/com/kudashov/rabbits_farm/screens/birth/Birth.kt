@@ -56,7 +56,7 @@ class Birth : Fragment(), BirthDelegate {
 
         adapter = BirthAdapter()
         adapter.attachDelegate(this)
-        recyclerView = binding.birthList
+        recyclerView = binding.rvBirth
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
@@ -116,16 +116,24 @@ class Birth : Fragment(), BirthDelegate {
             is StateBirth.Sending -> {
                 Log.d(TAG, "stateProcessing: Birth Sending")
                 APP_ACTIVITY.showLoader()
+                binding.txtNoItem.visibility = View.GONE
             }
-            is StateBirth.ListOfBirthReceived -> {
+            is StateBirth.SuccessBirth -> {
                 Log.d(TAG, "stateProcessing: Birth Success")
                 adapter.setList(state.list)
                 APP_ACTIVITY.hideLoader()
+                binding.txtNoItem.visibility = View.GONE
             }
             is StateBirth.Error<*> -> {
                 Log.d(TAG, "stateProcessing: Birth Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
+                binding.txtNoItem.visibility = View.GONE
+            }
+            StateBirth.NoItem -> {
+                Log.d(TAG, "stateProcessing: No Item")
+                APP_ACTIVITY.hideLoader()
+                binding.txtNoItem.visibility = View.VISIBLE
             }
         }
     }

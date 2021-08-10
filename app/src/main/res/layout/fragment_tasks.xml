@@ -118,7 +118,7 @@
         android:background="@drawable/shape_menu"
         android:visibility="gone"
         android:paddingHorizontal="10dp"
-        android:text="Список задач пуст"
+        android:text="@string/common_state_no_item"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

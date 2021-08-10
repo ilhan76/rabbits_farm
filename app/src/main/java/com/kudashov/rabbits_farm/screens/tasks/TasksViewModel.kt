@@ -66,9 +66,9 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                         state.postValue(StateTask.ListOfTaskReceived(response.content))
                     } else {
                         Log.d(TAG, "getTasks: Error")
-                        if (response.detail == ERROR_NO_ITEM) {
-                            Log.d(TAG, "getTasks: No Item")
-                            state.postValue(StateTask.NoItem)
+                        when (response.detail) {
+                            ERROR_NO_ITEM -> state.postValue(StateTask.NoItem)
+                            else -> StateTask.Error("Unknown error ${response.detail}")
                         }
                     }
                 })

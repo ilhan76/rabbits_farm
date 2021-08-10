@@ -20,7 +20,6 @@ class InspectionViewHolder(val view: View, val delegate: TaskDelegate?) :
     private val rvWeight: RecyclerView = view.findViewById(R.id.rvWeight)
     private var adapter: TaskWeightAdapter = TaskWeightAdapter()
 
-    // todo - список для взвешивания
     private val btnDone: Button = view.findViewById(R.id.btn_done)
 
     private lateinit var inspection: InspectionDomain

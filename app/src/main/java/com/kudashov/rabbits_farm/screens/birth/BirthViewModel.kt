@@ -6,15 +6,17 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.kudashov.rabbits_farm.data.converters.BirthMapper
-import com.kudashov.rabbits_farm.data.domain.BirthListItem
+import com.kudashov.rabbits_farm.data.converters.implementation.BirthConverterImpl
+import com.kudashov.rabbits_farm.data.domain.BirthDomain
+import com.kudashov.rabbits_farm.data.source.implementation.BirthProviderHeroku
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
 import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
 import com.kudashov.rabbits_farm.repository.BirthRepository
-import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryHeroku
+import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.StateBirth
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
+import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -24,9 +26,12 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
     private val TAG: String = this::class.java.simpleName
 
     private val state = MutableLiveData<StateBirth>().default(initialValue = StateBirth.Default)
-    private val repository: BirthRepository = BirthRepositoryHeroku()
+    private val repository: BirthRepository = BirthRepositoryImpl(
+        converter = BirthConverterImpl(),
+        provider = BirthProviderHeroku()
+    )
 
-    private val listOfBirth: MutableList<BirthListItem> = ArrayList()
+    private val listOfBirth: MutableList<BirthDomain> = ArrayList()
 
     private var page: Int = 1
     private val pageSize: Int = 50
@@ -58,18 +63,15 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
-                if (response.detail == null || response.detail.isEmpty()) {
+                if (response.content != null){
                     Log.d(TAG, "getBirth: Success")
-                    state.postValue(
-                        StateBirth.ListOfBirthReceived(
-                            BirthMapper.fromApiToListItem(
-                                response.results!!
-                            )
-                        )
-                    )
+                    state.postValue(StateBirth.SuccessBirth(response.content))
                 } else {
-                    Log.d(TAG, "getBirth: ${response.detail}")
-                    state.postValue(StateBirth.Error(response.detail))
+                    Log.d(TAG, "getBirth: Error")
+                    when(response.detail){
+                        ERROR_NO_ITEM -> state.postValue(StateBirth.NoItem)
+                        else -> state.postValue(StateBirth.Error("Unknown error ${response.detail}"))
+                    }
                 }
             }
     }

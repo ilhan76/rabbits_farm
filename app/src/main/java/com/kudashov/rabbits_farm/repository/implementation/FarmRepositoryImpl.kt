@@ -38,8 +38,9 @@ class FarmRepositoryImpl(
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RepoResponse<List<RabbitDomain>>> {
-        val resp: PublishSubject<RepoResponse<List<RabbitDomain>>> = PublishSubject.create()
+    ): Observable<Pair<Int, RepoResponse<List<RabbitDomain>>>> {
+        val resp: PublishSubject<Pair<Int, RepoResponse<List<RabbitDomain>>>> =
+            PublishSubject.create()
 
         provider.getRabbits(
             token,
@@ -61,15 +62,17 @@ class FarmRepositoryImpl(
             .subscribe({
                 Log.d(TAG, "getRabbits: Success")
                 resp.onNext(
-                    RepoResponse(
-                        it.results?.map { rabbitDto ->
-                            converter.convertRabbitFromApiToDomain(rabbitDto)
-                        }, it.detail
+                    Pair(
+                        it.count, RepoResponse(
+                            it.results?.map { rabbitDto ->
+                                converter.convertRabbitFromApiToDomain(rabbitDto)
+                            }, it.detail
+                        )
                     )
                 )
             }, {
                 Log.d(TAG, "getRabbits: Error")
-                resp.onNext(RepoResponse(null, it.localizedMessage))
+                resp.onNext(Pair(0, RepoResponse<List<RabbitDomain>>(null, it.localizedMessage)))
             })
 
         return resp
@@ -86,8 +89,9 @@ class FarmRepositoryImpl(
         numberRabbitsFrom: Int?,
         numberRabbitsTo: Int?,
         orderBy: String?
-    ): Observable<RepoResponse<List<CageDomain>>> {
-        val resp: PublishSubject<RepoResponse<List<CageDomain>>> = PublishSubject.create()
+    ): Observable<Pair<Int, RepoResponse<List<CageDomain>>>> {
+        val resp: PublishSubject<Pair<Int, RepoResponse<List<CageDomain>>>> =
+            PublishSubject.create()
 
         provider.getCages(
             token,
@@ -106,15 +110,16 @@ class FarmRepositoryImpl(
             .subscribe({
                 Log.d(TAG, "getCages: Success")
                 resp.onNext(
-                    RepoResponse(
-                        it.results?.map { cageDto ->
-                            converter.convertCageFromApiToDomain(cageDto)
-                        }, it.detail
+                    Pair(it.count, RepoResponse(
+                            it.results?.map { cageDto ->
+                                converter.convertCageFromApiToDomain(cageDto)
+                            }, it.detail
+                        )
                     )
                 )
             }, {
                 Log.d(TAG, "getCages: Error")
-                resp.onNext(RepoResponse(null, it.localizedMessage))
+                resp.onNext(Pair(0, RepoResponse<List<CageDomain>>(null, it.localizedMessage)))
             })
 
         return resp

@@ -30,7 +30,7 @@ class TaskProviderHeroku : TaskProvider {
         orderBy: String?
     ): Observable<TaskResponse> {
         val response: PublishSubject<TaskResponse> = PublishSubject.create()
-        GlobalScope.launch(Dispatchers.IO) {
+/*        GlobalScope.launch(Dispatchers.IO) {
             Thread.sleep(2000)
             response.onNext(
                 TaskResponse(
@@ -47,8 +47,8 @@ class TaskProviderHeroku : TaskProvider {
                     )
                 )
             )
-        }
-/*        ApiClient.client.create(ApiInterface::class.java)
+        }*/
+        ApiClient.client.create(ApiInterface::class.java)
             .getTasks(token,  page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -59,7 +59,7 @@ class TaskProviderHeroku : TaskProvider {
             }, {
                 Log.d(TAG, "getTasks: Error")
                 response.onError(it)
-            })*/
+            })
         return response
     }
 

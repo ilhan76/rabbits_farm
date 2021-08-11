@@ -60,8 +60,8 @@ class FarmProviderImpl : FarmProvider {
                 Log.d(TAG, "onError: ${it?.localizedMessage}")
                 resp.onNext(
                     RabbitResponse(
-                        it?.localizedMessage,
                         0,
+                        it?.localizedMessage,
                         null
                     )
                 )
@@ -106,6 +106,7 @@ class FarmProviderImpl : FarmProvider {
                 Log.d(TAG, "onError: ${it?.localizedMessage}")
                 resp.onNext(
                     CageResponse(
+                        0,
                         it?.localizedMessage,
                         null
                     )

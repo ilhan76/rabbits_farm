@@ -23,7 +23,7 @@ interface FarmRepository {
         cageNumberTo: Int?,
         isMale: Int?,
         orderBy: String?
-    ): Observable<RepoResponse<List<RabbitDomain>>>
+    ): Observable<Pair<Int, RepoResponse<List<RabbitDomain>>>>
 
     fun getCages(
         token: String,
@@ -36,7 +36,7 @@ interface FarmRepository {
         numberRabbitsFrom: Int?,
         numberRabbitsTo: Int?,
         orderBy: String?
-    ): Observable<RepoResponse<List<CageDomain>>>
+    ): Observable<Pair<Int, RepoResponse<List<CageDomain>>>>
 
     fun getRabbitMoreInf(
         token: String,

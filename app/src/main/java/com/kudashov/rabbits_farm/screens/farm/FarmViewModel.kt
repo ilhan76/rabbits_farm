@@ -43,6 +43,7 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
     private val listOfRabbit: MutableList<RabbitDomain> = ArrayList()
 
     private var page: Int = 1
+    private var maxPage: Int = 1
     private val pageSize: Int = 50
 
     fun nextPage() {
@@ -56,72 +57,79 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
     }
 
     fun getRabbits() {
-        state.postValue(StateFarm.Sending)
+        if (page <= maxPage){
+            state.postValue(StateFarm.Sending)
 
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+            val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        repository.getRabbits(
-            token,
-            page,
-            pageSize,
-            RabbitFilter.farmNumber,
-            RabbitFilter.type,
-            RabbitFilter.breed,
-            RabbitFilter.status,
-            RabbitFilter.ageFrom,
-            RabbitFilter.ageTo,
-            RabbitFilter.cageNumberFrom,
-            RabbitFilter.cageNumberTo,
-            RabbitFilter.isMale,
-            RabbitFilter.orderBy
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response ->
-                if (response.content != null){
-                    Log.d(TAG, "getRabbits: Success")
-                    state.postValue(StateFarm.SuccessRabbits(response.content))
-                } else {
-                    Log.d(TAG, "getRabbits: Error")
-                    when(response.detail){
-                        ERROR_NO_ITEM -> StateFarm.NoItem
-                        else -> StateFarm.Error(response.detail)
+            repository.getRabbits(
+                token,
+                page,
+                pageSize,
+                RabbitFilter.farmNumber,
+                RabbitFilter.type,
+                RabbitFilter.breed,
+                RabbitFilter.status,
+                RabbitFilter.ageFrom,
+                RabbitFilter.ageTo,
+                RabbitFilter.cageNumberFrom,
+                RabbitFilter.cageNumberTo,
+                RabbitFilter.isMale,
+                RabbitFilter.orderBy
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { response ->
+                    maxPage = (response.first / pageSize) + 1
+                    if (response.second.content != null){
+                        Log.d(TAG, "getRabbits: Success")
+                        listOfRabbit.addAll(response.second.content!!)
+                        state.postValue(StateFarm.SuccessRabbits(listOfRabbit))
+                    } else {
+                        Log.d(TAG, "getRabbits: Error")
+                        when(response.second.detail){
+                            ERROR_NO_ITEM -> StateFarm.NoItem
+                            else -> StateFarm.Error(response.second.detail)
+                        }
                     }
                 }
-            }
+        }
     }
 
     fun getCages() {
-        state.postValue(StateFarm.Sending)
+        if (page <= maxPage){
+            state.postValue(StateFarm.Sending)
+            val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
-
-        repository.getCages(
-            token,
-            page,
-            pageSize,
-            CageFilter.farmNumber,
-            CageFilter.status,
-            CageFilter.type,
-            CageFilter.isParallel,
-            CageFilter.countOfRabbitFrom,
-            CageFilter.countOfRabbitTo,
-            CageFilter.orderBy
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response ->
-                if (response.content != null){
-                    Log.d(TAG, "getCages: Success")
-                    state.postValue(StateFarm.SuccessCage(response.content))
-                } else {
-                    Log.d(TAG, "getCages: Error")
-                    when(response.detail){
-                        ERROR_NO_ITEM -> StateFarm.NoItem
-                        else -> StateFarm.Error(response.detail)
+            repository.getCages(
+                token,
+                page,
+                pageSize,
+                CageFilter.farmNumber,
+                CageFilter.status,
+                CageFilter.type,
+                CageFilter.isParallel,
+                CageFilter.countOfRabbitFrom,
+                CageFilter.countOfRabbitTo,
+                CageFilter.orderBy
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { response ->
+                    maxPage = (response.first / pageSize) + 1
+                    if (response.second.content != null){
+                        Log.d(TAG, "getCages: Success")
+                        listOfCage.addAll(response.second.content!!)
+                        state.postValue(StateFarm.SuccessCage(listOfCage))
+                    } else {
+                        Log.d(TAG, "getCages: Error")
+                        when(response.second.detail){
+                            ERROR_NO_ITEM -> StateFarm.NoItem
+                            else -> StateFarm.Error(response.second.detail)
+                        }
                     }
                 }
-            }
+        }
     }
 
     fun getStates(): MutableLiveData<StateFarm> {

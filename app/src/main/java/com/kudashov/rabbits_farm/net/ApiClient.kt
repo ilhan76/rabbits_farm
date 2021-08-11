@@ -13,6 +13,7 @@ class ApiClient {
 
     companion object {
         private const val baseUrl: String = "https://rabbit-api--test.herokuapp.com/"
+        //private const val baseUrl: String = "http://servachok2021.ddns.net:8000/"
         var retrofit: Retrofit? = null
 
         val client: Retrofit

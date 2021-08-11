@@ -129,6 +129,7 @@ class Tasks : Fragment() {
             StateTask.NoItem -> {
                 Log.d(TAG, "stateProcessing: No Item")
                 binding.txtNoItem.visibility = View.VISIBLE
+                adapter.setList(emptyList())
                 APP_ACTIVITY.hideLoader()
             }
             StateTask.NotAllFieldsAreFilledIn -> {

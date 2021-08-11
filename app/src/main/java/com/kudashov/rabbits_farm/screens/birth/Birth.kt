@@ -60,7 +60,7 @@ class Birth : Fragment(), BirthDelegate {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
-        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+/*        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
             override fun loadNextPage() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
@@ -70,7 +70,7 @@ class Birth : Fragment(), BirthDelegate {
                 else
                     viewModel.getBirth(isConfirmed, null)
             }
-        })
+        })*/
 
         viewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)
@@ -133,6 +133,7 @@ class Birth : Fragment(), BirthDelegate {
             StateBirth.NoItem -> {
                 Log.d(TAG, "stateProcessing: No Item")
                 APP_ACTIVITY.hideLoader()
+                adapter.setList(emptyList())
                 binding.txtNoItem.visibility = View.VISIBLE
             }
         }

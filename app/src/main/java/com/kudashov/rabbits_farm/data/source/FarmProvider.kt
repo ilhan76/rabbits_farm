@@ -1,10 +1,8 @@
 package com.kudashov.rabbits_farm.data.source
 
 import com.kudashov.rabbits_farm.net.response.BaseResponse
-import com.kudashov.rabbits_farm.net.response.farm.CageResponse
-import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
-import com.kudashov.rabbits_farm.net.response.farm.RabbitMoreInfResponse
-import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
+import com.kudashov.rabbits_farm.net.response.RepoResponse
+import com.kudashov.rabbits_farm.net.response.farm.*
 import io.reactivex.rxjava3.core.Observable
 
 interface FarmProvider {
@@ -37,9 +35,38 @@ interface FarmProvider {
         orderBy: String?
     ): Observable<CageResponse>
 
-    fun getRabbitMoreInf(token: String, id: Int): Observable<RabbitMoreInfResponse>
+    fun getRabbitMoreInf(
+        token: String,
+        id: Int
+    ): Observable<RabbitMoreInfResponse>
 
-    fun getOperations(token: String, id: Int): Observable<OperationsResponse>
+    fun getOperations(
+        token: String,
+        id: Int
+    ): Observable<OperationsResponse>
 
-    fun postWeight(token: String, pathType: String, id: Int, weight: Double) : Observable<BaseResponse>
+    fun isRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<IsRecastResponse>
+
+    fun createRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<BaseResponse>
+
+    fun deleteRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<BaseResponse>
+
+    fun postWeight(
+        token: String,
+        pathType: String,
+        id: Int,
+        weight: Double
+    ) : Observable<BaseResponse>
 }

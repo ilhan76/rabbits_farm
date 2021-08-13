@@ -117,7 +117,8 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="@dimen/standard_margin"
         android:background="@null"
-        android:src="@drawable/ic_btn_change_type"
+        android:src="@drawable/ic_btn_change_type_blue"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

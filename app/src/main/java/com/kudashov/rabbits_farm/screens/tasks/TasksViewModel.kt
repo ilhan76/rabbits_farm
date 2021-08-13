@@ -35,7 +35,9 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
 
     private var deathCause: String? = null
     private val listOfTask: MutableList<TaskListItemType> = ArrayList()
+
     private var page: Int = 1
+    private var maxPage = 1
     private val pageSize: Int = 50
 
     fun nextPage() {
@@ -52,26 +54,30 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     }
 
     fun getTasks(isDone: Boolean, orderBy: String?) {
-        state.postValue(StateTask.Sending)
+        if (page <= maxPage) {
+            state.postValue(StateTask.Sending)
 
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+            val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        compositeDisposable.add(
-            repository.getTasks(token, isDone, page, pageSize, orderBy)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { response ->
-                    if (response.content != null) {
-                        Log.i(TAG, "getRabbits: SUCCESS")
-                        state.postValue(StateTask.ListOfTaskReceived(response.content))
-                    } else {
-                        Log.d(TAG, "getTasks: Error")
-                        when (response.detail) {
-                            ERROR_NO_ITEM -> state.postValue(StateTask.NoItem)
-                            else -> StateTask.Error("Unknown error ${response.detail}")
+            compositeDisposable.add(
+                repository.getTasks(token, isDone, page, pageSize, orderBy)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { response ->
+                        maxPage = response.first / pageSize + 1
+                        if (response.second.content != null) {
+                            Log.i(TAG, "getRabbits: SUCCESS")
+                            listOfTask.addAll(response.second.content!!)
+                            state.postValue(StateTask.ListOfTaskReceived(listOfTask))
+                        } else {
+                            Log.d(TAG, "getTasks: Error")
+                            when (response.second.detail) {
+                                ERROR_NO_ITEM -> state.postValue(StateTask.NoItem)
+                                else -> StateTask.Error("Unknown error ${response.second.detail}")
+                            }
                         }
-                    }
-                })
+                    })
+        }
     }
 
     fun putDeath(farmNumber: Int, cageNumber: Int, letter: String) {
@@ -116,7 +122,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     override fun confirmSlaughterInspectionTask(id: Int, weights: List<Double>) {
         if (weights.isEmpty()) {
             state.postValue(StateTask.NotAllFieldsAreFilledIn)
-        } else{
+        } else {
             state.postValue(StateTask.Sending)
 
             compositeDisposable.add(

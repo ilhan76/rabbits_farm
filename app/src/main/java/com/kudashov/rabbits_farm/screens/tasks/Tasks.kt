@@ -15,6 +15,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
 import com.kudashov.rabbits_farm.screens.tasks.dialogs.DeathDialog
+import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateTask
 
@@ -57,14 +58,14 @@ class Tasks : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
-/*        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
             override fun loadNextPage() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
 
                 viewModel.getTasks(false, "")
             }
-        })*/
+        })
 
         initListeners()
     }
@@ -93,6 +94,8 @@ class Tasks : Fragment() {
     }
 
     private fun loadData(){
+        viewModel.cleanPage()
+
         if (isDone){
             binding.btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_grey)

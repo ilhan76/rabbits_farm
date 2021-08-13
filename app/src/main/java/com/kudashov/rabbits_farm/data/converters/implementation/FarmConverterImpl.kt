@@ -67,11 +67,11 @@ class FarmConverterImpl : FarmConverter {
     }
     private fun getType(currentType: String): String {
         return when (currentType) {
-            RABBIT_TYPE_BABY -> "Малыш"
-            RABBIT_TYPE_DEATH -> "Мертвый"
-            RABBIT_TYPE_FATTENING -> "Откорм."
-            RABBIT_TYPE_MATHER -> "Самка"
-            RABBIT_TYPE_FATHER -> "Самец"
+            RABBIT_TYPE_BABY -> RABBIT_TYPE_UI_BABY
+            RABBIT_TYPE_DEATH -> RABBIT_TYPE_UI_DEATH
+            RABBIT_TYPE_FATTENING -> RABBIT_TYPE_UI_FATTENING
+            RABBIT_TYPE_MATHER -> RABBIT_TYPE_UI_MATHER
+            RABBIT_TYPE_FATHER -> RABBIT_TYPE_UI_FATHER
             else -> "???"
         }
     }

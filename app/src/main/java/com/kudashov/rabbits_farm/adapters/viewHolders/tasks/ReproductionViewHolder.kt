@@ -38,9 +38,9 @@ class ReproductionViewHolder(val view: View, val delegate: TaskDelegate?) : Recy
         )
         takeTo.text = view.context.getString(
             R.string.task_item_cage_format,
-            reproduction.cageFrom.farmNumber,
-            reproduction.cageFrom.cageNumber,
-            reproduction.cageFrom.letter
+            reproduction.cageTo.farmNumber,
+            reproduction.cageTo.cageNumber,
+            reproduction.cageTo.letter
         )
         isDone = reproduction.isDone
 

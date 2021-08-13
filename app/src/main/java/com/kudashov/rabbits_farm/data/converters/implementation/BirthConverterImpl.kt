@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.data.converters.implementation
 
 import android.os.Build
+import android.util.Log
 import com.kudashov.rabbits_farm.data.converters.BirthConverter
 import com.kudashov.rabbits_farm.data.domain.BirthDomain
 import com.kudashov.rabbits_farm.data.dto.BirthDto
@@ -24,7 +25,9 @@ class BirthConverterImpl : BirthConverter{
     private fun getNumberOfCage(cage: CageDto): String {
         return cage.farm_number.toString() + cage.number.toString() + cage.letter
     }
+
     private fun getDurationPregnancy(birthday: String?): String {
+        Log.d("TAG", "getDurationPregnancy: $birthday")
         return if (birthday != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = dateFormat.format(Date())
@@ -36,7 +39,7 @@ class BirthConverterImpl : BirthConverter{
                 LocalDate.parse(today.substring(0, 10), format)
             )
 
-            "$difference"
+            "$difference дн"
         } else "???"
     }
 }

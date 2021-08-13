@@ -48,6 +48,24 @@ interface FarmRepository {
         id: Int
     ): Observable<RepoResponse<List<OperationDomain>>>
 
+    fun isRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<RepoResponse<Boolean>>
+
+    fun createRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<BaseResponse>
+
+    fun deleteRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<BaseResponse>
+
     fun postWeight(
         token: String,
         pathType: String,

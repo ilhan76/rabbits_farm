@@ -110,7 +110,8 @@ class FarmRepositoryImpl(
             .subscribe({
                 Log.d(TAG, "getCages: Success")
                 resp.onNext(
-                    Pair(it.count, RepoResponse(
+                    Pair(
+                        it.count, RepoResponse(
                             it.results?.map { cageDto ->
                                 converter.convertCageFromApiToDomain(cageDto)
                             }, it.detail
@@ -170,6 +171,58 @@ class FarmRepositoryImpl(
             }, {
                 Log.d(TAG, "getOperations: Error")
                 resp.onNext(RepoResponse(null, it.localizedMessage))
+            })
+
+        return resp
+    }
+
+    override fun isRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<RepoResponse<Boolean>> {
+        val resp: PublishSubject<RepoResponse<Boolean>> = PublishSubject.create()
+
+        provider.isRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "isRecast: Success")
+                resp.onNext(RepoResponse(it.waitingRecast, null))
+            }, {
+                resp.onError(it)
+            })
+
+        return resp
+    }
+
+    override fun createRecast(token: String, pathType: String, id: Int): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        provider.createRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "isRecast: Success")
+                resp.onNext(BaseResponse(null))
+            }, {
+                resp.onError(it)
+            })
+
+        return resp
+    }
+
+    override fun deleteRecast(token: String, pathType: String, id: Int): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        provider.deleteRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "isRecast: Success")
+                resp.onNext(BaseResponse(null))
+            }, {
+                resp.onError(it)
             })
 
         return resp

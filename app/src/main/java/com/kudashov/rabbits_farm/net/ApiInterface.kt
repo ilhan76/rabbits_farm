@@ -14,6 +14,7 @@ import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.net.response.farm.CageResponse
 import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
 import com.kudashov.rabbits_farm.net.response.BaseResponse
+import com.kudashov.rabbits_farm.net.response.farm.IsRecastResponse
 import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
@@ -57,7 +58,7 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<CageResponse>
 
-    @GET("api/rabbit/{id}")
+    @GET("api/rabbit/{id}/")
     fun getRabbitMoreInf(
         @Header("Authorisation") token: String,
         @Path("id") id: Int
@@ -68,6 +69,27 @@ interface ApiInterface {
         @Header("Authorisation") token: String,
         @Query("rabbit_id") id: Int
     ): Observable<OperationsResponse>
+
+    @GET("api/rabbit/{pathType}/{id}/recast/")
+    fun isRecast(
+        @Header("Authorisation") token: String,
+        @Path("pathType") pathType: String,
+        @Path("id") id: Int
+    ) : Observable<IsRecastResponse>
+
+    @POST("api/rabbit/{pathType}/{id}/recast/")
+    fun createRecast(
+        @Header("Authorisation") token: String,
+        @Path("pathType") pathType: String,
+        @Path("id") id: Int
+    ): Observable<BaseResponse>
+
+    @DELETE("api/rabbit/{pathType}/{id}/recast/")
+    fun deleteRecast(
+        @Header("Authorisation") token: String,
+        @Path("pathType") pathType: String,
+        @Path("id") id: Int
+    ): Observable<BaseResponse>
 
     @PUT("api/rabbit/{pathType}/{id}/")
     fun postWeight(

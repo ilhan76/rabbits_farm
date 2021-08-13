@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,13 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.RabbitOperationsAdapter
+import com.kudashov.rabbits_farm.data.domain.OperationDomain
 import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
 import com.kudashov.rabbits_farm.databinding.DialogFragmentRabbitMoreInfoBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
-import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
-import com.kudashov.rabbits_farm.utilits.StateRabbit
+import com.kudashov.rabbits_farm.utilits.BaseListState
+import com.kudashov.rabbits_farm.utilits.BaseState
+import com.kudashov.rabbits_farm.utilits.RecastState
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_FATHER
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.RABBIT_TYPE_MATHER
+
 
 class RabbitDialog : DialogFragment() {
 
@@ -44,6 +48,7 @@ class RabbitDialog : DialogFragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RabbitOperationsAdapter
+    private var isRecast: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,7 +84,9 @@ class RabbitDialog : DialogFragment() {
         )
 
         viewModel = ViewModelProvider(this).get(RabbitViewModel::class.java)
-        viewModel.getStates().observe(this, this::stateProcessing)
+        viewModel.rabbitState.observe(viewLifecycleOwner, this::rabbitProcessing)
+        viewModel.operationState.observe(viewLifecycleOwner, this::operationsProcessing)
+        viewModel.isRecastState.observe(viewLifecycleOwner, this::isRecastProcessing)
 
         adapter = RabbitOperationsAdapter()
         recyclerView = binding.historyOfOperationList
@@ -105,7 +112,39 @@ class RabbitDialog : DialogFragment() {
         }
 
         binding.btnChangeType.setOnClickListener {
-            Toast.makeText(requireContext(), "Меняем тип", Toast.LENGTH_SHORT).show()
+            if (!isRecast) {
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Создать задачу на смену типа?")
+                    .setCancelable(true)
+                    .setPositiveButton("Да") { dialog, _ ->
+                        viewModel.createRecast(
+                            arguments?.get(Farm.ARG_RABBIT_ID) as Int,
+                            arguments?.get(Farm.ARG_RABBIT_TYPE) as String
+                        )
+                        dialog.cancel()
+                    }
+                    .setNegativeButton("Нет") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
+                    .show()
+            } else {
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Отменить задачу на смену типа?")
+                    .setCancelable(true)
+                    .setPositiveButton("Да") { dialog, _ ->
+                        viewModel.deleteRecast(
+                            arguments?.get(Farm.ARG_RABBIT_ID) as Int,
+                            arguments?.get(Farm.ARG_RABBIT_TYPE) as String
+                        )
+                        dialog.cancel()
+                    }
+                    .setNegativeButton("Нет") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
+                    .show()
+            }
         }
     }
 
@@ -168,11 +207,11 @@ class RabbitDialog : DialogFragment() {
                 rabbit.status
             )
             if (rabbit.currentType == RABBIT_TYPE_MATHER || rabbit.currentType == RABBIT_TYPE_FATHER) {
-                txtCountOfPins.text =  resources.getString(
+                txtCountOfPins.text = resources.getString(
                     R.string.dialog_rabbit_txt_output,
                     rabbit.output.toString()
                 )
-                txtAveragePins.text =  resources.getString(
+                txtAveragePins.text = resources.getString(
                     R.string.dialog_rabbit_txt_output_efficiency,
                     rabbit.output_efficiency.toString()
                 )
@@ -180,35 +219,93 @@ class RabbitDialog : DialogFragment() {
         }
     }
 
-    private fun stateProcessing(state: StateRabbit) {
+    private fun rabbitProcessing(state: BaseState) {
         when (state) {
-            is StateRabbit.Default -> {
-                Log.d(TAG, "stateProcessing: Rabbit Default")
+            BaseState.Default -> {
+                Log.d(TAG, "rabbitProcessing: Default")
                 viewModel.getRabbitMoreInf(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
-                viewModel.getOperations(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
-                APP_ACTIVITY.hideLoader()
             }
-            is StateRabbit.Sending -> {
-                Log.d(TAG, "stateProcessing: Rabbit Sending")
-                APP_ACTIVITY.showLoader()
+            BaseState.Sending -> {
+                Log.d(TAG, "rabbitProcessing: Loading")
             }
-            is StateRabbit.SuccessRabbit -> {
-                Log.d(TAG, "stateProcessing: Rabbit Success (Rabbit)")
-                APP_ACTIVITY.hideLoader()
-                arguments?.putSerializable(ARG_RABBIT, state.rabbit)
-                loadData(state.rabbit)
+            is BaseState.Success<*> -> {
+                Log.d(TAG, "rabbitProcessing: Success")
+                loadData(state.content as RabbitMoreInfDomain)
             }
-            is StateRabbit.SuccessOperations -> {
-                Log.d(TAG, "stateProcessing: Rabbit Success (Operations)")
-                APP_ACTIVITY.hideLoader()
-                adapter.setList(state.operations)
-            }
-            is StateRabbit.Error<*> -> {
-                Log.d(TAG, "stateProcessing: Rabbit Error ${state.message.toString()}")
-                Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
-                APP_ACTIVITY.hideLoader()
+            is BaseState.Error<*> -> {
+                Log.d(TAG, "rabbitProcessing: Error")
+                Toast.makeText(context, state.error.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
+    private fun operationsProcessing(state: BaseListState) {
+        when (state) {
+            BaseListState.Default -> {
+                Log.d(TAG, "operationsProcessing: Default")
+                viewModel.getOperations(arguments?.get(Farm.ARG_RABBIT_ID) as Int)
+            }
+            BaseListState.Sending -> {
+                Log.d(TAG, "operationsProcessing: Sending")
+            }
+            is BaseListState.Success<*> -> {
+                Log.d(TAG, "operationsProcessing: Success")
+                @Suppress("UNCHECKED_CAST")
+                adapter.setList(state.content as List<OperationDomain>)
+            }
+            BaseListState.NoItem -> {
+                Log.d(TAG, "operationsProcessing: NoItem")
+                Toast.makeText(context, "Список операций пуст", Toast.LENGTH_SHORT).show()
+            }
+            is BaseListState.Error<*> -> {
+                Log.d(TAG, "operationsProcessing: Error")
+                Toast.makeText(context, state.error.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun isRecastProcessing(state: RecastState) {
+        when (state) {
+            RecastState.Default -> {
+                Log.d(TAG, "isRecastProcessing: Default")
+                viewModel.isRecast(
+                    arguments?.get(Farm.ARG_RABBIT_ID) as Int,
+                    arguments?.get(Farm.ARG_RABBIT_TYPE) as String
+                )
+            }
+            RecastState.Sending -> {
+                Log.d(TAG, "isRecastProcessing: Sending")
+            }
+            is RecastState.IsRecast -> {
+                Log.d(TAG, "isRecastProcessing: IsRecast")
+                binding.btnChangeType.visibility = View.VISIBLE
+                isRecast = state.content
+                if (!isRecast) {
+                    binding.btnChangeType.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_btn_change_type_blue
+                        )
+                    )
+                } else {
+                    binding.btnChangeType.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_btn_change_type_red
+                        )
+                    )
+                }
+            }
+            RecastState.Success -> {
+                Log.d(TAG, "isRecastProcessing: Success")
+            }
+            RecastState.Bunny -> {
+                binding.btnChangeType.visibility = View.GONE
+            }
+            is RecastState.Error<*> -> {
+                Log.d(TAG, "isRecastProcessing: Error")
+                Toast.makeText(context, state.error.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

@@ -26,8 +26,9 @@ class TaskRepositoryImpl(
         page: Int,
         pageSize: Int,
         orderBy: String?
-    ): Observable<RepoResponse<List<TaskListItemType>>> {
-        val response: PublishSubject<RepoResponse<List<TaskListItemType>>> = PublishSubject.create()
+    ): Observable<Pair<Int, RepoResponse<List<TaskListItemType>>>> {
+        val response: PublishSubject<Pair<Int, RepoResponse<List<TaskListItemType>>>> =
+            PublishSubject.create()
         provider.getTasks(token, isDone, page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -35,15 +36,21 @@ class TaskRepositoryImpl(
                 if (resp.tasks == null || resp.tasks.isEmpty()) {
                     Log.d(TAG, "getTasks: No Item")
                     response.onNext(
-                        RepoResponse(null, ERROR_NO_ITEM)
+                        Pair(
+                            resp.count,
+                            RepoResponse<List<TaskListItemType>>(null, ERROR_NO_ITEM)
+                        )
                     )
                 } else {
                     Log.d(TAG, "getTasks: Success")
                     response.onNext(
-                        RepoResponse(
-                            resp.tasks.map { taskDto ->
-                                converter.convertTaskItemFromApiToDomain(task = taskDto)
-                            }, resp.detail
+                        Pair(
+                            resp.count,
+                            RepoResponse(
+                                resp.tasks.map { taskDto ->
+                                    converter.convertTaskItemFromApiToDomain(task = taskDto)
+                                }, resp.detail
+                            )
                         )
                     )
                 }

@@ -6,10 +6,8 @@ import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.request.farm.WeightRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
-import com.kudashov.rabbits_farm.net.response.farm.CageResponse
-import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
-import com.kudashov.rabbits_farm.net.response.farm.RabbitMoreInfResponse
-import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
+import com.kudashov.rabbits_farm.net.response.RepoResponse
+import com.kudashov.rabbits_farm.net.response.farm.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -165,6 +163,64 @@ class FarmProviderImpl : FarmProvider {
             })
 
         return response
+    }
+
+    override fun isRecast(
+        token: String,
+        pathType: String,
+        id: Int
+    ): Observable<IsRecastResponse> {
+        val resp: PublishSubject<IsRecastResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .isRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "isRecast: Success")
+                resp.onNext(it)
+            }, {
+                Log.d(TAG, "isRecast: Error")
+                resp.onError(it)
+            })
+
+        return resp
+    }
+
+    override fun createRecast(token: String, pathType: String, id: Int): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .createRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "createRecast: Success")
+                resp.onNext(it)
+            }, {
+                Log.d(TAG, "createRecast: Error")
+                resp.onError(it)
+            })
+
+        return resp
+    }
+
+    override fun deleteRecast(token: String, pathType: String, id: Int): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .deleteRecast(token, pathType, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "deleteRecast: Success")
+                resp.onNext(it)
+            }, {
+                Log.d(TAG, "deleteRecast: Error")
+                resp.onError(it)
+            })
+
+        return resp
     }
 
     override fun postWeight(

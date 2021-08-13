@@ -30,7 +30,9 @@ class Farm : Fragment(), FarmDelegate {
 
     companion object {
         const val ARG_RABBIT_ID = "rabbit_id"
+        const val ARG_RABBIT_TYPE = "rabbit_type"
         const val ARG_VIEW_MODEL = "view_model"
+
         const val ARG_IS_RABBIT = "is_rabbit"
     }
 
@@ -240,6 +242,7 @@ class Farm : Fragment(), FarmDelegate {
 
         val bundle = Bundle()
         bundle.putInt(ARG_RABBIT_ID, rabbit.id)
+        bundle.putString(ARG_RABBIT_TYPE, rabbit.type)
         val rabbitDialog = RabbitDialog.newInstance(bundle)
         val transaction = parentFragmentManager.beginTransaction()
         rabbitDialog.show(transaction, "Rabbit")

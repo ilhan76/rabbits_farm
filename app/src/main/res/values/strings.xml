@@ -122,7 +122,7 @@
     <!-- Item reproduction-->
     <string name="task_item_reproduction_title">Размножение</string>
     <string name="task_item_reproduction_txt_take_female_from">Взять самку ИЗ (№ клетки)</string>
-    <string name="task_item_reproduction_txt_refer_female_to_male">Взять самку ИЗ (№ клетки)</string>
+    <string name="task_item_reproduction_txt_refer_female_to_male">Отнести к самцу В (№ клетки)</string>
     <!-- Item reproduction-->
 
     <!-- Item kill -->

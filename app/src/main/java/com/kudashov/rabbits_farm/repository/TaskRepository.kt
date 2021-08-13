@@ -13,7 +13,7 @@ interface TaskRepository {
         page: Int,
         pageSize: Int,
         orderBy: String?
-    ): Observable<RepoResponse<List<TaskListItemType>>>
+    ): Observable<Pair<Int, RepoResponse<List<TaskListItemType>>>>
 
     fun confirmSimpleTask(
         token: String,

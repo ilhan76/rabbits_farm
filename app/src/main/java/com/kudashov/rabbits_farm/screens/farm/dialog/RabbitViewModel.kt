@@ -137,10 +137,11 @@ class RabbitViewModel(val context: Application) : AndroidViewModel(context), Ser
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d(TAG, "isRecast: Success")
-                _isRecastState.postValue(RecastState.Success)
+                _isRecastState.postValue(RecastState.Default)
             }, {
                 Log.d(TAG, "isRecast: Error")
                 Log.d(TAG, "isRecast: ${it.stackTrace}")
+                Log.d(TAG, "deleteRecast: ${it.localizedMessage}")
                 _isRecastState.postValue(RecastState.Error(it.localizedMessage))
             })
     }

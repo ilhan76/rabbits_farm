@@ -18,6 +18,7 @@ import com.kudashov.rabbits_farm.net.response.farm.IsRecastResponse
 import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
+import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiInterface {
@@ -102,6 +103,7 @@ interface ApiInterface {
     @GET("api/task/in_progress/")
     fun getTasks(
         @Header("Authorisation") token: String,
+        @Query("is_completed") isCompleted: Int,
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
         @Query("__order_by__") orderBy: String?

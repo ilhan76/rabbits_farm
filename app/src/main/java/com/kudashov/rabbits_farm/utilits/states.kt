@@ -69,7 +69,8 @@ sealed class StateTask {
 sealed class StateAuth {
     object Default : StateAuth()
     object Sending : StateAuth()
-    class Success(val message: String) : StateAuth()
     object OutdatedToken : StateAuth()
+    object ActualToken: StateAuth()
+    class Success(val message: String) : StateAuth()
     class Error<T>(val message: T) : StateAuth()
 }

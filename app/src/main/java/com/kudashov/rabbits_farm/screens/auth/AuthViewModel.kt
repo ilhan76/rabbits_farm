@@ -13,6 +13,7 @@ import com.kudashov.rabbits_farm.repository.AuthRepository
 import com.kudashov.rabbits_farm.repository.implementation.AuthRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.*
+import com.kudashov.rabbits_farm.utilits.extensions.default
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,7 +21,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class AuthViewModel(val context: Application) : AndroidViewModel(context) {
 
     private val TAG: String = this::class.java.simpleName
-    private val state: MutableLiveData<StateAuth> = MutableLiveData()
+    private val state = MutableLiveData<StateAuth>().default(initialValue = StateAuth.Default)
     private val repository: AuthRepository = AuthRepositoryImpl()
     private val compositeDisposable = CompositeDisposable()
 
@@ -64,10 +65,10 @@ class AuthViewModel(val context: Application) : AndroidViewModel(context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d(TAG, "onNext: $t")
-                Toast.makeText(context, it?.detail, Toast.LENGTH_SHORT).show()
+                state.postValue(StateAuth.ActualToken)
             }, {
                 Log.d(TAG, "onError: ${it?.localizedMessage}")
-                Toast.makeText(context, it?.localizedMessage, Toast.LENGTH_SHORT).show()
+                state.postValue(StateAuth.OutdatedToken)
             })
     }
 

@@ -58,6 +58,7 @@ class Auth : Fragment() {
         when (state) {
             is StateAuth.Default -> {
                 Log.d(TAG, "stateProcessing: Auth Default")
+                viewModel.echo()
                 APP_ACTIVITY.hideLoader()
             }
             is StateAuth.Sending -> {
@@ -71,12 +72,17 @@ class Auth : Fragment() {
             }
             is StateAuth.OutdatedToken -> {
                 Log.d(TAG, "stateProcessing: Токен устарел")
+                binding.auth.visibility = View.VISIBLE
                 APP_ACTIVITY.hideLoader()
             }
             is StateAuth.Error<*> -> {
                 Log.d(TAG, "stateProcessing: Auth Error ${state.message.toString()}")
                 Toast.makeText(context, state.message.toString(), Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
+            }
+            StateAuth.ActualToken -> {
+                Log.d(TAG, "stateProcessing: Actual Token")
+                navigation.auth()
             }
         }
     }

@@ -48,7 +48,7 @@ class TaskRepositoryImpl(
                             resp.count,
                             RepoResponse(
                                 resp.tasks.map { taskDto ->
-                                    converter.convertTaskItemFromApiToDomain(task = taskDto)
+                                    converter.convertTaskItemFromApiToDomain(task = taskDto, isComplete = isDone)
                                 }, resp.detail
                             )
                         )

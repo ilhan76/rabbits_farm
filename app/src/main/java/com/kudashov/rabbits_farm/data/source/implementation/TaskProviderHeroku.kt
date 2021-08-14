@@ -49,7 +49,7 @@ class TaskProviderHeroku : TaskProvider {
             )
         }*/
         ApiClient.client.create(ApiInterface::class.java)
-            .getTasks(token,  page, pageSize, orderBy)
+            .getTasks(token, if (isDone) 1 else 0, page, pageSize, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

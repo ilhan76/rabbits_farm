@@ -4,5 +4,5 @@ import com.kudashov.rabbits_farm.data.domain.TaskListItemType
 import com.kudashov.rabbits_farm.data.dto.TaskDto
 
 interface TaskConverter {
-    fun convertTaskItemFromApiToDomain(task: TaskDto): TaskListItemType
+    fun convertTaskItemFromApiToDomain(task: TaskDto, isComplete: Boolean): TaskListItemType
 }

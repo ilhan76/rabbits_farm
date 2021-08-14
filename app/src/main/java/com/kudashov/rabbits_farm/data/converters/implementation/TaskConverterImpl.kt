@@ -5,7 +5,7 @@ import com.kudashov.rabbits_farm.data.domain.*
 import com.kudashov.rabbits_farm.data.dto.TaskDto
 
 class TaskConverterImpl: TaskConverter {
-    override fun convertTaskItemFromApiToDomain(task: TaskDto): TaskListItemType {
+    override fun convertTaskItemFromApiToDomain(task: TaskDto, isComplete: Boolean): TaskListItemType {
         return when (task.type){
                 "M" -> ReproductionDomain(
                     id = task.id,
@@ -14,7 +14,7 @@ class TaskConverterImpl: TaskConverter {
                     userId = task.userId,
                     cageFrom = task.cageFrom!!,
                     cageTo = task.cageTo!!,
-                    isDone = false
+                    isDone = isComplete
                 )
                 "B" -> DepositionFromMotherDomain(
                     id = task.id,
@@ -25,7 +25,7 @@ class TaskConverterImpl: TaskConverter {
                     maleCageTo = task.maleCageTo!!,
                     femaleCageTo = task.femaleCageTo!!,
                     countBunnies = task.countBunnies!!,
-                    isDone = false
+                    isDone = isComplete
                 )
                 "V" -> VaccinationDomain(
                     id = task.id,
@@ -33,7 +33,7 @@ class TaskConverterImpl: TaskConverter {
                     date = task.date.substring(0, 10),
                     userId = task.userId,
                     cage = task.cage!!,
-                    isDone = false
+                    isDone = isComplete
                 )
                 "I" -> InspectionDomain(
                     id = task.id,
@@ -42,7 +42,7 @@ class TaskConverterImpl: TaskConverter {
                     userId = task.userId,
                     cage = task.cage!!,
                     countRabbit = task.countRabbit!!,
-                    isDone = false
+                    isDone = isComplete
                 )
                 "S" -> KillDomain(
                     id = task.id,
@@ -51,7 +51,7 @@ class TaskConverterImpl: TaskConverter {
                     userId = task.userId,
                     cage = task.cage!!,
                     weight = task.weight!!,
-                    isDone = false
+                    isDone = isComplete
                 )
                 else -> DepositionDomain(
                     id = task.id,
@@ -60,7 +60,7 @@ class TaskConverterImpl: TaskConverter {
                     userId = task.userId,
                     cageFrom = task.cageFrom!!,
                     cageTo = task.cageTo!!,
-                    isDone = false
+                    isDone = isComplete
                 )
             }
     }

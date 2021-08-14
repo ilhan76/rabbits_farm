@@ -109,20 +109,20 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<TaskResponse>
 
-    @PUT("api/task/in_progress/{id}/")
+    @PUT("task/in_progress/complete/{id}/")
     fun confirmSimpleTask(
         @Header("Authorisation") token: String,
         @Path("id") id: Int
     ): Observable<BaseResponse>
 
-    @PUT("api/task/in_progress/bunny_jigging/{id}/")
+    @PUT("task/in_progress/complete/bunny_jigging/{id}/")
     fun confirmBunnyJigging(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body body: BunnyJiggingTaskRequest
     ) : Observable<BaseResponse>
 
-    @PUT("api/task/in_progress/slaughter_inspection/{id}/")
+    @PUT("task/in_progress/complete/slaughter_inspection/{id}/")
     fun confirmSlaughterInspection(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,

@@ -35,6 +35,12 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
 
     private var page: Int = 1
     private val pageSize: Int = 50
+    private var orderBy: String? = null
+
+    fun setOrderBy(orderBy: String?){
+        this.orderBy = orderBy
+        state.postValue(StateBirth.Default)
+    }
 
     fun nextPage() {
         page++
@@ -45,7 +51,7 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
         page = 1
     }
 
-    fun getBirth(isConfirmed: Boolean, orderBy: String?) {
+    fun getBirth(isConfirmed: Boolean) {
         state.postValue(StateBirth.Sending)
 
         val pref: SharedPreferences = context.getSharedPreferences(

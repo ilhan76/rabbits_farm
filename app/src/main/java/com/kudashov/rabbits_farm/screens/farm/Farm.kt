@@ -25,6 +25,7 @@ import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.sort.*
+import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 
 class Farm : Fragment(), FarmDelegate {
 
@@ -47,7 +48,7 @@ class Farm : Fragment(), FarmDelegate {
     private lateinit var spinnerAdapter: SpinnerAdapter
 
     private var isRabbit: Boolean = true
-    private lateinit var typesOfSort: List<String>
+    private lateinit var typesOfSort: List<String?>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -134,13 +135,20 @@ class Farm : Fragment(), FarmDelegate {
                     id: Long
                 ) {
                     Log.d(TAG, "onItemSelected: SPINNER")
+                    var type: String? = null
                     if (isRabbit) {
                         viewModel.cleanPage()
-                        RabbitFilter.orderBy = typesOfSort[position]
+                        for ((k, v) in TYPES_SORT_RABBIT){
+                            if (typesOfSort[position] == v) type = k
+                        }
+                        RabbitFilter.orderBy = type
                         viewModel.getRabbits()
                     } else {
                         viewModel.cleanPage()
-                        CageFilter.orderBy = typesOfSort[position]
+                        for ((k, v) in TYPES_SORT_CAGE){
+                            if (typesOfSort[position] == v) type = k
+                        }
+                        CageFilter.orderBy = type
                         viewModel.getCages()
                     }
                 }
@@ -156,16 +164,16 @@ class Farm : Fragment(), FarmDelegate {
 
             typesOfSort = listOf(
                 "",
-                SORT_RABBIT_AGE,
-                SORT_RABBIT_AGE_INV,
-                SORT_RABBIT_SEX,
-                SORT_RABBIT_FARM_NUMBER,
-                SORT_RABBIT_CAGE_NUMBER,
-                SORT_RABBIT_TYPE,
-                SORT_RABBIT_BREED,
-                SORT_RABBIT_STATUS,
-                SORT_RABBIT_WEIGHT,
-                SORT_RABBIT_WEIGHT_INV
+                TYPES_SORT_RABBIT[SORT_RABBIT_AGE],
+                TYPES_SORT_RABBIT[SORT_RABBIT_AGE_INV],
+                TYPES_SORT_RABBIT[SORT_RABBIT_SEX],
+                TYPES_SORT_RABBIT[SORT_RABBIT_FARM_NUMBER],
+                TYPES_SORT_RABBIT[SORT_RABBIT_CAGE_NUMBER],
+                TYPES_SORT_RABBIT[SORT_RABBIT_TYPE],
+                TYPES_SORT_RABBIT[SORT_RABBIT_BREED],
+                TYPES_SORT_RABBIT[SORT_RABBIT_STATUS],
+                TYPES_SORT_RABBIT[SORT_RABBIT_WEIGHT],
+                TYPES_SORT_RABBIT[SORT_RABBIT_WEIGHT_INV]
             )
 
             binding.spinner.setSelection(typesOfSort.indexOf(RabbitFilter.orderBy))
@@ -183,14 +191,14 @@ class Farm : Fragment(), FarmDelegate {
 
             typesOfSort = listOf(
                 "",
-                SORT_CAGE_FARM_NUMBER,
-                SORT_CAGE_NUMBER,
-                SORT_CAGE_NUMBER_RABBITS,
-                SORT_CAGE_STATUS,
-                SORT_CAGE_FARM_NUMBER_INV,
-                SORT_CAGE_NUMBER_INV,
-                SORT_CAGE_NUMBER_RABBITS_INV,
-                SORT_CAGE_STATUS_INV
+                TYPES_SORT_CAGE[SORT_CAGE_FARM_NUMBER],
+                TYPES_SORT_CAGE[SORT_CAGE_FARM_NUMBER_INV],
+                TYPES_SORT_CAGE[SORT_CAGE_NUMBER],
+                TYPES_SORT_CAGE[SORT_CAGE_NUMBER_INV],
+                TYPES_SORT_CAGE[SORT_CAGE_STATUS],
+                TYPES_SORT_CAGE[SORT_CAGE_STATUS_INV],
+                TYPES_SORT_CAGE[SORT_CAGE_NUMBER_RABBITS],
+                TYPES_SORT_CAGE[SORT_CAGE_NUMBER_RABBITS_INV]
             )
 
             binding.spinner.setSelection(typesOfSort.indexOf(CageFilter.orderBy))

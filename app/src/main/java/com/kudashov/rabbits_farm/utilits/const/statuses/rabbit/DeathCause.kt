@@ -8,15 +8,6 @@ const val DEATH_CAUSE_OVERHEATING: String = "H"
 const val DEATH_CAUSE_COLD: String = "C"
 const val DEATH_CAUSE_OTHER: String = "E"
 
-/*val DEATH_CAUSES = listOf(
-    Pair(DEATH_CAUSE_SLAUGHTER, "Убой"),
-    Pair(DEATH_CAUSE_MOTHER, "Мать"),
-    Pair(DEATH_CAUSE_DISEASE, "Болезнь"),
-    Pair(DEATH_CAUSE_WEAKNESS, "Слабость (Генетика)"),
-    Pair(DEATH_CAUSE_OVERHEATING, "Перегрев"),
-    Pair(DEATH_CAUSE_COLD, "Холод"),
-    Pair(DEATH_CAUSE_OTHER, "Другое")
-)*/
 val DEATH_CAUSES = hashMapOf(
     DEATH_CAUSE_SLAUGHTER to "Убой",
     DEATH_CAUSE_MOTHER to "Мать",

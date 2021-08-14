@@ -10,12 +10,18 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
+import com.kudashov.rabbits_farm.data.domain.BreedDomain
 import com.kudashov.rabbits_farm.data.dto.BreedDto
 import com.kudashov.rabbits_farm.databinding.FragmentFarmRabbitFilterBinding
 import com.kudashov.rabbits_farm.screens.farm.Farm
 import com.kudashov.rabbits_farm.screens.farm.FarmViewModel
+import com.kudashov.rabbits_farm.screens.farm.filters.FilterViewModel
+import com.kudashov.rabbits_farm.utilits.BaseState
 import com.kudashov.rabbits_farm.utilits.const.*
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
@@ -30,7 +36,7 @@ class FarmFilterRabbit : Fragment() {
     private var _binding: FragmentFarmRabbitFilterBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: FarmViewModel
+    private lateinit var viewModel: FilterViewModel
 
     private lateinit var adapterNumberOfFarm: SpinnerAdapter
     private lateinit var adapterBreed: SpinnerAdapter
@@ -38,14 +44,14 @@ class FarmFilterRabbit : Fragment() {
 
     private var isMale: Boolean = false
     private lateinit var listNumberOfFarm: List<String>
-    private lateinit var listBreed: List<BreedDto>
+    private lateinit var listBreed: List<BreedDomain>
     private lateinit var listStatus: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFarmRabbitFilterBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -56,7 +62,16 @@ class FarmFilterRabbit : Fragment() {
     }
 
     private fun init() {
-        viewModel = arguments?.get(Farm.ARG_VIEW_MODEL) as FarmViewModel
+        viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
+        viewModel.statuses.observe(viewLifecycleOwner, Observer {
+            listStatus = it
+            adapterStatus = SpinnerAdapter(requireContext())
+            adapterStatus.setList(listStatus)
+            binding.spinnerStatus.adapter = adapterStatus
+        })
+        viewModel.getListOfStatuses()
+
+        viewModel.stateBreed.observe(viewLifecycleOwner, this::stateBreedProcessing)
 
         listNumberOfFarm = listOf("",
             farm1,
@@ -67,20 +82,6 @@ class FarmFilterRabbit : Fragment() {
         adapterNumberOfFarm = SpinnerAdapter(requireContext())
         adapterNumberOfFarm.setList(listNumberOfFarm)
         binding.spinnerNumberOfFarm.adapter = adapterNumberOfFarm
-
-        // todo - взять породы из SharedPreferences
-        listBreed = listOf(
-            BreedDto(-1, ""),
-            BreedDto(1, "Паннон")
-        )
-        adapterBreed = SpinnerAdapter(requireContext())
-        adapterBreed.setList(listBreed)
-        binding.spinnerBreed.adapter = adapterBreed
-
-        listStatus = viewModel.getListOfStatuses()
-        adapterStatus = SpinnerAdapter(requireContext())
-        adapterStatus.setList(listStatus)
-        binding.spinnerStatus.adapter = adapterStatus
 
         initListeners()
         loadData()
@@ -227,9 +228,8 @@ class FarmFilterRabbit : Fragment() {
             if (RabbitFilter.type.contains(RABBIT_TYPE_FATTENING))
                 cbFattening.isChecked = true
 
-            if (RabbitFilter.farmNumber != null) {
-                spinnerNumberOfFarm.setSelection(RabbitFilter.farmNumber!!)
-            }
+            spinnerNumberOfFarm.setSelection(RabbitFilter.farmNumber ?: 0)
+            spinnerBreed.setSelection(RabbitFilter.breed ?: 0)
 
             if (RabbitFilter.ageFrom != null) editTxtAgeFrom.setText(
                 RabbitFilter.ageFrom.toString(),
@@ -248,13 +248,32 @@ class FarmFilterRabbit : Fragment() {
                 TextView.BufferType.EDITABLE
             )
 
-            when (RabbitFilter.breed) {
-                1 -> spinnerBreed.setSelection(1)
-            }
-
             when (RabbitFilter.status) {
                 CAGE_STATUS_NEED_CLEAN -> spinnerStatus.setSelection(1)
                 CAGE_STATUS_NEED_REPAIR -> spinnerStatus.setSelection(2)
+            }
+        }
+    }
+
+    private fun stateBreedProcessing(state: BaseState){
+        when(state){
+            BaseState.Default -> {
+                Log.d(TAG, "stateBreedProcessing: Default")
+                viewModel.getBreed()
+            }
+            BaseState.Sending -> {
+                Log.d(TAG, "stateBreedProcessing: Loading")
+            }
+            is BaseState.Error<*> -> {
+                Log.d(TAG, "stateBreedProcessing: ${state.error.toString()}")
+            }
+            is BaseState.Success<*> -> {
+                Log.d(TAG, "stateBreedProcessing: Success")
+                listBreed = state.content as List<BreedDomain>
+                adapterBreed = SpinnerAdapter(requireContext())
+                adapterBreed.setList(listBreed)
+                binding.spinnerBreed.adapter = adapterBreed
+                binding.spinnerBreed.setSelection((RabbitFilter.breed?.minus(1)) ?: 0)
             }
         }
     }

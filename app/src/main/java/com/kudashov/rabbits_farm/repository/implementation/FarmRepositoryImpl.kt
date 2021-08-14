@@ -2,10 +2,7 @@ package com.kudashov.rabbits_farm.repository.implementation
 
 import android.util.Log
 import com.kudashov.rabbits_farm.data.converters.FarmConverter
-import com.kudashov.rabbits_farm.data.domain.CageDomain
-import com.kudashov.rabbits_farm.data.domain.OperationDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
+import com.kudashov.rabbits_farm.data.domain.*
 import com.kudashov.rabbits_farm.data.source.FarmProvider
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
@@ -121,6 +118,31 @@ class FarmRepositoryImpl(
             }, {
                 Log.d(TAG, "getCages: Error")
                 resp.onNext(Pair(0, RepoResponse<List<CageDomain>>(null, it.localizedMessage)))
+            })
+
+        return resp
+    }
+
+    override fun getBreed(token: String): Observable<RepoResponse<List<BreedDomain>>> {
+        val resp: PublishSubject<RepoResponse<List<BreedDomain>>> =
+            PublishSubject.create()
+
+        provider.getBreed(
+            token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "getCages: Success")
+                resp.onNext(
+                    RepoResponse(
+                            it.breeds?.map { breedDto ->
+                                converter.convertBreedFromApiToDomain(breedDto)
+                            }, it.detail
+                        )
+                )
+            }, {
+                Log.d(TAG, "getCages: Error")
+                resp.onNext(RepoResponse(null, it.localizedMessage))
             })
 
         return resp

@@ -32,7 +32,6 @@ class Farm : Fragment(), FarmDelegate {
     companion object {
         const val ARG_RABBIT_ID = "rabbit_id"
         const val ARG_RABBIT_TYPE = "rabbit_type"
-        const val ARG_VIEW_MODEL = "view_model"
 
         const val ARG_IS_RABBIT = "is_rabbit"
     }
@@ -106,12 +105,10 @@ class Farm : Fragment(), FarmDelegate {
 
     private fun initListeners() {
         binding.btnToMenu.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
             if (isRabbit) {
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit, bundle)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
             } else {
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage, bundle)
+                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
             }
         }
 

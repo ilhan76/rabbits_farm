@@ -116,7 +116,6 @@ class DeathDialog : DialogFragment() {
                     editTxtNumberOfCage.text.toString().toInt(),
                     editTxtLetter.text.toString()
                 )
-                // TODO - запрос к серверу на сохранение данных
                 dialog!!.dismiss()
             }
         }

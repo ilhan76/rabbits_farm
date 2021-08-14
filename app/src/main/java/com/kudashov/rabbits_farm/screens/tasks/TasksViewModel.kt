@@ -39,6 +39,12 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     private var page: Int = 1
     private var maxPage = 1
     private val pageSize: Int = 50
+    private var orderBy: String? = null
+
+    fun setOrderBy(orderBy: String?){
+        this.orderBy = orderBy
+        state.postValue(StateTask.Default)
+    }
 
     fun nextPage() {
         page++
@@ -53,7 +59,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
         deathCause = cause
     }
 
-    fun getTasks(isDone: Boolean, orderBy: String?) {
+    fun getTasks(isDone: Boolean) {
         if (page <= maxPage) {
             state.postValue(StateTask.Sending)
 

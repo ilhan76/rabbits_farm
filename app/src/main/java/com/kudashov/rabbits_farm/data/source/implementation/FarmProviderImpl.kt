@@ -52,7 +52,7 @@ class FarmProviderImpl : FarmProvider {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "onNext: $it")
+                Log.d(TAG, "onNext: Success")
                 resp.onNext(it)
             }, {
                 Log.d(TAG, "onError: ${it?.localizedMessage}")
@@ -98,7 +98,7 @@ class FarmProviderImpl : FarmProvider {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "onNext: count of cage: ${it?.results?.size}")
+                Log.d(TAG, "onNext: Success")
                 resp.onNext(it)
             }, {
                 Log.d(TAG, "onError: ${it?.localizedMessage}")
@@ -107,6 +107,30 @@ class FarmProviderImpl : FarmProvider {
                         0,
                         it?.localizedMessage,
                         null
+                    )
+                )
+            })
+
+        return resp
+    }
+
+    override fun getBreed(token: String): Observable<BreedResponse> {
+        val resp: PublishSubject<BreedResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .getBreed(token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "onNext: count of breed: ${it?.breeds?.size}")
+                resp.onNext(it)
+            }, {
+                Log.d(TAG, "onError: ${it?.localizedMessage}")
+                resp.onNext(
+                    BreedResponse(
+                        0,
+                        null,
+                        it?.localizedMessage
                     )
                 )
             })

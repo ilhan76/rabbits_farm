@@ -35,6 +35,8 @@ interface FarmProvider {
         orderBy: String?
     ): Observable<CageResponse>
 
+    fun getBreed(token: String): Observable<BreedResponse>
+
     fun getRabbitMoreInf(
         token: String,
         id: Int

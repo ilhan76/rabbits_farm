@@ -11,11 +11,8 @@ import com.kudashov.rabbits_farm.net.request.task.SlaughterInspectionTaskRequest
 import com.kudashov.rabbits_farm.net.response.*
 import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
-import com.kudashov.rabbits_farm.net.response.farm.CageResponse
-import com.kudashov.rabbits_farm.net.response.farm.OperationsResponse
 import com.kudashov.rabbits_farm.net.response.BaseResponse
-import com.kudashov.rabbits_farm.net.response.farm.IsRecastResponse
-import com.kudashov.rabbits_farm.net.response.farm.RabbitResponse
+import com.kudashov.rabbits_farm.net.response.farm.*
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
@@ -58,6 +55,11 @@ interface ApiInterface {
         @Query("number_rabbits_to") numberRabbitsTo: Int?,
         @Query("__order_by__") orderBy: String?
     ): Observable<CageResponse>
+
+    @GET("api/breed/")
+    fun getBreed(
+        @Header("Authorisation") token: String
+    ): Observable<BreedResponse>
 
     @GET("api/rabbit/{id}/")
     fun getRabbitMoreInf(

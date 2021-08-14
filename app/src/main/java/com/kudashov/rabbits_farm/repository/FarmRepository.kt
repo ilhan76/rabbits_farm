@@ -1,9 +1,7 @@
 package com.kudashov.rabbits_farm.repository
 
-import com.kudashov.rabbits_farm.data.domain.CageDomain
-import com.kudashov.rabbits_farm.data.domain.OperationDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
+import com.kudashov.rabbits_farm.data.domain.*
+import com.kudashov.rabbits_farm.data.dto.BreedDto
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.RepoResponse
 import io.reactivex.rxjava3.core.Observable
@@ -37,6 +35,10 @@ interface FarmRepository {
         numberRabbitsTo: Int?,
         orderBy: String?
     ): Observable<Pair<Int, RepoResponse<List<CageDomain>>>>
+
+    fun getBreed(
+        token: String
+    ): Observable<RepoResponse<List<BreedDomain>>>
 
     fun getRabbitMoreInf(
         token: String,

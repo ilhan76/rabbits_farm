@@ -6,18 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
+import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.TasksAdapter
 import com.kudashov.rabbits_farm.databinding.FragmentTasksBinding
+import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
+import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.screens.tasks.dialogs.DeathDialog
 import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.StateTask
+import com.kudashov.rabbits_farm.utilits.const.sort.*
 
 class Tasks : Fragment() {
 
@@ -29,6 +34,17 @@ class Tasks : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TasksAdapter
+    private lateinit var spinnerAdapter: SpinnerAdapter
+
+    private val typesOfSort = listOf(
+        "",
+        TYPES_SORT_TASK[SORT_TASKS_DEPOSITION],
+        TYPES_SORT_TASK[SORT_TASKS_DEPOSITION_FROM_MOTHER],
+        TYPES_SORT_TASK[SORT_TASKS_REPRODUCTION],
+        TYPES_SORT_TASK[SORT_TASKS_INSPECTION],
+        TYPES_SORT_TASK[SORT_TASKS_VACCINATION],
+        TYPES_SORT_TASK[SORT_TASKS_SLAUGHTER]
+    )
 
     private var isDone: Boolean = false
 
@@ -63,9 +79,13 @@ class Tasks : Fragment() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
 
-                viewModel.getTasks(false, "")
+                viewModel.getTasks(false)
             }
         })
+
+        spinnerAdapter = SpinnerAdapter(requireContext())
+        spinnerAdapter.setList(typesOfSort)
+        binding.spinner.adapter = spinnerAdapter
 
         initListeners()
     }
@@ -91,19 +111,38 @@ class Tasks : Fragment() {
             isDone = false
             loadData()
         }
+
+        binding.spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.d(TAG, "onItemSelected: SPINNER")
+                    viewModel.cleanPage()
+                    var type: String? = null
+                    for ((k, v) in TYPES_SORT_TASK)
+                        if (typesOfSort[position] == v) type = k
+                    viewModel.setOrderBy(type)
+                }
+            }
     }
 
-    private fun loadData(){
+    private fun loadData() {
         viewModel.cleanPage()
 
-        if (isDone){
+        if (isDone) {
             binding.btnDone.setBackgroundResource(R.drawable.shape_btn_green)
             binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_grey)
         } else {
             binding.btnDone.setBackgroundResource(R.drawable.shape_btn_grey)
             binding.btnNotDone.setBackgroundResource(R.drawable.shape_btn_green)
         }
-        viewModel.getTasks(isDone, null)
+        viewModel.getTasks(isDone)
     }
 
     private fun stateProcessing(state: StateTask) {

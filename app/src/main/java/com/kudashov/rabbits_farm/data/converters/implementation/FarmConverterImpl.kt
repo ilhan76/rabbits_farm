@@ -2,14 +2,8 @@ package com.kudashov.rabbits_farm.data.converters.implementation
 
 import android.os.Build
 import com.kudashov.rabbits_farm.data.converters.FarmConverter
-import com.kudashov.rabbits_farm.data.domain.CageDomain
-import com.kudashov.rabbits_farm.data.domain.OperationDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitDomain
-import com.kudashov.rabbits_farm.data.domain.RabbitMoreInfDomain
-import com.kudashov.rabbits_farm.data.dto.CageDto
-import com.kudashov.rabbits_farm.data.dto.OperationDto
-import com.kudashov.rabbits_farm.data.dto.RabbitDto
-import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
+import com.kudashov.rabbits_farm.data.domain.*
+import com.kudashov.rabbits_farm.data.dto.*
 import com.kudashov.rabbits_farm.utilits.const.OPERATIONS
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
@@ -55,6 +49,13 @@ class FarmConverterImpl : FarmConverter {
             getCageType(cageDto),
             getCageStatus(cageDto.status)
         )
+
+    override fun convertBreedFromApiToDomain(breedDto: BreedDto): BreedDomain =
+        BreedDomain(
+            breedDto.id,
+            breedDto.title
+        )
+
     override fun convertOperationFromApiToDomain(operationDto: OperationDto): OperationDomain =
         OperationDomain(
         operationDto.rabbit_id,

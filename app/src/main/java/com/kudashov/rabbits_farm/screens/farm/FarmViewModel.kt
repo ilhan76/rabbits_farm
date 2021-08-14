@@ -135,22 +135,4 @@ class FarmViewModel(val context: Application) : AndroidViewModel(context), Seria
     fun getStates(): MutableLiveData<StateFarm> {
         return state
     }
-
-    fun getListOfStatuses(): List<String> {
-        val list: MutableList<String> = ArrayList()
-        list.add("")
-        for (i in STATUSES_CAGE) {
-            list.add(i.second)
-        }
-        return list
-    }
-
-    fun getListOfTypes(): List<String> {
-        val list: MutableList<String> = ArrayList()
-        list.add("")
-        for (i in TYPES_CAGE) {
-            list.add(i.second)
-        }
-        return list
-    }
 }

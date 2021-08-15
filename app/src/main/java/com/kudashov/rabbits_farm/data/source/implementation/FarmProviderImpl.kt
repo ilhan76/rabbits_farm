@@ -4,6 +4,7 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.source.FarmProvider
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
+import com.kudashov.rabbits_farm.net.request.farm.CageStatusRequest
 import com.kudashov.rabbits_farm.net.request.farm.WeightRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.RepoResponse
@@ -114,6 +115,28 @@ class FarmProviderImpl : FarmProvider {
         return resp
     }
 
+    override fun updateCageStatus(
+        token: String,
+        id: Int,
+        statuses: List<String>
+    ): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> = PublishSubject.create()
+
+        ApiClient.client.create(ApiInterface::class.java)
+            .updateCageStatus(token, id, CageStatusRequest(statuses))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(TAG, "updateCageStatus: Success")
+                resp.onNext(it)
+            }, {
+                Log.d(TAG, "updateCageStatus: ${it.localizedMessage}")
+                resp.onError(it)
+            })
+
+        return resp
+    }
+
     override fun getBreed(token: String): Observable<BreedResponse> {
         val resp: PublishSubject<BreedResponse> = PublishSubject.create()
 
@@ -122,10 +145,10 @@ class FarmProviderImpl : FarmProvider {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "onNext: count of breed: ${it?.breeds?.size}")
+                Log.d(TAG, "getBreed: count of breed: ${it?.breeds?.size}")
                 resp.onNext(it)
             }, {
-                Log.d(TAG, "onError: ${it?.localizedMessage}")
+                Log.d(TAG, "getBreed: ${it?.localizedMessage}")
                 resp.onNext(
                     BreedResponse(
                         0,

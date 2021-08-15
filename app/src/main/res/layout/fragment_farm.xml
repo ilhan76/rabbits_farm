@@ -33,7 +33,7 @@
             android:layout_width="@dimen/farm_btn_to_menu_size"
             android:layout_height="@dimen/farm_btn_to_menu_size"
             android:layout_margin="30dp"
-            android:background="@drawable/ic_to_menu"
+            android:background="@drawable/btn_to_filter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

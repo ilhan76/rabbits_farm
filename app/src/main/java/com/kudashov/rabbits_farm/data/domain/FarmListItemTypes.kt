@@ -15,5 +15,7 @@ data class CageDomain(
         val numberOfCage: String,
         val numberOfFarm: String,
         val type: String,
-        val status: String
+        val statusString: String,
+        val statuses: MutableList<String>,
+        var isSelected: Boolean = false
 ) : AboutFarmListItemType()

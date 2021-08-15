@@ -55,7 +55,7 @@ class FarmAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 inflater.inflate(R.layout.item_farm_rabbit, parent, false),
                 delegate
             )
-            else -> CageViewHolder(inflater.inflate(R.layout.item_farm_cage, parent, false))
+            else -> CageViewHolder(inflater.inflate(R.layout.item_farm_cage, parent, false), delegate)
         }
     }
 }

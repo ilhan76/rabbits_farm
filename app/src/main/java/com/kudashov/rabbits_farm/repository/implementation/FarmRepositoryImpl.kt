@@ -110,6 +110,7 @@ class FarmRepositoryImpl(
                     Pair(
                         it.count, RepoResponse(
                             it.results?.map { cageDto ->
+                                Log.d(TAG, "getCages: map")
                                 converter.convertCageFromApiToDomain(cageDto)
                             }, it.detail
                         )
@@ -117,7 +118,28 @@ class FarmRepositoryImpl(
                 )
             }, {
                 Log.d(TAG, "getCages: Error")
+                Log.d(TAG, "getCages: ${it.localizedMessage}")
                 resp.onNext(Pair(0, RepoResponse<List<CageDomain>>(null, it.localizedMessage)))
+            })
+
+        return resp
+    }
+
+    override fun updateCageStatus(
+        token: String,
+        id: Int,
+        statuses: List<String>
+    ): Observable<BaseResponse> {
+        val resp: PublishSubject<BaseResponse> =
+            PublishSubject.create()
+
+        provider.updateCageStatus(token, id, statuses)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                resp.onNext(it)
+            }, {
+                resp.onError(it)
             })
 
         return resp
@@ -132,16 +154,16 @@ class FarmRepositoryImpl(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "getCages: Success")
+                Log.d(TAG, "getBreed: Success")
                 resp.onNext(
                     RepoResponse(
-                            it.breeds?.map { breedDto ->
-                                converter.convertBreedFromApiToDomain(breedDto)
-                            }, it.detail
-                        )
+                        it.breeds?.map { breedDto ->
+                            converter.convertBreedFromApiToDomain(breedDto)
+                        }, it.detail
+                    )
                 )
             }, {
-                Log.d(TAG, "getCages: Error")
+                Log.d(TAG, "getBreed: Error")
                 resp.onNext(RepoResponse(null, it.localizedMessage))
             })
 

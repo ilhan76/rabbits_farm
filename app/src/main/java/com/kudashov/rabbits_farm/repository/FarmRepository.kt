@@ -36,6 +36,12 @@ interface FarmRepository {
         orderBy: String?
     ): Observable<Pair<Int, RepoResponse<List<CageDomain>>>>
 
+    fun updateCageStatus(
+        token: String,
+        id: Int,
+        statuses: List<String>
+    ): Observable<BaseResponse>
+
     fun getBreed(
         token: String
     ): Observable<RepoResponse<List<BreedDomain>>>
@@ -73,5 +79,5 @@ interface FarmRepository {
         pathType: String,
         id: Int,
         weight: Double
-    ) : Observable<BaseResponse>
+    ): Observable<BaseResponse>
 }

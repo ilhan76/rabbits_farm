@@ -35,6 +35,12 @@ interface FarmProvider {
         orderBy: String?
     ): Observable<CageResponse>
 
+    fun updateCageStatus(
+        token: String,
+        id: Int,
+        statuses: List<String>
+    ): Observable<BaseResponse>
+
     fun getBreed(token: String): Observable<BreedResponse>
 
     fun getRabbitMoreInf(
@@ -70,5 +76,5 @@ interface FarmProvider {
         pathType: String,
         id: Int,
         weight: Double
-    ) : Observable<BaseResponse>
+    ): Observable<BaseResponse>
 }

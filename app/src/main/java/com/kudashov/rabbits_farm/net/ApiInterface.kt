@@ -4,6 +4,7 @@ import com.kudashov.rabbits_farm.data.dto.RabbitMoreInfDto
 import com.kudashov.rabbits_farm.data.dto.UserDto
 import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
 import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
+import com.kudashov.rabbits_farm.net.request.farm.CageStatusRequest
 import com.kudashov.rabbits_farm.net.request.farm.WeightRequest
 import com.kudashov.rabbits_farm.net.request.task.BunnyJiggingTaskRequest
 import com.kudashov.rabbits_farm.net.request.task.DeathRequest
@@ -56,10 +57,15 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<CageResponse>
 
+    @PUT("api/cage/{id}/")
+    fun updateCageStatus(
+        @Header("Authorisation") token: String,
+        @Path("id") id: Int,
+        @Body cageStatusRequest: CageStatusRequest
+    ): Observable<BaseResponse>
+
     @GET("api/breed/")
-    fun getBreed(
-        @Header("Authorisation") token: String
-    ): Observable<BreedResponse>
+    fun getBreed(@Header("Authorisation") token: String): Observable<BreedResponse>
 
     @GET("api/rabbit/{id}/")
     fun getRabbitMoreInf(

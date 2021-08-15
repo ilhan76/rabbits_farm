@@ -16,6 +16,7 @@ import com.kudashov.rabbits_farm.R
 import com.kudashov.rabbits_farm.adapters.FarmAdapter
 import com.kudashov.rabbits_farm.adapters.SpinnerAdapter
 import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
+import com.kudashov.rabbits_farm.data.domain.CageDomain
 import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
@@ -25,6 +26,10 @@ import com.kudashov.rabbits_farm.utilits.PaginationScrollListener
 import com.kudashov.rabbits_farm.utilits.StateFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
 import com.kudashov.rabbits_farm.utilits.const.sort.*
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_CLEANED
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_REPAIRED
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 
 class Farm : Fragment(), FarmDelegate {
@@ -104,52 +109,68 @@ class Farm : Fragment(), FarmDelegate {
     }
 
     private fun initListeners() {
-        binding.btnToMenu.setOnClickListener {
-            if (isRabbit) {
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
-            } else {
-                APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
-            }
-        }
-
-        binding.btnRabbits.setOnClickListener {
-            isRabbit = true
-            loadData()
-        }
-        binding.btnCages.setOnClickListener {
-            isRabbit = false
-            loadData()
-        }
-
-        binding.spinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    Log.d(TAG, "onItemSelected: SPINNER")
-                    var type: String? = null
-                    if (isRabbit) {
-                        viewModel.cleanPage()
-                        for ((k, v) in TYPES_SORT_RABBIT){
-                            if (typesOfSort[position] == v) type = k
-                        }
-                        RabbitFilter.orderBy = type
-                        viewModel.getRabbits()
-                    } else {
-                        viewModel.cleanPage()
-                        for ((k, v) in TYPES_SORT_CAGE){
-                            if (typesOfSort[position] == v) type = k
-                        }
-                        CageFilter.orderBy = type
-                        viewModel.getCages()
-                    }
+        binding.apply {
+            btnToMenu.setOnClickListener {
+                if (isRabbit) {
+                    APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuRabbit)
+                } else {
+                    APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
                 }
             }
+
+            btnRabbits.setOnClickListener {
+                isRabbit = true
+                loadData()
+            }
+            btnCages.setOnClickListener {
+                isRabbit = false
+                loadData()
+            }
+
+            btnCageIsCleaned.setOnClickListener {
+                viewModel.updateCageStatus(CAGE_STATUS_CLEANED)
+            }
+            btnCageIsRepaired.setOnClickListener {
+                viewModel.updateCageStatus(CAGE_STATUS_REPAIRED)
+                Log.d(TAG, "initListeners: $CAGE_STATUS_REPAIRED")
+            }
+            btnCageNeedCleaned.setOnClickListener {
+                viewModel.updateCageStatus(CAGE_STATUS_NEED_CLEAN)
+            }
+            btnCageNeedRepaired.setOnClickListener {
+                viewModel.updateCageStatus(CAGE_STATUS_NEED_REPAIR)
+            }
+
+            spinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(TAG, "onItemSelected: SPINNER")
+                        var type: String? = null
+                        if (isRabbit) {
+                            viewModel.cleanPage()
+                            for ((k, v) in TYPES_SORT_RABBIT){
+                                if (typesOfSort[position] == v) type = k
+                            }
+                            RabbitFilter.orderBy = type
+                            viewModel.getRabbits()
+                        } else {
+                            viewModel.cleanPage()
+                            for ((k, v) in TYPES_SORT_CAGE){
+                                if (typesOfSort[position] == v) type = k
+                            }
+                            CageFilter.orderBy = type
+                            viewModel.getCages()
+                        }
+                    }
+                }
+        }
     }
 
     private fun loadData() {
@@ -253,5 +274,9 @@ class Farm : Fragment(), FarmDelegate {
         rabbitDialog.show(transaction, "Rabbit")
 
         Log.d(TAG, "openMoreRabbitInfo: Dialog is opened")
+    }
+
+    override fun updateSelectedCages(cage: CageDomain) {
+        viewModel.updateSelectedCages(cage)
     }
 }

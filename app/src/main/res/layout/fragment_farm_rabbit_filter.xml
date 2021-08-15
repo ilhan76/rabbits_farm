@@ -86,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@id/srt_breed" />
 
         <TextView
-            android:id="@+id/str_number_of_farm"
+            android:id="@+id/txt_number_of_farm"
             style="@style/FarmRabbitsSettingsText"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
@@ -101,7 +101,7 @@
             android:layout_height="@dimen/farm_rabbit_settings_btn_height"
             android:text="@string/farm_rabbits_settings_txt_status_of_cage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/str_number_of_farm" />
+            app:layout_constraintTop_toBottomOf="@id/txt_number_of_farm" />
 
         <Spinner
             android:id="@+id/spinner_number_of_farm"

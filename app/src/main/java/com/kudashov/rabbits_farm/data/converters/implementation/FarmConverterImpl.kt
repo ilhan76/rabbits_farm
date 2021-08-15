@@ -5,10 +5,7 @@ import com.kudashov.rabbits_farm.data.converters.FarmConverter
 import com.kudashov.rabbits_farm.data.domain.*
 import com.kudashov.rabbits_farm.data.dto.*
 import com.kudashov.rabbits_farm.utilits.const.OPERATIONS
-import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_CLEAN
-import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_STATUS_NEED_REPAIR
-import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_FATTENING
-import com.kudashov.rabbits_farm.utilits.const.statuses.cage.CAGE_TYPE_MOTHER
+import com.kudashov.rabbits_farm.utilits.const.statuses.cage.*
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -36,7 +33,7 @@ class FarmConverterImpl : FarmConverter {
             rabbit.current_type,
             getType(rabbit.current_type),
             rabbit.cage,
-            getStatuses(rabbit.status),
+            getStatusesRabbit(rabbit.status),
             rabbit.output,
             rabbit.output_efficiency,
             rabbit.weight
@@ -47,7 +44,8 @@ class FarmConverterImpl : FarmConverter {
             getNumberOfCage(cageDto),
             cageDto.farm_number.toString(),
             getCageType(cageDto),
-            getCageStatus(cageDto.status)
+            getCageStatus(cageDto.statuses),
+            cageDto.statuses
         )
 
     override fun convertBreedFromApiToDomain(breedDto: BreedDto): BreedDomain =
@@ -100,7 +98,7 @@ class FarmConverterImpl : FarmConverter {
             "$birthday"
         } else "???"
     }
-    private fun getStatuses(statuses: List<String>): String {
+    private fun getStatusesRabbit(statuses: List<String>): String {
         var res = ""
         for (i in STATUSES_RABBIT) {
             if (statuses.contains(i.first)) res += "\n" + i.second

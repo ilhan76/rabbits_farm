@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background">
+
+    <TextView
+        android:id="@+id/farm_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="@string/farm_rabbits_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_txt_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="@dimen/farm_btn_exit"
+        android:layout_height="@dimen/farm_btn_exit"
+        android:layout_margin="30dp"
+        android:background="@drawable/ic_close_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sort_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:background="@drawable/shape_item_corner"
+        android:elevation="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txt_number_of_farm"
+            style="@style/FarmRabbitsSettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:text="@string/farm_cage_settings_txt_number_of_farm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_type_of_cage"
+            style="@style/FarmRabbitsSettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:text="@string/farm_cage_settings_txt_type_of_cage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_number_of_farm" />
+
+        <TextView
+            android:id="@+id/txt_count_of_rabbit"
+            style="@style/FarmRabbitsSettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:text="@string/farm_cage_settings_txt_count_of_rabbits"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_type_of_cage" />
+
+        <TextView
+            android:id="@+id/txt_status_of_cage"
+            style="@style/FarmRabbitsSettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:text="@string/farm_cage_settings_txt_status_of_cage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_count_of_rabbit" />
+
+        <Spinner
+            android:id="@+id/spinner_farm_number"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:background="@drawable/selector_spinner_bg"
+            android:popupBackground="@drawable/shape_menu"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_type_of_cage"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:background="@drawable/selector_spinner_bg"
+            android:popupBackground="@drawable/shape_menu"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_farm_number" />
+
+        <EditText
+            android:id="@+id/edit_txt_count_of_rabbit_from"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:background="@drawable/selector_menu"
+            android:drawableStart="@drawable/ic_edit_txt_from"
+            android:gravity="center"
+            android:inputType="number"
+            android:paddingHorizontal="5dp"
+            app:layout_constraintEnd_toStartOf="@id/edit_txt_count_of_rabbit_to"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
+
+        <EditText
+            android:id="@+id/edit_txt_count_of_rabbit_to"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:background="@drawable/selector_menu"
+            android:drawableStart="@drawable/ic_edit_txt_to"
+            android:gravity="center"
+            android:inputType="number"
+            android:paddingHorizontal="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type_of_cage" />
+
+        <CheckBox
+            android:id="@+id/cb_need_clear"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:background="@drawable/shape_item_text"
+            android:button="@drawable/selector_check_box"
+            android:gravity="end|center_vertical"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/farm_cage_settings_btn_status_of_cage_need_clean"
+            android:textAllCaps="false"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_count_of_rabbit_from" />
+
+        <CheckBox
+            android:id="@+id/cb_need_repair"
+            style="@style/FarmRabbitsButton"
+            android:layout_width="@dimen/farm_rabbit_settings_btn_width"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_height"
+            android:background="@drawable/shape_item_text"
+            android:button="@drawable/selector_check_box"
+            android:gravity="end|center_vertical"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/farm_cage_settings_btn_status_of_cage_need_repair"
+            android:textAllCaps="false"
+            android:textSize="@dimen/standard_txt_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_need_clear" />
+
+        <Button
+            android:id="@+id/btnShow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/farm_rabbit_settings_btn_show_height"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="@dimen/standard_margin"
+            android:background="@drawable/shape_btn_show"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/farm_rabbits_settings_btn_show"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/farm_rabbit_settings_btn_show_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_need_repair" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

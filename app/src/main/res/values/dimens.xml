@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="farm_btn_exit">20dp</dimen>
+
+    <dimen name="standard_margin">20dp</dimen>
+
+    <dimen name="standard_spinner_height">25dp</dimen>
+    <dimen name="standard_btn_height">30dp</dimen>
+
+    <dimen name="title_txt_size">24sp</dimen>
+    <dimen name="title_item_txt_size">21sp</dimen>
+    <dimen name="standard_txt_size">14sp</dimen>
+    <dimen name="small_txt_size">12sp</dimen>
+    <dimen name="very_small_txt_size">10sp</dimen>
+
+    <!-- Floating action fragment -->
+    <dimen name="floating_action_fragment_btn_edit_size">15dp</dimen>
+    <dimen name="floating_action_fragment_btn_exit_margin_end">20dp</dimen>
+    <dimen name="floating_action_fragment_btn_exit_margin_top">17dp</dimen>
+    <!-- Floating action fragment -->
+
+    <!-- About farm -->
+    <dimen name="farm_btn_width">170dp</dimen>
+    <dimen name="farm_btn_to_menu_size">20dp</dimen>
+
+    <!-- About farm Rabbit Settings-->
+    <dimen name="farm_rabbit_settings_horizontal_margin">10dp</dimen>
+    <dimen name="farm_rabbit_settings_vertical_btn_margin">10dp</dimen>
+    <dimen name="farm_rabbit_settings_btn_width">160dp</dimen>
+    <dimen name="farm_rabbit_settings_btn_height">25dp</dimen>
+    <dimen name="farm_rabbit_settings_small_btn_width">75dp</dimen>
+
+    <dimen name="farm_rabbit_settings_btn_show_height">40dp</dimen>
+    <dimen name="farm_rabbit_settings_btn_show_width">190dp</dimen>
+    <dimen name="farm_rabbit_settings_btn_show_text_size">19sp</dimen>
+    <!-- About farm Rabbit Settings-->
+
+    <!-- About farm Rabbit Item-->
+    <dimen name="farm_item_rabbit_label_size">25dp</dimen>
+    <dimen name="farm_item_rabbit_margin_start_end">10dp</dimen>
+    <dimen name="farm_item_rabbit_margin_vertical">5dp</dimen>
+    <dimen name="farm_item_rabbit_elevation">5dp</dimen>
+    <dimen name="farm_item_rabbit_height">30dp</dimen>
+    <dimen name="farm_item_rabbit_txt_width">70dp</dimen>
+    <!-- About farm Rabbit Item-->
+
+    <!-- About farm Cage Item-->
+    <dimen name="farm_item_cage_label_size">25dp</dimen>
+    <dimen name="farm_item_cage_margin_start_end">10dp</dimen>
+    <dimen name="farm_item_cage_margin_vertical">5dp</dimen>
+    <dimen name="farm_item_cage_elevation">5dp</dimen>
+    <dimen name="farm_item_cage_height">30dp</dimen>
+    <dimen name="farm_item_cage_txt_width">70dp</dimen>
+    <!-- About farm Cage Item-->
+
+    <!-- Floating Action Fragment Weigh Rabbit -->
+    <dimen name="farm_floating_action_weigh_elevation">5dp</dimen>
+    <dimen name="farm_floating_action_weigh_title_margin_top">30dp</dimen>
+    <dimen name="farm_floating_action_weigh_title_txt_size">22sp</dimen>
+    <dimen name="farm_floating_action_weigh_input_area_margin_top">45dp</dimen>
+    <dimen name="farm_floating_action_weigh_input_area_margin_bottom">25dp</dimen>
+    <dimen name="farm_floating_action_weigh_input_area_elevation">50dp</dimen>
+    <dimen name="farm_floating_action_weigh_margin_from_title">20dp</dimen>
+    <dimen name="farm_floating_action_weigh_txt_current_weight_size">18sp</dimen>
+    <dimen name="farm_floating_action_weigh_txt_size">16sp</dimen>
+    <dimen name="farm_floating_action_weigh_btn_margin_top">25dp</dimen>
+    <dimen name="farm_floating_action_weigh__btn_margin_bottom">15dp</dimen>
+    <!-- Floating Action Fragment Weigh Rabbit -->
+
+    <!-- About farm -->
+
+    <!-- Tasks -->
+
+    <dimen name="tasks_header_padding_bottom">20dp</dimen>
+    <dimen name="tasks_btn_width">170dp</dimen>
+    <dimen name="tasks_btn_death_width">120dp</dimen>
+
+    <dimen name="tasks_item_margin_horizontal">15dp</dimen>
+    <dimen name="tasks_item_margin_vertical">10dp</dimen>
+    <dimen name="tasks_item_elevation">10dp</dimen>
+    <dimen name="tasks_item_txt_area_padding_horizontal">10dp</dimen>
+
+    <dimen name="tasks_item_btn_show_height">35dp</dimen>
+    <dimen name="tasks_item_btn_show_margin_top">40dp</dimen>
+    <dimen name="tasks_item_btn_show_margin_bottom">20dp</dimen>
+    <dimen name="tasks_item_btn_show_margin_horizontal">50dp</dimen>
+
+
+    >
+    <dimen name="tasks_item_deposition_margin_horizontal">20dp</dimen>
+    <dimen name="tasks_item_deposition_title_margin_top">20dp</dimen>
+    <dimen name="tasks_item_deposition_margin_from_title">50dp</dimen>
+    <dimen name="tasks_item_deposition_txt_margin_top">10dp</dimen>
+    <dimen name="tasks_item_deposition_seek_bar_margin_top">20dp</dimen>
+    <!-- Tasks deposition -->
+
+    <!-- Tasks inspection -->
+    <dimen name="tasks_item_inspection_margin_horizontal">20dp</dimen>
+    <dimen name="tasks_item_inspection_title_margin_top">20dp</dimen>
+    <dimen name="tasks_item_inspection_margin_from_title">50dp</dimen>
+    <dimen name="tasks_item_inspection_txt_margin_top">10dp</dimen>
+    <!-- Tasks inspection -->
+
+    <!-- Tasks kill -->
+    <dimen name="tasks_item_kill_margin_horizontal">20dp</dimen>
+    <dimen name="tasks_item_kill_title_margin_top">20dp</dimen>
+    <dimen name="tasks_item_kill_margin_from_title">50dp</dimen>
+    <dimen name="tasks_item_kill_txt_margin_top">10dp</dimen>
+    <!-- Tasks kill -->
+
+    <!-- Tasks reproduction -->
+    <dimen name="tasks_item_reproduction_margin_horizontal">20dp</dimen>
+    <dimen name="tasks_item_reproduction_title_margin_top">20dp</dimen>
+    <dimen name="tasks_item_reproduction_margin_from_title">50dp</dimen>
+    <dimen name="tasks_item_reproduction_txt_margin_top">10dp</dimen>
+    <!-- Tasks reproduction -->
+
+    <!-- Tasks vaccination -->
+    <dimen name="tasks_item_vaccination_margin_horizontal">20dp</dimen>
+    <dimen name="tasks_item_vaccination_title_margin_top">20dp</dimen>
+    <dimen name="tasks_item_vaccination_margin_from_title">50dp</dimen>
+    <!-- Tasks vaccination -->
+
+    <!-- Floating Action Fragment -->
+
+    <!-- Floating Action Fragment -->
+
+    <!-- Tasks -->
+
+    <!-- Birth -->
+    <dimen name="birth_header_padding_bottom">20dp</dimen>
+    <dimen name="birth_btn_width">170dp</dimen>
+
+    <dimen name="birth_item_margin_horizontal">15dp</dimen>
+    <dimen name="birth_item_margin_vertical">10dp</dimen>
+    <dimen name="birth_item_elevation">5dp</dimen>
+
+    <dimen name="birth_item_txt_area_padding_horizontal">10dp</dimen>
+
+    <dimen name="birth_item_btn_show_height">35dp</dimen>
+    <dimen name="birth_item_btn_show_margin_top">40dp</dimen>
+    <dimen name="birth_item_btn_show_margin_bottom">20dp</dimen>
+    <dimen name="birth_item_btn_show_margin_horizontal">50dp</dimen>
+
+    <!-- Floating Action Fragment -->
+    <dimen name="birth_item_floating_action_margin_horizontal">20dp</dimen>
+    <dimen name="birth_item_floating_action_title_margin_top">20dp</dimen>
+
+    <dimen name="birth_item_floating_action_margin_from_title">30dp</dimen>
+
+    <dimen name="birth_item_btn_save_height">35dp</dimen>
+    <dimen name="birth_item_btn_save_margin_top">40dp</dimen>
+    <dimen name="birth_item_btn_save_margin_bottom">20dp</dimen>
+    <dimen name="birth_item_btn_save_margin_horizontal">50dp</dimen>
+
+
+    <!-- Floating Action Fragment -->
+
+
+    <!-- Birth -->
+
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
+
+</resources>

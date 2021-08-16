@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/auth">
+
+    <fragment
+        android:id="@+id/farm"
+        android:name="com.kudashov.rabbits_farm.screens.farm.Farm"
+        android:label="AboutFarm" >
+        <action
+            android:id="@+id/action_farm_to_farmMenuCage"
+            app:destination="@id/farmMenuCage" />
+        <action
+            android:id="@+id/action_farm_to_farmMenuRabbit"
+            app:destination="@id/farmMenuRabbit" />
+        <action
+            android:id="@+id/action_farm_to_auth"
+            app:destination="@id/auth" />
+    </fragment>
+    <fragment
+        android:id="@+id/farmMenuRabbit"
+        android:name="com.kudashov.rabbits_farm.screens.farm.filters.rabbit.FarmFilterRabbit"
+        android:label="AboutFarmMenu" >
+        <action
+            android:id="@+id/action_farmMenuRabbit_to_farm"
+            app:destination="@id/farm" />
+    </fragment>
+    <fragment
+        android:id="@+id/birth"
+        android:name="com.kudashov.rabbits_farm.screens.birth.Birth"
+        android:label="Birth" />
+    <fragment
+        android:id="@+id/tasks"
+        android:name="com.kudashov.rabbits_farm.screens.tasks.Tasks"
+        android:label="Tasks" />
+    <fragment
+        android:id="@+id/farmMenuCage"
+        android:name="com.kudashov.rabbits_farm.screens.farm.filters.cage.FarmFilterCage"
+        android:label="FarmMenuCage" >
+        <action
+            android:id="@+id/action_farmMenuCage_to_farm"
+            app:destination="@id/farm" />
+    </fragment>
+    <fragment
+        android:id="@+id/auth"
+        android:name="com.kudashov.rabbits_farm.screens.auth.Auth"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_auth_to_farm"
+            app:destination="@id/farm" />
+    </fragment>
+</navigation>

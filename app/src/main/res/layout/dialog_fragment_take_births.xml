@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/birth_item_margin_horizontal"
+    android:background="@drawable/shape_dialog_fragment"
+    android:elevation="@dimen/birth_item_elevation"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/btn_exit"
+        android:layout_width="@dimen/floating_action_fragment_btn_edit_size"
+        android:layout_height="@dimen/floating_action_fragment_btn_edit_size"
+        android:layout_marginTop="@dimen/floating_action_fragment_btn_exit_margin_top"
+        android:layout_marginEnd="@dimen/floating_action_fragment_btn_exit_margin_end"
+        android:background="@drawable/ic_close_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/birth_item_floating_action_margin_horizontal"
+        android:layout_marginTop="@dimen/birth_item_floating_action_title_margin_top"
+        android:text="@string/birth_floating_action_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_item_txt_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/srt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/birth_item_floating_action_margin_horizontal"
+        android:layout_marginTop="@dimen/birth_item_floating_action_margin_from_title"
+        android:text="@string/birth_floating_action_count_of_rabbit"
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/txt_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/birth_item_floating_action_margin_horizontal"
+        android:background="@drawable/shape_item_text"
+        android:gravity="center_vertical|start"
+        android:inputType="number"
+        android:paddingHorizontal="@dimen/birth_item_txt_area_padding_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/srt_number"
+        tools:text="13" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/birth_item_btn_save_height"
+        android:layout_marginHorizontal="@dimen/birth_item_btn_save_margin_horizontal"
+        android:layout_marginTop="@dimen/birth_item_btn_save_margin_top"
+        android:layout_marginBottom="@dimen/birth_item_btn_save_margin_bottom"
+        android:background="@drawable/shape_btn_green"
+        android:text="@string/birth_floating_action_btn_save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_count" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

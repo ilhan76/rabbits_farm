@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth"
+    android:background="@color/app_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".screens.auth.Auth">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/BaseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Авторизация"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/editTxtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:background="@drawable/shape_item_text"
+        android:gravity="center_vertical|start"
+        android:hint="Логин"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/editTxtPass"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:background="@drawable/shape_item_text"
+        android:gravity="center_vertical|start"
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintBottom_toTopOf="@+id/btnAuth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
+
+    <Button
+        android:id="@+id/btnAuth"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:background="@drawable/shape_btn_green"
+        android:padding="0dp"
+        android:text="Войти"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/standard_txt_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtPass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

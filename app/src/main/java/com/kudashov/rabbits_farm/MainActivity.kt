@@ -1,5 +1,7 @@
 package com.kudashov.rabbits_farm
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.ChangeBounds
@@ -16,7 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kudashov.rabbits_farm.databinding.ActivityMainBinding
 import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
-import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.*
 
 class MainActivity : AppCompatActivity(),
     AuthNavigationDelegate {
@@ -94,11 +96,26 @@ class MainActivity : AppCompatActivity(),
         _binding = null
     }
 
-    override fun auth() {
+    override fun logIn() {
         binding.footerBar.visibility = View.VISIBLE
         binding.underline.visibility = View.VISIBLE
         navController.navigate(R.id.action_auth_to_farm)
     }
+
+    override fun logOut() {
+        binding.footerBar.visibility = View.GONE
+        binding.underline.visibility = View.GONE
+
+        val pref: SharedPreferences = this.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+
+        editor.apply {
+            putString(USER_TOKEN, "")
+        }
+        editor.apply()
+        navController.navigate(R.id.action_farm_to_auth)
+    }
+
 
     fun showLoader(){
         binding.loadPage.visibility = View.VISIBLE

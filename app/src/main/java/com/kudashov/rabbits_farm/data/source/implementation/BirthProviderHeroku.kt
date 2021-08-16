@@ -42,7 +42,7 @@ class BirthProviderHeroku: BirthProvider {
                     response.onNext(it)
                 }, {
                     Log.d(TAG, "onError: ${it?.localizedMessage}")
-                    response.onNext(BirthResponse(it?.localizedMessage, null))
+                    response.onNext(BirthResponse(it?.localizedMessage, 0, null))
                 })
         } else {
             ApiClient.client.create(ApiInterface::class.java)
@@ -59,7 +59,7 @@ class BirthProviderHeroku: BirthProvider {
                     response.onNext(it)
                 }, {
                     Log.d(TAG, "onError: ${it?.localizedMessage}")
-                    response.onNext(BirthResponse(it?.localizedMessage, null))
+                    response.onNext(BirthResponse(it?.localizedMessage, 0,null))
                 })
         }
         return response

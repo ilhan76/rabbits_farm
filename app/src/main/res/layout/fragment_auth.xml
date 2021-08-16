@@ -6,7 +6,7 @@
     android:background="@color/app_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone"
+    android:visibility="visible"
     tools:context=".screens.auth.Auth">
 
     <TextView
@@ -76,6 +76,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPass" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,18 @@ import com.kudashov.rabbits_farm.data.dto.CageSimpleDto
 
 sealed class TaskListItemType
 
-data class DepositionDomain(
+data class DepositionToReproductionDomain(
+        val id: Int,
+        val type: String,
+        var date: String,
+        val userId: Int,
+        val cageFrom: CageSimpleDto,
+        val cageTo: CageSimpleDto,
+        val weight: Double,
+        val isDone: Boolean
+) : TaskListItemType()
+
+data class DepositionToFatteningDomain(
         val id: Int,
         val type: String,
         var date: String,

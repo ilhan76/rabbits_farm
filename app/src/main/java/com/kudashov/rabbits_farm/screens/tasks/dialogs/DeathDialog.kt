@@ -70,37 +70,37 @@ class DeathDialog : DialogFragment() {
 
         deathCause = listOf(
             "",
-            DEATH_CAUSES[DEATH_CAUSE_COLD],
-            DEATH_CAUSES[DEATH_CAUSE_DISEASE],
+            DEATH_CAUSES[DEATH_CAUSE_SLAUGHTER],
             DEATH_CAUSES[DEATH_CAUSE_MOTHER],
+            DEATH_CAUSES[DEATH_CAUSE_DISEASE],
+            DEATH_CAUSES[DEATH_CAUSE_WEAKNESS],
             DEATH_CAUSES[DEATH_CAUSE_OVERHEATING],
-            DEATH_CAUSES[DEATH_CAUSE_SLAUGHTER],
-            DEATH_CAUSES[DEATH_CAUSE_SLAUGHTER],
+            DEATH_CAUSES[DEATH_CAUSE_COLD],
             DEATH_CAUSES[DEATH_CAUSE_OTHER]
         )
         adapter = SpinnerAdapter(requireContext())
         adapter.setList(deathCause)
         binding.spDeathCause.adapter = adapter
         binding.spDeathCause.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                var isNotEmpty = true
-                for (i in DEATH_CAUSES){
-                    if (i.value == deathCause[position]){
-                        viewModel.setDeathCause(i.key)
-                        isNotEmpty = false
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    var isNotEmpty = true
+                    for (i in DEATH_CAUSES) {
+                        if (i.value == deathCause[position]) {
+                            viewModel.setDeathCause(i.key)
+                            isNotEmpty = false
+                        }
                     }
+                    if (isNotEmpty) viewModel.setDeathCause(null)
                 }
-                if (isNotEmpty) viewModel.setDeathCause(null)
             }
-        }
         initListeners()
     }
 
@@ -114,7 +114,12 @@ class DeathDialog : DialogFragment() {
                 viewModel.putDeath(
                     editTxtNumberOfFarm.text.toString().toInt(),
                     editTxtNumberOfCage.text.toString().toInt(),
-                    editTxtLetter.text.toString()
+                    when (editTxtLetter.text.toString().toInt()) {
+                        0 -> "а"
+                        1 -> "б"
+                        2 -> "в"
+                        else -> "г"
+                    }.toLowerCase()
                 )
                 dialog!!.dismiss()
             }

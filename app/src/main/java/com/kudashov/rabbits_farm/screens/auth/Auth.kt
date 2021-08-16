@@ -68,7 +68,7 @@ class Auth : Fragment() {
             is StateAuth.Success -> {
                 Log.d(TAG, "stateProcessing: Auth Success: ${state.message}")
                 APP_ACTIVITY.hideLoader()
-                navigation.auth()
+                navigation.logIn()
             }
             is StateAuth.OutdatedToken -> {
                 Log.d(TAG, "stateProcessing: Токен устарел")
@@ -82,7 +82,7 @@ class Auth : Fragment() {
             }
             StateAuth.ActualToken -> {
                 Log.d(TAG, "stateProcessing: Actual Token")
-                navigation.auth()
+                navigation.logIn()
             }
         }
     }

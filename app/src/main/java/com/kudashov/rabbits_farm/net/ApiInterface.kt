@@ -117,27 +117,27 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<TaskResponse>
 
-    @PUT("task/in_progress/complete/{id}/")
+    @PUT("api/task/in_progress/complete/{id}/")
     fun confirmSimpleTask(
         @Header("Authorisation") token: String,
         @Path("id") id: Int
     ): Observable<BaseResponse>
 
-    @PUT("task/in_progress/complete/bunny_jigging/{id}/")
+    @PUT("api/task/in_progress/complete/bunny_jigging/{id}/")
     fun confirmBunnyJigging(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body body: BunnyJiggingTaskRequest
     ) : Observable<BaseResponse>
 
-    @PUT("task/in_progress/complete/slaughter_inspection/{id}/")
+    @PUT("api/task/in_progress/complete/slaughter_inspection/{id}/")
     fun confirmSlaughterInspection(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body body: SlaughterInspectionTaskRequest
     ): Observable<BaseResponse>
 
-    @GET("/api/birth/confirmed/")
+    @GET("api/birth/confirmed/")
     fun getBirthConfirmed(
         @Header("Authorisation") token: String,
         @Query("page") page: Int,
@@ -145,7 +145,7 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<BirthResponse>
 
-    @GET("/api/birth/unconfirmed/")
+    @GET("api/birth/unconfirmed/")
     fun getBirthUnconfirmed(
         @Header("Authorisation") token: String,
         @Query("page") page: Int,
@@ -153,14 +153,14 @@ interface ApiInterface {
         @Query("__order_by__") orderBy: String?
     ): Observable<BirthResponse>
 
-    @PUT("/api/birth/unconfirmed/{id}/")
+    @PUT("api/birth/unconfirmed/{id}/")
     fun confirmPregnancy(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,
         @Body body: ConfirmPregnancyRequest
     ): Observable<BaseResponse>
 
-    @PUT("/api/birth/confirmed/{id}/")
+    @PUT("api/birth/confirmed/{id}/")
     fun takeBirth(
         @Header("Authorisation") token: String,
         @Path("id") id: Int,

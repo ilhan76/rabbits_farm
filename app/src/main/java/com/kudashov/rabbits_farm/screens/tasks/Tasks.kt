@@ -79,7 +79,7 @@ class Tasks : Fragment() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
 
-                viewModel.getTasks(false)
+                viewModel.getTasks(isDone)
             }
         })
 

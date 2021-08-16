@@ -29,6 +29,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/btn_log_out"
+            android:layout_width="22dp"
+            android:layout_height="18dp"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/btn_log_out"
+            app:layout_constraintTop_toTopOf="@+id/farm_title"
+            app:layout_constraintBottom_toBottomOf="@+id/farm_title"
+            app:layout_constraintStart_toEndOf="@+id/farm_title" />
+
+        <ImageButton
             android:id="@+id/btn_to_menu"
             android:layout_width="@dimen/farm_btn_to_menu_size"
             android:layout_height="@dimen/farm_btn_to_menu_size"
@@ -241,8 +252,6 @@
             app:layout_constraintStart_toEndOf="@+id/btn_cage_is_cleaned"
             app:layout_constraintTop_toBottomOf="@+id/btn_cage_need_repaired" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

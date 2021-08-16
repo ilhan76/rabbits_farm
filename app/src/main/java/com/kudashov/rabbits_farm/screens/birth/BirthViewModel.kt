@@ -35,6 +35,7 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
 
     private var page: Int = 1
     private val pageSize: Int = 50
+    private var maxPage = 1
     private var orderBy: String? = null
 
     fun setOrderBy(orderBy: String?){
@@ -52,34 +53,37 @@ class BirthViewModel(val context: Application) : AndroidViewModel(context), Seri
     }
 
     fun getBirth(isConfirmed: Boolean) {
-        state.postValue(StateBirth.Sending)
+        if (page <= maxPage) {
+            state.postValue(StateBirth.Sending)
 
-        val pref: SharedPreferences = context.getSharedPreferences(
-            APP_PREFERENCE, Context.MODE_PRIVATE
-        )
-        val token = "Token ${pref.getString(USER_TOKEN, "")}"
+            val pref: SharedPreferences = context.getSharedPreferences(
+                APP_PREFERENCE, Context.MODE_PRIVATE
+            )
+            val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
-        repository.getBirth(
-            token,
-            page,
-            pageSize,
-            isConfirmed,
-            orderBy
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { response ->
-                if (response.content != null){
-                    Log.d(TAG, "getBirth: Success")
-                    state.postValue(StateBirth.SuccessBirth(response.content))
-                } else {
-                    Log.d(TAG, "getBirth: Error")
-                    when(response.detail){
-                        ERROR_NO_ITEM -> state.postValue(StateBirth.NoItem)
-                        else -> state.postValue(StateBirth.Error("Unknown error ${response.detail}"))
+            repository.getBirth(
+                token,
+                page,
+                pageSize,
+                isConfirmed,
+                orderBy
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { response ->
+                    maxPage = response.first / pageSize + 1
+                    if (response.second.content != null) {
+                        Log.d(TAG, "getBirth: Success")
+                        state.postValue(StateBirth.SuccessBirth(response.second.content!!))
+                    } else {
+                        Log.d(TAG, "getBirth: Error")
+                        when (response.second.detail) {
+                            ERROR_NO_ITEM -> state.postValue(StateBirth.NoItem)
+                            else -> state.postValue(StateBirth.Error("Unknown error ${response.second.detail}"))
+                        }
                     }
                 }
-            }
+        }
     }
 
     fun confirmPregnancy(id: Int, isConfirmed: Boolean) {

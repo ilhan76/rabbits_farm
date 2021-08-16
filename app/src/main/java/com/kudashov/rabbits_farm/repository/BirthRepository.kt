@@ -15,7 +15,7 @@ interface BirthRepository {
         pageSize: Int,
         isConfirmed: Boolean,
         orderBy: String?
-    ): Observable<RepoResponse<List<BirthDomain>>>
+    ): Observable<Pair<Int, RepoResponse<List<BirthDomain>>>>
 
     fun confirmPregnancy(
         token: String,

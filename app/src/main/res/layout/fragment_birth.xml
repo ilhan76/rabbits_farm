@@ -28,7 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <Button
             android:id="@+id/btn_not_yet_confirmed"
             android:layout_width="@dimen/birth_btn_width"

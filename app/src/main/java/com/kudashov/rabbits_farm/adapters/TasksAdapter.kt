@@ -28,13 +28,15 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
+        // todo - изменить
         return when (listOfTasks[position]) {
             is DepositionFromMotherDomain -> 0
             is VaccinationDomain -> 1
             is InspectionDomain -> 2
             is ReproductionDomain -> 3
             is KillDomain -> 4
-            is DepositionDomain -> 5
+            is DepositionToFatteningDomain -> 5
+            is DepositionToReproductionDomain -> 6
         }
     }
 
@@ -45,7 +47,8 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is InspectionViewHolder -> holder.bind(listOfTasks[position] as InspectionDomain)
             is ReproductionViewHolder -> holder.bind(listOfTasks[position] as ReproductionDomain)
             is KillViewHolder -> holder.bind(listOfTasks[position] as KillDomain)
-            is DepositionViewHolder -> holder.bind(listOfTasks[position] as DepositionDomain)
+            is DepositionToFatteningViewHolder -> holder.bind(listOfTasks[position] as DepositionToFatteningDomain)
+            is DepositionToReproductionViewHolder -> holder.bind(listOfTasks[position] as DepositionToReproductionDomain)
         }
     }
 
@@ -74,9 +77,16 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 ), delegate
             )
             4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false), delegate)
-            5 -> DepositionViewHolder(
+            5 -> DepositionToFatteningViewHolder(
                 inflater.inflate(
-                    R.layout.item_tasks_deposition,
+                    R.layout.item_tasks_deposition_to_fattening,
+                    parent,
+                    false
+                ), delegate
+            )
+            6 -> DepositionToReproductionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition_to_reproduction,
                     parent,
                     false
                 ), delegate

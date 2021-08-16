@@ -3,6 +3,7 @@ package com.kudashov.rabbits_farm.screens.tasks
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
@@ -25,7 +26,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     TaskDelegate {
 
     private val TAG: String = this::class.java.simpleName
-    private val state = MutableLiveData<StateTask>().default(initialValue = StateTask.Default)
+    private val state = MutableLiveData<StateTask>()
     private val repository: TaskRepository = TaskRepositoryImpl(
         converter = TaskConverterImpl(),
         provider = TaskProviderHeroku()
@@ -74,6 +75,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                         if (response.second.content != null) {
                             Log.i(TAG, "getRabbits: SUCCESS")
                             listOfTask.addAll(response.second.content!!)
+                            Log.d(TAG, "getTasks: ${listOfTask.size}")
                             state.postValue(StateTask.ListOfTaskReceived(listOfTask))
                         } else {
                             Log.d(TAG, "getTasks: Error")

@@ -74,17 +74,13 @@ class Birth : Fragment(), BirthDelegate {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
-/*        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+        recyclerView.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
             override fun loadNextPage() {
                 Log.d(TAG, "loadMoreItems: NEXT PAGE")
                 viewModel.nextPage()
-
-                if (isConfirmed)
-                    viewModel.getBirth(isConfirmed, null)
-                else
-                    viewModel.getBirth(isConfirmed, null)
+                viewModel.getBirth(isConfirmed)
             }
-        })*/
+        })
 
         viewModel = ViewModelProvider(this).get(BirthViewModel::class.java)
         viewModel.getStates().observe(this, this::stateProcessing)

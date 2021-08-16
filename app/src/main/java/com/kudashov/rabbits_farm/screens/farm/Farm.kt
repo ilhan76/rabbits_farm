@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -19,6 +20,7 @@ import com.kudashov.rabbits_farm.adapters.delegates.FarmDelegate
 import com.kudashov.rabbits_farm.data.domain.CageDomain
 import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 import com.kudashov.rabbits_farm.databinding.FragmentFarmBinding
+import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
 import com.kudashov.rabbits_farm.screens.farm.dialog.RabbitDialog
 import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
 import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
@@ -45,6 +47,7 @@ class Farm : Fragment(), FarmDelegate {
     private var _binding: FragmentFarmBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var navigation: AuthNavigationDelegate
     private lateinit var viewModel: FarmViewModel
 
     private lateinit var recyclerView: RecyclerView
@@ -60,6 +63,7 @@ class Farm : Fragment(), FarmDelegate {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFarmBinding.inflate(layoutInflater, container, false)
+        navigation = activity as AuthNavigationDelegate
         return binding.root
     }
 
@@ -116,6 +120,21 @@ class Farm : Fragment(), FarmDelegate {
                 } else {
                     APP_ACTIVITY.navController.navigate(R.id.action_farm_to_farmMenuCage)
                 }
+            }
+
+            btnLogOut.setOnClickListener {
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Вы уверены, что хотите выйти?")
+                    .setCancelable(true)
+                    .setPositiveButton("Да") { dialog, _ ->
+                        navigation.logOut()
+                        dialog.cancel()
+                    }
+                    .setNegativeButton("Нет") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
+                    .show()
             }
 
             btnRabbits.setOnClickListener {

@@ -32,8 +32,9 @@ class BirthRepositoryImpl(
         pageSize: Int,
         isConfirmed: Boolean,
         orderBy: String?
-    ): Observable<RepoResponse<List<BirthDomain>>> {
-        val response: PublishSubject<RepoResponse<List<BirthDomain>>> = PublishSubject.create()
+    ): Observable<Pair<Int, RepoResponse<List<BirthDomain>>>> {
+        val response: PublishSubject<Pair<Int, RepoResponse<List<BirthDomain>>>> =
+            PublishSubject.create()
 
         provider.getBirth(token, page, pageSize, isConfirmed, orderBy)
             .subscribeOn(Schedulers.io())
@@ -42,15 +43,21 @@ class BirthRepositoryImpl(
                 if (resp.results == null || resp.results.isEmpty()) {
                     Log.d(TAG, "getBirth: No Item")
                     response.onNext(
-                        RepoResponse(null, ERROR_NO_ITEM)
+                        Pair(
+                            0,
+                            RepoResponse<List<BirthDomain>>(null, ERROR_NO_ITEM)
+                        )
                     )
                 } else {
                     Log.d(TAG, "getBirth: Success")
                     response.onNext(
-                        RepoResponse(
-                            resp.results.map { BirthDto ->
-                                converter.convertBirthFromApiToDomain(BirthDto)
-                            }, resp.detail
+                        Pair(
+                            resp.count,
+                            RepoResponse(
+                                resp.results.map { BirthDto ->
+                                    converter.convertBirthFromApiToDomain(BirthDto)
+                                }, resp.detail
+                            )
                         )
                     )
                 }

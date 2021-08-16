@@ -53,7 +53,17 @@ class TaskConverterImpl: TaskConverter {
                     weight = task.weight!!,
                     isDone = isComplete
                 )
-                else -> DepositionDomain(
+                "R" -> DepositionToReproductionDomain(
+                    id = task.id,
+                    type = task.type,
+                    date = task.date.substring(0, 10),
+                    userId = task.userId,
+                    cageFrom = task.cageFrom!!,
+                    cageTo = task.cageTo!!,
+                    weight = task.weight!!,
+                    isDone = isComplete
+                )
+                else -> DepositionToFatteningDomain(
                     id = task.id,
                     type = task.type,
                     date = task.date.substring(0, 10),
@@ -62,6 +72,6 @@ class TaskConverterImpl: TaskConverter {
                     cageTo = task.cageTo!!,
                     isDone = isComplete
                 )
-            }
+        }
     }
 }

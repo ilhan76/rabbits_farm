@@ -36,6 +36,10 @@ class KillViewHolder(val view: View, val delegate: TaskDelegate?) : RecyclerView
             kill.cage.cageNumber,
             kill.cage.letter
         )
+        weight.text = view.context.getString(
+            R.string.task_item_weight_format,
+            kill.weight.toString()
+        )
         isDone = kill.isDone
 
         if (kill.isDone) {

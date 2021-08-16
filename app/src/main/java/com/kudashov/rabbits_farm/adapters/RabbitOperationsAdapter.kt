@@ -1,18 +1,17 @@
 package com.kudashov.rabbits_farm.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.Operation
+import com.kudashov.rabbits_farm.adapters.viewHolders.farm.RabbitOperationViewHolder
+import com.kudashov.rabbits_farm.data.domain.OperationDomain
 
 class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val list: MutableList<Operation> = ArrayList()
+    private val list: MutableList<OperationDomain> = ArrayList()
 
-    fun setList(newList: List<Operation>){
+    fun setList(newList: List<OperationDomain>){
         list.clear()
         list.addAll(newList)
 
@@ -29,16 +28,6 @@ class RabbitOperationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RabbitOperationViewHolder) holder.bind(list[position])
-    }
-
-    class RabbitOperationViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val data: TextView = view.findViewById(R.id.txt_data)
-        private val event: TextView = view.findViewById(R.id.txt_event)
-
-        fun bind(operation: Operation){
-            data.text = operation.data
-            event.text = operation.event
-        }
     }
 }
 

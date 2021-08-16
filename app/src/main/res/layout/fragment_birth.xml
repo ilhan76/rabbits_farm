@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menu_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:paddingBottom="@dimen/birth_header_padding_bottom"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,73 +20,55 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
             android:text="@string/birth_title"
-
             android:textColor="@color/black"
             android:textSize="@dimen/title_txt_size"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <Button
             android:id="@+id/btn_not_yet_confirmed"
             android:layout_width="@dimen/birth_btn_width"
             android:layout_height="@dimen/standard_btn_height"
-
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-
+            android:background="@drawable/shape_btn_orange"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-
-            android:background="@drawable/shape_btn_orange"
-
             android:text="@string/birth_btn_not_yet_confirmed"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <Button
             android:id="@+id/btn_confirmed"
             android:layout_width="@dimen/birth_btn_width"
             android:layout_height="@dimen/standard_btn_height"
-
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
-
+            android:background="@drawable/shape_btn_grey"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-
-            android:background="@drawable/shape_btn_grey"
-
             android:text="@string/birth_btn_confirmed"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/standard_txt_size"
-
-            app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
             android:id="@+id/str_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-
             android:text="@string/tasks_txt_sort"
             android:textColor="@color/black"
             android:textSize="@dimen/standard_txt_size"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_not_yet_confirmed" />
 
@@ -96,30 +76,38 @@
             android:id="@+id/spinner"
             android:layout_width="@dimen/birth_btn_width"
             android:layout_height="@dimen/standard_spinner_height"
-
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
-
-            android:paddingHorizontal="30dp"
-
-            android:dropDownVerticalOffset="@dimen/standard_spinner_height"
-            android:popupBackground="@drawable/shape_spinner_dark"
             android:background="@drawable/selector_spinner_bg"
-
+            android:popupBackground="@drawable/shape_spinner_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_confirmed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/birth_list"
+        android:id="@+id/rvBirth"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
-        android:layout_weight="2"
-
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_area" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/txtNoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:background="@drawable/shape_menu"
+        android:paddingHorizontal="10dp"
+        android:text="@string/common_state_no_item"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvBirth" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

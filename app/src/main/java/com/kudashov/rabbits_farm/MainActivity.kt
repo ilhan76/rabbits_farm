@@ -1,43 +1,50 @@
 package com.kudashov.rabbits_farm
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.MenuItem
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kudashov.rabbits_farm.databinding.ActivityMainBinding
-import com.kudashov.rabbits_farm.utilits.APP_ACTIVITY
+import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
+import com.kudashov.rabbits_farm.utilits.const.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    AuthNavigationDelegate {
 
     private var TAG: String = this::class.java.simpleName
     lateinit var navController: NavController
     private var _binding: ActivityMainBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SplashTheme)
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        setContentView(binding.root)
 
         APP_ACTIVITY = this
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
-        bottomNavigationView = mBinding.footerBar
+        bottomNavigationView = binding.footerBar
         bottomNavigationView.itemIconTintList = null
         bottomNavigationView.setupWithNavController(navController = navController)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            underlineSelectedItem(item)
+        bottomNavigationView.setOnItemSelectedListener {
+            underlineSelectedItem(it)
             true
         }
     }
@@ -48,25 +55,20 @@ class MainActivity : AppCompatActivity() {
         val transition: Transition = ChangeBounds()
 
         transition.addListener(object : Transition.TransitionListener {
-            override fun onTransitionStart(transition: Transition?) {
-            }
+            override fun onTransitionStart(transition: Transition?) {}
             override fun onTransitionEnd(transition: Transition?) {
                 NavigationUI.onNavDestinationSelected(item, navController)
             }
-            override fun onTransitionCancel(transition: Transition?) {
-            }
-            override fun onTransitionPause(transition: Transition?) {
-            }
-            override fun onTransitionResume(transition: Transition?) {
-            }
+
+            override fun onTransitionCancel(transition: Transition?) {}
+            override fun onTransitionPause(transition: Transition?) {}
+            override fun onTransitionResume(transition: Transition?) {}
         })
-
-        TransitionManager.beginDelayedTransition(mBinding.main, transition)
-
+        TransitionManager.beginDelayedTransition(binding.main, transition)
         val constraintSet = ConstraintSet()
-        constraintSet.clone(mBinding.main)
+        constraintSet.clone(binding.main)
         constraintSet.setHorizontalBias(R.id.underline, getItemPosition(item.itemId) * 0.5f)
-        constraintSet.applyTo(mBinding.main)
+        constraintSet.applyTo(binding.main)
     }
 
     private fun getItemPosition(itemId: Int): Int {
@@ -78,19 +80,48 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun moveUnderline(itemId: Int){
+    fun moveUnderline(itemId: Int) {
         val transition: Transition = ChangeBounds()
 
-        TransitionManager.beginDelayedTransition(mBinding.main, transition)
+        TransitionManager.beginDelayedTransition(binding.main, transition)
 
         val constraintSet = ConstraintSet()
-        constraintSet.clone(mBinding.main)
+        constraintSet.clone(binding.main)
         constraintSet.setHorizontalBias(R.id.underline, getItemPosition(itemId) * 0.5f)
-        constraintSet.applyTo(mBinding.main)
+        constraintSet.applyTo(binding.main)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun logIn() {
+        binding.footerBar.visibility = View.VISIBLE
+        binding.underline.visibility = View.VISIBLE
+        navController.navigate(R.id.action_auth_to_farm)
+    }
+
+    override fun logOut() {
+        binding.footerBar.visibility = View.GONE
+        binding.underline.visibility = View.GONE
+
+        val pref: SharedPreferences = this.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+
+        editor.apply {
+            putString(USER_TOKEN, "")
+        }
+        editor.apply()
+        navController.navigate(R.id.action_farm_to_auth)
+    }
+
+
+    fun showLoader(){
+        binding.loadPage.visibility = View.VISIBLE
+    }
+
+    fun hideLoader(){
+        binding.loadPage.visibility = View.GONE
     }
 }

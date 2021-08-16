@@ -1,25 +1,26 @@
 package com.kudashov.rabbits_farm.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kudashov.rabbits_farm.R
-import com.kudashov.rabbits_farm.data.*
+import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
+import com.kudashov.rabbits_farm.adapters.viewHolders.tasks.*
+import com.kudashov.rabbits_farm.data.domain.*
 
 class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var listOfTasks: MutableList<TaskListItemType> = ArrayList()
+    private var delegate: TaskDelegate? = null
 
-    private var listOfTasks: MutableList<TasksListItemTypes> = ArrayList()
-
-    fun setList(list: List<TasksListItemTypes>) {
+    fun setList(list: List<TaskListItemType>) {
         listOfTasks.clear()
         listOfTasks.addAll(list)
 
         notifyDataSetChanged()
+    }
+
+    fun attachDelegate(delegate: TaskDelegate) {
+        this.delegate = delegate
     }
 
     override fun getItemCount(): Int {
@@ -27,167 +28,76 @@ class TasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(listOfTasks[position]){
-            is Deposition -> 0
-            is Vaccination -> 1
-            is Inspection -> 2
-            is Reproduction -> 3
-            is Kill -> 4
+        // todo - изменить
+        return when (listOfTasks[position]) {
+            is DepositionFromMotherDomain -> 0
+            is VaccinationDomain -> 1
+            is InspectionDomain -> 2
+            is ReproductionDomain -> 3
+            is KillDomain -> 4
+            is DepositionToFatteningDomain -> 5
+            is DepositionToReproductionDomain -> 6
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-            is DepositionViewHolder -> holder.bind(listOfTasks[position] as Deposition)
-            is VaccinationViewHolder -> holder.bind(listOfTasks[position] as Vaccination)
-            is InspectionViewHolder -> holder.bind(listOfTasks[position] as Inspection)
-            is ReproductionViewHolder -> holder.bind(listOfTasks[position] as Reproduction)
-            is KillViewHolder -> holder.bind(listOfTasks[position] as Kill)
+        when (holder) {
+            is DepositionFromMotherViewHolder -> holder.bind(listOfTasks[position] as DepositionFromMotherDomain)
+            is VaccinationViewHolder -> holder.bind(listOfTasks[position] as VaccinationDomain)
+            is InspectionViewHolder -> holder.bind(listOfTasks[position] as InspectionDomain)
+            is ReproductionViewHolder -> holder.bind(listOfTasks[position] as ReproductionDomain)
+            is KillViewHolder -> holder.bind(listOfTasks[position] as KillDomain)
+            is DepositionToFatteningViewHolder -> holder.bind(listOfTasks[position] as DepositionToFatteningDomain)
+            is DepositionToReproductionViewHolder -> holder.bind(listOfTasks[position] as DepositionToReproductionDomain)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when(viewType){
-            1 -> VaccinationViewHolder(inflater.inflate(R.layout.item_tasks_vaccination, parent, false))
-            2 -> InspectionViewHolder(inflater.inflate(R.layout.item_tasks_inspection, parent, false))
-            3 -> ReproductionViewHolder(inflater.inflate(R.layout.item_tasks_reproduction, parent, false))
-            4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false))
-            else -> DepositionViewHolder(inflater.inflate(R.layout.item_tasks_deposition, parent, false))
-        }
-    }
-
-    class DepositionViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var data: TextView = view.findViewById(R.id.data)
-        var cageFrom: TextView = view.findViewById(R.id.txt_from)
-        var cageTo: TextView = view.findViewById(R.id.txt_to)
-
-        var countOfMale: SeekBar = view.findViewById(R.id.sb_count_of_male)
-        var txtCountOfMale: TextView = view.findViewById(R.id.txt_sb_count_of_male)
-        var txtCountOfFemale: TextView = view.findViewById(R.id.txt_sb_count_of_female)
-        var countOfFemale: SeekBar = view.findViewById(R.id.sb_count_of_female)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(deposition: Deposition){
-            data.text = deposition.data
-            cageFrom.text = deposition.numberOfCageFrom
-            cageTo.text = deposition.numberOfCageTo
-
-            countOfMale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    txtCountOfMale.text = seekBar?.progress.toString()
-                }
-            })
-            txtCountOfMale.text = "0"
-
-            countOfFemale.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    txtCountOfFemale.text = seekBar?.progress.toString()
-                }
-            })
-            txtCountOfFemale.text = "0"
-
-            if (deposition.isDone){
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-    class VaccinationViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(vaccination: Vaccination){
-            data.text = vaccination.data
-            numberOfCage.text = vaccination.numberOfCage
-
-            if (vaccination.isDone){
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-    class InspectionViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-        var weight: EditText = view.findViewById(R.id.txt_weight)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(inspection: Inspection){
-            data.text = inspection.data
-            numberOfCage.text = inspection.numberOfCage
-
-            if (inspection.isDone){
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-    class ReproductionViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var data: TextView = view.findViewById(R.id.data)
-        var takeFrom: TextView = view.findViewById(R.id.txt_from)
-        var takeTo: TextView = view.findViewById(R.id.txt_to)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(reproduction: Reproduction){
-            data.text = reproduction.data
-            takeFrom.text = reproduction.takeFemaleFrom
-            takeTo.text = reproduction.takeFemaleTo
-
-            if (reproduction.isDone){
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
-        }
-    }
-    class KillViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var data: TextView = view.findViewById(R.id.data)
-        var numberOfCage: TextView = view.findViewById(R.id.txt_number_of_cage)
-        var weight: TextView = view.findViewById(R.id.txt_weight)
-
-        var btnDone: Button = view.findViewById(R.id.btn_done)
-
-        fun bind(kill: Kill){
-            data.text = kill.data
-            numberOfCage.text = kill.numberOfCage
-
-            if (kill.isDone){
-                btnDone.setText(R.string.task_item_btn_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_green)
-            } else {
-                btnDone.setText(R.string.task_item_btn_not_yet_done)
-                btnDone.setBackgroundResource(R.drawable.shape_btn_red)
-            }
-            //todo - обработчики
+        return when (viewType) {
+            1 -> VaccinationViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_vaccination,
+                    parent,
+                    false
+                ), delegate
+            )
+            2 -> InspectionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_inspection,
+                    parent,
+                    false
+                ), delegate
+            )
+            3 -> ReproductionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_reproduction,
+                    parent,
+                    false
+                ), delegate
+            )
+            4 -> KillViewHolder(inflater.inflate(R.layout.item_tasks_kill, parent, false), delegate)
+            5 -> DepositionToFatteningViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition_to_fattening,
+                    parent,
+                    false
+                ), delegate
+            )
+            6 -> DepositionToReproductionViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition_to_reproduction,
+                    parent,
+                    false
+                ), delegate
+            )
+            else -> DepositionFromMotherViewHolder(
+                inflater.inflate(
+                    R.layout.item_tasks_deposition_from_mother,
+                    parent,
+                    false
+                ), delegate
+            )
         }
     }
 }

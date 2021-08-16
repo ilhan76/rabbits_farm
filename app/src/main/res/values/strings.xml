@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Rabbits</string>
 
-    <!--IN CODE-->
-    <string name="error_receiving_data">Ошибка получения данных с сервера</string>
-    <!--IN CODE-->
+    <!-- Common -->
+    <string name="common_state_no_item">Список пуст</string>
+    <!-- Common -->
 
     <!-- About Farm -->
     <!-- About Farm Rabbits -->
@@ -23,17 +23,22 @@
     <string name="farm_cages_txt_number">Номер</string>
     <string name="farm_cages_txt_type">Тип</string>
     <string name="farm_cages_txt_status">Статус</string>
+
+    <string name="farm_button_area_cage_is_repaired">Клетка отремонтирована</string>
+    <string name="farm_button_area_cage_is_cleaned">Клетка убрана</string>
+    <string name="farm_button_area_need_repair">Требуется ремонт</string>
+    <string name="farm_button_area_need_clean">Требуется уборка</string>
     <!-- About Farm Cages -->
 
     <!-- About Farm Rabbit Settings -->
-    <string name="farm_rabbits_settings_txt_number_of_farm">Номер фирмы</string>
+    <string name="farm_rabbits_settings_txt_number_of_farm">Номер фермы</string>
     <string name="farm_rabbits_settings_txt_choose_gender">Выбрать пол</string>
     <string name="farm_rabbits_settings_txt_type_of_rabbit">Тип кролика</string>
     <string name="farm_rabbits_settings_txt_breed_of_rabbit">Порода кролика</string>
     <string name="farm_rabbits_settings_txt_age">Возраст (в днях)</string>
     <string name="farm_rabbits_settings_number_of_cage">Номер клетки</string>
     <string name="farm_rabbits_settings_txt_status_of_cage">Статус клетки</string>
-    <string name="farm_rabbits_settings_btn_show">Отобразить (%s)</string>
+    <string name="farm_rabbits_settings_btn_show">Отобразить</string>
 
     <string name="farm_rabbits_settings_btn_male">Самец</string>
     <string name="farm_rabbits_settings_btn_female">Самка</string>
@@ -54,16 +59,31 @@
     <string name="farm_cage_settings_btn_show">Отобразить</string>
     <!-- About Farm Cage Settings -->
 
-    <!-- Floating Action Fragment Weigh Rabbit -->
-    <string name="farm_floating_action_title">Взвесить кролика</string>
-    <string name="farm_floating_txt_current_weight_of_rabbit">Текущий вес кролика: %s кг</string>
-    <string name="farm_floating_new_weight_of_rabbit">Новый вес кролика</string>
-    <string name="farm_floating_action_btn_save">Сохранить вес кролики</string>
-    <!-- Floating Action Fragment Weigh Rabbit -->
+    <!-- Dialog Fragment Weigh Rabbit -->
+    <string name="dialog_weight_title">Взвесить кролика</string>
+    <string name="dialog_weight_txt_current_weight">Текущий вес кролика: %s кг</string>
+    <string name="dialog_weight_new_weight">Новый вес кролика</string>
+    <string name="dialog_weight_btn_save">Сохранить вес кролики</string>
+    <!-- Dialog Fragment Weigh Rabbit -->
 
-    <!-- Floating Action Fragment Rabbit -->
+    <!-- Dialog Fragment Rabbit -->
+    <string name="dialog_rabbit_txt_title">Кролик</string>
+    <string name="dialog_rabbit_txt_id"><b>#%d</b></string>
+    <string name="dialog_rabbit_txt_weight"><b>%s кг</b></string>
+    
+    <string name="dialog_rabbit_txt_birthday">Дата рождения: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_age">Возраст: <b>%s дн.</b></string>
+    
+    <string name="dialog_rabbit_txt_type">Тип: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_breed">Порода: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_number_of_cage">№ клетки: <b>%d-%d(%s)</b></string>
+    
+    <string name="dialog_rabbit_txt_status">Статус: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_output">Кол-во выводов: <b>%s</b></string>
+    <string name="dialog_rabbit_txt_output_efficiency">Средний вывод: <b>%s</b></string>
 
-    <!-- Floating Action Fragment Rabbit -->
+    <string name="dialog_rabbit_txt_history_of_operations">История операций</string>
+    <!-- Dialog Action Fragment Rabbit -->
     <!-- About Farm -->
 
     <!-- Tasks-->
@@ -73,12 +93,17 @@
     <string name="tasks_btn_not_yet_done">Не выполнено</string>
     <string name="tasks_btn_done">Выполнено</string>
     <string name="tasks_txt_sort">Сортировать (дн)</string>
-    
+
     <string name="task_item_btn_not_yet_done">Не выполнено</string>
     <string name="task_item_btn_done">Выполнено</string>
+    <string name="task_item_cage_format">%d-%d(%s)</string>
+    <string name="task_item_weight_format">%s кг.</string>
 
     <!-- Item deposition-->
-    <string name="task_item_deposition_txt_title">Отсадка от мат.</string>
+    <string name="task_item_deposition_from_mother_txt_title">Отсадка от мат.</string>
+    <string name="task_item_deposition_from_mother_txt_cage_to">Самцы: %d-%d(%s), Самки: %d-%d(%s)</string>
+    <string name="task_item_deposition_txt_title_to_fattening">Отсадка (размнож. -> откорм.)</string>
+    <string name="task_item_deposition_txt_title_to_reproduction">Отсадка (откорм. -> размнож.)</string>
     <string name="task_item_deposition_txt_number_of_cage_from">№ клетки ИЗ</string>
     <string name="task_item_deposition_txt_number_of_cage_to">№ клетки В</string>
     <string name="task_item_deposition_txt_count_of_male">Количество самцов</string>
@@ -99,7 +124,7 @@
     <!-- Item reproduction-->
     <string name="task_item_reproduction_title">Размножение</string>
     <string name="task_item_reproduction_txt_take_female_from">Взять самку ИЗ (№ клетки)</string>
-    <string name="task_item_reproduction_txt_refer_female_to_male">Взять самку ИЗ (№ клетки)</string>
+    <string name="task_item_reproduction_txt_refer_female_to_male">Отнести к самцу В (№ клетки)</string>
     <!-- Item reproduction-->
 
     <!-- Item kill -->
@@ -137,10 +162,6 @@
     <string name="birth_floating_action_title">Принять роды</string>
     <string name="birth_floating_action_count_of_rabbit">Количество рожденных кроликов</string>
     <string name="birth_floating_action_btn_save">Сохранить</string>
-    <string name="farm_button_area_cage_is_repaired">Клетка отремонтирована</string>
-    <string name="farm_button_area_cage_is_cleaned">Клетка убрана</string>
-    <string name="farm_button_area_need_repair">Требуется ремонт</string>
-    <string name="farm_button_area_need_clean">Требуется уборка</string>
     <!-- Floating Action Fragment -->
     <!-- Birth -->
 </resources>

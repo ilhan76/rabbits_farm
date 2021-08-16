@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.data.source
 
 import com.kudashov.rabbits_farm.net.response.BaseResponse
+import com.kudashov.rabbits_farm.net.response.task.DeathResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 
@@ -36,5 +37,5 @@ interface TaskProvider {
         cageNumber: Int?,
         letter: String?,
         deathCause: String?
-    ): Observable<BaseResponse>
+    ): Observable<DeathResponse>
 }

@@ -3,6 +3,7 @@ package com.kudashov.rabbits_farm.repository
 import com.kudashov.rabbits_farm.data.domain.TaskListItemType
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.RepoResponse
+import com.kudashov.rabbits_farm.net.response.task.DeathResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 
@@ -38,5 +39,5 @@ interface TaskRepository {
         cageNumber: Int?,
         letter: String?,
         deathCause: String?
-    ): Observable<BaseResponse>
+    ): Observable<DeathResponse>
 }

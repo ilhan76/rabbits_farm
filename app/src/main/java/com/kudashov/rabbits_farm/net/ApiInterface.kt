@@ -14,6 +14,7 @@ import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.farm.*
+import com.kudashov.rabbits_farm.net.response.task.DeathResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
@@ -171,5 +172,5 @@ interface ApiInterface {
     fun death(
         @Header("Authorisation") token: String,
         @Body body: DeathRequest
-    ) : Observable<BaseResponse>
+    ) : Observable<DeathResponse>
 }

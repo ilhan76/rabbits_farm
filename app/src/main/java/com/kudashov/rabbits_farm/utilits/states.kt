@@ -62,6 +62,10 @@ sealed class StateTask {
     object Sending : StateTask()
     object NoItem : StateTask()
     object NotAllFieldsAreFilledIn : StateTask()
+    object DeathNotMatherCage: StateTask()
+    object DeathNotBunnies: StateTask()
+    object DeathNotRabbit: StateTask()
+    object DeathCageNotExist: StateTask()
     class ListOfTaskReceived(val list: List<TaskListItemType>) : StateTask()
     class Error<T>(val message: T) : StateTask()
 }

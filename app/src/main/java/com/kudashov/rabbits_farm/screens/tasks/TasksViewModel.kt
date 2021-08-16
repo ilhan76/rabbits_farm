@@ -3,20 +3,16 @@ package com.kudashov.rabbits_farm.screens.tasks
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.adapters.delegates.TaskDelegate
 import com.kudashov.rabbits_farm.data.converters.implementation.TaskConverterImpl
 import com.kudashov.rabbits_farm.data.domain.TaskListItemType
 import com.kudashov.rabbits_farm.data.source.implementation.TaskProviderHeroku
-import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.TaskRepository
 import com.kudashov.rabbits_farm.repository.implementation.TaskRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.StateTask
-import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
-import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -42,7 +38,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
     private val pageSize: Int = 50
     private var orderBy: String? = null
 
-    fun setOrderBy(orderBy: String?){
+    fun setOrderBy(orderBy: String?) {
         this.orderBy = orderBy
         state.postValue(StateTask.Default)
     }
@@ -98,8 +94,22 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d(TAG, "putDeath: Success")
-                    state.postValue(StateTask.Default)
+                    if (it.warning != null && it.warning.codes.contains(WARNING_DEATH)) {
+                        Log.d(TAG, "putDeath: Warning")
+                        when {
+                            it.warning.codes.contains(WARNING_DEATH_NOT_MOTHER_CAGE) ->
+                                state.postValue(StateTask.DeathNotMatherCage)
+                            it.warning.codes.contains(WARNING_DEATH_NOT_BUNNIES) ->
+                                state.postValue(StateTask.DeathNotBunnies)
+                            it.warning.codes.contains(WARNING_DEATH_NOT_RABBITS) ->
+                                state.postValue(StateTask.DeathNotRabbit)
+                            it.warning.codes.contains(WARNING_DEATH_CAGE_NOT_EXIST) ->
+                                state.postValue(StateTask.DeathCageNotExist)
+                        }
+                    } else {
+                        Log.d(TAG, "putDeath: Success")
+                        state.postValue(StateTask.Default)
+                    }
                 }, {
                     Log.d(TAG, "putDeath: Error")
                     state.postValue(StateTask.Error(it.localizedMessage))

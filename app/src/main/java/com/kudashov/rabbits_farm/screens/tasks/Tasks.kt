@@ -179,6 +179,26 @@ class Tasks : Fragment() {
                 Toast.makeText(context, "Заполнены не все поля", Toast.LENGTH_SHORT).show()
                 APP_ACTIVITY.hideLoader()
             }
+            StateTask.DeathCageNotExist -> {
+                Log.d(TAG, "stateProcessing: DeathCageNotExist")
+                Toast.makeText(context, "Такая клетка не существует", Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
+            }
+            StateTask.DeathNotMatherCage -> {
+                Log.d(TAG, "stateProcessing: DeathNotMatherCage")
+                Toast.makeText(context, "Эта клетка не материнская", Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
+            }
+            StateTask.DeathNotRabbit -> {
+                Log.d(TAG, "stateProcessing: DeathNotRabbit")
+                Toast.makeText(context, "В клетке нет кроликов", Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
+            }
+            StateTask.DeathNotBunnies -> {
+                Log.d(TAG, "stateProcessing: DeathNotBunnies")
+                Toast.makeText(context, "В клетке нет крольчат", Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
+            }
         }
     }
 

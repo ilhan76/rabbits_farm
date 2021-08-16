@@ -10,6 +10,7 @@ import com.kudashov.rabbits_farm.net.request.task.BunnyJiggingTaskRequest
 import com.kudashov.rabbits_farm.net.request.task.DeathRequest
 import com.kudashov.rabbits_farm.net.request.task.SlaughterInspectionTaskRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
+import com.kudashov.rabbits_farm.net.response.task.DeathResponse
 import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -131,8 +132,8 @@ class TaskProviderHeroku : TaskProvider {
         cageNumber: Int?,
         letter: String?,
         deathCause: String?
-    ): Observable<BaseResponse> {
-        val response: PublishSubject<BaseResponse> = PublishSubject.create()
+    ): Observable<DeathResponse> {
+        val response: PublishSubject<DeathResponse> = PublishSubject.create()
 
         ApiClient.client.create(ApiInterface::class.java)
             .death(

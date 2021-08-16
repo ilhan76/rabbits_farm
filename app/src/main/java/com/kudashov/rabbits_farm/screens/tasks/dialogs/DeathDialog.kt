@@ -114,12 +114,7 @@ class DeathDialog : DialogFragment() {
                 viewModel.putDeath(
                     editTxtNumberOfFarm.text.toString().toInt(),
                     editTxtNumberOfCage.text.toString().toInt(),
-                    when (editTxtLetter.text.toString().toInt()) {
-                        0 -> "а"
-                        1 -> "б"
-                        2 -> "в"
-                        else -> "г"
-                    }.toLowerCase()
+                    editTxtLetter.text.toString().toLowerCase()
                 )
                 dialog!!.dismiss()
             }

@@ -12,8 +12,7 @@ import java.util.concurrent.TimeUnit
 class ApiClient {
 
     companion object {
-        //private const val baseUrl: String = "https://rabbit-api--test.herokuapp.com/"
-        private const val baseUrl: String = "http://servachok2021.ddns.net:8000/"
+        private const val baseUrl: String = "https://rabbit-api--test.herokuapp.com/"
         var retrofit: Retrofit? = null
 
         val client: Retrofit

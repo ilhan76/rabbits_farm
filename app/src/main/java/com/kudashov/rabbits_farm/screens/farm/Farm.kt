@@ -283,8 +283,6 @@ class Farm : Fragment(), FarmDelegate {
     }
 
     override fun openMoreRabbitInfo(rabbit: RabbitDomain) {
-        Toast.makeText(context, "Нажали на элемент списка", Toast.LENGTH_SHORT).show()
-
         val bundle = Bundle()
         bundle.putInt(ARG_RABBIT_ID, rabbit.id)
         bundle.putString(ARG_RABBIT_TYPE, rabbit.type)

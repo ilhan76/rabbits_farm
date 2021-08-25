@@ -63,7 +63,7 @@ class TasksViewModel(val context: Application) : AndroidViewModel(context), Seri
             val token = "Token ${pref.getString(USER_TOKEN, "")}"
 
             compositeDisposable.add(
-                repository.getTasks(token, isDone, page, pageSize, orderBy)
+                repository.getTasks(token, isDone, page, pageSize, pref.getInt(USER_ID, 0), orderBy)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { response ->

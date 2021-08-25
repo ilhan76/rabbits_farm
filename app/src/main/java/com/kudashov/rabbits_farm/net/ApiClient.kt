@@ -1,7 +1,6 @@
 package com.kudashov.rabbits_farm.net
 
 import com.kudashov.rabbits_farm.BuildConfig
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +11,7 @@ import java.util.concurrent.TimeUnit
 class ApiClient {
 
     companion object {
-        private const val baseUrl: String = "https://rabbit-api--app.herokuapp.com/"
+        private const val BASE_URL: String = "https://rabbit-api--test.herokuapp.com/"
         var retrofit: Retrofit? = null
 
         val client: Retrofit
@@ -28,7 +27,7 @@ class ApiClient {
                     httpClient.connectTimeout(20000, TimeUnit.SECONDS)
 
                     val retrofitBuilder: Retrofit.Builder = Retrofit.Builder()
-                        .baseUrl(baseUrl)
+                        .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                         .client(httpClient.build())

@@ -4,6 +4,7 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.dto.UserDto
 import com.kudashov.rabbits_farm.net.ApiClient
 import com.kudashov.rabbits_farm.net.ApiInterface
+import com.kudashov.rabbits_farm.net.response.ApiWarning
 import com.kudashov.rabbits_farm.net.response.auth.AuthResponse
 import com.kudashov.rabbits_farm.repository.AuthRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -25,25 +26,18 @@ class AuthRepositoryImpl: AuthRepository {
             .getToken(UserDto(username, pass))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<AuthResponse>{
-                override fun onComplete() {}
-                override fun onSubscribe(d: Disposable?) {}
-
-                override fun onNext(t: AuthResponse?) {
-                    Log.d(TAG, "onNext: $t")
-                    response.onNext(t)
-                }
-
-                override fun onError(e: Throwable?) {
-                    Log.d(TAG, "onError: ${e?.localizedMessage}")
-                    response.onNext(
-                        AuthResponse(
-                            null,
-                            null,
-                            e?.localizedMessage
-                        )
+            .subscribe({
+                Log.d(TAG, "onNext: $it")
+                response.onNext(it)
+            }, {
+                Log.d(TAG, "onError: ${it.localizedMessage}")
+                response.onNext(
+                    AuthResponse(
+                        null,
+                        null,
+                        ApiWarning(listOf(it.localizedMessage))
                     )
-                }
+                )
             })
 
         return response

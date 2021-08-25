@@ -75,6 +75,8 @@ sealed class StateAuth {
     object Sending : StateAuth()
     object OutdatedToken : StateAuth()
     object ActualToken: StateAuth()
+    object UserDoesNotExist: StateAuth()
+    object InvalidPass: StateAuth()
     class Success(val message: String) : StateAuth()
     class Error<T>(val message: T) : StateAuth()
 }

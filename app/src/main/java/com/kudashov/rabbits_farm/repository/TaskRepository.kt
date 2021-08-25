@@ -13,6 +13,7 @@ interface TaskRepository {
         isDone: Boolean,
         page: Int,
         pageSize: Int,
+        userId: Int,
         orderBy: String?
     ): Observable<Pair<Int, RepoResponse<List<TaskListItemType>>>>
 

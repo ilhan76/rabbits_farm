@@ -32,12 +32,14 @@ class AuthViewModel(val context: Application) : AndroidViewModel(context) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { response ->
-                if (response.detail == null) {
+                if (response.warning == null) {
                     Log.d(TAG, "getToken: SUCCESS")
-                    val pref: SharedPreferences = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+                    val pref: SharedPreferences =
+                        context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
                     val editor: SharedPreferences.Editor = pref.edit()
 
                     editor.apply {
+                        response.user?.id?.let { putInt(USER_ID, it) }
                         putString(USER_NAME, response.user?.first_name)
                         putString(USER_LAST_NAME, response.user?.last_name)
                         putString(USER_EMAIL, response.user?.email)
@@ -49,14 +51,20 @@ class AuthViewModel(val context: Application) : AndroidViewModel(context) {
 
                     state.postValue(StateAuth.Success("Success"))
                 } else {
-                    Log.d(TAG, "getToken: ERROR ${response.detail}")
-                    state.postValue(StateAuth.Error("Error ${response.detail}"))
+                    if (response.warning.codes.contains(WARNING_AUTH)) {
+                        Log.d(TAG, "auth: Warning Auth")
+                        when {
+                            response.warning.codes.contains(WARNING_AUTH_USERNAME) -> state.postValue(StateAuth.UserDoesNotExist)
+                            response.warning.codes.contains(WARNING_AUTH_PASSWORD) -> state.postValue(StateAuth.InvalidPass)
+                        }
+                    }
                 }
             })
     }
 
-    fun echo(){
-        val pref: SharedPreferences = context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+    fun echo() {
+        val pref: SharedPreferences =
+            context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         val t = "Token ${pref.getString(USER_TOKEN, "")}"
 
         ApiClient.client.create(ApiInterface::class.java)

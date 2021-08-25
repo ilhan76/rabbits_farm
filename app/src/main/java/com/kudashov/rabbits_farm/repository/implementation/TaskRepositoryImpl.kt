@@ -26,11 +26,12 @@ class TaskRepositoryImpl(
         isDone: Boolean,
         page: Int,
         pageSize: Int,
+        userId: Int,
         orderBy: String?
     ): Observable<Pair<Int, RepoResponse<List<TaskListItemType>>>> {
         val response: PublishSubject<Pair<Int, RepoResponse<List<TaskListItemType>>>> =
             PublishSubject.create()
-        provider.getTasks(token, isDone, page, pageSize, orderBy)
+        provider.getTasks(token, isDone, page, pageSize, userId, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ resp ->

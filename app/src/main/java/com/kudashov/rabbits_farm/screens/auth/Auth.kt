@@ -13,6 +13,8 @@ import com.kudashov.rabbits_farm.databinding.FragmentAuthBinding
 import com.kudashov.rabbits_farm.screens.auth.delegate.AuthNavigationDelegate
 import com.kudashov.rabbits_farm.utilits.StateAuth
 import com.kudashov.rabbits_farm.utilits.const.APP_ACTIVITY
+import com.kudashov.rabbits_farm.utilits.const.messages.MESSAGE_INVALID_PASS
+import com.kudashov.rabbits_farm.utilits.const.messages.MESSAGE_USER_DOES_NOT_EXIST
 
 class Auth : Fragment() {
 
@@ -47,21 +49,17 @@ class Auth : Fragment() {
                 binding.editTxtEmail.text.toString(),
                 binding.editTxtPass.text.toString()
             )
-/*            viewModel.auth(
-                "zoo",
-                "coolpass"
-            )*/
         }
     }
 
     private fun stateProcessing(state: StateAuth) {
         when (state) {
-            is StateAuth.Default -> {
+            StateAuth.Default -> {
                 Log.d(TAG, "stateProcessing: Auth Default")
                 viewModel.echo()
                 APP_ACTIVITY.hideLoader()
             }
-            is StateAuth.Sending -> {
+            StateAuth.Sending -> {
                 Log.d(TAG, "stateProcessing: Auth Sending")
                 APP_ACTIVITY.showLoader()
             }
@@ -70,7 +68,7 @@ class Auth : Fragment() {
                 APP_ACTIVITY.hideLoader()
                 navigation.logIn()
             }
-            is StateAuth.OutdatedToken -> {
+            StateAuth.OutdatedToken -> {
                 Log.d(TAG, "stateProcessing: Токен устарел")
                 binding.auth.visibility = View.VISIBLE
                 APP_ACTIVITY.hideLoader()
@@ -83,6 +81,20 @@ class Auth : Fragment() {
             StateAuth.ActualToken -> {
                 Log.d(TAG, "stateProcessing: Actual Token")
                 navigation.logIn()
+            }
+            StateAuth.InvalidPass -> {
+                Log.d(TAG, "stateProcessing: InvalidPass")
+                Toast.makeText(context, MESSAGE_INVALID_PASS, Toast.LENGTH_SHORT).show()
+                APP_ACTIVITY.hideLoader()
+            }
+            StateAuth.UserDoesNotExist -> {
+                Log.d(TAG, "stateProcessing: UserDoesNotExist")
+                Toast.makeText(
+                    context,
+                    MESSAGE_USER_DOES_NOT_EXIST,
+                    Toast.LENGTH_SHORT
+                ).show()
+                APP_ACTIVITY.hideLoader()
             }
         }
     }

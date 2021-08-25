@@ -28,29 +28,13 @@ class TaskProviderHeroku : TaskProvider {
         isDone: Boolean,
         page: Int,
         pageSize: Int,
+        userId: Int,
         orderBy: String?
     ): Observable<TaskResponse> {
         val response: PublishSubject<TaskResponse> = PublishSubject.create()
-/*        GlobalScope.launch(Dispatchers.IO) {
-            Thread.sleep(2000)
-            response.onNext(
-                TaskResponse(
-                    "", listOf(
-                        TaskDto(
-                            id = 1,
-                            type = "I",
-                            date = "11.11.2021:sddvsd",
-                            userId = 15,
-                            cage = CageSimpleDto(1, 12, "a"),
-                            maleCageTo = CageSimpleDto(1, 14, "a"),
-                            countRabbit = 3
-                        )
-                    )
-                )
-            )
-        }*/
+
         ApiClient.client.create(ApiInterface::class.java)
-            .getTasks(token, if (isDone) 1 else 0, page, pageSize, orderBy)
+            .getTasks(token, if (isDone) 1 else 0, page, pageSize, userId, orderBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

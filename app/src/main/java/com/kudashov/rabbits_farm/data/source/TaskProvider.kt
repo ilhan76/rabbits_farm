@@ -11,6 +11,7 @@ interface TaskProvider {
         isDone: Boolean,
         page: Int,
         pageSize: Int,
+        userId: Int,
         orderBy: String?
     ): Observable<TaskResponse>
 

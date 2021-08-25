@@ -10,7 +10,6 @@ import com.kudashov.rabbits_farm.data.domain.CageDomain
 import com.kudashov.rabbits_farm.data.domain.RabbitDomain
 import com.kudashov.rabbits_farm.data.converters.implementation.FarmConverterImpl
 import com.kudashov.rabbits_farm.data.source.implementation.FarmProviderImpl
-import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryImpl
@@ -18,12 +17,11 @@ import com.kudashov.rabbits_farm.screens.farm.filters.cage.CageFilter
 import com.kudashov.rabbits_farm.screens.farm.filters.rabbit.RabbitFilter
 import com.kudashov.rabbits_farm.utilits.StateFarm
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.messages.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.statuses.cage.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import io.reactivex.rxjava3.subjects.PublishSubject
 import java.io.Serializable
 
 class FarmViewModel(val context: Application) : AndroidViewModel(context), Serializable {

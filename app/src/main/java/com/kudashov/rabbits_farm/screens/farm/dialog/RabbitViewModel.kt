@@ -13,8 +13,8 @@ import com.kudashov.rabbits_farm.repository.FarmRepository
 import com.kudashov.rabbits_farm.repository.implementation.FarmRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.messages.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.statuses.rabbit.*
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

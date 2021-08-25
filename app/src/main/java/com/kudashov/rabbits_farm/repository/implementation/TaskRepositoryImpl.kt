@@ -7,9 +7,8 @@ import com.kudashov.rabbits_farm.data.source.TaskProvider
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.RepoResponse
 import com.kudashov.rabbits_farm.net.response.task.DeathResponse
-import com.kudashov.rabbits_farm.net.response.task.TaskResponse
 import com.kudashov.rabbits_farm.repository.TaskRepository
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
+import com.kudashov.rabbits_farm.utilits.const.messages.ERROR_NO_ITEM
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers

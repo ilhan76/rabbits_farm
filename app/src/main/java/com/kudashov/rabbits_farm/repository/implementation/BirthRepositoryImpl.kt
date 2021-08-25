@@ -4,19 +4,14 @@ import android.util.Log
 import com.kudashov.rabbits_farm.data.converters.BirthConverter
 import com.kudashov.rabbits_farm.data.domain.BirthDomain
 import com.kudashov.rabbits_farm.data.source.BirthProvider
-import com.kudashov.rabbits_farm.net.ApiClient
-import com.kudashov.rabbits_farm.net.ApiInterface
 import com.kudashov.rabbits_farm.net.request.birth.ConfirmPregnancyRequest
 import com.kudashov.rabbits_farm.net.request.birth.TakeBirthRequest
 import com.kudashov.rabbits_farm.net.response.BaseResponse
 import com.kudashov.rabbits_farm.net.response.RepoResponse
-import com.kudashov.rabbits_farm.net.response.birth.BirthResponse
 import com.kudashov.rabbits_farm.repository.BirthRepository
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
+import com.kudashov.rabbits_farm.utilits.const.messages.ERROR_NO_ITEM
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 

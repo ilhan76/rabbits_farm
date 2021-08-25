@@ -16,8 +16,8 @@ import com.kudashov.rabbits_farm.repository.BirthRepository
 import com.kudashov.rabbits_farm.repository.implementation.BirthRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.StateBirth
 import com.kudashov.rabbits_farm.utilits.const.APP_PREFERENCE
-import com.kudashov.rabbits_farm.utilits.const.ERROR_NO_ITEM
 import com.kudashov.rabbits_farm.utilits.const.USER_TOKEN
+import com.kudashov.rabbits_farm.utilits.const.messages.ERROR_NO_ITEM
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable

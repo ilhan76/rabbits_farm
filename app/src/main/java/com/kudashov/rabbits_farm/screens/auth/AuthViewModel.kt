@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kudashov.rabbits_farm.net.ApiClient
@@ -13,6 +12,9 @@ import com.kudashov.rabbits_farm.repository.AuthRepository
 import com.kudashov.rabbits_farm.repository.implementation.AuthRepositoryImpl
 import com.kudashov.rabbits_farm.utilits.*
 import com.kudashov.rabbits_farm.utilits.const.*
+import com.kudashov.rabbits_farm.utilits.const.messages.WARNING_AUTH
+import com.kudashov.rabbits_farm.utilits.const.messages.WARNING_AUTH_PASSWORD
+import com.kudashov.rabbits_farm.utilits.const.messages.WARNING_AUTH_USERNAME
 import com.kudashov.rabbits_farm.utilits.extensions.default
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

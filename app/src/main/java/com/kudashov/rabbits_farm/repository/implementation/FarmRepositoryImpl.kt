@@ -280,7 +280,7 @@ class FarmRepositoryImpl(
     ): Observable<BaseResponse> {
         val resp: PublishSubject<BaseResponse> = PublishSubject.create()
 
-        provider.getOperations(token, id)
+/*        provider.getOperations(token, id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -294,7 +294,7 @@ class FarmRepositoryImpl(
                         it?.localizedMessage
                     )
                 )
-            })
+            })*/
         ApiClient.client.create(ApiInterface::class.java)
             .postWeight(token, pathType, id, WeightRequest(weight = weight))
             .subscribeOn(Schedulers.io())

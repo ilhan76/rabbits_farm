@@ -1,6 +1,7 @@
 package com.kudashov.rabbits_farm.screens.farm.dialog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class WeighDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DialogFragmentWeighRabbitBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -65,10 +66,11 @@ class WeighDialog : DialogFragment() {
 
         binding.btnSave.setOnClickListener {
             val rabbit = arguments?.get(RabbitDialog.ARG_RABBIT) as RabbitMoreInfDomain
+            Log.d("TAG", "initButtons: $rabbit")
             viewModel.postWeight(
                 weight = binding.editTxtNewWeight.text.toString().toDouble(),
                 id = rabbit.id,
-                type = rabbit.currentType
+                type = rabbit.currentTypeString
             )
             dialog!!.dismiss()
         }

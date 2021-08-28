@@ -45,9 +45,13 @@ class Auth : Fragment() {
         viewModel.getStates().observe(this, this::stateProcessing)
 
         binding.btnAuth.setOnClickListener {
-            viewModel.auth(
+/*            viewModel.auth(
                 binding.editTxtEmail.text.toString(),
                 binding.editTxtPass.text.toString()
+            )*/
+            viewModel.auth(
+                "kudashov_dev",
+                "Kudashov_Rabbit1"
             )
         }
     }

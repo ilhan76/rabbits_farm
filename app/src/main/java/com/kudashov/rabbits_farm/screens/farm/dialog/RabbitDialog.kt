@@ -54,7 +54,7 @@ class RabbitDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         Log.d(TAG, "onCreateView: Rabbit dialog is created")
         _binding = DialogFragmentRabbitMoreInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -104,6 +104,7 @@ class RabbitDialog : DialogFragment() {
         binding.btnWeigh.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable(ARG_VIEW_MODEL, viewModel)
+            bundle.putString(Farm.ARG_RABBIT_TYPE, arguments?.get(Farm.ARG_RABBIT_TYPE) as String)
             bundle.putSerializable(ARG_RABBIT, arguments?.get(ARG_RABBIT) as RabbitMoreInfDomain)
 
             val dialogWeigh = WeighDialog.newInstance(bundle)
@@ -230,6 +231,7 @@ class RabbitDialog : DialogFragment() {
             }
             is BaseState.Success<*> -> {
                 Log.d(TAG, "rabbitProcessing: Success")
+                arguments?.putSerializable(ARG_RABBIT, state.content as RabbitMoreInfDomain)
                 loadData(state.content as RabbitMoreInfDomain)
             }
             is BaseState.Error<*> -> {

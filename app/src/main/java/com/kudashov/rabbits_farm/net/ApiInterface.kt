@@ -115,7 +115,7 @@ interface ApiInterface {
         @Query("is_completed") isCompleted: Int,
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
-        @Query("user_id") userId: Int,
+        @Query("user") userId: Int,
         @Query("__order_by__") orderBy: String?
     ): Observable<TaskResponse>
 
